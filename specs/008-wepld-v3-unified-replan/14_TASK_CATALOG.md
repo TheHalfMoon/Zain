@@ -44,20 +44,29 @@ EXIT_RULE = every task ends with: tests green (incl. mutation control for neg), 
 | B-06 | Verify Claude Agent SDK + `claude-agent-acp` load from user-provided location in T3 build; confirm installer exclusion feasible | B-03 | R11 §5 | Feasibility note; G4 path chosen | — | 0.1 | T2 | SEC-13 |
 | B-07 | G2 decision record (GO / reopen ADR-001) | B-03..06 | 00 §7 | Signed founder decision | — | 0.05 | T0 | GOV-03 |
 
-## P2 — Fork, strip, rebrand (usable WePLD workbench)
+## P2-N — Zain naming clearance (before F-03)
 
 | ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
 |---|---|---|---|---|---|---|---|---|
-| F-01 | Import T3 at FORK_BASE into WePLD monorepo layout (apps/, packages/, native/) beside `crates/` | B-07 | R11 §2 KEEP set | Tree equals upstream KEEP set byte-for-byte (manifest hash); source admission record (pin, license, deps, tests) per R11 | manifest hash test | 0.5 | T2 | PR-01, GOV-05, GOV-07 |
+| N-01 | Name/trademark clearance for "Zain" in software classes (founder + counsel; R19 checklist) | G-01 | research/R19 | Written clearance or rename decision recorded | review of clearance record | 0.2 | T0 | GOV-11 |
+| N-02 | Choose controlled domain → app ID / AUMID / bundle ids; update ZAIN_NAMING_MIGRATION §2 | N-01 | ZAIN_NAMING_MIGRATION | IDs fixed before any build is distributed | det: identity grep gate uses final ids | 0.1 | T0 | GOV-11 |
+| N-03 | Package scope + crate names decision (no publishing); collision check vs Zain-LLM | N-01 | R19 | Scope/crates documented; no shared identifiers with Zain-LLM | det: grep gate for Zain-LLM identifiers | 0.1 | T0 | GOV-11, GOV-12 |
+| N-04 | Canonical docs + crate rename (`wepld-*` → `zain-*`) as part of G-06 / F-10 | G-06, F-10 | AGENTS.md, invariants, Cargo.toml | Rust suite green after rename; protected docs signed | det: cargo test | 0.3 | T2 | GOV-11 |
+
+## P2 — Fork, strip, rebrand (usable Zain workbench)
+
+| ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
+|---|---|---|---|---|---|---|---|---|
+| F-01 | Import T3 at FORK_BASE into Zain monorepo layout (apps/, packages/, native/) beside `crates/` | B-07 | R11 §2 KEEP set | Tree equals upstream KEEP set byte-for-byte (manifest hash); source admission record (pin, license, deps, tests) per R11 | manifest hash test | 0.5 | T2 | PR-01, GOV-05, GOV-07 |
 | F-02 | Strip: mobile, marketing, relay/T3 Connect, Clerk, PostHog, `.repos/`, unused providers, V1 importer | F-01 | R11 §2 STRIP set | Build + kept tests green at B-03 ratio; no references remain | det: kept suites; grep | 1–2 | T2 | PR-22, SEC-11 |
 | F-03 | Identity rename (app id, AUMID, protocol, CLI, data dirs, env prefix, refs, MCP name, hook headers) | F-02 | R11 §4; 06 §4 | Zero donor identifiers outside NOTICE files | det: donor-identifier grep gate | 1–1.5 | T2 | SEC-11 |
-| F-04 | Update feed → WePLD-hosted Generic provider with ed25519-signed manifest verified by Core (no tokens in client) | F-03 | R11 §7; R13 §6 | Updater refuses donor manifests | neg: donor manifest rejected | 0.5–1 | T2 | SEC-11 |
+| F-04 | Update feed → Zain-hosted Generic provider with ed25519-signed manifest verified by Core (no tokens in client) | F-03 | R11 §7; R13 §6 | Updater refuses donor manifests | neg: donor manifest rejected | 0.5–1 | T2 | SEC-11 |
 | F-05 | Telemetry removal + idle-egress test | F-02 | R11 §3 | No outbound connections at idle (except user-initiated) | e2e: egress capture | 0.3 | T2 | PR-22, SEC-11 |
 | F-06 | Claude SDK exclusion from installer; user-consented load path; installer-content gate | B-06, F-02 | R11 §3, §5 | Installer contains no `claude-agent-sdk*`; Claude sessions work with user-provided SDK + API key | det: installer-content gate; e2e: Claude session with key | 0.5 | T2 | SEC-13 |
 | F-07 | Default permission mode → Supervised; remove Full access option | F-02 | R11 §3 (RuntimePolicy) | Full access not selectable | e2e; neg (with S1 later) | 0.2 | T2 | SEC-06 |
 | F-08 | ThreadSettlement → cosmetic archive only | F-02 | R11 §3 | Merge/close never marks a thread "done/settled" | det | 0.2 | T1 | PR-13 |
-| F-09 | Protocol version bump (WePLD-1) | F-03 | contracts environment.ts (R11) | T3 clients get 426 | det | 0.1 | T2 | SEC-11 |
-| F-10 | Rename Core binary `wepld-core`; move S2 commands under it; package next to `server.asar` | F-01 | `crates/core`, build scripts (R11 §7) | One `wepld` CLI (Server) + `wepld-core`; S2 tests green | det: existing 19k-line Rust suite | 0.5 | T2 | PR-01 |
+| F-09 | Protocol version bump (Zain-1) | F-03 | contracts environment.ts (R11) | T3 clients get 426 | det | 0.1 | T2 | SEC-11 |
+| F-10 | Rename Core binary `zain-core`; move S2 commands under it; package next to `server.asar` | F-01 | `crates/core`, build scripts (R11 §7) | One `zain` CLI (Server) + `zain-core`; S2 tests green | det: existing 19k-line Rust suite | 0.5 | T2 | PR-01 |
 | F-11 | Windows NSIS build (dev-signed) + notices generation gate | F-03 | R11 §7 | Installer builds; build fails on missing notice; OV code-signing certificate with cloud-HSM key + jsign (Azure Trusted Signing unavailable to a Saudi individual — R13 F1) | det: notice gate | 1–1.5 | T2 | PR-21, GOV-06 |
 | F-12 | Inherited-bug hardening batch 1: DB writer stalls (#21840, #23482), preview webview memory (#15579), Windows startup (#25262) | F-02 | R02 §13 | Each issue reproduced then fixed or explicitly deferred with limitation | det/e2e per issue | 2–4 | T2 | NF-02, PR-21 |
 | F-13 | Effect 4 / orchestration-v2 ramp-up notes (Build Learning) | F-01 | R02 §3 | Seam walkthrough doc for P3 | — | 2–4 (learning, overlaps) | T0 | GOV-08 |
@@ -79,7 +88,7 @@ EXIT_RULE = every task ends with: tests green (incl. mutation control for neg), 
 | C-08 | Seam S3 ACP fs/terminal PEP | C-06 | R11 §3 S3 | Every ACP fs/terminal effect has receipt | neg T1 (ACP write outside worktree) | 1 | T2 | SEC-01 |
 | C-09 | Seam S2 provider approvals (Claude PreToolUse→propose+dispatch, canUseTool; Codex handlers; ACP permission) | C-06 | R11 §3 S2; 03C §2 | Provider prompts decided by Core; CC-T01..T03 | neg; CC-T02 kill mid-Edit; V1-17 | 2–3 | T2 | SEC-01, SEC-03 |
 | C-10 | Seam S4 EffectWorker + S4b recovery gating | C-04 | R11 §3 S4/S4b | No requeue/auto-continue before open_dispatches | R1 sweep; W9 | 1.5–2.5 | T2 | SEC-10, NF-05 |
-| C-11 | Seam S5 per-run receipt link + compaction exemption | C-03 | R11 §3 S5 | `wepld.run-receipts` survives compaction | det; W2 | 1 | T2 | SEC-08 |
+| C-11 | Seam S5 per-run receipt link + compaction exemption | C-03 | R11 §3 S5 | `zain.run-receipts` survives compaction | det; W2 | 1 | T2 | SEC-08 |
 | C-12 | Seams S6 MCP access, S7 git destructive ops, S8 terminals | C-06 | R11 §3 | Each class mediated with receipts | neg per class; W6 | 1.5–2.5 | T2 | SEC-01, PR-08 |
 | C-13 | WebAuthn approvals (registration, challenge, assertion verify in Core) | C-04 | 07 §6; R13 | Approval impossible without user presence | neg T3 (forged/replayed) | 1–2 | T2 | SEC-04 |
 | C-14 | Inbox UI (approvals, unknown outcomes, expiries) + trust indicator | C-13 | web app (R11) | Outcomes rendered only from Core | e2e | 1–1.5 | T1 | PR-23, SEC-05 |
@@ -109,8 +118,8 @@ EXIT_RULE = every task ends with: tests green (incl. mutation control for neg), 
 | ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
 |---|---|---|---|---|---|---|---|---|
 | V-01 | Reviewer route ≠ builder route enforcement; per-role pins | M-07 | 07; ADR-008 | Same-route reviewer refused | neg | 0.5 | T2 | PR-03, PR-12 |
-| V-02 | Findings schema + review UI (inline, resolve, repair proposal) | V-01 | T3 diff panel (R11) | Findings tracked to resolution | e2e | 1–1.5 | T1 | PR-12 |
-| V-03 | Optional local review producer wrap (PR-Agent) | V-01 | R12 D22 | Runs with user's key; output as findings | det | 0.5–1 | T2 | PR-12 |
+| V-02 | SUPERSEDED by K-04/K-05 (Zain Code Review findings panel + dispositions) | V-01 | T3 diff panel (R11) | Findings tracked to resolution | e2e | 0 | T1 | PR-12 |
+| V-03 | SUPERSEDED: PR-Agent wrap replaced by Zain Code Review engine (K-*); PR-Agent reference only | V-01 | R12 D22 | Runs with user's key; output as findings | det | 0 | T2 | PR-12 |
 | V-04 | Completion evaluate/decide (rules 1–10 + UNMEDIATED handling) + Stop/SubagentStop gating | V-02 | Spec 006 §20; 03C | Merge ≠ completion; UNKNOWN blocks | neg; CC-T05; V1-07 | 1–1.5 | T2 | PR-13 |
 | V-05 | MCP connections (local/remote OAuth) with per-tool grants | C-22 | R12 D13; T3 /mcp | Revoked token → blocked_on_auth | neg; V1-09 | 1–1.5 | T2 | PR-14 |
 | V-06 | Agent Skills (SKILL.md) loader, hash pinning, re-review on update | V-05 | 03C; census CL-E-006 | Widening update disabled until re-approved | neg T5; V1-08 | 0.5–1 | T2 | PR-14 |
@@ -164,36 +173,118 @@ EXIT_RULE = every task ends with: tests green (incl. mutation control for neg), 
 | W-01 | Documents/artifacts as project files; preview; export MD/HTML/PDF | V-08 | T3 file previews (R11) | One-pager → PDF | e2e; V1-11 | 1–2 | T1 | PR-16 |
 | W-02 | PPTX/XLSX generation (permissive libs after Ponytail) | W-01 | R13 | Opens in Office/LibreOffice | det | 1–2 | T2 | PR-16 |
 | W-03 | Research task type with citations as evidence | M-07 | — | ≥3 cited sources stored | e2e; V1-13 | 1–1.5 | T2 | PR-17 |
-| W-04 | Browser automation subset (CDP/Playwright) + hard-blocked categories + evidence capture | S-04 | R13 §4; R11 | Form fill on localhost; payments refused; T3 already drives pages via Playwright connectOverCDP (CdpRelay.ts) + 12 preview_* MCP tools; work = gating incl. redirects (Playwright MCP is not a security boundary) | neg T12; V1-14 | 4–6 | T2 | PR-18 |
+| W-04 | SUPERSEDED by Y-* (Zain Browser); general-web lane = Y-09 | S-04 | R13 §4; R11 | Form fill on localhost; payments refused; T3 already drives pages via Playwright connectOverCDP (CdpRelay.ts) + 12 preview_* MCP tools; work = gating incl. redirects (Playwright MCP is not a security boundary) | neg T12; V1-14 | 0 | T2 | PR-18 |
 | W-05 | Computer use (Windows first) behind per-session grants | S-01 | R12 D6; R13 §5 | Approved actions only; Orca helpers: macOS Swift (AX, ScreenCaptureKit, CGEvent; TCC grants), Windows PowerShell UIA/SendInput → replace ExecutionPolicy Bypass with signed helper, Linux AT-SPI/xdotool X11 only | neg T12; V1-15 | 6–10 | T2 | PR-19 |
 
 ## P10 — Remote and runner
 
 | ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
 |---|---|---|---|---|---|---|---|---|
-| R-01 | Headless runner (`wepld serve`) + Linux service; Windows service wrapper | M-07 | R13 §6 | Runner survives reboot; Windows service via Rust `windows-service` crate, non-SYSTEM account, no desktop features in service mode | e2e | 1–2 | T2 | PR-20 |
+| R-01 | Headless runner (`zain serve`) + Linux service; Windows service wrapper | M-07 | R13 §6 | Runner survives reboot; Windows service via Rust `windows-service` crate, non-SYSTEM account, no desktop features in service mode | e2e | 1–2 | T2 | PR-20 |
 | R-02 | Project-home rule + export/import bundles | R-01 | 07 §5; 05 §4.7 | Grants dropped; dispatches UNKNOWN on new home | det | 1–2 | T2 | PR-20 |
 | R-03 | Passkey pairing for phone/web approvals | C-13, R-01 | 05 §7.1 | Guest links cannot approve | neg; V1-16 | 1–2 | T2 | PR-20, SEC-04 |
 | R-04 | Web client hardening for LAN/Tailscale | R-01 | R11 (client-runtime) | Scoped sessions only | neg | 1–2 | T2 | PR-20 |
 
+
+## Product components (cross-phase; the `[Px]` tag is the phase used for totals)
+
+### Zain Code Review (16_*, research/R14) — OCR engine fork + Zain-owned UX and authority
+
+| ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
+|---|---|---|---|---|---|---|---|---|
+| K-01 | [P2] Optional spike: build forked OCR engine on Windows; engine mode on the Zain repo with a local Ollama route; advisory, read-only | F-03 | R14 §11; alibaba/open-code-review@375f64cd | Findings shown, labelled advisory; no fixes | ZCR spike log | 0.5–0.75 | T2 | PR-26 |
+| K-02 | [P5] Admission: pin, SBOM + transitive license scan, notices, Go toolchain in CI (Win/Linux/mac) | V-01 | R14 §9 | Source admission record; notices generated | det: license gate | 0.5–0.75 | T2 | PR-26, GOV-07 |
+| K-03 | [P5] Fork-vendor `native/zain-review-engine` + patches Z-P1..Z-P6 (route lock `ZAIN_REVIEW_*`, HOME isolation, branding) + upstream suite green | K-02 | R14 §5–6 | Upstream tests green; ambient config cannot override the route | neg ZCR-T05 | 1–1.5 | T2 | PR-26, SEC-18 |
+| K-04 | [P5] `packages/review-engine` normalizer/fingerprint/anchors + EngineRunner (spawn as Core effect, Job Object, NDJSON, cancel/resume) + contracts/ledger kinds + route rule (reviewer ≠ builder) | K-03, C-22 | R14 §7 | One finding schema for engine and delegated modes | det; neg reviewer=builder | 1.75–2.5 | T2 | PR-12, PR-26 |
+| K-05 | [P5] IDE UX: findings panel, Monaco markers, filters, accept/dismiss/false-positive, sanitized renderer | K-04, I-01 | R14 §7 | Model text never rendered as trusted markdown | e2e; neg ZCR-T15 | 1.5–2 | T1 | PR-26 |
+| K-06 | [P5] Fix pipeline: proposals, preimage OID check, checkpoint, Core-granted apply, undo, verification profile | K-04, C-12 | R14 §7 | Stale fix refused; undo restores; tests run after apply | neg ZCR-T07/T10/T11 | 1.5–2 | T2 | PR-26, SEC-02 |
+| K-07 | [P5] Acceptance suite ZCR-T01..T25 (excl. T21) + guard-mutation job | K-03, K-04, K-05, K-06 | R14 §8 | All pass; each guard test fails with its guard removed | ZCR suite | 1–1.5 | T2 | PR-26, SEC-17 |
+| K-08 | [P5] Delegated mode (MCP tools, read-only reviewer session, coverage) + fix worker in disposable worktree | K-07 | R14 §11 (P5b) | Reviewer session cannot write | neg ZCR-T17 | 1.75–2.5 | T2 | PR-26 |
+| K-09 | [P6] CI action + SARIF + scan mode + "propose rule" + model proxy (MEDIATED egress) | K-08 | R14 §11 | CI summary; egress mediated | ZCR-T21 | 1.5–2.5 | T2 | PR-26 |
+
+### Zain Engineering System (17_*, research/R15) — PStack-derived loop + Playwright E2E
+
+| ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
+|---|---|---|---|---|---|---|---|---|
+| E-00 | [P1] Donor pin snapshot + license records (PStack, cursor-team-kit, Ascout candidate) | B-01 | R15 §10 | Pins + LICENSE hashes recorded | hash check | 0.2 | T0 | GOV-05 |
+| E-01 | [P5] Skill pack adaptation into `packages/skills/zain-engineering` (router, playbooks, principles, agents, CTK skills), notices, identifier scrub | V-06 | cursor/plugins@ab1f702c pstack/ | No PStack/Cursor names in product; notices present | ES-AT-03 | 2–3 | T2 | PR-27, GOV-06 |
+| E-02 | [P5] Core evidence kinds + completion rules ES-1..ES-7 + patch-id staleness | V-04 | R15 §7 | INCONCLUSIVE never PASS; verdict stale after patch change | neg ES-AT | 1–1.5 | T2 | PR-27, PR-13 |
+| E-03 | [P5] `zain-browser-verify` E2E (Playwright, isolated partition, localhost-only origin policy) — source UNRESOLVED (Ascout candidate) pending founder FO-9 | C-22, Y-03 | R15 §6–7 | Evidence hashed into Core; no user profile touched | ES-AT e2e | 3–5 | T2 | PR-27, PR-28 |
+| E-04 | [P5] verify-skill generator into `.zainide/skills` + dogfood on Zain | E-01, E-03 | R15 §10 | Generated skills pass checks | det | 1–1.5 | T2 | PR-27 |
+| E-05 | [P5] Review lanes (independent routes, comment reviewer, deslop) feeding Zain Code Review findings | K-04 | R15 §10 | Same schema as K-04; no second review store | det | 1–2 | T2 | PR-27, PR-26 |
+| E-06 | [P6] PR babysit/shipping (gated merges) | E-02, E-05 | R15 §10 | Merge requires a Core grant; merge ≠ completion | neg | 2–3 | T2 | PR-27 |
+| E-07 | [P5] Acceptance suite ES-AT-01..16 + tie into V-08 | E-01, E-02, E-03, E-04, E-05 | R15 §9 | Suite green with mutation control | ES-AT | 1 | T2 | PR-27, SEC-17 |
+
+### Zain Plan Mode (18_*, research/R16) — mattpocock/skills (MIT) + T3 plan mode + Core read-only profile
+
+| ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
+|---|---|---|---|---|---|---|---|---|
+| L-01 | [P2] Inherit T3 plan mode under Zain brand; verify enforcement; label "not yet enforced" | F-16 | R16 §7 PL-01 | Plan thread renders the proposed plan | e2e | 0.3–0.5 | T1 | PR-29 |
+| L-02 | [P3] `PLAN_READONLY` Core profile bound to plan path + base commit | C-05, C-07 | R16 PL-02 | MEDIATED writes outside the plan path denied | neg N1–N8 | 1–1.5 | T2 | PR-29, SEC-19 |
+| L-03 | [P3] Turn-end out-of-path diff → INVALIDATED; CLI agents blocked in plan mode | C-17, L-02 | R16 PL-03 | Violation blocks approval | neg N9–N10 | 0.5 | T2 | PR-29, SEC-19 |
+| L-04 | [P4] Plan artifacts + Brain index + `plan.lock.json` | M-03, L-02 | R16 PL-04 | Lock covers all artifacts | det D1–D3 | 0.5–1 | T2 | PR-29 |
+| L-05 | [P4] Approve plan → start mission (WebAuthn) | M-01, C-13, L-04 | R16 PL-05 | No mission without lock + assertion | neg N11–N12 | 0.5 | T2 | PR-29 |
+| L-06 | [P5] `packages/skills/zain-plan` copy/adapt (mattpocock/skills@59db609e) + NOTICE + manifest | V-06 | R16 §5 | Hashes match manifest | det D4–D5; neg N13 | 1–1.5 | T2 | PR-29, GOV-06 |
+| L-07 | [P5] `tasks.dag.json` handoff contract shared with the Engineering System | L-04, E-01 | R16 PL-07 | Engineering consumes the DAG without re-parsing prose | det D6 | 0.3–0.5 | T2 | PR-29, PR-27 |
+| L-08 | [P5] Plan UI: canvas, question loop, decision cards, DAG view, approve bar | L-04 | R16 PL-08 | Recommended answers logged | e2e E1–E4 | 2–3.5 | T1 | PR-29 |
+| L-09 | [P5] Critic route ≠ griller route; findings in the Code Review schema; readiness gate | V-01, K-04 | R16 PL-09 | Same-route critic refused | neg N14 | 0.5–1 | T2 | PR-29 |
+| L-10 | [P5] Plan Mode acceptance suite + mutation control | L-01, L-02, L-03, L-04, L-05, L-06, L-07, L-08, L-09 | R16 PL-10 | Negatives fail with Core disabled | all | 0.5–1 | T2 | PR-29, SEC-17 |
+
+### Zain Browser (19_*, research/R17) — one BrowserController, four lanes
+
+| ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
+|---|---|---|---|---|---|---|---|---|
+| Y-00 | [P2] Strip T3/Orca browser-cookie import; isolate agent partition; disable eval outside Preview; relay method allowlist | F-02 | R17 §5, WB0 | No code path reads user browser stores | neg: cookie import absent; grep gate | 0.5–1 | T2 | PR-28, SEC-20 |
+| Y-01 | [P3] Browser effect classes + hard-block floor rules registered in Core | C-05 | R17 WB4 (part) | Payments/credentials/account creation/executable downloads blocked even in Skip | neg | 0.5–1 | T2 | PR-28, SEC-20 |
+| Y-02 | [P5] Controller unification (broker → BrowserController; lanes Preview/Agent/Test) + Playwright 1.64 bump | Y-01 | R17 WB1 | Single controller; MCP/CLI/UI are thin front-ends | det | 1.5–2.5 | T2 | PR-28 |
+| Y-03 | [P5] Pre-request navigation/redirect gate (Electron + CDP Fetch) + spike | Y-02 | R17 WB2 | Redirect to a non-granted origin blocked before the request | neg redirect | 2–3 | T2 | PR-28, SEC-20 |
+| Y-04 | [P5] Page classifier + hard blocks + download quarantine | Y-03 | R17 WB3 | Executable download quarantined | neg | 1.5–2.5 | T2 | PR-28, SEC-20 |
+| Y-05 | [P5] Core integration: grants, receipts with replay classes, Inbox UX | Y-02, C-14 | R17 WB4 | Every action has a receipt with screenshot/AX/HAR hashes | det; R1 sample | 1.5–2 | T2 | PR-28, SEC-02 |
+| Y-06 | [P5] Evidence: screenshots, HAR-from-CDP, redaction, tracing, export | Y-05 | R17 WB5 | No secrets in evidence | neg T6 | 1.5–2.5 | T2 | PR-28 |
+| Y-07 | [P5] Session recovery + takeover UX + prompt-injection measures | Y-05 | R17 WB6 | Human takeover for sign-in; injection suite passes | injection suite | 1–1.5 | T2 | PR-28 |
+| Y-08 | [P5] Test lane endpoint (loopback) + mutation-controlled suite | Y-02 | R17 WB7 | Suite green; each guard test fails without its guard | R17 §11 | 1–1.5 | T2 | PR-28, SEC-17 |
+| Y-09 | [P9] General web in Agent lane + user-session lane (MV3 extension) + Claude browser_toolset adapter | Y-08, S-04 | R17 WB8–WB9 | Opt-in, tab-group scoped; no ambient credentials | neg | 4.5–7 | T2 | PR-28, PR-18 |
+
+### DeskGate (20_*, research/R18) — Desktop Commander tools as Core-mediated adapters
+
+| ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
+|---|---|---|---|---|---|---|---|---|
+| H-00 | [P1] Registry row + license admission for DesktopCommanderMCP@db3430f2; remote-desktop-commander recorded EXCLUDED (proprietary) | B-01 | R18 §1 | Admission record | review | 0.1–0.2 | T0 | PR-30, GOV-07 |
+| H-01 | [P3] `packages/deskgate` on Server `/mcp`; schemas port; static-import guard (no own spawn/config) | C-06, C-12 | R18 §4 | DeskGate cannot spawn outside the Server host | neg DG-N10 | 0.5–1 | T2 | PR-30, SEC-21 |
+| H-02 | [P3] fs adapters (read/list/write/edit/move/mkdir) via Core effects | H-01 | R18 | Every fs effect has a receipt | neg DG-N* | 1–1.5 | T2 | PR-30 |
+| H-03 | [P3] Process/terminal adapters on the single node-pty host; ownership-scoped signals; `set_config_value` refused | H-01 | R18 | Kill limited to Zain-owned process trees | neg | 1–1.5 | T2 | PR-30, SEC-21 |
+| H-04 | [P6] Search adapters (rg as spawn effect) | H-01 | R18 | Results paged; spawn receipted | det | 0.5–1 | T2 | PR-30 |
+| H-05 | [P3] Negative/mutation suite DG-N01..N14 + perf DG-B1..B9 | H-02, H-03 | R18 §5 | Suite green; adapter overhead p95 ≤ 5 ms | neg; bench | 1–1.5 | T2 | PR-30, SEC-17 |
+| H-06 | [P10] Remote DeskGate via runner/project-home + passkey | R-01, R-02, R-03 | R18 | No third-party relay | neg | 0.7–1.3 | T2 | PR-30, PR-20 |
+| H-07 | [P6] Cross-OS parity (macOS/Linux) | H-05, I-09 | R18 | Parity matrix green | e2e | 0.2–0.5 | T2 | PR-30 |
+
 ## §13 Phase totals (generated by script; do not hand-edit)
 
-| Phase | Tasks | ESTIMATE pw (low–high, computed from task rows) |
+| Phase | Tasks (incl. component tasks tagged to it) | ESTIMATE pw (low–high, computed) |
 |---|---|---|
 | P−1′ Restore CI | 2 | 0.2–0.2 |
 | P0 Governance | 6 | 1.4–1.9 |
-| P1 Baseline | 7 | 1.4–1.9 |
-| P2 Fork/strip/rebrand | 16 | 11.3–18.8 |
-| P3 Trusted Core | 22 | 24.2–36.7 |
-| P4 Missions/Brain | 7 | 5.2–8.7 |
-| P5 Review/Completion/Connections | 8 | 5.3–8.3 |
-| P6 IDE/debug/CLI agents/bench | 11 | 29.8–53.5 |
+| P1 Baseline | 9 | 1.7–2.3 |
+| P2-N Naming clearance | 4 | 0.7–0.7 |
+| P2 Fork/strip/rebrand | 19 | 12.6–21.1 |
+| P3 Trusted Core | 29 | 29.7–45.2 |
+| P4 Missions/Brain | 9 | 6.2–10.2 |
+| P5 Review/Completion/Connections | 33 | 36.1–55.5 |
+| P6 IDE/debug/CLI agents/bench | 15 | 34.0–60.5 |
 | P7 Design Studio | 8 | 9.2–14.7 |
 | P8 Containment | 6 | 9.3–14.8 |
-| P9 General agent work | 5 | 13.0–21.5 |
-| P10 Remote/runner | 4 | 4.0–8.0 |
-| **v1 = P−1′…P5** | **68** | **49–76** |
-| **All phases** | **102** | **114–189** |
+| P9 General agent work | 6 | 13.5–22.5 |
+| P10 Remote/runner | 5 | 4.7–9.3 |
+| **v1 = P−1′…P5** | **111** | **88–137** |
+| **All phases** | **151** | **159–259** |
+
+| Component | Tasks | Total pw | of which in v1 |
+|---|---|---|---|
+| Zain Code Review | 9 | 11.0–16.0 | 9.5–13.5 |
+| Zain Engineering System | 8 | 11.2–17.2 | 9.2–14.2 |
+| Zain Plan Mode | 10 | 7.1–11.5 | 7.1–11.5 |
+| Zain Browser | 10 | 15.5–24.5 | 11.0–17.5 |
+| DeskGate | 8 | 5.0–8.5 | 3.6–5.7 |
 
 ## §14 Critical path
 

@@ -5,7 +5,7 @@ Rank = impact × (1/complexity) × (1/risk) × source availability, judged quali
 | Rank | Gap | Impact | Complexity | Risk | Source availability | Phase |
 |---|---|---|---|---|---|---|
 | 1 | Main CI broken + governance mechanism cost | H | L | L | n/a (own) | P0 |
-| 2 | No runnable product (no agent can run in WePLD) | H | M | M | **High** (T3 fork) | P1–P2 |
+| 2 | No runnable product (no agent can run in Zain) | H | M | M | **High** (T3 fork) | P1–P2 |
 | 3 | Effect-time authority over provider tools | H | M | H | Med (seams in T3; Core own) | P3 |
 | 4 | Unknown-outcome receipts + reconciliation | H | M | M | Low (own; patterns from durable-harness) | P3 |
 | 5 | Project memory across models (Brain) | H | M | L | Low (own; Codex memories as reference) | P4 |

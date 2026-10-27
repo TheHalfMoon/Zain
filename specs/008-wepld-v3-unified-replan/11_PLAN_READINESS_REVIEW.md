@@ -32,12 +32,12 @@ REVIEW_LIMITS = model reviewer, not a qualified hosted reviewer (CodeRabbit etc.
 | M5 | Medium | No dispatch fsync point for Claude-native tools | **Fixed**: dispatch inside PreToolUse before allow | 03C §2; 08 P3; ADR-007 |
 | M6 | Medium | Donor path/pin errors (codex sandbox crate set, cedar core pin, style-dictionary org, missing SHAs, Onlook status) | **Fixed** | 06 D7, D9, D11, D19–D23 |
 | M7 | Medium | Upkeep share and scope inflation unstated | **Fixed**: upkeep ≈ 25–43% stated; v1 scope line + cut order | 10 §3; 00 §7; 08 overview |
-| M8 | Medium | Compaction-exempt per-effect events reintroduce growth; dangling T3 ids | **Fixed**: per-run aggregate `wepld.run-receipts`; tombstone-aware refs (`REFERENT_DELETED`) | 07 §4; ADR-004 |
+| M8 | Medium | Compaction-exempt per-effect events reintroduce growth; dangling T3 ids | **Fixed**: per-run aggregate `zain.run-receipts`; tombstone-aware refs (`REFERENT_DELETED`) | 07 §4; ADR-004 |
 | M9 | Medium | 11 missing; 4.5/4.7 prose; missing remote/W1/runner diagrams | **Fixed**: this file; diagrams added | 05 §4.5, §4.7, §7 |
 | L1 | Low | "~10 weeks" → ~7 | Fixed | 01 H5 |
 | L2 | Low | D3 3–6 vs 3–5; P7 below donor sum | Fixed (D3 3–5; P7 8–14) | 06; ADR-003; 08 |
 | L3 | Low | P6 naming drift; telemetry phase contradiction | Fixed | 03F §1; 03C §1 |
-| L4 | Low | Two `wepld` binaries coexist | Fixed: rename at P2 in one change | 07 §10; 08 P2 |
+| L4 | Low | Two `zain` binaries coexist | Fixed: rename at P2 in one change | 07 §10; 08 P2 |
 | L5 | Low | 64 KiB frame cap without chunking | Fixed: chunk frames | 07 §3 |
 | L6 | Low | MCP license check scheduled P5 but SDK present at P2 | Fixed (U-06-1 → P2) | ASSUMPTIONS |
 | L7 | Low | A vs B estimates not like-for-like | Fixed | 00 §3; FOUNDER |
@@ -60,7 +60,7 @@ REVIEW_LIMITS = model reviewer, not a qualified hosted reviewer (CodeRabbit etc.
 | Orca's IDE breadth makes it the better foundation | Monaco, Design Mode, computer use, 45 CLI agents | three stores, 2.37M LOC, 421 Windows issues, cloud coupling, store-bound UIs | T3 foundation + Orca ports |
 | T3's event log can be the single evidence log | single txn, receipts | compaction, snapshots, payload rewrite, outbox pruning, NORMAL sync | one authority per fact |
 | Vercel Workflow should be the durable engine | well-tested, World spec | dev-only local World, compiler coupling, second orchestrator | patterns only |
-| Keep Tauri to minimize RAM | smaller baseline | WePLD shell is a demo; donors and browser/Design features depend on Electron webContents; unmeasured gain | Electron, revisit on B2 |
+| Keep Tauri to minimize RAM | smaller baseline | Zain shell is a demo; donors and browser/Design features depend on Electron webContents; unmeasured gain | Electron, revisit on B2 |
 | Keep the V2.3 governance mechanism | proven fail-closed semantics | 83.6k lines, ≥3 PRs per test fix, silently broken by visibility change | semantics kept, mechanism replaced |
 
 ## 4. Go / No-Go

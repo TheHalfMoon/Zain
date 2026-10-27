@@ -1,9 +1,9 @@
-# Feature Parity Matrix — WePLD current vs donors vs target
+# Feature Parity Matrix — Zain current vs donors vs target
 
 Legend: ✓ verified present · ◐ partial/light · ✗ absent · ? UNKNOWN · (src) where verified. Target column = planned
 phase. Nothing in the Target column is implemented yet.
 
-| Capability | WePLD now (main 0a843a2) | T3 @36d4d711 | Orca @e310a636 | Claude Desktop / Code / Design | Amp | Target WePLD |
+| Capability | Zain now (main 0a843a2) | T3 @36d4d711 | Orca @e310a636 | Claude Desktop / Code / Design | Amp | Target Zain |
 |---|---|---|---|---|---|---|
 | Desktop app | ◐ Tauri status window | ✓ Electron | ✓ Electron | ✓ (Win/mac; Linux beta) | ✓ macOS app; CLI (Win via WSL) | P2 |
 | Multi-provider agents | ✗ | ✓ Claude, Codex, ACP, OpenCode, Pi, Cursor… | ✓ ~45 CLIs + structured | ✗ Claude only | ✗ Amp-routed models | P2 |
@@ -32,4 +32,14 @@ phase. Nothing in the Target column is implemented yet.
 | Offline/local-first core | ✓ (by design) | ✓ (local server) | ✓ | ✗ (cloud) | ✗ | keep |
 | Telemetry off by default | ✓ | ✗ PostHog | ✗ PostHog | ✗ | ✗ | P2 |
 
-Source rows: R02, R03, R03B, R03C, R03D, R04, R10; WePLD column from `01_LIVE_WEPLD_AUDIT.md`.
+Source rows: R02, R03, R03B, R03C, R03D, R04, R10; Zain column from `01_LIVE_WEPLD_AUDIT.md`.
+
+## Founder-amendment components (2026-10-28)
+
+| Capability | Zain now | T3 | Orca | Claude | Amp | Target Zain |
+|---|---|---|---|---|---|---|
+| Code review with findings, dispositions, fix apply + undo | ✗ | ◐ diff annotations | ◐ diff comments | ◐ Code Review / security review | ◐ review skill | **P5** (Zain Code Review) |
+| Engineering loop with E2E verification evidence | ✗ | ✗ | ✗ | ◐ (skills/plugins) | ◐ | **P5** (Engineering System) |
+| Enforced read-only Plan Mode with durable artifacts | ✗ | ◐ plan mode (enforcement unverified) | ✗ | ✓ plan mode (Claude Code) | ✗ | P2 unenforced → **P3/P5** |
+| Browser control with receipts, redirect gating, isolated profiles | ✗ | ◐ automation, no pre-request gate, cookie import | ◐ 91 methods, cookie import | ✓ Claude in Chrome (behavior ref.) | ✗ | P2 hardening → **P5** → P9 |
+| Desktop/terminal tools for agents (DeskGate) | ✗ | ◐ terminal tools | ◐ | ✓ Desktop Commander-like via MCP | ◐ | **P3** local, P10 remote |

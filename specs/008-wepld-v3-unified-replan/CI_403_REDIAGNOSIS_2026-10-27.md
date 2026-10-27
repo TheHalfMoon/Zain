@@ -1,5 +1,8 @@
 # CI 403 Re-diagnosis (2026-10-27)
 
+> **Legacy-name note (2026-10-27):** this is historical evidence recorded when the product and repository were named **WePLD** (`TheHalfMoon/wepld`). The product is now **Zain** and the repository is `TheHalfMoon/Zain` (same repository ID 1334408699). Names below are preserved as legacy references.
+
+
 ```text
 SUBJECT = foundation-integrity run 36589753362 (push to main @ 0a843a2c…, 2026-09-29T15:22Z) failed with HTTP 403
 TRIGGER = founder challenge: both workflows on main already declare `permissions: contents: read`

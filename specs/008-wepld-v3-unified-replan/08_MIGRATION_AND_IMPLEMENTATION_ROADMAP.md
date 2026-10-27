@@ -17,7 +17,7 @@ TIERS = T0 docs-only · T1 UI/product code with no effect, CI, supply-chain or a
 | P−1′ Restore CI | **DONE 2026-10-27**: main green on unchanged re-run (repo public) | 0.2 | no code change | n/a |
 | P0 Governance reset | one stable checker; protected paths; founder-signed co-sign | 1–2 | ADR-011 | T2 |
 | P1 Donor baseline (VM) | T3/Orca measured; nothing changed | 1–2 | — | T2 (executes donor install scripts, isolated) |
-| P2 Fork, strip, rebrand | "WePLD" app: chat + code sessions (Codex, ACP, Claude via API key), worktrees, diff, terminal, browser | 11–19 | WP0 3–5 + WP1 2–4 + SDK/installer gates 0.5–1 + WP8 2–4 | T2 |
+| P2 Fork, strip, rebrand | "Zain" app: chat + code sessions (Codex, ACP, Claude via API key), worktrees, diff, terminal, browser | 11–19 | WP0 3–5 + WP1 2–4 + SDK/installer gates 0.5–1 + WP8 2–4 | T2 |
 | P3 Trusted Core | Core-decided approvals with WebAuthn; ledger; UNKNOWN outcomes; containment floor; no Full access | 24–37 | WP2 2–3 + WP3 4–8 + WP4/S4b 2–4 + WP5 3–6 + policy engine 2–4 + Inbox/permission UI 2–3 + WebAuthn 1–2 + floor 1–2 | T2 |
 | P4 Missions + Brain | projects remember; missions wait for CI/schedules; context survives model switch | 5–9 | own build | T2 |
 | P5 Review, Completion, Connections | independent reviewer; completion decisions; MCP/skills/plugins with grants | 5–9 | own + PR-Agent wrap | T2 |
@@ -32,7 +32,7 @@ TIERS = T0 docs-only · T1 UI/product code with no effect, CI, supply-chain or a
 **What this means for a solo founder (stated, not hidden):** at assumption A-1 (~1 pw of AI-assisted output per
 calendar week) and an ongoing fork/adapter upkeep of 1.1–1.85 pw/month once P2 lands (≈25–43% of capacity, `10_*` §3),
 **v1 (P−1…P5) is roughly 14–27 calendar months; the full plan is 3–6 years.** Two earlier stopping points are useful
-products on their own: **P2 exit** (~10–18 pw from start: a WePLD-branded multi-agent workbench) and **P3 exit**
+products on their own: **P2 exit** (~10–18 pw from start: a Zain-branded multi-agent workbench) and **P3 exit**
 (~27–50 pw: the authority differentiator). Scope cuts, if slippage exceeds 50%: drop P9 computer use, P7 PPTX export,
 P10 mobile, then P6 Linear.
 
@@ -87,11 +87,11 @@ do not start ("recent account payments have failed or your spending limit needs 
   load from a user-consented location (user installs it, or install-on-consent showing Anthropic terms); installer-content
   CI gate fails if `claude-agent-sdk*` is bundled. Claude sessions in P2 work only when the user has provided the SDK and an
   API key/cloud credential.
-- **Identity:** rename register (06 §4); Core binary → `wepld-core` and S2 commands move under it in the same change.
+- **Identity:** rename register (06 §4); Core binary → `zain-core` and S2 commands move under it in the same change.
 - **Tests:** T3 suites at P1 ratio; donor-identifier + installer-content gates; no network egress at idle; protocol
   mismatch with T3 clients → 426.
 - **Budget:** B1/B2/B3 ≤ P1 T3 baseline + 10%.
-- **DoD:** installable unsigned/dev-signed `WePLD-Setup.exe`; Codex + ACP + (user-provided) Claude sessions work.
+- **DoD:** installable unsigned/dev-signed `Zain-Setup.exe`; Codex + ACP + (user-provided) Claude sessions work.
 
 ## P3 — Trusted Core (differentiator)
 
@@ -110,7 +110,7 @@ do not start ("recent account payments have failed or your spending limit needs 
   no authority; stale epoch frame → rejected; T3 recovery attempts to auto-continue a `NEVER` effect → blocked;
   Skip cannot override Blocked; Full access not selectable; agent writes to data root → denied by profile floor;
   agent rewrites ledger file and recomputes chain → detected at next `ledger.anchor` comparison (documented limitation
-  before P8); agent sets `WEPLD_CORE_ENFORCE=observe` → no effect in release build; Claude kill mid-Edit → UNKNOWN or
+  before P8); agent sets `ZAIN_CORE_ENFORCE=observe` → no effect in release build; Claude kill mid-Edit → UNKNOWN or
   reconciled by file hash (CC-T02).
 - **Durability:** R1 sweep 20 effects × 5 kill points; W1, W2, W2b (T3 receipt rollback → un-acked fire reconciled,
   not re-fired), W9 (T3 recovery vs Core reconcile race).

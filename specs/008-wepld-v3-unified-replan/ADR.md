@@ -9,7 +9,7 @@ All ADRs: `STATUS = PROPOSED` until this package is merged and the founder signs
 - **Context:** Need one shell + agent control plane. Candidates verified at source: T3 @36d4d711 (~1.0M LOC, single
   event-sourced store, server-first) and Orca @e310a636 (~2.37M LOC, three stores, Electron-first, stronger IDE breadth).
 - **Decision:** Option A. Hard-fork T3 (shell, server, orchestration, providers). Port Orca modules D2–D7 into
-  WePLD-owned packages. Rust Core is the authority sidecar.
+  Zain-owned packages. Rust Core is the authority sidecar.
 - **Alternatives rejected:** B Orca-first (≥30–60 pw before trust work, fourth store, 421 Windows issues); C dual app via
   `orcad` (two runtimes/stores, non-public RPC, doubled RAM) except as a time-boxed bridge; D own platform (60–120 pw)
   kept as fallback; E unmodified T3 + outside-agent Core (no per-effect authority); F merge both apps.
@@ -18,7 +18,7 @@ All ADRs: `STATUS = PROPOSED` until this package is merged and the founder signs
 
 ## ADR-002 — Electron (inherited) over Tauri for the shell
 
-- **Context:** WePLD's Tauri shell is a ~1k-line status demo; T3 and Orca are Electron; T3's browser automation,
+- **Context:** Zain's Tauri shell is a ~1k-line status demo; T3 and Orca are Electron; T3's browser automation,
   preview webviews, `printToPDF`, Orca's Design Mode capture rely on Electron `webContents`/CDP; T3 runs its server
   as Node (`ELECTRON_RUN_AS_NODE`).
 - **Decision:** Electron 44 (T3's). Retire the Tauri host after P3 proves the Core sidecar under the new shell.
@@ -30,7 +30,7 @@ All ADRs: `STATUS = PROPOSED` until this package is merged and the founder signs
 ## ADR-003 — Editor, canvas and Design Studio
 
 - **Decision:** Monaco (MIT) as the editor surface (with Orca diff-comments port), no LSP in v1 (DEFER; candidate
-  monaco-languageclient later). Design Studio = WePLD-built iframe-artboard canvas + Orca Design Mode capture + Onlook-style
+  monaco-languageclient later). Design Studio = Zain-built iframe-artboard canvas + Orca Design Mode capture + Onlook-style
   element→source mapping + Excalidraw freeform layer + DTCG tokens (Style Dictionary). Reject tldraw (license),
   Webstudio (AGPL), Craft.js (dormant).
 - **Consequences:** Design Studio is the largest net-new UI (P7, 8–14 pw, `08_*`).
@@ -43,7 +43,7 @@ All ADRs: `STATUS = PROPOSED` until this package is merged and the founder signs
   hash-chained, `synchronous=FULL`) is authoritative for grants, decisions, effect outcomes, missions, continuations,
   completion and Brain notes. Canonical specs/ADRs stay in git (Brain indexes them). No fact has two writers. T3's own
   recovery services are gated by Core (seam S4b) so T3 never requeues or auto-continues effects on its own after a crash.
-  Cross-links: one compaction-exempt per-run aggregate event `wepld.run-receipts` in T3 (not per effect, avoiding
+  Cross-links: one compaction-exempt per-run aggregate event `zain.run-receipts` in T3 (not per effect, avoiding
   #21154-class growth); tombstone-aware T3 ids in ledger payloads. One ledger per Core data root, exclusive OS lock,
   Core-minted fencing epoch per Server connection.
 - **Rejected:** making T3's log the single evidence log (requires disabling compaction → 17 GiB class growth, #21154);
@@ -92,7 +92,7 @@ All ADRs: `STATUS = PROPOSED` until this package is merged and the founder signs
 ## ADR-009 — Self-hosting and remote
 
 - **Decision:** Same Server+Core stack runs headless as an opt-in runner on user hardware; clients connect over
-  LAN/Tailscale with T3's scoped/DPoP auth. No WePLD-hosted relay or cloud in v1. Project bundle export/import for
+  LAN/Tailscale with T3's scoped/DPoP auth. No Zain-hosted relay or cloud in v1. Project bundle export/import for
   machine moves; live multi-device sync deferred (CRDT candidates Loro/Yjs).
 
 ## ADR-010 — Repository visibility and enforcement
@@ -155,3 +155,33 @@ Windows: Codex backends (restricted token; elevated sandbox users + WFP service;
 macOS: Seatbelt profiles from codex-rs. Linux: bubblewrap + seccomp (+ landlock where present). A separate debug
 profile permits ptrace for the debuggee only. anthropics/sandbox-runtime (Apache-2.0; alpha Windows backend) is a
 reference/fallback. Escape suites per OS gate any widening of the trust claim.
+
+## ADR-015 — Zain Code Review: one engine (OCR fork), Zain-owned authority
+
+Fork `alibaba/open-code-review@375f64cd` as a read-only Go review engine; Zain owns routes (reviewer ≠ builder), findings,
+dispositions, fix application via Core grants with checkpoint undo and verification. Continue is reference only
+(unmaintained). PR-Agent is no longer a producer. Alternatives rejected: two review systems; TS rewrite of OCR (fallback only
+if the Go sidecar fails signing/size gates).
+
+## ADR-016 — Zain Engineering System: PStack-derived single loop; E2E on Playwright in Zain Browser Test lane
+
+Adapt `cursor/plugins` pstack (MIT) as the only execution/verification loop; completion rules ES-1..ES-7 extend Trusted
+Completion. E2E engine Playwright; source of the E2E harness pending founder confirmation (FO-9). Plan Mode owns plan
+artifacts; this loop only reads them.
+
+## ADR-017 — Zain Plan Mode: read-only Core profile, durable repo artifacts
+
+Adapt mattpocock/skills (MIT) planning skills; enforce `PLAN_READONLY` in Core; approval → mission with WebAuthn and
+`plan.lock.json`; critic route ≠ griller route. Builds on T3 plan mode; no separate planner engine.
+
+## ADR-018 — Zain Browser: one BrowserController, four lanes, pre-request gating
+
+Evolve T3's broker into the single controller; Preview/Agent/Test lanes in v1 (localhost + allow-listed), user-session lane
+and general web in P9; remove donor cookie import; pre-request navigation/redirect gate; hard blocks not overridable.
+Rejected: running browser-harness, Browser Use, Orca's browser manager or Playwright MCP as additional controllers.
+
+## ADR-019 — DeskGate: adapters without authority
+
+Port Desktop Commander tool surface as thin MCP adapters; every action a Core effect executed by the single Server
+process/PTY host; remote only via Zain runner and passkey. Remote Desktop Commander relay excluded (proprietary, not
+available). Rejected: running DesktopCommanderMCP as its own server (second execution authority, bypassable blocklist).

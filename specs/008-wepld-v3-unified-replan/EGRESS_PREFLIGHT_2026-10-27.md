@@ -1,5 +1,8 @@
 # Egress Preflight — Draft PR for Spec 008 (2026-10-27)
 
+> **Legacy-name note (2026-10-27):** this is historical evidence recorded when the product and repository were named **WePLD** (`TheHalfMoon/wepld`). The product is now **Zain** and the repository is `TheHalfMoon/Zain` (same repository ID 1334408699). Names below are preserved as legacy references.
+
+
 ```text
 POLICY = docs/canonical/EXTERNAL_REVIEW_EGRESS_POLICY.md (canonical main @ 0a843a2)
 FOUNDER_DECISIONS (2026-10-27) = repository stays PRIVATE; NO automatic external review; NO transmission of private

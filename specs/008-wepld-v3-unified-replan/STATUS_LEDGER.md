@@ -1,7 +1,7 @@
 # V3 Replan — Durable Status Ledger
 
 ```text
-MISSION = WePLD full replan (copy-first, deep REA, planning only)
+MISSION = Zain full replan (copy-first, deep REA, planning only)
 STARTED = 2026-10-27
 BRANCH = docs/v3-unified-replan-20261027
 BASE_MAIN = 0a843a2 (Merge PR #345) — live main at research start
@@ -17,7 +17,7 @@ top level of this directory.
 
 | Track | Output | State |
 |---|---|---|
-| WePLD live audit | `01_LIVE_WEPLD_AUDIT.md` | DONE |
+| Zain live audit | `01_LIVE_WEPLD_AUDIT.md` | DONE |
 | T3 Code source REA | `research/R02_T3_CODE.md` → `02_*` | DONE |
 | Orca source REA | `research/R03D_ORCA.md` → `03D_*` | DONE |
 | Vercel Workflow / durable-harness REA | `research/R05_VERCEL.md` → `05_*` | DONE |
@@ -30,7 +30,7 @@ top level of this directory.
 | Adversarial review | `11_PLAN_READINESS_REVIEW.md` | DONE — 28 findings, all dispositioned |
 | Publish | branch pushed; **draft PR deliberately NOT opened** | see "Publication decision" below |
 
-## Early verified findings (WePLD live audit)
+## Early verified findings (Zain live audit)
 
 - Live repo is **PRIVATE** (`gh repo view`, 2026-10-27); `CURRENT_STATE.md` (checkpoint 2026-09-12) and
   Astro `EVIDENCE_AND_VALIDATION.md` (2026-09-20) both record **public**. Discrepancy: live wins.

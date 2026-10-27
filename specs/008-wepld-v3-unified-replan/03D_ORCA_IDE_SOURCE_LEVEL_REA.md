@@ -2,11 +2,11 @@
 
 ```text
 DONOR = stablyai/orca @ e310a63624c86c0e91e9d77df71f038b91d79ea0 (2026-10-27), MIT (Lovecast Inc.)
-SUPERSEDES = prior WePLD pin b5b727bd (5,577 commits stale)
+SUPERSEDES = prior Zain pin b5b727bd (5,577 commits stale)
 FULL_REA = research/R03D_ORCA.md (785 lines)
 RIGHTS = PUBLIC_OPEN_SOURCE (MIT) + FOUNDER-ATTESTED; carry Apache-2.0 notices (agent-browser, serve-sim, sherpa-onnx);
          modules importing @anthropic-ai/claude-agent-sdk inherit Anthropic's terms
-ROLE_IN_V3 = MODULE DONOR (ports into WePLD-owned packages) + REFERENCE SPECIFICATIONS. Not the foundation.
+ROLE_IN_V3 = MODULE DONOR (ports into Zain-owned packages) + REFERENCE SPECIFICATIONS. Not the foundation.
 ```
 
 ## 1. What Orca is (verified)
@@ -28,7 +28,7 @@ mobile via the Stably relay. Churn ≈150 commits/day; 4,194 open issues incl. 4
 
 ## 3. Port list (Option A) in value ÷ effort order
 
-| # | Module | Path @e310a636 | LOC | Extractability | ESTIMATE pw | Target in WePLD |
+| # | Module | Path @e310a636 | LOC | Extractability | ESTIMATE pw | Target in Zain |
 |---|---|---|---|---|---|---|
 | 1 | Design Mode guest scripts + payload clamp | `src/main/browser/grab-*.ts`, `browser-grab-payload.ts`, `src/shared/browser-grab-types` | ~1.1k | High | 3–6 | Browser pane → composer; Design Studio element targeting |
 | 2 | TUI agent catalog | `src/shared/tui-agent-config*.ts` | 443 | High (data) | with #3 | "CLI agents" in terminal |

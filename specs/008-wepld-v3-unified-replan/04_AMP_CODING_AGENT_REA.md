@@ -19,9 +19,9 @@ ROLE_IN_V3 = BEHAVIOR ORACLE + interface oracle (self-hosted orb dispatch contra
 | Ad-supported free tier | Ads removed 2026-03-30; free (Hobby) if you bring your own compute + model keys/subscriptions | R04 §8.4 |
 | Approval model | **No approvals by default**; control via plugins and per-MCP-tool policy | R04 §8.2 |
 
-## 2. What WePLD should learn (adopt as behavior), and what it must beat
+## 2. What Zain should learn (adopt as behavior), and what it must beat
 
-| Amp strength | WePLD response | Measurable target (proposed, not measured) |
+| Amp strength | Zain response | Measurable target (proposed, not measured) |
 |---|---|---|
 | Subagents with isolated context | T3 subagents + structured result contract validated by Core | % subagent results passing schema + evidence checks |
 | Thread search/Read Thread | Brain + local thread index (Codex `thread-store` crates as donor, Apache-2.0) | offline query p95; zero vendor storage |
@@ -31,13 +31,13 @@ ROLE_IN_V3 = BEHAVIOR ORACLE + interface oracle (self-hosted orb dispatch contra
 | Plugins (`tool.call` allow/reject/modify/synthesize) | Same hook shape, but decision owned by Core and plugins capability-scoped | plugin escape tests |
 | Per-role model choice | Independent per-role pins (reviewer ≠ builder), which Amp's Task subagents cannot do | 100% role pins in ledger |
 
-Where Amp is weak and WePLD wins by design: no default approvals; Windows CLI only via WSL; vendor-hosted threads
+Where Amp is weak and Zain wins by design: no default approvals; Windows CLI only via WSL; vendor-hosted threads
 (30-day deletion policy); routing failover on provider errors undocumented (UNKNOWN).
 
 ## 3. Acquisition map summary (32 rows in R04 §10)
 
 All 32 Amp features: **source unavailable** (or unlicensed text) → behavior oracle only. Every row has an OSS donor
-candidate or a WePLD build. Highest-value donors referenced there and carried into `06_*`:
+candidate or a Zain build. Highest-value donors referenced there and carried into `06_*`:
 `openai/codex` crates (sandboxing, windows-sandbox-rs, execpolicy, thread-store, rmcp-client, code-mode, skills,
 app-server-protocol; Apache-2.0 @603a7baf), ACP spec/SDKs (Apache-2.0 @e50f62b4), OpenHands software-agent-sdk
 (MIT), goose crates (Apache-2.0), vibe-kanban crates (Apache-2.0), OpenCode (MIT).
@@ -47,4 +47,4 @@ app-server-protocol; Apache-2.0 @603a7baf), ACP spec/SDKs (Apache-2.0 @e50f62b4)
 ACP has become the de-facto editor↔agent protocol; Codex has the strongest default local safety (OS sandbox +
 approvals); Cursor 3.0 added an agents window + `/worktree` + `/best-of-n`; the standalone Codex app was folded into the
 ChatGPT desktop app (~2026-07-09, press-reported). **No competitor documents exactly-once side effects or crash-safe
-effect logs** — WePLD's clearest ownable gap (still to be demonstrated, `09_*`).
+effect logs** — Zain's clearest ownable gap (still to be demonstrated, `09_*`).

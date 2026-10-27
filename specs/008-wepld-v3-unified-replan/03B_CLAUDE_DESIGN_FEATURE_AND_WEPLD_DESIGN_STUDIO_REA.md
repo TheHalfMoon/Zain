@@ -1,11 +1,11 @@
-# 03B — Claude Design Feature REA and WePLD Design Studio (synthesis)
+# 03B — Claude Design Feature REA and Zain Design Studio (synthesis)
 
 ```text
 FULL_REA = research/R03B_CLAUDE_DESIGN.md (feature matrix, data model, CLI + visual interaction spec, AT-01..AT-23)
 SOURCES = 15 official sources (Help Center, claude.com/product/design, Academy, code.claude.com commands/artifacts,
           2026-04-17 launch post, release notes), accessed 2026-10-27; [OBS] = artifact-type descriptions read in this
           environment (read-only, nothing published); [3P] = third-party, unverified
-SCOPE = the DESIGN FEATURE (creation/editing). WePLD's own visual identity is separate and WePLD-owned.
+SCOPE = the DESIGN FEATURE (creation/editing). Zain's own visual identity is separate and Zain-owned.
 ```
 
 ## 1. What Claude Design does (verified)
@@ -27,11 +27,11 @@ SCOPE = the DESIGN FEATURE (creation/editing). WePLD's own visual identity is se
   elements needs a mouse; large codebases lag; no offline; not on Bedrock/Vertex/Foundry/CMEK/HIPAA/ZDR.
 - **UNKNOWN:** Figma export, web capture, responsive breakpoints, admin edit-lock role, true two-way canvas↔code sync.
 - **`/design-sync`:** React design systems only, Anthropic API only, uploads to the standalone site that closes
-  2026-12-14 → WePLD interop targets exported HTML/zip and the Design System artifact *format*, not the sync endpoint.
+  2026-12-14 → Zain interop targets exported HTML/zip and the Design System artifact *format*, not the sync endpoint.
 
-## 2. Where WePLD can beat it (falsifiable targets)
+## 2. Where Zain can beat it (falsifiable targets)
 
-| Claude Design gap | WePLD Design Studio target | Test |
+| Claude Design gap | Zain Design Studio target | Test |
 |---|---|---|
 | No version history | Operation log + snapshots per design doc, git-versioned | AT-history |
 | Non-DTCG tokens | DTCG 2025.10 as canonical token format; Style Dictionary transforms | AT-tokens |
@@ -45,12 +45,12 @@ SCOPE = the DESIGN FEATURE (creation/editing). WePLD's own visual identity is se
 
 | Primitive | Donor / basis | License (verified) | Route |
 |---|---|---|---|
-| Canvas of iframe artboards (pan/zoom, multi-artboard) | WePLD-built on React; Excalidraw for freeform sketch layer | Excalidraw MIT | ADAPT |
+| Canvas of iframe artboards (pan/zoom, multi-artboard) | Zain-built on React; Excalidraw for freeform sketch layer | Excalidraw MIT | ADAPT |
 | Live sandboxed preview (project dev server or static HTML) | T3 in-app browser/webviews | MIT | ADAPT |
 | Element pick → payload (DOM path, styles, screenshot crop) | Orca Design Mode guest scripts | MIT | PORT |
 | Element → source mapping (3 tiers: build-time ids, React dev info, source maps) | Onlook `data-oid` approach; click-to-component / react-dev-inspector | Apache-2.0 / MIT | ADAPT |
 | Layer tree + properties panel (token-aware) | Puck patterns | MIT | ADAPT |
-| Comments → agent proposal → approve → patch | WePLD (Core grant on file writes) | — | BUILD |
+| Comments → agent proposal → approve → patch | Zain (Core grant on file writes) | — | BUILD |
 | Token store (DTCG) + transforms | DTCG spec; Style Dictionary | W3C / Apache-2.0 | COPY spec / INTEGRATE |
 | Code editor alongside | Monaco | MIT | INTEGRATE |
 | Exports: HTML/zip, PNG, PDF (print-to-PDF via Chromium), PPTX (later) | Electron `printToPDF`; pptx via a permissive lib (candidate) | — | ADAPT / DEFER PPTX |
@@ -61,7 +61,7 @@ SCOPE = the DESIGN FEATURE (creation/editing). WePLD's own visual identity is se
 
 ## 4. Interaction specification (summary; full spec R03B §7)
 
-- **CLI:** `wepld design new|open|sync|apply-tokens|lint|comment|export|handoff|history|consent`.
+- **CLI:** `zain design new|open|sync|apply-tokens|lint|comment|export|handoff|history|consent`.
 - **Layout:** left = pages/artboards + layer tree; center = canvas; right = properties (tokens first) + comments; bottom
   = code (Monaco) for the selected EditTarget; composer docked with element chips.
 - **Selection model:** click selects a node in the live DOM; resolver returns EditTarget(s) with confidence; low

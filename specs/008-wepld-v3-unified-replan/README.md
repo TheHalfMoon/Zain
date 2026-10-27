@@ -1,4 +1,4 @@
-# Spec 008 — WePLD V3 Unified Replan (planning package)
+# Spec 008 — Zain V3 Unified Replan (planning package)
 
 ```text
 STATUS = CANDIDATE / DOCS-ONLY / NO IMPLEMENTATION AUTHORITY

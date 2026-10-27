@@ -8,7 +8,7 @@ PREPARED = 2026-10-27
 ## Recommended foundation (one line)
 
 **T3-first hybrid:** hard-fork `pingdotgg/t3code@36d4d711b79c73eb33131944f73ea4a8c6156484` as shell + server +
-orchestration; keep WePLD's tested Rust core as the authority sidecar; port six Orca modules from
+orchestration; keep Zain's tested Rust core as the authority sidecar; port six Orca modules from
 `stablyai/orca@e310a63624c86c0e91e9d77df71f038b91d79ea0`; Vercel durability as patterns only.
 
 ## Evidence for T3-first vs Orca-first vs hybrid
@@ -50,7 +50,7 @@ not disclosed).
 | # | Item | Evidence | Implication if not done |
 |---|---|---|---|
 | FO-1 | **Restore GitHub Actions** for the private repo (payment method / spending limit / plan) | Re-run of run 36589753362 (attempt 2) annotation: "The job was not started because recent account payments have failed or your spending limit needs to be increased." | No integrity check can run → no PR can be qualified or merged under current policy; the 403 diagnosis stays PROBABLE |
-| FO-2 | **Cubic**: uninstall the GitHub App or remove `TheHalfMoon/wepld` from its repository access, and record evidence | Cubic auto-wrote PR #347's description on 2026-10-01 despite `cubic.yaml`; its check suite is absent on today's push, but that does not prove removal | Opening a PR may transmit private content to Cubic (`PROHIBITED_EGRESS`) |
+| FO-2 | **Cubic**: uninstall the GitHub App or remove `TheHalfMoon/Zain` from its repository access, and record evidence | Cubic auto-wrote PR #347's description on 2026-10-01 despite `cubic.yaml`; its check suite is absent on today's push, but that does not prove removal | Opening a PR may transmit private content to Cubic (`PROHIBITED_EGRESS`) |
 | FO-3 | **Qodo**: uninstall or remove repo access | Auto-comment within ~4 s of PR creation: reviews "paused because your trial has ended" | Any future billing restoration silently re-enables automatic review of private PRs |
 | FO-4 | **CodeRabbit**: decide remove vs accept its automatic "review skipped" reaction (it reads `.coderabbit.yaml`) | Auto-comments on every PR #340–#347 within ~9 s | If accepted, record it as non-review metadata access in the egress record |
 | FO-5 | **Cursor, Devin, Sentry, Vercel, Claude GitHub Apps**: confirm automatic PR review/summary features are off for this repo or remove access | Check suites from all five on today's branch push | Unknown automatic processing of private PR content on creation |
@@ -58,3 +58,7 @@ not disclosed).
 | FO-7 | Enforcement plan for a private repo: (b) GitHub Pro/Team for branch protection/required checks, or (c) free/advisory | Branch-protection API 403 "Upgrade to GitHub Pro or make this repository public" | Under (c) every gate is advisory |
 
 None of these can be performed by an agent under current rules (account settings, billing, app installations).
+| FO-8 | **Trademark clearance for "Zain"** before distribution/publishing (R19: HIGH risk in KSA/GCC vs Zain Group; PyPI `zain` is a coding agent) | research/R19_ZAIN_NAMING_CONFLICTS.md | Distribution under a contested mark; forced rename later |
+| FO-9 | **Confirm the E2E source**: which repository/framework was meant (provisional: `TheHalfMoon/Ascout@ecada2bc` Spec 016 + Playwright); which Ascout parts are canonical; relicensing into Zain; whether any cloud E2E service is ever acceptable | research/R15 §6 | E-03 cannot start; Engineering loop ships without browser E2E |
+| FO-10 | **Accept the scope reality**: with the five components v1 = ≈88–137 pw (2.3–4 years solo at A-1); choose release tiers (ZAIN_V3_MASTER_PLAN §5a) or cut v1 scope | 14 §13 (computed) | Plan remains unrealistic for one person |
+| FO-11 | Review the locally installed Desktop Commander configuration (unrestricted `allowedDirectories`, telemetry on) — independent of Zain | research/R18 §8 | Local exposure on the founder's machine |

@@ -1,5 +1,8 @@
 # 01 — Live WePLD Audit (2026-10-27)
 
+> **Legacy-name note (2026-10-27):** this is historical evidence recorded when the product and repository were named **WePLD** (`TheHalfMoon/wepld`). The product is now **Zain** and the repository is `TheHalfMoon/Zain` (same repository ID 1334408699). Names below are preserved as legacy references.
+
+
 ```text
 STATUS = CANDIDATE PLANNING EVIDENCE (untrusted until reviewed + merged)
 OBSERVED_AT = 2026-10-27 (Asia/Riyadh session; GitHub API + fresh clone)

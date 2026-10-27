@@ -1,11 +1,11 @@
-# 00 — Executive Product Decision (WePLD V3)
+# 00 — Executive Product Decision (Zain V3)
 
 ```text
 STATUS = CANDIDATE PLANNING PACKAGE — not authority until reviewed and merged under trusted-base governance
 DATE = 2026-10-27
 RECOMMENDATION = CONDITIONAL GO (conditions in §7)
 FOUNDATION = Hard fork of T3 Code @ 36d4d711b79c73eb33131944f73ea4a8c6156484 (MIT)
-           + WePLD Rust Trusted Core (existing S1/S2 code) as a server-owned sidecar
+           + Zain Rust Trusted Core (existing S1/S2 code) as a server-owned sidecar
            + bounded ports of Orca modules @ e310a63624c86c0e91e9d77df71f038b91d79ea0 (MIT)
            + Vercel Workflow / durable-harness as PATTERNS ONLY (no runtime dependency)
 REJECTED = Orca-as-foundation; merge-both-apps; keep-Tauri-and-build-UI; Vercel Workflow as engine
@@ -14,7 +14,7 @@ NEXT_BUILD_ENTRY = (P−1′ CLOSED: main green on unchanged re-run 2026-10-27) 
 
 ## 1. Product definition
 
-**WePLD is a local-first desktop agent workbench in which any model or agent can do real engineering and
+**Zain is a local-first desktop agent workbench in which any model or agent can do real engineering and
 general knowledge work, and in which a Rust Trusted Core — not the agent, not the UI and not the provider —
 decides which *mediated* effects are allowed, records what the enforcing Server observed, and decides what counts as
 done.** The forked Server is the enforcement point and part of the trusted computing base; effects that bypass it
@@ -41,12 +41,12 @@ What makes it different from T3, Orca, Claude Desktop, Amp, Cursor and Codex (al
 Fork T3 Code as the shell, server and agent orchestration runtime because it already ships the hardest 80% of the
 product (multi-provider sessions, an event-sourced orchestrator with receipts and a transactional outbox, worktrees,
 hidden-ref checkpoints, diff/PR review, terminal, in-app browser, Electron packaging/updater, remote clients) under
-MIT, and because its server-first design exposes exact seams where WePLD's existing Rust core can become the
+MIT, and because its server-first design exposes exact seams where Zain's existing Rust core can become the
 authority (`R02 §10`, seams S1–S9). Do **not** treat T3's log as the evidence log — it compacts and mutates by design —
 instead apply **one authority per fact**: T3 owns conversation/UI state; the Rust Core owns grants, decisions, effect
 outcomes, missions, continuations and completion. Port a small set of separable Orca modules (Design Mode guest
 scripts, TUI-agent catalog + OSC 7501 status, Windows process-host, Linear, computer use, Monaco/diff comments) into
-WePLD-owned packages. Use Vercel's World/replay-class/fencing/crash-drill ideas as patterns for the Core ledger, not
+Zain-owned packages. Use Vercel's World/replay-class/fencing/crash-drill ideas as patterns for the Core ledger, not
 as a runtime. Retire the Tauri shell; keep every line of the tested Rust core.
 
 ## 3. Options compared (summary; detail in `ADR-001`, `R02 §14`, `R03D §16`)
@@ -66,25 +66,25 @@ Estimates are ESTIMATES from the research agents' source reading, not measured; 
 
 | Capability | Single owner | Source |
 |---|---|---|
-| Desktop window, updater, packaging | WePLD Shell (forked `apps/desktop`, Electron 44) | T3 |
-| Web UI (chat, diff, files, terminal view, browser pane) | WePLD Shell (forked `apps/web`) | T3 (+ Orca ports) |
-| Thread / run / turn / provider-session state | WePLD Server orchestration-v2 SQLite (`statev2.sqlite`) | T3 |
-| Effect **execution** queue (leases, retries, FIFO) | WePLD Server EffectWorker/EffectOutbox | T3 |
-| Effect **authority**, receipts, unknown-outcome, reconciliation | WePLD Core Ledger (Rust, fsync, hash chain) | WePLD (Spec 006 §19) |
-| Missions, continuations (wait-for-CI, schedules, wake-ups) | WePLD Core Ledger; fires idempotent commands into the Server | WePLD |
-| Project Brain (memory notes, preferences, mission summaries, evidence + **index over repo specs/ADRs**) | WePLD Core Brain tables (FTS5); canonical specs stay in git | WePLD |
-| Project identity, evidence generations, read-only git topology | WePLD Core (existing S2) | WePLD |
-| Git writes, worktrees, checkpoints | WePLD Server VCS driver, **gated by Core grants** | T3 |
-| Provider adapters (Claude, Codex, ACP family, OpenCode, Pi) | WePLD Server provider packages | T3 |
-| CLI agents in terminals (TUI catalog + status) | WePLD Server terminal manager + ported catalog | Orca port |
-| PTY hosting | WePLD Server terminal (node-pty) — one PTY host | T3 |
-| Editor | Monaco surface in WePLD Shell | Orca port / monaco-editor |
-| Browser pane, Design Mode capture, browser automation | WePLD Shell desktop process (Electron webContents/CDP) | T3 + Orca port |
-| Design Studio canvas + design system tokens | WePLD Shell + Server design package; tokens in project files (DTCG) | New (R03B) |
-| Process sandbox | WePLD Core launcher (Codex `windows-sandbox-rs` / `linux-sandbox` ports) | openai/codex (Apache-2.0) |
-| Permission policy (PDP) | WePLD Core Nawat (Cedar candidate); approvals verified by WebAuthn assertion | WePLD |
-| Policy enforcement (PEP) | WePLD Server at seams S1–S8 (part of the TCB) | T3 fork |
-| Remote/mobile clients | WePLD Server WebSocket RPC (T3 protocol v2) | T3 |
+| Desktop window, updater, packaging | Zain Shell (forked `apps/desktop`, Electron 44) | T3 |
+| Web UI (chat, diff, files, terminal view, browser pane) | Zain Shell (forked `apps/web`) | T3 (+ Orca ports) |
+| Thread / run / turn / provider-session state | Zain Server orchestration-v2 SQLite (`statev2.sqlite`) | T3 |
+| Effect **execution** queue (leases, retries, FIFO) | Zain Server EffectWorker/EffectOutbox | T3 |
+| Effect **authority**, receipts, unknown-outcome, reconciliation | Zain Core Ledger (Rust, fsync, hash chain) | Zain (Spec 006 §19) |
+| Missions, continuations (wait-for-CI, schedules, wake-ups) | Zain Core Ledger; fires idempotent commands into the Server | Zain |
+| Project Brain (memory notes, preferences, mission summaries, evidence + **index over repo specs/ADRs**) | Zain Core Brain tables (FTS5); canonical specs stay in git | Zain |
+| Project identity, evidence generations, read-only git topology | Zain Core (existing S2) | Zain |
+| Git writes, worktrees, checkpoints | Zain Server VCS driver, **gated by Core grants** | T3 |
+| Provider adapters (Claude, Codex, ACP family, OpenCode, Pi) | Zain Server provider packages | T3 |
+| CLI agents in terminals (TUI catalog + status) | Zain Server terminal manager + ported catalog | Orca port |
+| PTY hosting | Zain Server terminal (node-pty) — one PTY host | T3 |
+| Editor | Monaco surface in Zain Shell | Orca port / monaco-editor |
+| Browser pane, Design Mode capture, browser automation | Zain Shell desktop process (Electron webContents/CDP) | T3 + Orca port |
+| Design Studio canvas + design system tokens | Zain Shell + Server design package; tokens in project files (DTCG) | New (R03B) |
+| Process sandbox | Zain Core launcher (Codex `windows-sandbox-rs` / `linux-sandbox` ports) | openai/codex (Apache-2.0) |
+| Permission policy (PDP) | Zain Core Nawat (Cedar candidate); approvals verified by WebAuthn assertion | Zain |
+| Policy enforcement (PEP) | Zain Server at seams S1–S8 (part of the TCB) | T3 fork |
+| Remote/mobile clients | Zain Server WebSocket RPC (T3 protocol v2) | T3 |
 
 ## 5. What survives from V2.3, what changes
 
@@ -105,11 +105,11 @@ S2 identity/evidence/git observer code and its adversarial tests.
 
 ## 6. Claude-feature stance (summary of `03*`)
 
-WePLD recreates the *capabilities* of Claude Chat/Cowork/Code/Design/Artifacts — not Anthropic's brand, chrome or trade
+Zain recreates the *capabilities* of Claude Chat/Cowork/Code/Design/Artifacts — not Anthropic's brand, chrome or trade
 dress — and stays multi-vendor. Of 377 census rows (incl. Platform/API family G): 124 ADAPT, 80 USE VIA OFFICIAL INTEGRATION, 35 REIMPLEMENT,
 6 COPY, 127 DEFER, 5 REJECT (`03E`). A binding constraint discovered in official docs: **third-party products may not
-route requests through users' Free/Pro/Max Claude credentials**; WePLD must use API keys/cloud providers, or launch the
-user's own unmodified Claude Code binary (the latter's status as "ordinary use" inside WePLD is UNKNOWN and must be
+route requests through users' Free/Pro/Max Claude credentials**; Zain must use API keys/cloud providers, or launch the
+user's own unmodified Claude Code binary (the latter's status as "ordinary use" inside Zain is UNKNOWN and must be
 confirmed in writing before marketing it) (`R03C §auth`, census `CL-E-096`).
 
 ## 7. GO conditions (CONDITIONAL GO)
@@ -119,7 +119,7 @@ confirmed in writing before marketing it) (`R03C §auth`, census `CL-E-096`).
 | G1 | **MET for CI (2026-10-27):** `main` integrity green on unchanged re-run (attempt 3) after the repo became public; remaining: governance simplified per `ADR-011` (P0) | Nothing can be accepted while the gate is broken | Green `foundation-integrity` (or its successor) on `main` |
 | G2 | Phase 1 measurement: T3 @ pin builds, tests and runs on the founder's Windows machine; baseline RAM/start/latency recorded | Estimates are from reading, not running | `09_*` B1–B3 numbers committed |
 | G3 | Effect seam spike: Core grants a Codex approval and an ACP `fs/write` through S2/S3 with a ledger receipt, and a kill -9 between dispatch and receipt yields `EFFECT_OUTCOME_UNKNOWN` | Proves the trust claim is implementable on the fork | Spike test log + receipts |
-| G4 | Claude SDK redistribution + auth posture confirmed | Proprietary SDK in a redistributed product; subscription-auth policy | Written Anthropic answer, **or** fallback adopted: SDK excluded from installer and loaded from a user-consented location + API-key/cloud credentials only. The "user-installed CLI in a WePLD terminal" route stays UNKNOWN and is not a G4 discharge. |
+| G4 | Claude SDK redistribution + auth posture confirmed | Proprietary SDK in a redistributed product; subscription-auth policy | Written Anthropic answer, **or** fallback adopted: SDK excluded from installer and loaded from a user-consented location + API-key/cloud credentials only. The "user-installed CLI in a Zain terminal" route stays UNKNOWN and is not a G4 discharge. |
 | G5 | Founder accepts the governance change and the T3 fork-not-track policy | Both reverse earlier canonical choices | Founder decision record (`FOUNDER_DECISION_RECORD.md`) signed off in PR |
 
 **v1 scope line:** P−1…P5 (≈ 49–76 pw; 14–27 calendar months at assumption A-1 with upkeep). Design Studio (P7),

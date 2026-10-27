@@ -1,4 +1,4 @@
-# 07 — Target Architecture and UX (WePLD V3)
+# 07 — Target Architecture and UX (Zain V3)
 
 ```text
 STATUS = PROPOSED (candidate), revision 2 after adversarial review (11_*: C1–C3, H1–H3, H7–H9, M3, M5, M8, L5).
@@ -11,11 +11,11 @@ PRINCIPLES = one authority per fact; one executor; one PTY host; one policy deci
 
 ```mermaid
 flowchart LR
-  subgraph Desktop["WePLD Desktop (Electron 44, forked T3 apps/desktop)"]
-    UI["Renderer: WePLD Web UI\n(forked apps/web + Orca ports)"]
+  subgraph Desktop["Zain Desktop (Electron 44, forked T3 apps/desktop)"]
+    UI["Renderer: Zain Web UI\n(forked apps/web + Orca ports)"]
     DM["Desktop main: windows, updater,\nbrowser panes (webContents/CDP),\nnotifications, WebAuthn prompts"]
   end
-  subgraph Server["WePLD Server (Node; forked T3 apps/server) = PEP"]
+  subgraph Server["Zain Server (Node; forked T3 apps/server) = PEP"]
     ORCH["orchestration-v2\nOrchestrator + EventSink\n(statev2.sqlite)"]
     EW["EffectWorker / EffectOutbox\n(sole effect executor)"]
     REC["Recovery services\n(gated by Core, §5)"]
@@ -25,7 +25,7 @@ flowchart LR
     MCP["/mcp endpoint"]
     BRIDGE["CoreBridge (S1 framing)"]
   end
-  subgraph Core["WePLD Core (Rust) = PDP + ledger"]
+  subgraph Core["Zain Core (Rust) = PDP + ledger"]
     NAWAT["Nawat PDP"]
     LEDGER["Ledger (append-only,\nhash-chained, fsync)"]
     BRAIN["Brain index"]
@@ -48,8 +48,8 @@ flowchart LR
 |---|---|---|---|
 | Desktop main | app session | windows, updater, browser panes, OS notifications, WebAuthn ceremony UI | renderer/Server unaffected if headless; UI reconnects |
 | Renderer | window | view state only | none durable |
-| WePLD Server | app session or service | conversation/run state, effect queue, PTYs, git ops, providers | Core-gated reconciliation (§5) |
-| WePLD Core | child of Server | authority, ledger, Brain index, identity | Server refuses gated effects until Core returns (fail-closed); ledger survives |
+| Zain Server | app session or service | conversation/run state, effect queue, PTYs, git ops, providers | Core-gated reconciliation (§5) |
+| Zain Core | child of Server | authority, ledger, Brain index, identity | Server refuses gated effects until Core returns (fail-closed); ledger survives |
 | Provider processes | per session | provider-native transcripts (external) | in-flight effects become UNKNOWN or reconciled |
 | Optional runner | always-on | same Server+Core stack | same as Server |
 
@@ -119,12 +119,12 @@ Replay classes: `SAFE` (idempotent/read-only), `RECONCILABLE` (observable postco
 - **Chain:** `hash = SHA-256(prev_hash ‖ seq ‖ kind ‖ canonical_json(payload))`.
 - **Honest integrity claim:** before P8 the chain is **tamper-evident against corruption, not against a same-user
   adversary** (an unsandboxed agent with the user's rights could rewrite the file and recompute an unkeyed chain).
-  Mitigations from P3: (a) deny-floor rules for the WePLD data root in every provider profile (Claude managed settings,
+  Mitigations from P3: (a) deny-floor rules for the Zain data root in every provider profile (Claude managed settings,
   Codex sandbox config, ACP client policy) — the strongest mediated control; (b) approvals carry WebAuthn signatures that
   an agent cannot forge, so the decisions that matter most are verifiable independently of the chain; (c) `ledger.anchor`
   periodically writes the head hash to a signed git note / signed tag the founder pushes (out-of-machine anchor). P8
   containment upgrades the claim.
-- **T3 cross-links:** one compaction-exempt **per-run aggregate** event `wepld.run-receipts{run_id, ledger_range,
+- **T3 cross-links:** one compaction-exempt **per-run aggregate** event `zain.run-receipts{run_id, ledger_range,
   head_hash}` (not one per effect) to avoid reintroducing #21154-class growth. Ledger references to T3 ids are
   tombstone-aware: if T3 deletes a thread, the ledger keeps the id and marks `REFERENT_DELETED` on next reconciliation.
 - **Retention:** never compacted; redaction via tombstones that preserve the chain.
@@ -161,7 +161,7 @@ P10) uses the same mechanism with a paired passkey. **Until this lands in P3, th
 UI says so.** Policy changes, `core.mode` changes and permission-mode escalations use the same assertion.
 
 **Mediation classes (C2 fix).** Every effect is tagged:
-- `MEDIATED` — passes through a Server PEP (ACP fs/terminal, WePLD terminals' commands issued by WePLD, git ops,
+- `MEDIATED` — passes through a Server PEP (ACP fs/terminal, Zain terminals' commands issued by Zain, git ops,
   MCP tools, outbox effects, provider approval prompts with a Core decision).
 - `UNMEDIATED` — happens inside a provider's own tool runtime without a prompt, or inside a CLI agent running in a PTY.
   Core records it only if reported (e.g. PostToolUse, file-hash diffs).
@@ -171,9 +171,15 @@ return `COMPLETED_WITH_UNMEDIATED_LIMITATION`, which is shown as such. Marketing
 `MEDIATED` effects until P8.
 
 **Containment floor in P3 (C2 fix, partial).** Before the full P8 sandbox: (a) provider launch profiles deny writes to
-the WePLD data root and outside the worktree (Codex `workspaceWrite`, Claude managed deny rules, ACP client policy);
+the Zain data root and outside the worktree (Codex `workspaceWrite`, Claude managed deny rules, ACP client policy);
 (b) Windows Job Objects for process-tree ownership and kill (Orca process-host + codex `process-hardening` ideas);
 (c) Full access mode removed. This is **not** a security sandbox; it narrows the unmediated surface.
+
+## 6b. First-class components (founder amendment)
+
+Zain Code Review, Zain Engineering System, Zain Plan Mode, Zain Browser and DeskGate are clients of the single owners
+above (Core for authority, Server for execution/orchestration/browser control, repo for plan artifacts). Ownership map and
+no-duplicate rules: `16_ZAIN_PRODUCT_COMPONENTS.md` §1.
 
 ## 7. Information architecture (UX)
 
@@ -190,7 +196,7 @@ the WePLD data root and outside the worktree (Codex `workspaceWrite`, Claude man
 
 One composer everywhere (chat escalates to task), overrides `/plan`, `/mission`, `/design`, `/review`, worker picker,
 permission chip. A persistent **trust indicator** shows the current mediation claim (e.g. "Mediated effects only — no
-sandbox yet"). Visual identity is WePLD-owned; no Anthropic/T3/Orca chrome or trade dress.
+sandbox yet"). Visual identity is Zain-owned; no Anthropic/T3/Orca chrome or trade dress.
 
 ## 8. Local vs internet vs self-hosted
 
@@ -214,14 +220,14 @@ open dispatches become `STILL_UNKNOWN` on the new home.
 | Windows x64 | NSIS; signing provider eligibility for an individual in Saudi Arabia **UNKNOWN** (Azure Trusted Signing historically restricted by entity/region) — verify; fallback OV certificate | Primary |
 | macOS | DMG, notarized (Apple Developer Program) | Secondary |
 | Linux | AppImage + .deb | Secondary |
-| Runner | `wepld serve` + service install (Linux first; Windows service = gap) | P10 |
+| Runner | `zain serve` + service install (Linux first; Windows service = gap) | P10 |
 
-Core binary (`wepld-core`) packaged next to `server.asar`. Installer contents gate: fails if donor identifiers,
+Core binary (`zain-core`) packaged next to `server.asar`. Installer contents gate: fails if donor identifiers,
 telemetry keys or `claude-agent-sdk*` (until G4) are present.
 
 ## 10. Identity
 
-App ID `ai.wepld.desktop`; protocol `wepld://`; Server CLI `wepld`; Core binary renamed `wepld-core` **at P2** (the S2
-`wepld` CLI's commands move under `wepld-core doctor|open|status` in the same change, so two `wepld` binaries never
-coexist); data dir `%APPDATA%\WePLD`; env `WEPLD_*`; refs `refs/wepld/checkpoints/…`; MCP server `wepld`; hook headers
-`x-wepld-*`. Full register in `06_*` §4.
+App ID `<reverse-domain>.zain.desktop`; protocol `zain://`; Server CLI `zain`; Core binary renamed `zain-core` **at P2** (the S2
+`zain` CLI's commands move under `zain-core doctor|open|status` in the same change, so two `zain` binaries never
+coexist); data dir `%APPDATA%\Zain`; env `ZAIN_*`; refs `refs/zain/checkpoints/…`; MCP server `zain`; hook headers
+`x-zain-*`. Full register in `06_*` §4.

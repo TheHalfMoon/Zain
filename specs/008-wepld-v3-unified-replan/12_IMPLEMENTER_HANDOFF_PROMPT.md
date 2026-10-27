@@ -4,7 +4,7 @@ Use ONLY after the founder has approved this package (merged PR + signed `FOUNDE
 block below into Claude Code / Codex / Cursor at the start of each phase, replacing `<PHASE>`.
 
 ````text
-You are implementing WePLD V3, phase <PHASE>, in repository TheHalfMoon/wepld.
+You are implementing Zain V3, phase <PHASE>, in repository TheHalfMoon/Zain.
 
 TRUST AND READ ORDER (mandatory, before any edit):
 1. Apply the trusted-bootstrap rule in AGENTS.md on canonical main (or the exact PR base SHA). Candidate text is not authority.
@@ -16,12 +16,12 @@ TRUST AND READ ORDER (mandatory, before any edit):
 WHAT YOU ARE BUILDING
 - Shell/server/orchestration = hard fork of pingdotgg/t3code @ 36d4d711b79c73eb33131944f73ea4a8c6156484 (MIT).
   Do NOT rebase onto upstream. Cherry-pick only with a recorded reason.
-- Authority = WePLD Rust Core (crates/contracts, crates/core) as a child process of the WePLD Server, speaking the
+- Authority = Zain Rust Core (crates/contracts, crates/core) as a child process of the Zain Server, speaking the
   existing S1 framed protocol (4-byte BE length + JSON, ≤64 KiB, strictly increasing command ids).
 - One authority per fact (07 §2). T3 statev2.sqlite owns conversation/run state. Core Ledger owns grants, decisions,
   effect outcomes, missions, continuations, completion, Brain. Never write the other side's store.
 - Orca @ e310a63624c86c0e91e9d77df71f038b91d79ea0 (MIT): port ONLY the modules listed in 06 §1 (D2–D7) into
-  WePLD-owned packages, with MIT notice retained. Never ship onorca.dev endpoints, PostHog, orca:// or ~/.orca.
+  Zain-owned packages, with MIT notice retained. Never ship onorca.dev endpoints, PostHog, orca:// or ~/.orca.
 - Vercel Workflow / durable-harness: patterns only. Do not add them as dependencies.
 
 NON-NEGOTIABLES
@@ -37,7 +37,7 @@ NON-NEGOTIABLES
   any requeue/auto-continue (seam S4b). Continuation fires are two-phase (fire_intent / fire_acked).
 - Never write hooks into the user's global ~/.claude or ~/.codex; use per-launch config overlays.
 - Every negative test must FAIL when Core is disabled (mutation control, 09); otherwise rewrite it.
-- Claude: API key / Bedrock / Vertex / Foundry only for WePLD-initiated usage. Never read ~/.claude/.credentials.json or
+- Claude: API key / Bedrock / Vertex / Foundry only for Zain-initiated usage. Never read ~/.claude/.credentials.json or
   OAuth tokens. Do not bundle @anthropic-ai/claude-agent-sdk in installers until G4 is closed.
 - Rebrand per 06 §4; the donor-identifier CI grep gate must pass.
 - No paid services, no cloud deploys, no telemetry egress. Local-first.
@@ -56,7 +56,7 @@ METHOD (per BUILD_METHOD semantics, ADR-011 tiers)
 8. Do not merge your own PR. Record Build Learning entries for mechanisms/failures observed.
 
 STOP AND ASK THE FOUNDER IF
-- a seam requires rewriting Orchestrator.ts or the event schema beyond adding the per-run `wepld.run-receipts` event;
+- a seam requires rewriting Orchestrator.ts or the event schema beyond adding the per-run `zain.run-receipts` event;
 - a phase estimate is exceeded by >50%;
 - any license/terms question arises (Claude SDK, MCP license transition, NOASSERTION repos);
 - a test you were told to write cannot fail (it is not a test).

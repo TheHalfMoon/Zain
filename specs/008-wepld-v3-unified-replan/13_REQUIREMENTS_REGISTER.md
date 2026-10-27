@@ -12,7 +12,7 @@ PRIORITY = M (must for v1 = P−1′…P5) · S (should, post-v1 phase named) ·
 
 | ID | Requirement | Pri | Phase |
 |---|---|---|---|
-| PR-01 | One desktop app combining IDE and AI workspace (chat, code sessions, files, terminal, browser preview, review) under the WePLD brand | M | P2 |
+| PR-01 | One desktop app combining IDE and AI workspace (chat, code sessions, files, terminal, browser preview, review) under the Zain brand | M | P2 |
 | PR-02 | Run Claude, Codex, ACP-family agents, OpenCode, Pi and local models as replaceable workers; no silent fallback | M | P2/P3 |
 | PR-03 | Multi-agent orchestration: parallel sessions in isolated worktrees, subagents, steer/interrupt/resume, per-role model pins (reviewer ≠ builder) | M | P2/P5 |
 | PR-04 | Unified composer that escalates chat to task with visible plan and resume | M | P2/P4 |
@@ -36,6 +36,11 @@ PRIORITY = M (must for v1 = P−1′…P5) · S (should, post-v1 phase named) ·
 | PR-22 | Local-first: core works offline; zero mandatory cloud; BYO credentials only | M | P2 |
 | PR-23 | Inbox for approvals, unknown outcomes and mission events; notifications | M | P3 |
 | PR-24 | Accessibility baseline (keyboard-complete, screen-reader modes, AA contrast) | M | P2/P6 |
+| PR-26 | Zain Code Review: one review engine (OCR fork) with IDE findings panel, dispositions, fix proposals applied only via Core grants with undo and verification; local/free model routes | M | P5 |
+| PR-27 | Zain Engineering System: one investigate-plan-implement-test-review-verify loop (PStack-derived) with E2E evidence feeding Trusted Completion | M | P5 |
+| PR-28 | Zain Browser: one BrowserController, lanes Preview/Agent/Test (+ opt-in user-session later), action receipts, evidence, recovery | M (localhost/allow-listed) / S (general web) | P5 / P9 |
+| PR-29 | Zain Plan Mode: first-class read-only planning mode with durable artifacts, approval to mission | M | P2-P5 |
+| PR-30 | DeskGate: agent-facing filesystem/terminal/process tools mediated by Core; remote via runner | M (local) / S (remote) | P3 / P10 |
 | PR-25 | Enterprise seams (principal/scope, audit export from ledger); enterprise admin deferred | C | P3 seam / post-v1 |
 
 ## B. Authority, security, durability
@@ -54,10 +59,14 @@ PRIORITY = M (must for v1 = P−1′…P5) · S (should, post-v1 phase named) ·
 | SEC-10 | T3 recovery gated by Core (S4b); two-phase continuation fires | M | P3/P4 |
 | SEC-11 | No telemetry egress; no donor endpoints, feeds or identifiers in shipped builds (grep + installer gates) | M | P2 |
 | SEC-12 | Secrets in OS keyring; Core holds handles only; no secrets in logs/ledger | M | P2/P3 |
-| SEC-13 | Claude: API key/cloud credentials only for WePLD-initiated usage; SDK not bundled until G4; never read claude.ai credentials | M | P2 |
+| SEC-13 | Claude: API key/cloud credentials only for Zain-initiated usage; SDK not bundled until G4; never read claude.ai credentials | M | P2 |
 | SEC-14 | CLI-agent hooks via per-launch overlays + authenticated loopback endpoint; never write user's global agent configs | S | P6 |
 | SEC-15 | Release builds have no observe mode | M | P3 |
 | SEC-16 | Design preview runs in isolated origin with no access to Server/Core | S | P7 |
+| SEC-18 | Review route independence cannot be overridden by ambient config/env | M | P5 |
+| SEC-19 | Plan Mode never writes product files; violations invalidate the plan | M | P3 |
+| SEC-20 | Browser hard blocks, pre-request redirect gating, no import of user browser cookie stores | M | P2-P5 |
+| SEC-21 | DeskGate has no execution authority of its own (single PTY/process host; Core-mediated) | M | P3 |
 | SEC-17 | Every negative security test passes mutation control (fails with Core disabled) | M | P3+ |
 
 ## C. Non-functional (budgets are targets until measured)
@@ -87,6 +96,8 @@ PRIORITY = M (must for v1 = P−1′…P5) · S (should, post-v1 phase named) ·
 | GOV-07 | Source admission per component at phase entry (pin, license, deps, tests) | M | P2+ |
 | GOV-08 | Build Learning entry per phase | M | all |
 | GOV-09 | Invariant text amendment (Mirefa/Edara line) through governed PR | M | P0 |
+| GOV-11 | Product identity is Zain everywhere user-facing; naming clearance and controlled-domain identifiers before distribution; legacy names preserved only as history | M | P2-N |
+| GOV-12 | Zain and the separate Zain-LLM project share no identifiers, packages, channels or docs | M | P2-N |
 | GOV-10 | `MASTER_PLAN_INDEX.md` updated to V3 only by a governed change after acceptance | M | P0 |
 
 ## E. Claude parity

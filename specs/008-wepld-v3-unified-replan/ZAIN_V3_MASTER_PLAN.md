@@ -1,11 +1,11 @@
-# WePLD V3 Master Plan
+# Zain V3 Master Plan
 
 ```text
 STATUS = CANDIDATE MASTER PLAN (planning only; no implementation authority until accepted under trusted-base governance)
 DATE = 2026-10-27
-REPOSITORY = TheHalfMoon/wepld (PUBLIC since 2026-10-27) · branch docs/v3-unified-replan-20261027
+REPOSITORY = TheHalfMoon/Zain (PUBLIC since 2026-10-27) · branch docs/v3-unified-replan-20261027
 BASE = main @ 0a843a2c0913236d9c93b31abb0d54bbdb023f23 (integrity GREEN on re-run 2026-10-27)
-LEADING_ARCHITECTURE = T3-first fork + selected Orca modules + existing WePLD Rust Trusted Core (ADR-001)
+LEADING_ARCHITECTURE = T3-first fork + selected Orca modules + existing Zain Rust Trusted Core (ADR-001)
 VERDICT = CONDITIONAL GO (gates in §10)
 ```
 
@@ -16,7 +16,7 @@ detailed document named in each section governs, and any contradiction is a defe
 
 ## 1. Product
 
-**WePLD is a local-first, multi-vendor desktop workbench that combines an IDE and an AI workspace, where any model or
+**Zain is a local-first, multi-vendor desktop workbench that combines an IDE and an AI workspace, where any model or
 agent does engineering and knowledge work, and where a Rust Trusted Core decides which mediated effects are allowed,
 records what actually happened (including unknown outcomes), remembers the project across models and decides what
 counts as done.** (00 §1; 07 §6 for the exact trust claim per phase.)
@@ -39,13 +39,13 @@ What it must deliver (13_REQUIREMENTS_REGISTER: 25 product, 17 security/durabili
 ## 2. Architecture (binding detail: 07; durability: 05)
 
 ```text
-WePLD Desktop (Electron 44, forked T3)  ── renderer (React) ─ preload ─ desktop main (windows, updater, browser panes, WebAuthn UI)
-        │ WebSocket RPC (T3 protocol, WePLD-1)
-WePLD Server (Node, forked T3 apps/server) = Policy ENFORCEMENT POINT, part of the TCB
+Zain Desktop (Electron 44, forked T3)  ── renderer (React) ─ preload ─ desktop main (windows, updater, browser panes, WebAuthn UI)
+        │ WebSocket RPC (T3 protocol, Zain-1)
+Zain Server (Node, forked T3 apps/server) = Policy ENFORCEMENT POINT, part of the TCB
         orchestration-v2 (statev2.sqlite: conversation/run truth) · EffectWorker (sole executor) · providers · PTYs · VCS · /mcp
         LSP/DAP managers (P6) · design service (P7) · browser automation broker (P9)
         │ stdin/stdout framed JSON (existing S1 protocol, v2: direction-tagged ids, chunking, fencing epoch)
-WePLD Core (Rust, existing crates) = Policy DECISION POINT + Ledger + Brain + identity + containment launcher
+Zain Core (Rust, existing crates) = Policy DECISION POINT + Ledger + Brain + identity + containment launcher
         ledger.sqlite (append-only, hash-chained, FULL sync) · Nawat policy · WebAuthn verify · S2 identity/evidence/git observer
 ```
 
@@ -66,7 +66,7 @@ report | reconcile`, replay classes SAFE / RECONCILABLE / NEVER (05; Spec 006 §
 | 006 | Brain = notes + index over repo specs; preferences candidate→qualified | proposed |
 | 007 | Core-only PDP; WebAuthn approvals; MEDIATED/UNMEDIATED; containment floor | proposed |
 | 008 | Workers: Claude (API key), Codex, ACP family, OpenCode, Pi, local models, CLI agents (UNMEDIATED) | proposed |
-| 009 | Self-hosted runner as project home; no WePLD cloud | proposed |
+| 009 | Self-hosted runner as project home; no Zain cloud | proposed |
 | 010 | Visibility: **PUBLIC since 2026-10-27** (founder); enforcement plan (Pro/Team vs advisory) still open | updated |
 | 011 | Governance reset: one checker from base, protected paths, signed co-sign, risk tiers | proposed |
 | 012 (new) | Debugging via DAP with server-side client (`@vscode/debugprotocol`, MIT), React panels, VS Code/OpenSumi MIT code as donors; Theia (EPL-2.0) reference only; debug effect classes always gated; debugpy from user env (pydevd EPL not bundled) | proposed (R13 §1) |
@@ -84,7 +84,7 @@ report | reconcile`, replay classes SAFE / RECONCILABLE / NEVER (05; Spec 006 §
 | ACP / MCP SDKs | agentclientprotocol/*, modelcontextprotocol/* | DEPEND | Server/Core | R12 |
 | Editor, LSP, DAP | microsoft/monaco-editor @dbf1945d; `@vscode/debugprotocol`; LSP client per spike | DEPEND / PORT | `apps/web` | R12, R13 |
 | Canvas, tokens, element mapping | excalidraw @808d068e, style-dictionary @f82e7aaf, onlook ideas @423e2e92 | DEPEND / ADAPT | `packages/design-*` | R12 |
-| Existing Rust Core | WePLD `crates/{contracts,core}` @0a843a2 | KEEP | `crates/*` | — |
+| Existing Rust Core | Zain `crates/{contracts,core}` @0a843a2 | KEEP | `crates/*` | — |
 | Vercel Workflow / durable-harness | vercel/workflow @af8c6d32; durable-harness @ea8aa406 | PATTERN ONLY | — | 05 |
 
 Legal: MIT/Apache notices retained in generated `third-party-licenses.json` and `THIRD_PARTY_NOTICES/`; founder

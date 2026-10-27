@@ -1,11 +1,11 @@
-# 05 — Durability REA and the WePLD "Never Forget" Contract
+# 05 — Durability REA and the Zain "Never Forget" Contract
 
 ```text
 SOURCES = research/R05_VERCEL.md (vercel/workflow @af8c6d32, durable-harness @ea8aa406, Apache-2.0)
           research/R02_T3_CODE.md §3, §11 (T3 orchestration-v2 @36d4d711)
-          specs/006-*/data-model.md §19–21 (WePLD effect model)
+          specs/006-*/data-model.md §19–21 (Zain effect model)
 DECISION = Vercel Workflow SDK and durable-harness: PATTERN-ONLY. No runtime dependency. (ADR-005)
-TOPOLOGY = T3 orchestration-v2 = executor + conversation truth; WePLD Core Ledger = authority + outcome + mission truth.
+TOPOLOGY = T3 orchestration-v2 = executor + conversation truth; Zain Core Ledger = authority + outcome + mission truth.
 ```
 
 ## 1. Comparison of the three candidates
@@ -24,7 +24,7 @@ TOPOLOGY = T3 orchestration-v2 = executor + conversation truth; WePLD Core Ledge
 | Fit for local-first desktop | **already in the shell** | needs a production SQLite World + compiler; Electron UNKNOWN | requires Vercel Sandbox for Claude/Codex |
 
 Conclusion: adopting either Vercel component would add a **second orchestrator** next to T3's. Neither provides the
-two things WePLD actually lacks (unknown-outcome reconciliation, permission revalidation). Take the patterns.
+two things Zain actually lacks (unknown-outcome reconciliation, permission revalidation). Take the patterns.
 
 ## 2. "Never forget" as four testable properties
 
@@ -49,7 +49,7 @@ two things WePLD actually lacks (unknown-outcome reconciliation, permission reva
 
 ## 4. Sequence diagrams (required scenarios)
 
-Participants: `UI` (renderer), `S` (WePLD Server: Orchestrator/EventSink/EffectWorker), `C` (WePLD Core), `P`
+Participants: `UI` (renderer), `S` (Zain Server: Orchestrator/EventSink/EffectWorker), `C` (Zain Core), `P`
 (provider/agent process), `X` (external system: git remote, GitHub, filesystem).
 
 ### 4.1 Creation (mission + first thread)
@@ -153,7 +153,7 @@ sequenceDiagram
 sequenceDiagram
   participant A as Old home (desktop)
   participant B as New home (runner)
-  A->>A: wepld-core export --project P (ledger partition + Brain + thread archive) + git bundle
+  A->>A: zain-core export --project P (ledger partition + Brain + thread archive) + git bundle
   A->>B: transfer bundle (user-initiated)
   B->>B: ledger.verify; import as new partition
   B->>B: open dispatches → STILL_UNKNOWN; grants dropped
@@ -215,7 +215,7 @@ sequenceDiagram
 
 ## 6. Recovery suite and metrics
 
-Adopted wholesale from `R05 §7` (R1–R11, invariants I1–I6) and extended with WePLD-specific cases in `09_*` §2:
+Adopted wholesale from `R05 §7` (R1–R11, invariants I1–I6) and extended with Zain-specific cases in `09_*` §2:
 duplicate continuation fire, Core-down fail-closed, T3 power-loss rollback vs Core receipts (`ORPHANED_RECEIPT`),
 grant expiry during approval wait, schema-too-new refusal.
 

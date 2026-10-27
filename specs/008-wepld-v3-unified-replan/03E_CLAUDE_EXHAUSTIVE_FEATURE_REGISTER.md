@@ -22,7 +22,7 @@ The register is kept in one file to avoid two divergent copies; this document is
 | beta_or_rollout, plan_gate, region_or_OS_gate | plan_gate / region_or_OS_gate (rollout inside status) | ~45 rows carry ≤15-word live quotes (`Q:`) |
 | data_storage_and_permissions | same | |
 | access_to_source_or_public_API | same | no Anthropic product source anywhere; APIs/SDKs/open formats only |
-| donor_candidate_path, WePLD_transplant_route | WePLD_route (+ 06 matrix for donors) | |
+| donor_candidate_path, Zain_transplant_route | Zain_route (+ 06 matrix for donors) | |
 | target_workflow, target_acceptance_test | in 03F | generated + hand-written V1-01..18 |
 | effort | 08 phase estimates | per phase, not per row |
 | confidence, unknowns | same | |
