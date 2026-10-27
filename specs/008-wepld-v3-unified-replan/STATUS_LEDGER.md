@@ -85,7 +85,7 @@ top level of this directory.
 | Requirements / tasks / traceability | 90 reqs, 154 task rows, 0 gaps (generated) | 13, 14, 15 |
 | Totals | v1 91–141 pw; all 160–259 pw (computed) | 14 §13 |
 | Audit 2 | DONE — all Critical/High resolved | 11 §6 |
-| File manifests R11 (T3) / R12 (donors) | re-running via API-only agents (disk-safe) | research/R11, R12 |
+| File manifests R11 (T3) / R12 (donors) | DONE (API-only, no local clones); corrections in 06 §1c | research/R11, R12 |
 | Astro handoff | DONE | ASTRO_REVIEW_HANDOFF.md |
 | Disk incident | local disk filled by donor clones; clones deleted; founder instruction: nothing saved locally, only in repo | — |
 | Privacy | local-machine details removed from R18 at HEAD (still present in commits c376917 and ef19a3f history) | — |

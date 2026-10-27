@@ -37,3 +37,5 @@ Every unknown has an owner phase, the evidence that closes it, and whether it bl
 | U-16-3 | Electron redirect/Fetch-domain gating behaviour and DNS-rebinding defence | R17 | Y-03 | spike | P5 |
 | U-16-4 | Trademark clearance for Zain (HIGH risk) | R19 | distribution | counsel (FO-8) | before N-02 |
 | U-16-5 | LSP client license (`@hediet/json-rpc` UNKNOWN) | R13 | I-03 | license check | P6 |
+| U-12-1 | Codex sandbox crate closure, LGPL bubblewrap vendor tree, `rama` pre-release | R12 D9 | S-01..S-04 | admission + spike | P8 |
+| U-12-2 | Orca D7 diff-comment rewrite effort; D3 closure (44 modules) | R12 | I-02, I-06 | admission | P6 |

@@ -139,7 +139,8 @@ V1-10…16 are v1.1+ tiers per 03F) → all mapped to ≥1 non-superseded task a
 4. "Zain" trademark risk HIGH in KSA/GCC (R19; FO-8).
 5. Provider-side settings of installed GitHub Apps unreadable (EGRESS_PREFLIGHT).
 6. OV certificate availability for the founder UNKNOWN; WebAuthn in Electron unproven until C-13.
-7. File-level manifests: T3 (R11) and other donors (R12) — see their completeness statements.
+7. File-level manifests complete: T3 (R11, every blob dispositioned) and donors (R12); risks raised for Codex sandbox closure,
+   LGPL bubblewrap, Orca diff-comments rewrite (06 §1c).
 8. Upstreams keep moving (pins recorded; fork-not-track).
 
 ## 10. GO / NO-GO gates

@@ -81,7 +81,8 @@ are post-v1 (P6) — a deliberate scope limitation.
 4. WebAuthn in Electron, OCR Go binary signing, Electron redirect gating and DNS-rebinding defence are unproven (spikes).
 5. Installed GitHub Apps (Cursor, Devin, Sentry, Vercel, Claude, Qodo, possibly Cubic) may auto-process PRs; provider-side
    settings unverified (EGRESS_PREFLIGHT).
-6. File-manifest completeness: see the completeness statements at the top of R11 and R12.
+6. File manifests R11/R12 are complete at the levels stated in their headers; remaining UNKNOWNs (Orca closures beyond depth 2,
+   native sidecars, Codex crate closure, LGPL bubblewrap) are listed in 06 §1c.
 7. Upstreams move daily; fork-not-track accepted; pins recorded.
 
 ## 8. Questions Astro must challenge

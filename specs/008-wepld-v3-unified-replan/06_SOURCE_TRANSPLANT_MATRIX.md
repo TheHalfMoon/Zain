@@ -120,3 +120,18 @@ CI gate (Phase 2 exit): grep for donor identifiers and endpoints fails the build
 
 **Founder attestation rule:** FOUNDER-ATTESTED records the founder statement only; it has **no effect** on admission,
 license or notice obligations, or trademark rights. Third-party code is governed by its public license.
+
+## 1c. Corrections from the file-level manifests (research/R11, R12 — 2026-10-28)
+
+| Row | Correction | Effect on plan |
+|---|---|---|
+| D1 (T3) | 28,763 blobs at pin: KEEP 4,361 / MODIFY 111 / STRIP 24,291 (incl. 21,833 `.repos/`); env prefix `T3CODE_`, scheme `t3code`, headers `x-t3-*`; build already excludes Claude SDK platform packages, only the main SDK package must leave `server.asar`; `heic-to` LGPL-3.0 and dual-licensed `jszip`/`dompurify` need a license election; `electron-webauthn` has no declared license | F-02/F-03/F-06 scope per R11; license election in the F-11 notice gate; WebAuthn library re-checked in C-13 |
+| D3 (Orca TUI catalog + hooks) | not self-contained: 44 outside `src/shared` modules come along; Orca hook installers must NOT be copied (they write global agent configs) | I-06 copies the listed closure only; overlays per SEC-14 |
+| D7 (diff comments) | depth-2 import closure 489 modules (renderer store) | REWRITE behind an adapter, not a port; I-02 estimate at risk (+1–2 pw) |
+| D2 (Design Mode) | nearly self-contained (6 outside modules; Electron in one file) | port as planned |
+| D4 (process-host) | fully closed | COPY AS-IS confirmed |
+| D9 (Codex sandboxes) | needs `codex-protocol`, `codex-utils-pty`, `codex-otel`, `codex-http-client`; `windows-sandbox-service` needs `codex-core` -> reference only; `bwrap` vendors LGPL-2.0 C -> do not vendor, use system bwrap; `network-proxy` pins pre-release `rama =0.3.0-alpha.4` | S-01..S-04 risk raised; CI license gate rejects LGPL vendor trees; S-01 estimate at risk (+1–3 pw) |
+| D13 (MCP SDKs) | one LICENSE mixes Apache-2.0 + MIT + CC-BY-4.0 | ship all license texts |
+| D19 (Excalidraw) | fonts without license files in tree; repo 0.18.0 vs npm 0.18.1 | verify font licenses before D-07; pin npm version |
+| UNKNOWN | Orca closures beyond depth 2; native sidecar internals; used `codex_protocol` symbols; test imports; `process-hardening` on Windows; TLS termination in `network-proxy` | resolved at each task admission (GOV-07) |
+
