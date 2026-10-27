@@ -36,13 +36,13 @@ CONFLICT_REVIEW = research/R19_ZAIN_NAMING_CONFLICTS.md
 | Governance scripts | `.github/scripts/wepld_*.py` (169 files) | unchanged until G-05 archives them; new `governance_check.py` | historical paths preserved |
 | Registry archive | `docs/canonical/artifacts/WEPLD_CANONICAL_ARTIFACTS_2026-08-14.tar.gz` | unchanged (frozen evidence) | never renamed |
 | npm scope | T3 `@t3tools/*` | `@thehalfmoon/*` (owned org scope; npm `zain` and PyPI `zain` taken; `@zain` ownership unverified) | N-03 |
-| Env prefix | `T3_*`, `ORCA_*` (donors); no product `WEPLD_*` variables exist yet | `ZAIN_*` (Zain-LLM must use a distinct prefix, e.g. `ZAINLLM_`) | F-03 |
+| Env prefix | `T3CODE_*`, `ORCA_*` (donors); no product `WEPLD_*` variables exist yet | `ZAIN_*` (Zain-LLM must use a distinct prefix, e.g. `ZAINLLM_`) | F-03 |
 | Git hidden refs | `refs/t3/checkpoints/` | `refs/zain/checkpoints/` | F-03 |
-| Protocol handler | `t3://`?, `orca://` | `zain://` (configurable) | F-03 |
+| Protocol handler | `t3code://`, `orca://` | `zain://` (configurable) | F-03 |
 | App ID / AUMID | `T3Tools.T3Code`, `com.stablyai.orca` | `io.github.thehalfmoon.zain` placeholder (zain.com/.ai/.dev/.app registered by others) | final id after N-01/N-02 |
 | Data dirs | T3 `~/.t3`, Orca `%APPDATA%\Orca`, `~/.orca` | `%APPDATA%\Zain`, user dir `~/.zain-ide`, project-local `.zainide/` (not `.zain/`, which PyPI `zain` uses) | no shipped product → no user data to migrate |
 | MCP server name | `t3-code` | `zain` | F-03 |
-| Hook headers | `x-orca-*` | `x-zain-*` | I-06 |
+| Hook headers | `x-t3-*`, `x-orca-*` | `x-zain-*` | I-06 |
 | Ledger cross-link event | (new) | `zain.run-receipts` | C-11 |
 | Installer artifacts | — | `Zain-Setup.exe`, `Zain-<ver>.dmg`, `zain_<ver>.deb`, `Zain-<ver>.AppImage` | F-11, I-09 |
 | Wire protocol id | T3 protocol v2 | `Zain-1` | F-09 |
