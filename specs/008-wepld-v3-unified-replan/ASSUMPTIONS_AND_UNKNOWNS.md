@@ -31,3 +31,9 @@ Every unknown has an owner phase, the evidence that closes it, and whether it bl
 | U-07-5 | Write-latency cost of `synchronous=FULL` on the T3 receipt table | 07 §5 | budget | P1 measurement | P1 |
 | U-08-1 | Whether the 2026-09-29 403 was rate-limit throttling (PROBABLE) — exact GitHub message not logged | CI re-diagnosis | G1 | unchanged re-run after Actions restored; else local reproduction with headers | P−1′ |
 | U-08-2 | Which installed GitHub Apps auto-process PR content (Cursor, Devin, Sentry, Vercel, Claude, Qodo; Cubic/CodeRabbit/Graphite/Greptile access state) | egress preflight | Draft PR | founder reads github.com/settings/installations + per-provider settings | before PR |
+| U-01-2r | Founder visibility intent: RESOLVED, repository PUBLIC (2026-10-27) | — | — | — | — |
+| U-16-1 | E2E source repository (FO-9; candidate Ascout Spec 016) | R15 | E-03 | founder confirmation | P5 entry |
+| U-16-2 | OCR Go engine signing, size, Defender reputation on Windows | R14 | K-03 | spike K-01 | P2/P5 |
+| U-16-3 | Electron redirect/Fetch-domain gating behaviour and DNS-rebinding defence | R17 | Y-03 | spike | P5 |
+| U-16-4 | Trademark clearance for Zain (HIGH risk) | R19 | distribution | counsel (FO-8) | before N-02 |
+| U-16-5 | LSP client license (`@hediet/json-rpc` UNKNOWN) | R13 | I-03 | license check | P6 |

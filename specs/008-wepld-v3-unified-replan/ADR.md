@@ -97,6 +97,9 @@ All ADRs: `STATUS = PROPOSED` until this package is merged and the founder signs
 
 ## ADR-010 — Repository visibility and enforcement
 
+> **Superseded in part (2026-10-27):** the founder made the repository PUBLIC; the private-repo options below are historical.
+> Current decision: public repository + free branch protection and required integrity check (task G-07).
+
 - **Context:** repo is private (founder decision 2026-10-27: **stays private**); branch protection unavailable on the
   current plan (403); integrity workflows already use `contents: read` — the 2026-09-29 403 was probably throttling,
   not visibility; Actions jobs are currently blocked by billing.

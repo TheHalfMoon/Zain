@@ -5,7 +5,7 @@ STATUS = PROPOSED (planning only). Founder amendment 2026-10-27/28: Code Review,
          Plan Mode (AI Hero / mattpocock skills), Zain Browser, DeskGate are first-class, user-facing parts of Zain.
 RESEARCH = research/R14 (Code Review), R15 (PStack/E2E), R16 (Plan Mode), R17 (Browser), R18 (DeskGate)
 TASKS = 14_TASK_CATALOG.md K-*, E-*, L-*, Y-*, H-* · REQS = PR-26..PR-30, SEC-18..SEC-21
-RIGHTS = public licenses verified per row (06 §1b) + FOUNDER-ATTESTED where the founder affirmed broader permission;
+RIGHTS = public licenses verified per row (06 §1b) + FOUNDER-ATTESTED recorded but with no effect on third-party licenses, notices or trademarks;
          proprietary / unavailable components are marked EXCLUDED — attested permission cannot apply to code that is not available
 NO_DUPLICATES_RULE = one review engine, one engineering loop, one planning mode, one browser controller, one PTY/process
                      host, one policy decision point (Core). Every component below is a client of those, never a second one.
@@ -16,7 +16,7 @@ NO_DUPLICATES_RULE = one review engine, one engineering loop, one planning mode,
 | Concern | Single owner | Components that use it (never re-implement it) |
 |---|---|---|
 | Policy decisions, grants, receipts | Zain Trusted Core (Nawat + Ledger) | all five |
-| Process / PTY execution | Zain Server terminal + process host (T3 node-pty + Orca process-host) | DeskGate, Code Review engine runner, E2E runner, LSP/DAP |
+| Process / PTY execution | one Zain Server ProcessHost service (T3 node-pty for PTYs; ported Orca process-host logic inside it; static import guard forbids child_process elsewhere) | DeskGate, Code Review engine runner, E2E runner, LSP/DAP |
 | Browser control | Zain Browser `BrowserController` (Server) | Engineering E2E (`zain-browser-verify`), Design Mode capture, DeskGate (none), agents via MCP |
 | Review findings store and schema | Zain Code Review (`packages/review-engine`) | Engineering review lanes (E-05), Plan Mode critic (L-09), Trusted Completion |
 | Planning artifacts (spec, ADR, task DAG) | Zain Plan Mode (repo files under `specs/<NNN>-<slug>/`, Brain index) | Engineering System reads only (L-07 contract) |
@@ -37,6 +37,8 @@ NO_DUPLICATES_RULE = one review engine, one engineering loop, one planning mode,
   REFERENCE ONLY** — ideas reused (markdown checks, fixes in throwaway worktree); `.continue/rules|checks` importer.
 - **Rejected:** PR-Agent as a second reviewer (06 D22 → reference), OCR viewer/IDE extensions (trusted-markdown
   injection; line-range fixes without preimage check), auto-fix by the reviewing agent, unpinned global installs.
+- **Egress disclosure:** in P5 the engine calls the model endpoint directly (UNMEDIATED egress until the K-09 proxy in P6);
+  local routes are the default and each cloud review route needs explicit approval.
 - **Local/free:** Ollama / LM Studio via OpenAI-compatible endpoints or user keys; tool-calling probe before first run
   (a run with zero tool calls is FAILED, never "clean").
 - **Earliest:** optional advisory spike late P2 (K-01); product in P5 (K-02..K-08); CI/scan in P6 (K-09).

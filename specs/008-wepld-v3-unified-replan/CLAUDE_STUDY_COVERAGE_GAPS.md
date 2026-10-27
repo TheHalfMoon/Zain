@@ -104,6 +104,6 @@ METHOD = each row's best evidence = deepest read level among the Help Center art
 | Gap | Closure | When |
 |---|---|---|
 | Hands-on for v1-gating features (03F V1-01…V1-18) | founder-run observation scripts in the founder's own Claude account, screenshots + notes stored as evidence | at each phase entry |
-| 78 digest-only rows | full read when the row's phase opens (most are Backlog/Backlog-E) | per phase |
+| digest-only rows | none remain (all re-read 2026-10-27) | — |
 | API platform references | read when a provider adapter needs them (P2 Claude adapter, P5 connectors) | P2/P5 |
 | Changelogs | diff-read at each pinned SDK/CLI upgrade | per upgrade |

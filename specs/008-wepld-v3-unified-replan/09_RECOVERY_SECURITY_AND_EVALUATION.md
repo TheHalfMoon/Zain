@@ -4,8 +4,8 @@
 STATUS = UNEXECUTED qualification plan (revision 2 after adversarial review M1/M2/H7/H8/C1).
 No benchmark result exists yet; every number is a TARGET or BUDGET until measured.
 "BEST" = falsifiable: Zain beats donor X on metric M only when this protocol shows it with raw data.
-MUTATION_CONTROL = every negative (security/authority) test is run twice: with Core enforcing (must pass) and with Core
-                   disabled/bypassed (must FAIL). A negative test that passes in both runs is not a Zain test and is
+MUTATION_CONTROL = every negative (security/authority) test is run twice: with its guard active (must pass) and with that
+                   guard removed or bypassed (must FAIL); for Core-enforced guards the guard is Core. A negative test that passes in both runs is not a Zain test and is
                    rewritten or dropped.
 ```
 

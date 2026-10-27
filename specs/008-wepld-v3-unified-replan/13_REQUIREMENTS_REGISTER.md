@@ -64,7 +64,7 @@ PRIORITY = M (must for v1 = P−1′…P5) · S (should, post-v1 phase named) ·
 | SEC-15 | Release builds have no observe mode | M | P3 |
 | SEC-16 | Design preview runs in isolated origin with no access to Server/Core | S | P7 |
 | SEC-18 | Review route independence cannot be overridden by ambient config/env | M | P5 |
-| SEC-19 | Plan Mode never writes product files; violations invalidate the plan | M | P3 |
+| SEC-19 | Plan Mode denies MEDIATED writes outside the plan path; UNMEDIATED writes are detected and invalidate the plan (prevention only after P8) | M | P3 |
 | SEC-20 | Browser hard blocks, pre-request redirect gating, no import of user browser cookie stores | M | P2-P5 |
 | SEC-21 | DeskGate has no execution authority of its own (single PTY/process host; Core-mediated) | M | P3 |
 | SEC-17 | Every negative security test passes mutation control (fails with Core disabled) | M | P3+ |

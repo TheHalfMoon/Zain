@@ -21,3 +21,9 @@ Rank = impact × (1/complexity) × (1/risk) × source availability, judged quali
 | 15 | Multi-device live sync | L–M | H | M | Med (Loro/Yjs) | post-v1 |
 | 16 | LSP / code intelligence graph (Maemar) | M | H | L | High (tree-sitter, SCIP) | post-v1 |
 | 17 | Enterprise admin (roles, SSO, audit export) | L (now) | M | L | Med | post-v1 |
+| 18 | Zain Code Review (one engine, fixes with undo) | H | M | M | High (OCR, Apache-2.0) | P5 |
+| 19 | Engineering loop with E2E evidence | H | M | M | High (PStack MIT) / E2E source unresolved | P5 |
+| 20 | Enforced Plan Mode | H | M | L | High (mattpocock MIT + T3) | P3–P5 |
+| 21 | Browser pre-request gating + DNS rebinding defence | H | H | H | Low (net-new on T3) | P5 |
+| 22 | DeskGate without second authority | M | M | M | High (DC MIT) | P3 |
+| 23 | Trademark clearance for Zain | H | L | H | n/a (legal) | before distribution |

@@ -86,29 +86,30 @@ Notices preserved in generated `third-party-licenses.json` + `THIRD_PARTY_NOTICE
 | Phase | Outcome | ESTIMATE pw |
 |---|---|---|
 | P−1′ | CI restored — **DONE** | 0.2 |
-| P0 | Governance reset | 1.4–1.9 |
+| P0 | Governance reset (+ branch protection G-07) | 1.5–2.0 |
 | P1 | Measured donor baseline (+ donor pins for new components) | 1.7–2.3 |
 | P2-N | Zain naming clearance | 0.7 |
-| P2 | Branded workbench (+ Plan Mode unenforced, browser hardening, review spike) | 12.6–21.1 |
+| (note) | LSP and debugging are P6 (post-v1) — accepted limitation under FO-10 | — |
+| P2 | Branded workbench with Monaco editor (+ Plan Mode unenforced, browser hardening, review spike) | 15.1–24.6 |
 | P3 | Trusted Core (+ DeskGate local, Plan read-only, browser effect classes) | 29.7–45.2 |
 | P4 | Missions, Brain, plan approval → mission | 6.2–10.2 |
 | P5 | Review/Completion/Connections + Code Review + Engineering + Plan UI + Browser v1 lanes | 36.1–55.5 |
-| **v1 total (P−1′…P5)** | | **≈ 88–137** |
+| **v1 total (P−1′…P5)** | | **≈ 91–141** |
 | P6 | IDE breadth, LSP, debugging, CI review, shipping, DeskGate search | 34.0–60.5 |
 | P7 | Design Studio | 9.2–14.7 |
 | P8 | OS sandbox | 9.3–14.8 |
 | P9 | Documents, research, general web, computer use | 13.5–22.5 |
 | P10 | Runner, remote DeskGate, phone approvals | 4.7–9.3 |
-| **All** | | **≈ 159–259** |
+| **All** | | **≈ 160–259** |
 
 ### 5a. Release tiers (each usable on its own) — founder decision FO-10
 
 | Release | Contents | Cumulative ESTIMATE pw | Calendar at A-1 (~1 pw/week, upkeep 25–43% after P2) |
 |---|---|---|---|
-| **R0 Zain Workbench** | P−1′…P2 (multi-agent IDE, unenforced Plan Mode, hardened browser preview) | ≈ 17–26 | ≈ 4–6 months |
-| **R1 Zain Trusted** | + P3 (Core authority, ledger, WebAuthn, DeskGate local, enforced Plan read-only) | ≈ 46–71 | ≈ 13–24 months |
-| **R2 Zain v1** | + P4 + P5 (missions, Brain, Code Review, Engineering loop, Browser v1, Plan UI) | ≈ 88–137 | ≈ 2.2–4.2 years |
-| v1-core option | R2 minus K-08, E-04, E-05, Y-06, Y-07 (and E-03 if FO-9 unresolved) | ≈ 79–122 | ≈ 1.9–3.7 years |
+| **R0 Zain Workbench** | P−1′…P2 (multi-agent IDE with Monaco editor, unenforced Plan Mode, hardened browser preview; no LSP/debugger yet) | ≈ 20–30 | ≈ 5–7 months |
+| **R1 Zain Trusted** | + P3 (Core authority, ledger, WebAuthn, DeskGate local, enforced Plan read-only) | ≈ 50–76 | ≈ 14–25 months |
+| **R2 Zain v1** | + P4 + P5 (missions, Brain, Code Review, Engineering loop, Browser v1, Plan UI) | ≈ 91–141 | ≈ 2.2–4.3 years |
+| v1-core option | R2 minus K-08, E-04, E-05, Y-06, Y-07 (E-07 re-scoped to E-01..E-03) | ≈ 85–131 (≈ 82–126 if E-03 also cut while FO-9 is open) | ≈ 2–4 years |
 | Later | P6–P10 | ≈ 159–259 total | multi-year |
 
 This is the honest bottom-up result of the founder's full scope for one person. Recommendation: commit to **R0 → R1**
@@ -126,8 +127,9 @@ gates re-checked, 55 from live non-Help-Center pages.
 
 ## 8. Feature completeness
 
-90 requirements (30 product, 21 security/durability, 9 non-functional, 12 governance, 18 Claude v1 parity) → **all mapped
-to ≥1 task and ≥1 test** (15_TRACEABILITY_MATRIX, generated; 0 gaps). 151 tasks (14).
+90 requirements (30 product, 21 security/durability, 9 non-functional, 12 governance, 18 Claude parity rows V1-01…18 of which
+V1-10…16 are v1.1+ tiers per 03F) → all mapped to ≥1 non-superseded task and ≥1 test (15, generated; superseded tasks excluded).
+154 task rows (14), of which 4 are 0-pw SUPERSEDED placeholders kept for history.
 
 ## 9. Limitations
 

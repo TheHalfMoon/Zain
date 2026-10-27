@@ -33,7 +33,7 @@ REGISTRY_BASE = frozen 402-entry V1 (archive 35dee10e…) — not rewritten; add
 | D19 | Canvas freeform layer | excalidraw/excalidraw @808d068e1826 | MIT | packages/excalidraw | **INTEGRATE (Phase 7)** | — | npm pin | bundle | AT tests | 1–2 | M |
 | D20 | Element→source mapping | onlook-dev/onlook @423e2e924366 (`data-oid` approach; OSS line slowing — hosted successor in early access, R03B §9), click-to-component, react-dev-inspector | Apache-2.0 / MIT | — | **ADAPT (Phase 7)** | — | owned | framework coverage | AT source-mapping tests | 3–5 | L |
 | D21 | Design tokens | W3C DTCG 2025.10 spec + style-dictionary/style-dictionary @f82e7aafbcae | W3C / Apache-2.0 | — | **COPY spec / INTEGRATE** | — | pin | DTCG support in progress | token round-trip tests | 1 | M |
-| D22 | Review producer (local) | The-PR-Agent/pr-agent @ae053ea8979a | MIT | — | **WRAP as optional reviewer worker** | — | pin | model cost | review fixture tests | 1–2 | M |
+| D22 | Review producer (local) | The-PR-Agent/pr-agent @ae053ea8979a | MIT | — | **REFERENCE only** (superseded by D26) | — | pin | model cost | review fixture tests | 1–2 | M |
 | D23 | Eval harness | UKGovernmentBEIS/inspect_ai @1692fd8d7364; harbor-framework/terminal-bench @6964e9252c90 | MIT / Apache-2.0 | — | **INTEGRATE (Phase 6 benchmarks)** | — | pin | — | B-suite in 09 | 1–2 | M |
 | D24 | Sync/CRDT (multi-device, later) | loro-dev/loro, yjs | MIT | — | **DEFER** | — | — | — | — | — | — |
 | D25 | Existing Zain Core | TheHalfMoon/Zain `crates/{contracts,core}` @0a843a2 | owned | as listed | **KEEP** | tested S1/S2 | owned | — | existing 19k-line test suite | 0 | H |
@@ -78,7 +78,7 @@ Pi → earendil-works. Registry hygiene: 5 duplicate rows, 4 dead (404), 6 archi
 | Surface | Donor value | Zain value | Collision risk if missed |
 |---|---|---|---|
 | App ID / AUMID | `T3Tools.T3Code`, `com.stablyai.orca` | `<reverse-domain>.zain.desktop` | notifications/keychain attributed to donor |
-| CLI | `t3`, `orca` | `zain` (Server CLI); Core binary → `zain-core` | PATH collision with existing S2 `zain` binary (rename Core) |
+| CLI | `t3`, `orca` | `zain` (Server CLI); Core binary → `zain-core` | PATH collision with the existing S2 `wepld` binary (rename Core) |
 | Protocol | `t3://`?, `orca://` | `zain://` | deep-link hijack |
 | Update feed | T3/Orca GitHub releases | Zain GitHub releases | **silent cross-update to donor binaries** |
 | Data dirs | `~/.t3`, `%APPDATA%\Orca`, `~/.orca` | `%APPDATA%\Zain`, `~/.zain` | reading/corrupting donor profiles |
@@ -105,3 +105,18 @@ CI gate (Phase 2 exit): grep for donor identifiers and endpoints fails the build
 | D34 | Browser agent references | browser-use/browser-harness @4ced8e00; Browser Use @2cc71890; Orca `src/main/browser` @e310a636 | MIT | HAR-from-CDP watchdog idea | **REFERENCE only** | — | whole-Chrome attach, `exec()`, telemetry | — | 0 |
 | D35 | Desktop/terminal tools → DeskGate | wonderwhy-er/DesktopCommanderMCP @db3430f2 (v0.3.1) | MIT + FOUNDER-ATTESTED | tool schemas, pure logic (~10 modules) — R18 §4 | **PORT (adapters only)** | `packages/deskgate` | DC is not a boundary; must not bring own spawn/config | DG-N01..N14, DG-B1..B9 | 5–8.5 |
 | D36 | Remote Desktop Commander | desktop-commander/remote-desktop-commander @a6573e86 | **All rights reserved; docs only; relay proprietary/unavailable** | — | **EXCLUDED** | — | — | — | 0 |
+
+## 3b. Notice obligations for components D26–D36 and additional dependencies
+
+| Source | Obligation |
+|---|---|
+| alibaba/open-code-review (Apache-2.0) | keep LICENSE; Apache-2.0 §4(b) prominent change notices in every file modified by Z-P1..Z-P6; no upstream NOTICE file |
+| Playwright + MV3 extension (Apache-2.0) | keep LICENSE, upstream NOTICE and ThirdPartyNotices files |
+| cursor/plugins pstack + cursor-team-kit (MIT) | per-directory LICENSE texts (© 2026 Lauren Tan; © Cursor); names/logos excluded |
+| mattpocock/skills (MIT) | LICENSE (© 2026 Matt Pocock) + per-file manifest hashes; `pr` skill excluded |
+| wonderwhy-er/DesktopCommanderMCP (MIT) | LICENSE + copyright line in ported files |
+| Orca browser/CDP code if ported (MIT) | Lovecast Inc. copyright line |
+| LSP client, DAP (`@vscode/debugprotocol`), jsign, electron-updater, WebAuthn library, ripgrep, PPTX/XLSX libraries | pinned and license-checked at task admission (I-03, I-04, F-11, F-04, C-13, H-04, W-02); `@hediet/json-rpc` license UNKNOWN blocks that client until resolved |
+
+**Founder attestation rule:** FOUNDER-ATTESTED records the founder statement only; it has **no effect** on admission,
+license or notice obligations, or trademark rights. Third-party code is governed by its public license.

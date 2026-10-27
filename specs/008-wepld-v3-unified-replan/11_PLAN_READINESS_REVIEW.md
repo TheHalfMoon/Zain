@@ -1,5 +1,8 @@
 # 11 — Plan Readiness Review
 
+> Sections 1–5 review **draft 1** (WePLD naming, pre-component scope). Section 6 records **audit 2** (2026-10-28) of the
+> Zain package; estimates in §1 are historical — current figures are in 14 §13.
+
 ```text
 REVIEW_TYPE = adversarial, independent of the drafting session (separate agent context, read-only, 2026-10-27)
 INPUT = draft 1 of this package (commit b62fb7c on docs/v3-unified-replan-20261027)
@@ -83,3 +86,22 @@ CURRENT_STATE sentence about the token boundary and not checked against the work
 nor the adversarial reviewer caught it (the reviewer took 01 H1/H2 as verified). Learning recorded: **a causal claim about
 CI must cite the workflow file and the run's token-permission block, not a governance narrative.** Details and the
 remaining PROBABLE/unproven status: `CI_403_REDIAGNOSIS_2026-10-27.md`.
+
+## 6. Audit 2 (2026-10-28, independent agent, read-only) — dispositions
+
+| ID | Finding | Disposition |
+|---|---|---|
+| C1 | R11/R12 file manifests missing | Re-run via API-only agents (disk-safe); GOV-05 PARTIAL until both exist (see STATUS_LEDGER) |
+| C2 | Dependency cycle F-16 / L-01; stale critical path | Fixed: F-16 deps explicit; §14 recomputed incl. components |
+| C3 | v1 depended on post-v1 Monaco (I-01) | Fixed: Monaco moved to P2 as F-17; LSP/debugger post-v1 recorded under FO-10 |
+| C4 | Naming matrix legacy values destroyed by bulk replace | Fixed: rebuilt from the live tree (`wepld`, `wepld-core`, `wepld-contracts`, `wepld-desktop`) |
+| H1 | Public vs private contradictions | Fixed: F4/F10/FO-1/FO-7 superseded; ADR-010 note; G-07 branch protection; G-03 fork-PR negative test |
+| H2 | Naming clearance did not gate identifiers | Fixed: N-02 gates F-03/F-04/F-11; N-01 gates N-04 |
+| H3 | v1-core incoherent | Fixed: E-07 re-scoped; both totals stated |
+| H4 | Traceability overstated | Fixed: generator excludes superseded tasks; V-08 narrowed; tests added (no silent fallback, REVIEW_BLOCKED, egress, keyring, principal/scope); CL-V1-10..16 labelled v1.1+ |
+| H5 | Mutation rule inapplicable to non-Core guards; F-04 needed Core in P2 | Fixed: rule = fails with its guard removed; F-04 verifies in the Server until C-06 |
+| H6 | DNS rebinding in the Agent lane | Fixed: Y-03 IP pinning, private-range denial, negative test |
+| H7 | Code Review fix could alter verify commands | Fixed: K-06 rejects such patches; argv shown; `.zainide/` |
+| H8 | DeskGate terminal.input approved blind | Fixed: H-03 redacted plaintext, NEVER class, approval default for interpreters |
+| M1–M15 | owner naming, review egress, reviewer independence, Plan wording, browser P3 gating, user-session wording, ordering, 08 vs 14, stale docs, notices, attestation wording, paid items, upkeep, handoff, Tauri retirement | Fixed or recorded (16 §1–§2, 07 §1, K-04, SEC-19, Y-01, Y-09, E-03/K-01/V-04 deps, 08 note, 06 §3b, 10 §7, 12, F-18) |
+| L | founder table break, signing wording, parity legend, local-config privacy, superseded rows, Zain-LLM prefix | Fixed; local-machine details removed from R18 (earlier pushed commits still contain them in history) |

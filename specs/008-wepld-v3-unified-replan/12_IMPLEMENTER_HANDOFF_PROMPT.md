@@ -27,7 +27,7 @@ WHAT YOU ARE BUILDING
 NON-NEGOTIABLES
 - Invariants in docs/canonical/ARCHITECTURE_INVARIANTS.md hold. ReviewOutcome != CompletionDecision. Green CI != done.
   No silent provider/model/worker fallback. Context/provenance/model choice never mint authority.
-- Every effectful operation in your phase goes through Core: effect.propose → (approval) → effect.dispatch (fsynced
+- From P3 on, every effectful operation in your phase goes through Core (Core is not wired in P2; P2 work must not claim mediation): effect.propose → (approval) → effect.dispatch (fsynced
   BEFORE the effect leaves) → effect.report / effect.reconcile. Unknown outcomes are EFFECT_OUTCOME_UNKNOWN, never retried
   blindly. Replay classes: SAFE | RECONCILABLE | NEVER.
 - Full access mode is not selectable unless the P8 sandbox is active. Skip mode never overrides Blocked.
@@ -36,7 +36,7 @@ NON-NEGOTIABLES
 - T3 recovery services (reconcileAfterProcessLoss, ProviderRuntimeRecoveryService) must consult Core open dispatches before
   any requeue/auto-continue (seam S4b). Continuation fires are two-phase (fire_intent / fire_acked).
 - Never write hooks into the user's global ~/.claude or ~/.codex; use per-launch config overlays.
-- Every negative test must FAIL when Core is disabled (mutation control, 09); otherwise rewrite it.
+- Every negative test must FAIL when its guard is removed (mutation control, 09); otherwise rewrite it.
 - First-class components (16_ZAIN_PRODUCT_COMPONENTS.md) are clients of the single owners: ONE review engine (OCR fork,
   K-*), ONE engineering loop (E-*), ONE Plan Mode (L-*, read-only Core profile), ONE BrowserController (Y-*), DeskGate
   adapters with no execution authority (H-*). Never add a second orchestrator, review store, browser controller, PTY host

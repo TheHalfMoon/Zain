@@ -40,7 +40,7 @@ model (R-01..R-04).** Effort ESTIMATE 5.0–8.5 pw across P3 (seam S6) / P6 / P1
 | Other `desktop-commander` org repos (gh repo list) | — | all report no SPDX license | — | `legal`, `main-web`, `main-web-astro`, `skills`, `mock-llm`, `dc-diagnose-tool`, `prompt-library`, `html2pdf-skill`, `bigquery-cli-toolkit`, … | **None is a DC execution/relay implementation**; `skills` duplicates SKILL.md content already in DCMCP. Not used |
 | Third-party forks (`burkeholland/desktop-commander` MIT 25★, `Shutupmilo/DesktopCommanderMCP` MIT fork, `jasondsmith72/UDC` MIT 4★) | — | MIT | — | Yes | Low-signal forks; no relay code. Not used |
 | Frozen registry `WEPLD_MASTER_SOURCE_REGISTRY_2026-08-14_V1.csv` (402 rows) | frozen | — | — | — | **No Desktop Commander row.** Related rows: SRC-0182 MCP, SRC-0046 ripgrep, SRC-0237 node-pty, SRC-0241 ConPTY, SRC-0242 Job Objects, SRC-0307 MCP Gateway (all NOT_ADMITTED). → DC needs a **new registry row** (proposed `SRC-NEW-DC`, PATH_LEVEL_MINING, MIT) via the admission gate before any copy |
-| Installed evidence (read-only, not run) | npx cache `…/npm-cache/_npx/4b4c857f6efdfb61/node_modules/@wonderwhy-er/desktop-commander` = **0.3.1** (matches pin; ships `dist/remote-device/*`, `vendor/`); global `%APPDATA%/npm/node_modules/@wonderwhy-er/desktop-commander` = **0.2.52** (older) | MIT `LICENSE` present | — | compiled `dist/*.js` | Local user config `~/.claude-server-commander/config.json` observed: `allowedDirectories: []` (= **unrestricted**, see §4), `telemetryEnabled: true`, `defaultShell: powershell.exe`, 33 blocked commands. (No other values recorded.) The DC MCP plugin failed to connect this session (CONNECT_TIMEOUT); not needed |
+| Installed package evidence | A locally installed DesktopCommanderMCP 0.3.1 build was inspected read-only and matched the pin (local machine details intentionally not recorded in this public repository) | MIT `LICENSE` present | — | compiled `dist/*.js` | — |
 
 **Public vs proprietary boundary (explicit).**
 
@@ -135,7 +135,7 @@ terminal-manager, filesystem, search…) become calls to Zain's local, observati
    anywhere the user can.
 3. **Agent-writable policy.** `set_config_value` lets the model widen `allowedDirectories` to `[]` (all) or empty
    `blockedCommands`; config file is also hot-watched.
-4. **Default = unrestricted.** Shipped default `allowedDirectories: []` = full filesystem (confirmed on this PC).
+4. **Default = unrestricted.** Shipped default `allowedDirectories: []` = full filesystem.
 5. **Blocklist bypassable** by construction (first-token match; see 2.3).
 6. **Arbitrary PID kill** (`kill_process`) and system-wide `list_processes`.
 7. **Plaintext logs** of tool args (`claude_tool_call.log`) and fuzzy-edit text.
@@ -329,5 +329,4 @@ honesty as DC's own "not a boundary" note); trust indicator widens only after S-
    ported (row 11).
 3. DC moves fast (≥100 commits/90 days): re-pin and diff rows 1-12 at implementation start; track upstream
    security fixes in `test-allowed-directories*`, `test-blocklist-bypass`.
-4. Local observation: this PC's DC install runs with unrestricted `allowedDirectories` and telemetry on;
-   independent of Zain, the founder may wish to review that config.
+4. Local-machine observations were shared privately with the founder and are not recorded here.

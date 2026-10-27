@@ -53,6 +53,9 @@ flowchart LR
 | Provider processes | per session | provider-native transcripts (external) | in-flight effects become UNKNOWN or reconciled |
 | Optional runner | always-on | same Server+Core stack | same as Server |
 
+**Server services not drawn above:** BrowserController (Zain Browser), review EngineRunner (Zain Code Review), DeskGate
+adapters on `/mcp`, LSP/DAP managers, Plan Mode profile — all execute through the single ProcessHost and Core (16 §1).
+
 **Trusted computing base (TCB), stated explicitly:** Core **decides** (PDP) and records; the forked Server **enforces**
 (PEP) and reports what it observed. Therefore the Server — including third-party provider SDKs that run in its process
 (Claude Agent SDK, OpenCode SDK) — is inside the TCB for every mediated effect. Core records what the Server reports, not
@@ -227,7 +230,7 @@ telemetry keys or `claude-agent-sdk*` (until G4) are present.
 
 ## 10. Identity
 
-App ID `<reverse-domain>.zain.desktop`; protocol `zain://`; Server CLI `zain`; Core binary renamed `zain-core` **at P2** (the S2
-`zain` CLI's commands move under `zain-core doctor|open|status` in the same change, so two `zain` binaries never
+App ID `io.github.thehalfmoon.zain` (placeholder; ZAIN_NAMING_MIGRATION); protocol `zain://`; Server CLI `zain`; Core binary renamed `zain-core` **at P2** (the S2
+`wepld` CLI's commands move under `zain-core doctor|open|status` in the same change, so a `wepld` and a `zain` binary never
 coexist); data dir `%APPDATA%\Zain`; env `ZAIN_*`; refs `refs/zain/checkpoints/…`; MCP server `zain`; hook headers
 `x-zain-*`. Full register in `06_*` §4.

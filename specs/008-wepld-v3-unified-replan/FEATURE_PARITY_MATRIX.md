@@ -1,6 +1,6 @@
 # Feature Parity Matrix — Zain current vs donors vs target
 
-Legend: ✓ verified present · ◐ partial/light · ✗ absent · ? UNKNOWN · (src) where verified. Target column = planned
+Legend: ✓ documented or source-read present (not hands-on) · ◐ partial/light · ✗ absent · ? UNKNOWN · (src) where verified. Target column = planned
 phase. Nothing in the Target column is implemented yet.
 
 | Capability | Zain now (main 0a843a2) | T3 @36d4d711 | Orca @e310a636 | Claude Desktop / Code / Design | Amp | Target Zain |

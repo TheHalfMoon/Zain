@@ -29,7 +29,7 @@ CONSTRAINTS = solo founder; zero mandatory cloud spend; no mandatory paid API fo
 | K3 | Claude SDK redistribution / auth policy | High | Med | G4; API-key default; user-installed CLI path | Anthropic says no → ship without bundled SDK, ACP via user-installed agent |
 | K4 | Trust claim overstated before sandbox | High | Med | trust banner; observe/enforce flag; P8 | any marketing claim without B11 data |
 | K5 | Governance reset weakens security | Med | Med | keep protected paths, exact-head, independent review, security review for T2; founder-signed co-sign; checker from base. **Under ADR-010 option (c) (private, free) every gate is advisory: no platform branch protection or required checks** | protected-path negative oracle fails |
-| K6 | Solo founder bandwidth (v1 ≈ 88–137 pw; all phases ≈ 159–259 pw; 2.2–4.2 years to v1 at A-1 incl. upkeep) | High | High | phase gates allow stopping at P3/P4 with a useful product; P6 parallelizable | slippage > 50% on P2/P3 → cut P7/P9 scope |
+| K6 | Solo founder bandwidth (v1 ≈ 91–141 pw; all phases ≈ 160–259 pw; 2.2–4.3 years to v1 at A-1 incl. upkeep) | High | High | phase gates allow stopping at P3/P4 with a useful product; P6 parallelizable | slippage > 50% on P2/P3 → cut P7/P9 scope |
 | K7 | Upstream security fixes missed (no tracking) | Med | Med | monthly 0.5–1 pw review of T3 security-labelled PRs + `pnpm audit` | CVE in Electron/node-pty |
 | K8 | Electron RAM vs "low footprint" goal | Med | High | measure; strip; lazy-load browser/preview; budgets | B2 fails twice |
 | K9 | Donor identity leakage (feeds, telemetry, hook headers) | High | Low (with gate) | CI grep gate; egress test at idle | any egress at idle |
@@ -70,3 +70,16 @@ of the planning package; they should be deleted after review (they are large and
 | K14 | Approval forgery before WebAuthn lands | UI states "Server trusted for approvals" until P3 WebAuthn; T3 negative oracle |
 | K15 | Same-user agent tampers with ledger/Brain before P8 | data-root deny floor; signed approvals; out-of-machine anchors; claim limited to "tamper-evident against corruption" |
 | K16 | Scope inflation (377 Claude rows, Design Studio, computer use, runner, mobile) | v1 scope line in 00; post-v1 phases explicit; cut order in 08 |
+
+## 7. Corrections after audit 2 (2026-10-28)
+
+- **Visibility:** the repository is PUBLIC since 2026-10-27; Actions and branch protection are free for public repos.
+  Rows above that assume a private repo (CI minutes, K5 option c, K11) are historical.
+- **Paid items inside v1 (not no-cost):** F-11 Windows code signing (OV certificate + cloud HSM; price UNKNOWN for a
+  Saudi individual/company); N-01 trademark counsel + SAIP filing fees (R19 cites roughly SAR 6,500 per class,
+  single-source, verify). Post-v1: Apple Developer Program ($99/yr) for notarization (I-09). Model spend for Code Review,
+  E2E and benchmarks is BYO keys or local models; set a per-run budget before B7. Development itself remains possible
+  at $0 (unsigned dev builds, local models).
+- **Upkeep additions:** OCR Go fork (fast upstream), PStack/skills copies (quarterly diff), DesktopCommanderMCP ports,
+  Playwright bumps -> add about 0.4–0.8 pw/month -> total upkeep about 1.5–2.6 pw/month (about 35–60% of capacity at A-1).
+  Calendar figures in the master plan use 25–43% and are therefore optimistic; A-1 is unvalidated until P1–P3 actuals.
