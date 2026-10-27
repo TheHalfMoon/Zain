@@ -70,3 +70,24 @@ top level of this directory.
 | Draft PR | **NOT OPENED** (conditions E1–E5 are founder-only) | same §4 |
 | Claude study-coverage gaps | DONE — 0 hands-on; 18 full-text; 220 summary+gates; 78 digest-only; 23 non-HC-only | `CLAUDE_STUDY_COVERAGE_GAPS.md` |
 | Research package | PRESERVED unchanged except one username redaction (R03C) and earlier quote trims | git history |
+
+## Zain master-plan sessions (2026-10-27 / 2026-10-28)
+
+| Item | State | Evidence |
+|---|---|---|
+| Repository | TheHalfMoon/Zain (ID 1334408699, PUBLIC; renamed from wepld by founder; remote updated) | gh api |
+| CI | main GREEN on unchanged re-run (attempt 3) — 403 was transient | CI_403_REDIAGNOSIS §4 |
+| Rename WePLD -> Zain | DONE in active docs; history/evidence labelled legacy | ZAIN_NAMING_MIGRATION.md |
+| Naming conflicts | DONE — trademark risk HIGH (FO-8) | research/R19 |
+| Claude census | 377 rows; 0 hands-on; 110 full-text, 212 summary+gates, 55 non-HC live | CLAUDE_STUDY_COVERAGE_GAPS.md |
+| IDE/debug/platform | DONE | research/R13 |
+| Components (Code Review, Engineering, Plan Mode, Browser, DeskGate) | DONE | research/R14–R18, 16_*, ADR-015..019, 06 D26–D36 |
+| Requirements / tasks / traceability | 90 reqs, 154 task rows, 0 gaps (generated) | 13, 14, 15 |
+| Totals | v1 91–141 pw; all 160–259 pw (computed) | 14 §13 |
+| Audit 2 | DONE — all Critical/High resolved | 11 §6 |
+| File manifests R11 (T3) / R12 (donors) | re-running via API-only agents (disk-safe) | research/R11, R12 |
+| Astro handoff | DONE | ASTRO_REVIEW_HANDOFF.md |
+| Disk incident | local disk filled by donor clones; clones deleted; founder instruction: nothing saved locally, only in repo | — |
+| Privacy | local-machine details removed from R18 at HEAD (still present in commits c376917 and ef19a3f history) | — |
+| Draft PR | NOT opened — automatic-review rule unproven for installed apps (EGRESS_PREFLIGHT §5) | — |
+
