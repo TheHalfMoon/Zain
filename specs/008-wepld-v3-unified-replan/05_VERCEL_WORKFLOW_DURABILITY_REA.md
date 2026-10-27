@@ -90,9 +90,12 @@ sequenceDiagram
   P->>S: item/commandExecution/requestApproval
   S->>C: effect.propose{PROCESS_EXEC, argv, cwd}
   C-->>S: APPROVAL_REQUIRED (policy: exec outside allowlist)
-  S-->>UI: Inbox item (receipt-linked)
-  UI->>S: approve (human token)
-  S->>C: approval.resolve{proposal, principal=user}
+  S-->>UI: Inbox item (proposal id)
+  C-->>S: approval_challenge (hash of proposal, input digest, decision, expiry, epoch)
+  UI->>UI: WebAuthn assertion (Windows Hello / passkey, user presence)
+  UI->>S: approve + assertion
+  S->>C: approval.resolve{proposal, assertion}
+  C->>C: verify signature against registered credential
   C-->>S: ALLOW grant (expires 10 min, revalidate at dispatch)
   S->>C: effect.dispatch
   S-->>P: approved
@@ -113,9 +116,19 @@ explicitly with a ledger event).
 
 ### 4.5 Browser/desktop window disconnect
 
-Renderer death has no durable consequence (view state only). Desktop main restarts renderer; Server and Core unaffected.
-If Desktop main dies and the Server was its child, Server shuts down via `prepareForShutdown` (R02 §3.7); Core receives
-EOF and closes the ledger cleanly. Next start → 4.6 reconciliation.
+```mermaid
+sequenceDiagram
+  participant DM as Desktop main
+  UI--xDM: renderer crashes
+  DM->>UI: reload renderer (view state only)
+  UI->>S: reconnect WS, resubscribe
+  Note over S,C: unaffected
+  DM--xS: desktop main dies (Server is its child)
+  S->>S: prepareForShutdown (R02 §3.7)
+  S->>C: EOF on stdin
+  C->>C: finish fsync, release data-root lock
+  Note over S,C: next start → 4.6 (Core-gated recovery)
+```
 
 ### 4.6 Worker crash mid-operation (kill -9 after dispatch, before report)
 
@@ -124,17 +137,28 @@ sequenceDiagram
   S->>C: effect.dispatch → dispatch_id
   S->>X: git push (in flight)
   Note over S: SIGKILL
-  S->>S: restart: reconcileAfterProcessLoss (T3)
-  S->>C: core.open_dispatches()
+  S->>C: restart: handshake → new fencing_epoch
+  S->>C: core.open_dispatches()  (BEFORE any T3 requeue/auto-continue — seam S4b)
   C-->>S: [dispatch_id: GIT_PUSH, RECONCILABLE]
   S->>X: observe remote ref
   S->>C: effect.reconcile{observations}
   C-->>S: CONFIRMED_APPLIED | CONFIRMED_NOT_APPLIED | STILL_UNKNOWN
   Note over C: STILL_UNKNOWN → Inbox; dependents blocked; no blind retry
+  S->>S: T3 reconcileAfterProcessLoss applies Core's answers only (requeue iff absent or SAFE)
 ```
 
 ### 4.7 Resume on a new machine (optional runner / migration)
 
+```mermaid
+sequenceDiagram
+  participant A as Old home (desktop)
+  participant B as New home (runner)
+  A->>A: wepld-core export --project P (ledger partition + Brain + thread archive) + git bundle
+  A->>B: transfer bundle (user-initiated)
+  B->>B: ledger.verify; import as new partition
+  B->>B: open dispatches → STILL_UNKNOWN; grants dropped
+  B->>A: project-home switched; A becomes a client for P
+```
 Supported path in v1 = **export/import of a project bundle**: git repo + Core ledger (verified chain) + Brain +
 T3 thread archive. On import: `ledger.verify`; open dispatches become `STILL_UNKNOWN` (different host cannot observe
 local effects); grants are **not** transferred (revalidate everything); provider sessions are not resumable across
@@ -158,12 +182,15 @@ Test: pinned facts recalled 100% after compaction (R9).
 sequenceDiagram
   S->>C: continuation.schedule{mission, on_ci{repo,sha}, poll=5m, max=24h}
   Note over C: Core timer (app running) or runner
-  C->>S: fire cont:{id}:{n} → command ci.check
+  C->>C: fsync fire_intent{id,n}
+  C->>S: core_req fire cont:{id}:{n} → command ci.check
+  S-->>C: committed (receipt) → C fsyncs fire_acked
   S->>X: GET check runs
   S->>C: brain.put{evidence: CI result, sha}
   C->>S: fire cont:{id}:{n+1} → thread.continue("CI failed: …") | mission.ready_for_review
 ```
-Duplicate fires are no-ops by commandId. Webhooks are optional and deduplicated on provider event ID (R05 R2).
+Duplicate fires are no-ops by commandId; an un-acked fire after a crash is reconciled by asking the Server for the
+receipt of `cont:{id}:{n}`, never re-fired blindly (covers T3 `synchronous=NORMAL` receipt rollback, W2b). Webhooks are optional and deduplicated on provider event ID (R05 R2).
 
 ### 4.10 Terminal completion
 
@@ -191,3 +218,44 @@ sequenceDiagram
 Adopted wholesale from `R05 §7` (R1–R11, invariants I1–I6) and extended with WePLD-specific cases in `09_*` §2:
 duplicate continuation fire, Core-down fail-closed, T3 power-loss rollback vs Core receipts (`ORPHANED_RECEIPT`),
 grant expiry during approval wait, schema-too-new refusal.
+
+## 7. Additional sequence diagrams (review M9)
+
+### 7.1 Remote (phone/web) approval — P10
+
+```mermaid
+sequenceDiagram
+  participant Ph as Phone browser (paired passkey)
+  C-->>S: APPROVAL_REQUIRED + challenge
+  S-->>Ph: Inbox item over WS (LAN/Tailscale, scoped session)
+  Ph->>Ph: passkey assertion over challenge
+  Ph->>S: approve + assertion
+  S->>C: approval.resolve
+  C->>C: verify against paired credential
+  Note over Ph,C: a guest link or session without a registered passkey cannot approve
+```
+
+### 7.2 Core restart while the Server keeps running (W1)
+
+```mermaid
+sequenceDiagram
+  C--xS: Core exits
+  S->>S: mark Core DOWN; refuse gated effects; providers held in Supervised/read-only
+  S->>C: respawn Core
+  C->>C: take data-root lock; ledger.verify window
+  S->>C: handshake → new fencing_epoch
+  S->>C: core.open_dispatches → reconcile per replay class
+  S->>S: resume gated effects
+```
+
+### 7.3 Desktop + runner with project-home rule (P10)
+
+```mermaid
+sequenceDiagram
+  participant D as Desktop Server+Core
+  participant R as Runner Server+Core (home of P)
+  D->>R: client session for project P
+  D->>R: user prompt / approval (assertion) for P
+  R->>R: all effects for P proposed/decided/executed on R
+  Note over D: D's Core holds no grants for P; local effects for P are refused
+```

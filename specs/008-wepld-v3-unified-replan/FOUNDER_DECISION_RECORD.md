@@ -22,7 +22,7 @@ orchestration; keep WePLD's tested Rust core as the authority sidecar; port six 
 | Cloud/telemetry to strip | Clerk, T3 Connect, PostHog | onorca.dev auth/relay/share, PostHog, update feed | R02 §9; R03D §15 |
 | IDE breadth | ◐ (no Monaco) | ✓ Monaco, Design Mode, computer use, Linear | R03D §9–11 |
 | Breadth gap closable by ports | ✓ the separable Orca modules are exactly T3's gaps | n/a | R03D §14, §16.2 |
-| ESTIMATE to MVP | 22–38 pw | ≥30–60 pw before trust work | R02 §14; R03D §16 |
+| ESTIMATE | v1 incl. all trust/Brain/completion work ≈ 37–68 pw (08) | ≥30–60 pw **before** trust work (+ ≈25–45 pw of the same trust work) | 08; R02 §14; R03D §16 |
 
 ## Decisions requested from the founder
 
@@ -35,6 +35,9 @@ orchestration; keep WePLD's tested Rust core as the authority sidecar; port six 
 | F5 | Governance reset (ADR-011) replacing the successor chain | Yes | Keep chain (not recommended) |
 | F6 | Fork-not-track policy for T3 | Yes | Rebase tracking (infeasible at ~1.3k PRs/week) |
 | F7 | Claude auth posture: API key default; no subscription proxy; seek Anthropic confirmation | Yes | — |
+| F9 | Accept the v1 scope line (P−1…P5) and the 12–26 month v1 calendar estimate, with P2/P3 as earlier stopping points | Yes | larger v1 |
+| F10 | Authorize the P−1 break-glass record (signed) to repair the integrity workflow | Yes | make repo public first (ADR-010 a) |
+| F11 | Create a founder-only SSH signing key and allowed_signers file for protected-path co-sign | Yes | — |
 | F8 | Communication: Arabic discussion, English artifacts (AGENTS.md) — resolve the Astro "English-only" contradiction | AGENTS.md | — |
 
 ## What the founder is NOT being asked

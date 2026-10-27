@@ -31,6 +31,12 @@ NON-NEGOTIABLES
   BEFORE the effect leaves) → effect.report / effect.reconcile. Unknown outcomes are EFFECT_OUTCOME_UNKNOWN, never retried
   blindly. Replay classes: SAFE | RECONCILABLE | NEVER.
 - Full access mode is not selectable unless the P8 sandbox is active. Skip mode never overrides Blocked.
+- Approvals, policy changes and mode changes require a WebAuthn assertion verified by Core (07 §6). Release builds have no
+  observe mode. Tag every effect MEDIATED/UNMEDIATED; UNMEDIATED effects cannot alone earn COMPLETED_TRUSTED.
+- T3 recovery services (reconcileAfterProcessLoss, ProviderRuntimeRecoveryService) must consult Core open dispatches before
+  any requeue/auto-continue (seam S4b). Continuation fires are two-phase (fire_intent / fire_acked).
+- Never write hooks into the user's global ~/.claude or ~/.codex; use per-launch config overlays.
+- Every negative test must FAIL when Core is disabled (mutation control, 09); otherwise rewrite it.
 - Claude: API key / Bedrock / Vertex / Foundry only for WePLD-initiated usage. Never read ~/.claude/.credentials.json or
   OAuth tokens. Do not bundle @anthropic-ai/claude-agent-sdk in installers until G4 is closed.
 - Rebrand per 06 §4; the donor-identifier CI grep gate must pass.
@@ -50,7 +56,7 @@ METHOD (per BUILD_METHOD semantics, ADR-011 tiers)
 8. Do not merge your own PR. Record Build Learning entries for mechanisms/failures observed.
 
 STOP AND ASK THE FOUNDER IF
-- a seam requires rewriting Orchestrator.ts or the event schema beyond adding the receipt-linked event;
+- a seam requires rewriting Orchestrator.ts or the event schema beyond adding the per-run `wepld.run-receipts` event;
 - a phase estimate is exceeded by >50%;
 - any license/terms question arises (Claude SDK, MCP license transition, NOASSERTION repos);
 - a test you were told to write cannot fail (it is not a test).
@@ -62,8 +68,9 @@ Report progress to the founder in Arabic; write code, specs, PRs and commit mess
 
 | Phase | Entry evidence required | First task packet |
 |---|---|---|
-| P0 | package merged | fix integrity workflow permission (ADR-010 choice); write `governance_check.py` + `PROTECTED_PATHS`; negative-oracle PR |
-| P1 | P0 DoD | build/run T3 + Orca at pins in an isolated dir; record B1–B4 + test ratio; no product code |
+| P−1 | founder-signed break-glass record | change only the integrity workflow permission (ADR-010 choice); verify main green |
+| P0 | package merged | `governance_check.py` from base (`pull_request_target`, no candidate checkout) + `PROTECTED_PATHS` + signed co-sign; negative-oracle PRs |
+| P1 | P0 DoD | build/run T3 + Orca at pins **in Windows Sandbox or a VM**; record B1–B4, test ratio, FULL-sync cost; no product code |
 | P2 | G2 | create fork layout; strip list; rename register; grep gate; NSIS build |
 | P3 | P2 DoD | **G3 spike first**: S3 ACP fs/write + S2 Codex approval via Core with ledger receipt + kill test |
 | P4–P10 | previous DoD | per 08 |

@@ -26,8 +26,9 @@ top level of this directory.
 | Claude Code CLI / desktop / SDK REA | `research/R03C_CLAUDE_CODE.md` → `03C_*` | DONE |
 | Amp + competitors REA | `research/R04_AMP.md`, `research/R10_COMPETITORS.md` | DONE |
 | 402-registry live verification | `research/R06_REGISTRY_VERIFICATION.md` | DONE |
-| Synthesis 00–12 + ADRs | top-level docs | DONE (draft 1) |
-| Adversarial review | `11_PLAN_READINESS_REVIEW.md` | IN_PROGRESS (independent reviewer agent) |
+| Synthesis 00–12 + ADRs | top-level docs | DONE (revision 2 after review) |
+| Adversarial review | `11_PLAN_READINESS_REVIEW.md` | DONE — 28 findings, all dispositioned |
+| Publish | branch pushed; **draft PR deliberately NOT opened** | see "Publication decision" below |
 
 ## Early verified findings (WePLD live audit)
 
@@ -55,3 +56,16 @@ top level of this directory.
 - `anthropics/sandbox-runtime` is Apache-2.0 (R10 pins) — resolves an R03C unknown.
 - Continue repository now states it is read-only / unmaintained (R06) — remove as reviewer/build-tool candidate.
 - Census coverage verdict recorded as COVERAGE_COMPLETE_FOR_MANDATORY_SCOPE / DEPTH_PARTIAL_OUTSIDE_IT.
+
+## Publication decision (2026-10-27)
+
+- Branch `docs/v3-unified-replan-20261027` pushed to `TheHalfMoon/wepld` as a backup of the package.
+- **No PR opened.** `EXTERNAL_REVIEW_EGRESS_POLICY.md` classifies unscreened automatic external review of non-public
+  content as `PROHIBITED_EGRESS`. The repo is now private, and Cubic has been observed auto-posting on PR creation
+  (PR #347, 2026-10-01) despite repository config disabling it (`CUBIC_PROVIDER_EFFECTIVE_STATE = CONFLICTING`).
+  Opening a PR would likely transmit this package to Cubic without a recorded preflight.
+- To open the PR safely, the founder chooses one: (a) uninstall/suspend the Cubic GitHub App for this repo (verify
+  provider-side), then open the PR; or (b) record an egress preflight for this exact docs-only scope (content
+  classification, secret screening evidence, provider data-handling decision) and accept Cubic exposure; or (c) make the
+  repo public first (ADR-010 a). Independently, the PR's integrity check will fail until P−1 repairs the 403 (08).
+- Secret screening performed on the package: regex scan for GitHub/Anthropic/AWS token patterns → 0 hits.

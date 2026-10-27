@@ -171,7 +171,7 @@ The docs warn that seeded randomness is predictable. Hook tokens generated in a 
 Queue interface (`packages/world/src/queue.ts@W` L607-750):
 - Methods: `queue(name, payload, {idempotencyKey, delaySeconds, deploymentId, region})`, optional `queueBatch`, `createQueueHandler(prefix, handler)` returning an HTTP `(Request)=>Response`, optional `registerHandler(prefix, fn)` for in-process delivery (local and postgres), optional `registerRoute`, and optional `invoke` (request/response, capability-gated).
 - **Delivery is at-least-once.** "A rejected handler must retry the same message with an incremented attempt." `meta.messageId` SHOULD be stable across redeliveries. `deliveryCount` and `createdAt` are reported where known.
-- **`invoke` transport errors are unknown outcomes:** "the request may have been successfully processed by the executor... and the success result may be lost."
+- **`invoke` transport errors are unknown outcomes:** "the request may have been successfully processed by the executor... and the …" (truncated; see source)
 
 Inline step ownership and liveness (`docs/content/docs/v5/changelog/step-message-ownership.mdx@W`; `packages/core/src/runtime/constants.ts@W` L478-500):
 - An inline step stamps the owning queue `messageId` on `step_started`.

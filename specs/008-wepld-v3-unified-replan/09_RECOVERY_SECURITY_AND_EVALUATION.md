@@ -1,80 +1,90 @@
 # 09 — Recovery, Security and Evaluation
 
 ```text
-STATUS = UNEXECUTED qualification plan. No benchmark result exists yet; every number below is a TARGET or BUDGET.
-"BEST" = falsifiable: WePLD is better than donor X on metric M only when the protocol below shows it with raw data.
+STATUS = UNEXECUTED qualification plan (revision 2 after adversarial review M1/M2/H7/H8/C1).
+No benchmark result exists yet; every number is a TARGET or BUDGET until measured.
+"BEST" = falsifiable: WePLD beats donor X on metric M only when this protocol shows it with raw data.
+MUTATION_CONTROL = every negative (security/authority) test is run twice: with Core enforcing (must pass) and with Core
+                   disabled/bypassed (must FAIL). A negative test that passes in both runs is not a WePLD test and is
+                   rewritten or dropped.
 ```
 
 ## 1. Adversarial / security matrix
 
-| # | Threat | Surface | Control (phase) | Test (negative oracle) |
-|---|---|---|---|---|
-| T1 | Agent performs effect without grant | provider native tools | S1 clamp + S2 hooks (P3); sandbox (P8) | Codex in Supervised requests `rm -rf` outside worktree → denied, receipt `DENY` |
-| T2 | Prompt injection from repo/web content asks agent to exfiltrate | provider + browser | network policy deny-by-default for agents (P8 proxy; P3: provider sandbox settings) | Injected README instructs `curl attacker`; egress blocked/approval required; ledger shows proposal |
-| T3 | Renderer XSS forges approvals | renderer ↔ Server | approvals need human token minted by desktop main on real UI gesture | Script calls approve RPC → rejected |
-| T4 | Outside MCP agent escalates | `/mcp` | Core-scoped grants per outside agent; read-only default | Outside agent attempts write tool → denied |
-| T5 | Skill/plugin widens privileges on update | Connections | hash-pinned skills; update requires re-review | Modified SKILL.md → disabled until re-approved |
-| T6 | Credential leakage into logs/ledger | all | secret handles only; redaction tombstones; secret scan in CI | Seeded fake key never appears in ledger/T3 DB/logs |
-| T7 | Claude subscription token access | provider env | WePLD never reads `~/.claude/.credentials.json`; file-access audit | CC-T04 |
-| T8 | Supply chain (donor drift, malicious dep) | build | lockfiles, pinned donors, license/notice gate, `pnpm audit`/`cargo deny`, SBOM | Injected dep with GPL / known CVE fails build |
-| T9 | Cross-update to donor binaries | updater | WePLD feed only + signature check + grep gate | Update manifest pointing to T3/Orca rejected |
-| T10 | Ledger tampering | Core store | hash chain + `ledger.verify` on start | Byte flip → verify fails, app enters read-only recovery mode |
-| T11 | Design preview script reaches Server/Core | Design Studio | sandboxed iframe, separate origin, no preload | Preview JS tries WS to Server → blocked |
-| T12 | Computer-use misclick into payments | P9 | hard-blocked categories + per-session grant | Payment page detected → action refused |
-| T13 | Stale grant after permission change | Core | revalidation at dispatch | Permission downgraded between approve and dispatch → `STALE_TARGET` |
-| T14 | Duplicate external effect after crash | EffectWorker + Core | replay classes + reconciliation | R1/R3/R4 below |
+| # | Threat | Control (phase) | Negative oracle (subject to mutation control) |
+|---|---|---|---|
+| T1 | Agent effect without grant | S1–S8 (P3), sandbox (P8) | ACP agent requests `fs/write` outside worktree → denied by Core. (Do **not** use a Codex `rm -rf` outside workspace as the oracle: Codex's own sandbox denies it even with Core off.) |
+| T2 | Prompt injection → exfiltration | provider network settings + ACP terminal policy (P3); egress proxy (P8) | Injected README asks agent to `curl` an external host via ACP terminal → `APPROVAL_REQUIRED`/deny |
+| T3 | Forged approval (XSS renderer, compromised Server) | WebAuthn assertion verified by Core (P3) | Approve RPC without valid assertion → rejected; replayed assertion for a different proposal → rejected |
+| T4 | Outside MCP agent escalates | Core-scoped grants per outside agent | write tool from outside agent → denied |
+| T5 | Skill/plugin privilege widening on update | hash-pinned skills; re-review | modified SKILL.md disabled until re-approved |
+| T6 | Credential leakage | secret handles; tombstones; CI secret scan | seeded fake key never in ledger/T3 DB/logs |
+| T7 | Claude subscription token access | no reads of `~/.claude/.credentials.json` | file-access audit (CC-T04) |
+| T8 | Supply chain | lockfiles, pins, license/notice gate, `pnpm audit`, `cargo deny`, SBOM, installer-content gate | injected GPL/CVE dep fails; `claude-agent-sdk*` in installer fails (until G4) |
+| T9 | Cross-update to donor binaries | own feed + signature + grep gate | manifest pointing to T3/Orca rejected |
+| T10 | Ledger corruption | hash chain + verify on start | byte flip → verify fails → read-only recovery mode |
+| T10b | **Ledger tampering by an unsandboxed agent** (same user) | data-root deny floor (P3); WebAuthn-signed approvals; out-of-machine anchor (`ledger.anchor`); P8 sandbox | agent rewrites file + recomputes chain → floor denies the write (mediated agents); for unmediated agents the next anchor comparison detects divergence (documented limitation before P8) |
+| T11 | Design preview script reaches Server/Core | separate-origin sandboxed iframe, no preload | preview JS WS to Server → blocked |
+| T12 | Computer-use into payments | hard-blocked categories + per-session grant (P9) | payment page → refused |
+| T13 | Stale grant after permission change | revalidation at dispatch | downgrade between approve and dispatch → `STALE_TARGET` |
+| T14 | Duplicate external effect after crash | replay classes + reconciliation + S4b | R1/R3/R4, W9 |
+| T15 | **Enforcement downgrade** (`observe` via env/profile) | observe compiled out of release; signed `core.mode` | agent `setx WEPLD_CORE_ENFORCE observe` → no effect after restart (release build) |
+| T16 | Second Server/Core on same data root | exclusive data-root lock + fencing epoch | second instance gets no authority; stale-epoch frames rejected |
+| T17 | CLI-agent hook spoofing | per-PTY secret on loopback hook endpoint; per-launch config overlays | unauthenticated local POST to hook endpoint → ignored; user's global `~/.claude` unchanged after a WePLD session |
 
-Security review per BUILD_METHOD stays mandatory for T2 changes; d1-local is advisory only and never clears a gate
-(per founder's CLAUDE.md).
+Security review per BUILD_METHOD stays mandatory for T2; d1-local is advisory only and never clears a gate.
 
-## 2. Recovery suite (adopted from R05 §7 + WePLD extensions)
+## 2. Recovery suite
 
-Invariants I1–I6 (dense log prefix; one terminal outcome per memo key; NEVER-class effects ≤1 per key unless proven
-absent; fenced writes refused; no wedged run; no secrets in logs). Scenarios R1–R11 exactly as R05 §7 (kill sweep,
-duplicate webhooks, missing receipts, unknown outcomes, lost credentials, corrupted state, schema upgrades, provider
-exhaustion, context overflow, network loss, cancellation). WePLD additions:
+Invariants I1–I6 and scenarios R1–R11 exactly as `research/R05_VERCEL.md` §7. WePLD additions:
 
 | ID | Scenario | Expected |
 |---|---|---|
-| W1 | Core killed while Server runs | gated effects refused; chat continues read-only; Core restart → open dispatches reconciled |
-| W2 | T3 DB power-loss rollback (simulate by restoring pre-commit WAL) | Core receipts without T3 run → `ORPHANED_RECEIPT` visible |
-| W3 | Duplicate continuation fire | single T3 command (receipt) |
-| W4 | Grant expires while approval pending | explicit expiry event; re-approval required |
-| W5 | Ledger schema too new | refuse to open; no partial writes |
-| W6 | Git push interrupted | reconcile by remote ref → APPLIED/NOT_APPLIED |
-| W7 | Rebase/outdated branch under a mission | mission marks target stale; completion blocked until re-evaluated |
-| W8 | Model context overflow mid-mission | continue-as-new into a fresh thread with Brain capsule; pinned-fact recall 100% |
+| W1 | Core killed while Server runs | gated effects refused; restart → epoch bump → open dispatches reconciled (05 §7.2) |
+| W2 | T3 power-loss rollback of a run | Core receipts → `ORPHANED_RECEIPT` visible |
+| W2b | T3 rollback of a continuation **receipt** | un-acked fire reconciled via receipt query; command executes once |
+| W3 | Duplicate continuation fire | single T3 command |
+| W4 | Grant expires while approval pending | explicit expiry event; re-approval needs a new assertion |
+| W5 | Ledger schema too new | refuse to open |
+| W6 | Git push interrupted | reconcile by remote ref |
+| W7 | Rebase / outdated branch under a mission | target stale; completion blocked until re-evaluated |
+| W8 | Context overflow mid-mission | continue-as-new with capsule; recall measured on non-pinned decisions (B8) |
+| W9 | T3 recovery vs Core reconcile race | T3 cannot requeue/auto-continue a `NEVER`/`RECONCILABLE` effect before Core answers |
 
-Success metrics: invariant violations 0; crash-point coverage 100% of enumerated points; p95 resume < 10 s local;
-NEVER-class duplicates 0; unknown outcomes unresolved after 24 h 0 (escalated counts as resolved-to-human); data loss on
-schema upgrade 0; manual recovery steps per 100 crash runs ≤ 2.
+Metrics: invariant violations 0; crash-point coverage 100% of enumerated points; p95 resume < 10 s local; NEVER-class
+duplicates 0. **Unknown outcomes are reported as two separate numbers:** auto-reconciled within 24 h (target ≥ 90% for
+RECONCILABLE effects with an observable postcondition) and escalated-to-human (target: 100% of the rest reach the Inbox
+within 1 min); escalation is not counted as resolution. Data loss on schema upgrade 0; manual recovery steps per 100 crash
+runs ≤ 2.
 
 ## 3. Benchmarks (solo-affordable protocol)
 
-Hardware: founder's Windows 11 laptop (record CPU/RAM/SSD); second run on a $0 GitHub Actions Windows runner for
-reproducibility (variance noted). Each benchmark: 10 warm-up + 30 measured runs, report median/p95, raw CSV in repo.
+Hardware: founder's Windows 11 laptop (record specs) for timing; a Windows VM for donor isolation. CI runners are used
+only for functional suites: on a **private** repo GitHub Actions minutes are limited and Windows minutes count at a
+multiplier (verify current plan numbers before relying on them); timing benchmarks are not run in CI.
 
-| ID | Metric | Method | Compared against | Budget / target (proposed) |
+| ID | Metric | Runs | Baseline | Budget / target (proposed) |
 |---|---|---|---|---|
-| B1 | Cold start to interactive | process start → first composer focus (UI marker) | T3 @pin, Orca @pin, Claude Desktop (if installed by founder) | ≤ T3 + 10% |
-| B2 | Resident memory idle / 3 sessions / 10 sessions | sum RSS of process tree after 60 s | same | idle ≤ T3 + 15%; 10 sessions ≤ 2.5 GB |
-| B3 | UI input latency | keypress → paint (Playwright trace) | same | p95 ≤ 50 ms |
-| B4 | Agent first-token latency | send → first streamed token, same model/key | T3 (same adapter) | ≤ T3 + 50 ms (Core overhead) |
-| B5 | Reconnect | kill WS; time to resumed stream | T3 | ≤ T3 |
-| B6 | Replay/restart correctness | R1 kill sweep | T3 unmodified (expected weaker on UNKNOWN) | invariants 100% |
-| B7 | Real task completion | 20 tasks from the founder's repos + 20 from SWE-bench Verified subset, same model, same budget, with/without WePLD Core+Brain | WePLD vs T3 | report completion %, PR correctness by independent reviewer, evidence freshness |
-| B8 | Context retention across model switch | 30 pinned facts; switch Claude→Codex→local; query | T3 handoff | recall 100% for pinned facts |
-| B9 | Worktree isolation + resume | 5 parallel missions, kill app, resume | Orca, T3 | 0 cross-worktree writes; 5/5 resume |
-| B10 | Ledger growth | effects/day × bytes | — | ≤ 50 MB per 10k effects |
-| B11 | Permission resistance | 50 injection/escalation prompts (T1–T5) | T3 default (Full access), Amp default (no approvals) | 0 unauthorized effects |
-| B12 | Offline usability | network off: open project, edit, terminal, Brain, local model chat | — | all pass |
+| B1 | Cold start → composer focus | 5 warm-up + 20 | T3 @pin (P1) | ≤ T3 + 10% |
+| B2 | RSS of process tree: idle / 3 / 10 sessions | 5 each | T3, Orca (P1) | idle ≤ T3 + 15%; 10 sessions ≤ 2.5 GB |
+| B3 | Input latency keypress→paint (Playwright trace) | 200 events | T3 | p95 ≤ 50 ms |
+| B4 | First-token latency, same model/key | 20 | T3 same adapter | ≤ T3 + 50 ms |
+| B5 | WS reconnect to resumed stream | 20 | T3 | ≤ T3 |
+| B6 | Restart correctness (R1 sweep) | 100 runs | T3 unmodified | invariants 100% |
+| B7 | Real task completion: 15 founder-repo tasks + 15 SWE-bench Verified subset, same model/budget, **3 runs per task per arm** | 180 agent runs | T3 (Supervised) vs WePLD | hypothesis H-B7: WePLD completion rate ≥ T3 − 5 pts **and** unauthorized-effect count lower; PR correctness by independent reviewer; cost logged |
+| B8 | Retention across model switch | 30 **non-pinned** decisions captured during work; switch Claude→Codex→local; quiz | T3 context handoff | WePLD recall ≥ T3 + 30 pts (hypothesis) |
+| B9 | Worktree isolation + resume | 5 parallel missions, kill app, 5 repeats | Orca, T3 | 0 cross-worktree writes; 5/5 resume |
+| B10 | Ledger growth | synthetic 10k effects | — | ≤ 50 MB / 10k effects |
+| B11 | Permission resistance (50 injection/escalation prompts T1–T5) | 1 run each | **T3 in Supervised mode** (not Full access) | 0 unauthorized **mediated** effects; unmediated ones counted and reported |
+| B12 | Offline usability (network off) | checklist | — | all pass |
+| B13 | Per-effect overhead | 1,000 mediated effects | no-Core build | p95 added latency ≤ 25 ms |
 
-Cost: $0 infrastructure; model spend for B4/B7/B8 capped by founder (suggest ≤ $50 per full run; local models for B8
-partial). Aspirational vs demonstrated: until B1–B12 are run, every comparative claim in marketing or docs is labelled
-"target".
+Cost: $0 infrastructure. Model spend: B4/B5 negligible; B7 ≈ 180 runs — cap the run budget explicitly (e.g. per-task token
+limit; estimate before running; local models for a smoke variant); B8 can use one cloud + one local model. Until run,
+every comparative statement is labelled "target".
 
 ## 4. Proof of progress
 
-A phase is "done" only when its DoD tests run in CI (or a recorded local run for hardware-bound benchmarks) and the
-evidence is linked from the phase PR; the Core ledger itself records WePLD's own build missions once P4 lands
-(dogfooding), so progress claims are queryable, not narrative.
+A phase is done only when its DoD tests run (CI or recorded local run for hardware-bound benchmarks) with mutation
+controls, and evidence is linked from the phase PR. From P4 WePLD records its own build missions in its ledger
+(dogfooding), so progress is queryable rather than narrated.

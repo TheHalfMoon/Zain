@@ -33,7 +33,7 @@ All ADRs: `STATUS = PROPOSED` until this package is merged and the founder signs
   monaco-languageclient later). Design Studio = WePLD-built iframe-artboard canvas + Orca Design Mode capture + Onlook-style
   element→source mapping + Excalidraw freeform layer + DTCG tokens (Style Dictionary). Reject tldraw (license),
   Webstudio (AGPL), Craft.js (dormant).
-- **Consequences:** Design Studio is the largest net-new UI (P7, 6–10 pw).
+- **Consequences:** Design Studio is the largest net-new UI (P7, 8–14 pw, `08_*`).
 
 ## ADR-004 — Event and state ownership: one authority per fact
 
@@ -41,8 +41,11 @@ All ADRs: `STATUS = PROPOSED` until this package is merged and the founder signs
   durable, unknown-aware effect receipts.
 - **Decision:** T3 `statev2.sqlite` is authoritative for conversation/run/UI state; Core Ledger (append-only,
   hash-chained, `synchronous=FULL`) is authoritative for grants, decisions, effect outcomes, missions, continuations,
-  completion and Brain. No fact has two writers. Cross-links: `wepld.receipt-linked` (compaction-exempt) in T3; T3 ids in
-  ledger payloads.
+  completion and Brain notes. Canonical specs/ADRs stay in git (Brain indexes them). No fact has two writers. T3's own
+  recovery services are gated by Core (seam S4b) so T3 never requeues or auto-continues effects on its own after a crash.
+  Cross-links: one compaction-exempt per-run aggregate event `wepld.run-receipts` in T3 (not per effect, avoiding
+  #21154-class growth); tombstone-aware T3 ids in ledger payloads. One ledger per Core data root, exclusive OS lock,
+  Core-minted fencing epoch per Server connection.
 - **Rejected:** making T3's log the single evidence log (requires disabling compaction → 17 GiB class growth, #21154);
   adding a second orchestrator (Vercel Workflow, Orca orchestration).
 
@@ -56,15 +59,22 @@ All ADRs: `STATUS = PROPOSED` until this package is merged and the founder signs
 
 ## ADR-006 — Memory (Project Brain)
 
-- **Decision:** Core Brain in the ledger SQLite family: typed entries (decision, constraint, preference, spec, fact,
+- **Decision:** Core Brain in the ledger SQLite family: typed notes (decision note, constraint, preference, fact,
   mission summary, compaction capsule) with provenance refs, supersede-not-edit, FTS5 search, per-project isolation,
-  incognito = no writes. Injection via capsule at turn start + `brain.query` MCP tool. Vector search, code graph
+  incognito = no writes. **Specs/ADRs are indexed (path + blob hash), never stored as Brain authority** — repository
+  canonical memory outranks Brain. Preferences start `CANDIDATE` and become `QUALIFIED` only by explicit user action
+  (ARCHITECTURE_INVARIANTS: learned preferences are candidates until qualified). Injection via capsule at turn start + `brain.query` MCP tool. Vector search, code graph
   (Maemar) deferred.
 - **Rejected for v1:** vector DB service; provider-native memory as authority.
 
 ## ADR-007 — Permissions and the Claude/provider authority relay
 
-- **Decision:** Core Nawat is the only PDP. Seams S1–S8 (P3), S9 sandbox (P8). UX modes Manual / Auto-with-review /
+- **Decision:** Core Nawat is the only PDP; the Server is the PEP and part of the TCB. Approvals, policy changes and
+  mode changes require a WebAuthn assertion (platform authenticator or paired passkey) verified by Core; until that
+  lands the UI states that the Server is trusted for approvals. Effects are tagged MEDIATED/UNMEDIATED; UNMEDIATED effects
+  cannot alone earn `COMPLETED_TRUSTED`. Containment floor in P3 (data-root and out-of-worktree write deny in provider
+  profiles, Job Objects, no Full access). Seams S1–S8 + S4b (P3), S9 sandbox (P8). The Claude PreToolUse hook calls
+  `effect.propose` and `effect.dispatch` (fsynced) before returning allow. UX modes Manual / Auto-with-review /
   Skip × per-tool Always / Needs approval / Blocked compile into Core policy; Skip never overrides Blocked; Full access only
   inside sandbox. Claude via SDK with PreToolUse hook → Core, compiled deny floor, `canUseTool` → Inbox. Cedar is the
   first policy-engine candidate (Ponytail may choose hand-written Rust rules if smaller).
@@ -91,16 +101,24 @@ All ADRs: `STATUS = PROPOSED` until this package is merged and the founder signs
   compare API (403) since 2026-09-29.
 - **Decision options for founder:** (a) make public again (free protection, unlimited public Actions; IP exposure),
   (b) stay private + GitHub Pro/Team for protection, (c) stay private, free: workflow `permissions: contents: read`,
-  process-level guard (`--match-head-commit`) only. **Recommendation: (b) if budget allows, else (c)**; (a) only if the
+  process-level guard (`--match-head-commit`) only. **Residual risk of (c), stated:** no platform branch protection or
+  required checks — every gate is advisory and depends on agents/founder honoring it; the founder-signed co-sign and
+  checker-from-base remain the only hard evidence. **Recommendation: (b) if budget allows, else (c)**; (a) only if the
   founder is comfortable with public code (it was public until September).
 
 ## ADR-011 — Governance and build method reset
 
 - **Decision:** Keep the *semantics* of BUILD_METHOD (spec → Ponytail → source check → implement → deterministic gates →
   independent review → security review for T2 → reconcile → accept → learn). Replace the mechanism: one stable
-  `governance_check.py` running from the base SHA, `PROTECTED_PATHS` manifest, risk tiers T0/T1/T2, exact-head merge
-  guard. Independent review: at least one qualified reviewer distinct from the builder route; when hosted reviewers are
-  unavailable, an independent-model local review with recorded limitation is an allowed T0/T1 substitute (founder
-  authorization recorded once in the ADR, not per PR); T2 still requires a qualified independent reviewer or `REVIEW_BLOCKED`.
+  `governance_check.py` executed from the **base** commit (`pull_request_target` with no candidate checkout, the data-only
+  pattern already used by `s1-admission-integrity`; a plain `pull_request` workflow would run candidate YAML and is
+  rejected), `PROTECTED_PATHS` manifest, risk tiers T0/T1/T2 (T2 includes CI/workflows, installer/updater, donor
+  ingestion, process spawning and hooks), exact-head merge guard, and **protected-path co-sign = a commit or tag signed by
+  a founder-only SSH signing key** listed in a protected `allowed_signers` file (labels are not proof: any agent with the
+  founder's `gh` token can add one). Independent review: at least one qualified reviewer distinct from the builder route.
+  Named substitute when hosted reviewers are unavailable (T0/T1 only): a model from a **different vendor than the builder
+  route** (e.g. Codex reviewing a Claude-built PR, or Claude reviewing a Codex-built PR), run by the founder, with model id
+  and version recorded and a residual-limitation note. T2 still requires CodeRabbit or another qualified independent
+  reviewer plus security review, else `REVIEW_BLOCKED`. The bootstrap uses the P−1 break-glass record (08).
 - **Consequences:** ends successor-per-edit (≥3 PRs per test fix); preserves trusted-base, exact-head and no
   self-authorization properties. Requires its own bootstrap PR (P0), which the current trusted base will judge.

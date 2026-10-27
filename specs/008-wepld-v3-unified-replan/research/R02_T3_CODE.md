@@ -74,7 +74,7 @@ concentrated in `Orchestrator.ts`, adapters, and the event contract.
 | Repo-level agent files | `AGENTS.md` (23.8 kB), `CLAUDE.md`, `.claude/`, `.cursor/`, `.agents/` — treated as data | root listing |
 
 Self-description: "agent harness control surface … control the agents on your machine with a … mobile app, web app
-and Electron-based desktop app"; "If we ever go the wrong direction, we want you to have everything you need to fork"
+and Electron-based desktop app"; "If we ever go the wrong direction, we want you to have …" (truncated; see source)
 (`README.md@36d4d711:L1-12`).
 
 ---

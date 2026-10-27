@@ -19,10 +19,14 @@ Every unknown has an owner phase, the evidence that closes it, and whether it bl
 | U-03D-1 | Orca runtime performance; exact IPC count; tamper evidence | R03D §18 | no | P1 comparison run | P1 |
 | U-04-1 | Amp provider failover semantics; Gigawatt pricing | R04 §11 | no | docs | — |
 | U-05-1 | Workflow SDK under Electron; community Worlds v5 compatibility | R05 §6 | no (not adopted) | — | — |
-| U-06-1 | MCP SDK license transition per file | R10 | low | per-file check at admission | P5 |
+| U-06-1 | MCP SDK license transition per file (`@modelcontextprotocol/sdk` already in the fork at P2) | R10 | low | per-file check at admission | **P2** |
 | U-06-2 | `codex-acp` license (NOASSERTION) | R10 | if used | license file | P2 |
 | U-07-1 | Electron RAM vs goal | ADR-002 | revisit trigger | B2 | P1/P2 |
 | U-07-2 | Ledger fsync latency on founder hardware | 07 §4 | budget | P3 microbench | P3 |
 | A-1 | Assumption: founder's AI-assisted capacity ≈ 1 pw per calendar week | 08 | schedule | track actuals | all |
 | A-2 | Assumption: T3 at pin remains MIT and pin stays fetchable | 06 | low | mirror pinned tarball into a private archive at P1 | P1 |
 | A-3 | Assumption: Windows-first remains the priority | AGENTS.md | ordering | founder | — |
+| U-07-3 | Windows Hello / platform WebAuthn availability inside Electron on the founder's hardware; passkey pairing UX for phones | 07 §6 | P3 approval design | P3 spike | P3 |
+| U-07-4 | Azure Trusted Signing eligibility for an individual in Saudi Arabia | 07 §9 | public Windows release | provider check | P2 |
+| U-07-5 | Write-latency cost of `synchronous=FULL` on the T3 receipt table | 07 §5 | budget | P1 measurement | P1 |
+| U-08-1 | Whether the break-glass repair alone restores the v72 gate (no other 403 paths) | 08 P−1 | P−1 | run after change | P−1 |

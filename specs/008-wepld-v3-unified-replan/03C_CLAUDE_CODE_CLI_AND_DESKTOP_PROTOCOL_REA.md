@@ -17,7 +17,7 @@ SOURCE_STATUS = CLI closed ("All rights reserved"); TS Agent SDK 0.3.311 proprie
 | Session identity | `sessionId` option, `resume` + `forkSession`, `parent_tool_use_id` | **ADAPT**: UUIDv5(task_attempt) mapping stored in T3 + Core | 2 |
 | Hermetic launch | `--bare` / `settingSources: []`, `strictMcpConfig`, `managedSettings`, per-tenant `CLAUDE_CONFIG_DIR` | **ADAPT** (R03C §10.2 profile) | 3 |
 | Structured hand-back | `outputFormat` JSON schema | **ADAPT** | 4 |
-| Telemetry | OTel metrics/events | **INTEGRATE** into WePLD local OTel sink (observational, `TELEMETRY_SPAN != EVIDENCE`) | 6 |
+| Telemetry | OTel metrics/events | **INTEGRATE** into a WePLD **local-only** OTel sink (observational, `TELEMETRY_SPAN != EVIDENCE`; P2 removes donor egress telemetry, P6 adds the local sink) | 6 |
 | Skills/plugins/subagents/output styles/CLAUDE.md | file formats (SKILL.md, plugin.json, `.claude/agents`) | **COPY formats** (open), load into any worker where supported | 5 |
 | MCP (stdio/http/sse, OAuth) | `mcp` subcommands, scopes | **ADAPT** via T3 `/mcp` + rmcp/TS SDK | 5 |
 | Worktrees, checkpoints/rewind | `--worktree`, checkpoints | T3 owns worktrees/checkpoints (git authority); Claude checkpointing off or convenience only | 2 |
@@ -26,7 +26,9 @@ SOURCE_STATUS = CLI closed ("All rights reserved"); TS Agent SDK 0.3.311 proprie
 
 ## 2. Permission relay contract (WePLD-owned authority)
 
-1. PreToolUse hook → Core decision (first gate, every call; hook `deny` holds even in bypass; `onFailure: block` ≥2.1.295).
+1. PreToolUse hook → Core `effect.propose`; on allow the hook also calls `effect.dispatch` (fsynced) **before** returning
+   allow, so a kill mid-Edit leaves a dispatch record and CC-T02 can derive UNKNOWN (hook `deny` holds even in bypass;
+   `onFailure: block` ≥2.1.295).
 2. Compiled deny floor in managed settings (survives hook failure).
 3. `canUseTool` → Core `APPROVAL_REQUIRED` → Inbox → `approval.resolve` (use `defer` for waits longer than the process).
 4. PostToolUse → Core `effect.report` (outcome evidence).
@@ -35,10 +37,11 @@ SOURCE_STATUS = CLI closed ("All rights reserved"); TS Agent SDK 0.3.311 proprie
 
 ## 3. Authentication posture (binding)
 
-API key / Bedrock / Vertex / Foundry for any WePLD-initiated Claude usage. Optional user-owned unmodified `claude`
+API key / Bedrock / Vertex / Foundry for any WePLD-initiated Claude usage. The Agent SDK is **not bundled** in the installer
+until G4 (08 P2 task); `claude-agent-acp` depends on the same SDK and does not avoid this. Optional user-owned unmodified `claude`
 binary in a WePLD terminal (user signs in through Anthropic's own flow; WePLD never reads `.credentials.json` or tokens).
 Subscription-backed SDK orchestration: **UNKNOWN**, blocked until written confirmation (G4). Branding: "powered by
-Claude", never "Claude Code Agent". Quotes in R03C §10.5.
+Claude", never "Claude Code Agent". Policy summary (paraphrased, with sources) in R03C §10.5.
 
 ## 4. Gaps between local CLI and docs (observed)
 

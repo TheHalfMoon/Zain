@@ -16,7 +16,7 @@ FEATURE_COVERAGE != SOURCE_AVAILABILITY != PROVEN_PARITY
 | P3 Core authority + permission UI | 24 | Manual/Auto/Skip mapped to Nawat; folder/tool permissions |
 | P4 Projects + Brain + Missions/continuations | 32 | memory, instructions, schedules, steer/resume |
 | P5 Connections + Review | 43 | skills, plugins, MCP, connectors, review |
-| P6 Editor / packaging / telemetry | 3 | |
+| P6 IDE breadth (rule bucket: editor / cross-platform packaging / local telemetry sink) | 3 | names align with 08 P6 |
 | P7 Design Studio | 1 + R03B matrix (all Design sub-features) | Design depth is in 03B / R03B §3 |
 | P9 Artifacts / documents / research / browser & computer use | 46 | |
 | P10 Remote / mobile | 4 | |
@@ -53,8 +53,11 @@ Each spec: user-visible outcome · route · donor · positive test · negative t
 
 ## 3. Full generated mapping (all 339 rows)
 
-Legend: `PT-<id>` = parity test placeholder with a positive and a negative assertion; each becomes a hand-written spec
-when its phase opens. `accounted only` = no test scheduled (DEFER/Backlog).
+Legend: `PT-<id>` = parity test **placeholder**. The generated negative clause ("any effect without Core grant is refused")
+is boilerplate and is **not** a valid test until rewritten for the specific feature and passed through the mutation
+control in `09_*` (must fail with Core disabled). Keyword routing has known misroutes (e.g. CL-A-008 PDF handling landed in
+P3 because of a permission keyword); every row is re-triaged by hand when its phase opens. `accounted only` = no test
+scheduled (DEFER/Backlog).
 
 | feature_id | exact_feature | status | Claude route | WePLD phase | target WePLD module | acceptance test |
 |---|---|---|---|---|---|---|

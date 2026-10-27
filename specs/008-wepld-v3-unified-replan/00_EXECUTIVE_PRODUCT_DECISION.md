@@ -9,14 +9,17 @@ FOUNDATION = Hard fork of T3 Code @ 36d4d711b79c73eb33131944f73ea4a8c6156484 (MI
            + bounded ports of Orca modules @ e310a63624c86c0e91e9d77df71f038b91d79ea0 (MIT)
            + Vercel Workflow / durable-harness as PATTERNS ONLY (no runtime dependency)
 REJECTED = Orca-as-foundation; merge-both-apps; keep-Tauri-and-build-UI; Vercel Workflow as engine
-NEXT_BUILD_ENTRY = Phase 0 (repair main CI + governance simplification) then Phase 1 (run T3 unmodified, measure)
+NEXT_BUILD_ENTRY = P−1 break-glass repair of the integrity workflow (founder-signed record) → merge this package → P0 → P1
 ```
 
 ## 1. Product definition
 
 **WePLD is a local-first desktop agent workbench in which any model or agent can do real engineering and
 general knowledge work, and in which a Rust Trusted Core — not the agent, not the UI and not the provider —
-decides what is allowed, records what actually happened, and decides what counts as done.**
+decides which *mediated* effects are allowed, records what the enforcing Server observed, and decides what counts as
+done.** The forked Server is the enforcement point and part of the trusted computing base; effects that bypass it
+(provider-native tools without prompts, CLI agents in terminals) are labelled `UNMEDIATED` and cannot by themselves earn
+`COMPLETED_TRUSTED`. The claim widens to all agent effects only after the P8 OS sandbox passes its escape suite.
 
 One project holds chats, coding sessions, research tasks, documents/designs, worktrees, PRs and long-lived
 Missions. The user starts locally and can optionally attach a self-hosted always-on runner, or control the desktop
@@ -50,10 +53,10 @@ as a runtime. Retire the Tauri shell; keep every line of the tested Rust core.
 
 | Option | What | ESTIMATE to useful MVP (solo, AI-assisted) | Verdict | Decisive reason |
 |---|---|---|---|---|
-| **A. T3 foundation + Orca modules + Rust Core** | Hard fork T3; port ~6 Orca modules; Core sidecar at seams | **22–38 pw** core; +20–40 pw for Orca breadth over time | **CHOSEN** | Best substrate for authority seams; 2.4× smaller than Orca; one state store |
-| B. Orca foundation + T3 orchestration | Fork Orca; graft T3 event store | ≥30–60 pw before any trust work; ≥1 FTE fork upkeep | REJECT | Three existing stores + a fourth; 2.37M LOC; 421 open Windows issues; cloud re-hosting |
+| **A. T3 foundation + Orca modules + Rust Core** | Hard fork T3; port ~6 Orca modules; Core sidecar at seams | **v1 (P−1…P5, incl. all trust work, Brain, missions, completion) ≈ 37–68 pw**; all phases ≈ 72–138 pw (`08_*`) | **CHOSEN** | Best substrate for authority seams; 2.4× smaller than Orca; one state store |
+| B. Orca foundation + T3 orchestration | Fork Orca; graft T3 event store | ≥30–60 pw **before** any trust work (not like-for-like with A; add ≈ the same 25–45 pw of trust/Brain work); ≥1 FTE fork upkeep | REJECT | Three existing stores + a fourth; 2.37M LOC; 421 open Windows issues; cloud re-hosting |
 | C. One shell + other app as process-isolated sidecar | e.g. T3 shell + `orcad` | 6–10 pw per bridged capability + recurring breakage | BRIDGE ONLY | Two runtimes, two stores, 778-method non-public RPC, doubled RAM |
-| D. Own modular platform (keep Tauri, build UI) | Build shell/orchestrator around Rust core, copy patterns | 60–120 pw to parity | FALLBACK | Contradicts COPY FIRST; fallback if A's Effect/orchestration seams prove unworkable |
+| D. Own modular platform (keep Tauri, build UI) | Build shell/orchestrator around Rust core, copy patterns | 60–120 pw to donor parity, **excluding** trust work | FALLBACK | Contradicts COPY FIRST; fallback if A's Effect/orchestration seams prove unworkable |
 | E. Run T3 unmodified, Core as outside MCP agent | No fork | 6–10 pw | REJECT as end state | Thread-level permission ceiling only — fails Nawat per-effect authority (`R02 §14`) |
 | F. "Merge both complete apps" | Both Electron apps | n/a | REJECT | Double Electron, duplicate PTYs, contradictory stores, two permission paths |
 
@@ -69,7 +72,7 @@ Estimates are ESTIMATES from the research agents' source reading, not measured; 
 | Effect **execution** queue (leases, retries, FIFO) | WePLD Server EffectWorker/EffectOutbox | T3 |
 | Effect **authority**, receipts, unknown-outcome, reconciliation | WePLD Core Ledger (Rust, fsync, hash chain) | WePLD (Spec 006 §19) |
 | Missions, continuations (wait-for-CI, schedules, wake-ups) | WePLD Core Ledger; fires idempotent commands into the Server | WePLD |
-| Project Brain (memory, decisions, specs, evidence index) | WePLD Core Brain store (same SQLite file family, FTS5) | WePLD |
+| Project Brain (memory notes, preferences, mission summaries, evidence + **index over repo specs/ADRs**) | WePLD Core Brain tables (FTS5); canonical specs stay in git | WePLD |
 | Project identity, evidence generations, read-only git topology | WePLD Core (existing S2) | WePLD |
 | Git writes, worktrees, checkpoints | WePLD Server VCS driver, **gated by Core grants** | T3 |
 | Provider adapters (Claude, Codex, ACP family, OpenCode, Pi) | WePLD Server provider packages | T3 |
@@ -79,12 +82,16 @@ Estimates are ESTIMATES from the research agents' source reading, not measured; 
 | Browser pane, Design Mode capture, browser automation | WePLD Shell desktop process (Electron webContents/CDP) | T3 + Orca port |
 | Design Studio canvas + design system tokens | WePLD Shell + Server design package; tokens in project files (DTCG) | New (R03B) |
 | Process sandbox | WePLD Core launcher (Codex `windows-sandbox-rs` / `linux-sandbox` ports) | openai/codex (Apache-2.0) |
-| Permission policy (PDP) | WePLD Core Nawat (Cedar candidate) | WePLD |
+| Permission policy (PDP) | WePLD Core Nawat (Cedar candidate); approvals verified by WebAuthn assertion | WePLD |
+| Policy enforcement (PEP) | WePLD Server at seams S1–S8 (part of the TCB) | T3 fork |
 | Remote/mobile clients | WePLD Server WebSocket RPC (T3 protocol v2) | T3 |
 
 ## 5. What survives from V2.3, what changes
 
-**Kept intact (semantics):** all `ARCHITECTURE_INVARIANTS.md` lines; Spec 006 §19 effect model; Trusted Completion
+**Kept (semantics):** all `ARCHITECTURE_INVARIANTS.md` authority/evidence/Project-Brain/reuse lines; the "Workers" line
+naming Mirefa and Edara needs a governed text amendment because those components are simplified/deferred (the rules
+they express — qualification before use, minimum-sufficient topology, Nawat authorizes effects — are kept); Spec 006 §19
+effect model; Trusted Completion
 rules (§20); independent review; no silent provider/model fallback; local-authoritative/cloud-independent; S1 protocol;
 S2 identity/evidence/git observer code and its adversarial tests.
 
@@ -109,11 +116,15 @@ confirmed in writing before marketing it) (`R03C §auth`, census `CL-E-096`).
 
 | # | Condition | Why | Evidence that discharges it |
 |---|---|---|---|
-| G1 | `main` CI repaired (403 on private repo) and governance simplified per `ADR-011` | Nothing can be accepted while the gate is broken | Green `foundation-integrity` (or its successor) on `main` |
+| G1 | `main` CI repaired via the P−1 break-glass record (403 on private repo), then governance simplified per `ADR-011` | Nothing can be accepted while the gate is broken | Green `foundation-integrity` (or its successor) on `main` |
 | G2 | Phase 1 measurement: T3 @ pin builds, tests and runs on the founder's Windows machine; baseline RAM/start/latency recorded | Estimates are from reading, not running | `09_*` B1–B3 numbers committed |
 | G3 | Effect seam spike: Core grants a Codex approval and an ACP `fs/write` through S2/S3 with a ledger receipt, and a kill -9 between dispatch and receipt yields `EFFECT_OUTCOME_UNKNOWN` | Proves the trust claim is implementable on the fork | Spike test log + receipts |
-| G4 | Claude SDK redistribution + auth posture confirmed | Proprietary SDK in a redistributed product; subscription-auth policy | Written answer or fallback (user-installed CLI / API key only) recorded |
+| G4 | Claude SDK redistribution + auth posture confirmed | Proprietary SDK in a redistributed product; subscription-auth policy | Written Anthropic answer, **or** fallback adopted: SDK excluded from installer and loaded from a user-consented location + API-key/cloud credentials only. The "user-installed CLI in a WePLD terminal" route stays UNKNOWN and is not a G4 discharge. |
 | G5 | Founder accepts the governance change and the T3 fork-not-track policy | Both reverse earlier canonical choices | Founder decision record (`FOUNDER_DECISION_RECORD.md`) signed off in PR |
+
+**v1 scope line:** P−1…P5 (≈ 37–68 pw; 12–26 calendar months at assumption A-1 with upkeep). Design Studio (P7),
+containment (P8), general agent work (P9) and runner/mobile (P10) are post-v1. Useful earlier stops: P2 exit (branded
+multi-agent workbench) and P3 exit (authority differentiator).
 
 If G2 or G3 fails: fall back to Option D for the failing layer only (e.g. keep T3 UI, replace its effect worker),
 re-estimate, and re-review.

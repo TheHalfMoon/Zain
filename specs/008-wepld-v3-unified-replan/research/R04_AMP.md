@@ -38,7 +38,7 @@
 | SDKs | TypeScript `@ampcode/sdk` and Python `amp-sdk`. Both drive the CLI (the Python SDK has a `CLINotFoundError`). Executors: local, `orb`, or `runner`. | `sdk`, `sdk/typescript`, `sdk/python` |
 | Plugin API | `@ampcode/plugin` TypeScript types. Plugins run in a plugin process on the executor. | `plugin-api`, `customize/plugins` |
 
-**Execution split (documented):** "Amp runs the agent loop and model inference on its own servers. Your orb runs the agent's tools" (`orbs/self-hosted` §What Leaves Your Network). The same split applies to runners. The thread lives server-side and the executor is attached. A thread can run in an orb, on a runner, or in a local CLI session, and it opens on every client (`threads`).
+**Execution split (documented):** "Amp runs the agent loop and model inference on its own servers. …" (truncated; see source) (`orbs/self-hosted` §What Leaves Your Network). The same split applies to runners. The thread lives server-side and the executor is attached. A thread can run in an orb, on a runner, or in a local CLI session, and it opens on every client (`threads`).
 
 ---
 
@@ -86,7 +86,7 @@ There is a documentation inconsistency: `tools` says Painter is "GPT Image 2.5 S
 | Provider precedence | For each model, Amp tries **personal connections (priority 0..n)**, then **workspace connections**, then **Amp**. It uses "the first active one whose model mapping includes that model". | `customize/model-routing` §Precedence |
 | Connection kinds | API keys (Anthropic, Google AI Studio, Meta, OpenAI, xAI). Subscriptions (ChatGPT, Claude, 𝕏 Premium+/SuperGrok, GitHub Copilot). Cloud (Bedrock, Vertex/Agent Platform, Azure Foundry). Routers (OpenRouter, Vercel AI Gateway, Cloudflare, Ollama Cloud, OpenCode Go, custom OpenAI/Anthropic URL). | same |
 | Model mapping DSL | Glob include/exclude lines with "last match wins" and `model -> providerModelID` rewrite | same §Model Mappings |
-| Pin fallback | "If a pinned model becomes unavailable or your workspace restricts it, Amp falls back to automatic model selection. If an effort level is not supported, Amp uses the closest supported level." | `the-dial` |
+| Pin fallback | "If a pinned model becomes unavailable or your workspace restricts it, Amp …" (truncated; see source) | `the-dial` |
 | Bedrock unknown ID | A wildcard match is skipped and routing continues down the order. An exact selection errors. | `customize/model-routing` |
 | Painter via Gemini | On failure it **reports an error instead of falling back** to Amp credits. | same |
 | Runtime failover on provider error (5xx or rate limit) to the next connection | **UNKNOWN.** Not documented. | — |
@@ -98,7 +98,7 @@ There is a documentation inconsistency: `tools` says Painter is "GPT Image 2.5 S
 
 - `amp.ai.decide({state, questions})` answers 1–20 typed questions, of types `noul` (probability), `choice` or `score`, in "well under a second" with "calibrated probabilities".
 - Amp itself uses Jev (TypeSafe) for diff file ordering and thread-label suggestion (`customize/decision-models`).
-- The docs warn that "The answer can still be wrong, so your plugin owns the thresholds and the control flow."
+- The docs warn that "The answer can still be wrong, so your plugin owns the thresholds …" (truncated; see source)
 
 ---
 
@@ -107,7 +107,7 @@ There is a documentation inconsistency: `tools` says Painter is "GPT Image 2.5 S
 | Topic | Documented behavior | Source |
 |---|---|---|
 | Subagent types | **Task** carries out end-to-end work, has edit and terminal tools, and loads a read-only skill. **Read Thread** summarizes other threads, of any size since 2026-07-02. | `models-and-subagents`, `tools` |
-| Context isolation | Each subagent has its own context window. "They work in isolation, so they can't communicate with each other, you can't guide them directly, and they start with the instructions and context the main agent gives them rather than the full conversation." | `models-and-subagents` |
+| Context isolation | Each subagent has its own context window. "They work in isolation, so they can't communicate with each other, you …" (truncated; see source) | `models-and-subagents` |
 | Result channel | "The main agent receives their final summary rather than monitoring their step-by-step work." | same |
 | Re-tasking | The main agent can send a Task subagent another task. If it is still running, the task arrives "as extra instructions" (steering). The subagent keeps its full earlier context. | same |
 | Subagent compaction | A full Task context is compacted the same way as a thread. | same |
@@ -209,7 +209,7 @@ All sizes have 60 GB disk. Billing is per minute while running.
 | Restack | The agent rewrites history into cleaner commits (same final tree). No push. |
 | Changes pane | Committed and uncommitted diff since the merge base, a per-commit picker, "Compare With Branch". **Intelligent file ordering by Jev**, which mutes generated files. Review button. Sync (`amp sync`) mirrors the orb to a local checkout live, or once with `--apply`. |
 | Code review | The built-in `review` prompt and the `reviewing-code` skill (Task subagent). The 2026-02-04 note "Liberating Code Review" made the review agent composable. The legacy CRA GitHub App repo (`ampcode/cra-github`) is archived. |
-| GitHub webhooks | Subscribe a thread to an issue or PR (comments, reviews, merge-queue events). **Orb spawner**: each newly opened issue or PR (optionally label-filtered) spawns an orb. **Follow CI** for an exact commit (check rollup plus a periodic refresh in case a webhook is missed). **Automatic follow-ups** subscribe the thread before reporting a PR complete. Subscriptions "do not ... grant permission to push changes, deploy, or carry out instructions someone posts in a GitHub comment." |
+| GitHub webhooks | Subscribe a thread to an issue or PR (comments, reviews, merge-queue events). **Orb spawner**: each newly opened issue or PR (optionally label-filtered) spawns an orb. **Follow CI** for an exact commit (check rollup plus a periodic refresh in case a webhook is missed). **Automatic follow-ups** subscribe the thread before reporting a PR complete. Subscriptions "do not ... grant permission to push changes, deploy, or carry out …" (truncated; see source) |
 | Terminal | A shared tmux session inside the orb that both the agent and the user can use. It can be embedded live in replies. Paste or drop uploads a file. |
 | App preview (Portals) | `.amp/services.yaml` declares services with health checks and dependencies. Portals get custom or friendly hostnames, review and comment overlays with dictation, and dev sign-in helpers (Vite, Laravel, magic link). Access requires a signed-in Amp user with thread access. |
 | Desktop | A GUI desktop in the orb (browsers, apps), and on a runner with `--desktop`. |

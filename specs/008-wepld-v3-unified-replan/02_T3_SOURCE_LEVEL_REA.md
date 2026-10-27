@@ -23,7 +23,8 @@ ROLE_IN_V3 = FORK FOUNDATION (shell + server + orchestration + providers)
 |---|---|---|---|
 | Orchestrator + EventSink + receipts | `apps/server/src/orchestration-v2/{Orchestrator,EventSink,CommandReceiptStore}.ts` | KEEP | single write path; idempotent commands |
 | EffectOutbox + EffectWorker | `…/EffectOutbox.ts`, `…/EffectWorker.ts` | KEEP + seam S4 | the one executor; add Core authority + unknown outcome |
-| Recovery + maintenance | `ProviderRuntimeRecoveryService.ts`, `ProjectionMaintenance.ts` | KEEP; exempt WePLD receipt-linked events from compaction | |
+| Recovery + maintenance | `ProviderRuntimeRecoveryService.ts`, `EffectOutbox.reconcileAfterProcessLoss`, `ProjectionMaintenance.ts` | KEEP but **gate on Core (seam S4b)**: no requeue/auto-continue before `core.open_dispatches`; exempt the per-run `wepld.run-receipts` event from compaction | T3 otherwise cancels/requeues/auto-continues without asking Core |
+| Thread settlement | `ThreadSettlementService.ts` | **CHANGE**: cosmetic auto-archive only, never a completion signal | auto-settles on PR merge/close (contradicts Merge != Completion) |
 | Provider adapters | `Adapters/ClaudeAdapterV2.ts` (11k), `CodexAdapterV2.ts` (7.5k), `packages/provider-acp*`, `provider-opencode`, `provider-pi` | KEEP these five families | per-provider approval relay = seams S2/S3 |
 | VCS / worktrees / checkpoints | `vcs/GitVcsDriver*.ts`, `checkpointing/*` | KEEP + seam S7 (gate `clean -fd`, push, merge) | rename hidden refs to `refs/wepld/…` |
 | Terminal | `apps/server/src/terminal/*`, libghostty-vt renderer | KEEP (the one PTY host) | |
@@ -36,7 +37,7 @@ ROLE_IN_V3 = FORK FOUNDATION (shell + server + orchestration + providers)
 
 S1 runtime-mode clamp (`RuntimePolicy.ts`) → S3 ACP fs/terminal PEP (`provider-acp/src/server/clientPolicy.ts`) →
 S2 provider approvals (Claude `canUseTool` L9265; Codex handlers L5039–5396; ACP `session/request_permission`) →
-S4 EffectWorker authority + unknown outcome (L99–560) → S5 EventSink commit mirror (L410–460) → S6 MCP access →
+S4 EffectWorker authority + unknown outcome (L99–560) and **S4b recovery gating** (`EffectOutbox.ts` L492–530, `ProviderRuntimeRecoveryService.ts` L700–788) → S5 per-run receipt link (EventSink L410–460) → S6 MCP access →
 S7 git writes → S8 terminals → S9 provider spawn under sandbox (new work). Precedent: T3 already ships a Rust stdio
 sidecar (`native/resource-monitor`).
 
@@ -45,7 +46,7 @@ sidecar (`native/resource-monitor`).
 T3 events are entity snapshots, compacted every 6 h, payloads rewritten for dedupe, no hash chain, outbox outcomes
 mutable and pruned after 7 days, `synchronous=NORMAL` (R02 §11, C1–C12). Resolution: **one authority per fact**
 (`07_*` §2). T3 = conversation/run truth; Core Ledger = grants/decisions/outcomes/missions/completion,
-cross-referenced through a compaction-exempt `wepld.receipt-linked` event.
+cross-referenced through one compaction-exempt per-run `wepld.run-receipts` event (07 §4).
 
 ## 5. Inherited risks (must be budgeted, R02 §13)
 
@@ -55,8 +56,8 @@ stuck runs (#15197, #22510), Windows startup (#25262), approval bugs (#24882, #2
 
 ## 6. Effort (ESTIMATE, R02 §14)
 
-MVP fork + Core seams: 18–34 pw; + minimal editor: 22–38 pw; + real sandbox: 26–48 pw; upkeep 0.5–1 pw/month of
-selective cherry-picks.
+R02 figures: MVP fork + Core seams 18–34 pw; + minimal editor 22–38 pw; + real sandbox 26–48 pw; upkeep 0.5–1 pw/month.
+These exclude Brain, missions, completion, WebAuthn and policy UI; the bottom-up v1 estimate is in `08_*` (≈ 37–68 pw).
 
 ## 7. Verdict
 
