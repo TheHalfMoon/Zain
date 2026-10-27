@@ -37,6 +37,11 @@ NON-NEGOTIABLES
   any requeue/auto-continue (seam S4b). Continuation fires are two-phase (fire_intent / fire_acked).
 - Never write hooks into the user's global ~/.claude or ~/.codex; use per-launch config overlays.
 - Every negative test must FAIL when Core is disabled (mutation control, 09); otherwise rewrite it.
+- First-class components (16_ZAIN_PRODUCT_COMPONENTS.md) are clients of the single owners: ONE review engine (OCR fork,
+  K-*), ONE engineering loop (E-*), ONE Plan Mode (L-*, read-only Core profile), ONE BrowserController (Y-*), DeskGate
+  adapters with no execution authority (H-*). Never add a second orchestrator, review store, browser controller, PTY host
+  or policy authority. Remote Desktop Commander relay is EXCLUDED.
+- Product identity is Zain (ZAIN_NAMING_MIGRATION.md); never touch TheHalfMoon/Zain-LLM.
 - Claude: API key / Bedrock / Vertex / Foundry only for Zain-initiated usage. Never read ~/.claude/.credentials.json or
   OAuth tokens. Do not bundle @anthropic-ai/claude-agent-sdk in installers until G4 is closed.
 - Rebrand per 06 §4; the donor-identifier CI grep gate must pass.

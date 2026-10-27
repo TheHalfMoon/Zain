@@ -21,17 +21,17 @@ TIERS = T0 docs-only · T1 UI/product code with no effect, CI, supply-chain or a
 | P3 Trusted Core | Core-decided approvals with WebAuthn; ledger; UNKNOWN outcomes; containment floor; no Full access | 24–37 | WP2 2–3 + WP3 4–8 + WP4/S4b 2–4 + WP5 3–6 + policy engine 2–4 + Inbox/permission UI 2–3 + WebAuthn 1–2 + floor 1–2 | T2 |
 | P4 Missions + Brain | projects remember; missions wait for CI/schedules; context survives model switch | 5–9 | own build | T2 |
 | P5 Review, Completion, Connections | independent reviewer; completion decisions; MCP/skills/plugins with grants | 5–9 | own + PR-Agent wrap | T2 |
-| **v1 = P−1…P5** | | **≈ 49–76** | | |
+| **v1 = P−1′…P5 (incl. five components; per-phase rows above predate them — authoritative: 14 §13)** | | **≈ 88–137** | | |
 | P6 IDE breadth + benchmarks | Monaco + diff comments, Design Mode capture, CLI agents, Linear, benchmark harness | 30–54 | 14 §13 (adds LSP 6–10, debugging 6–10, packaging 3.5–6.5, accessible terminal 2–5 per R13) | T2 (spawns processes, hooks) |
 | P7 Design Studio v1 | canvas, comments → proposals, DTCG tokens, handoff, exports | 9–15 | 14 §13 | T1/T2 |
 | P8 Containment | providers in OS sandbox (Windows first); Full-access lane only inside sandbox | 9–15 | 14 §13 (R13: Codex Windows backends, Seatbelt, bwrap+seccomp, debug profile) | T2 |
 | P9 General agent work | documents, research, browser agent, computer use (gated) | 13–22 | 14 §13 (R13: browser gating 4–6, computer use 6–10) | T2 |
 | P10 Remote + runner | runner as project home; phone/web approvals via passkey | 4–8 | T3 remote + own | T2 |
-| **All phases** | | **≈ 114–189** | | |
+| **All phases** | | **≈ 159–259** | | |
 
 **What this means for a solo founder (stated, not hidden):** at assumption A-1 (~1 pw of AI-assisted output per
 calendar week) and an ongoing fork/adapter upkeep of 1.1–1.85 pw/month once P2 lands (≈25–43% of capacity, `10_*` §3),
-**v1 (P−1…P5) is roughly 14–27 calendar months; the full plan is 3–6 years.** Two earlier stopping points are useful
+**v1 (P−1…P5) is roughly 2.2–4.2 years; the full plan is multi-year (≈159–259 pw).** Two earlier stopping points are useful
 products on their own: **P2 exit** (~10–18 pw from start: a Zain-branded multi-agent workbench) and **P3 exit**
 (~27–50 pw: the authority differentiator). Scope cuts, if slippage exceeds 50%: drop P9 computer use, P7 PPTX export,
 P10 mobile, then P6 Linear.

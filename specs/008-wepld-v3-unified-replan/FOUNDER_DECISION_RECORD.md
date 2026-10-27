@@ -22,7 +22,7 @@ orchestration; keep Zain's tested Rust core as the authority sidecar; port six O
 | Cloud/telemetry to strip | Clerk, T3 Connect, PostHog | onorca.dev auth/relay/share, PostHog, update feed | R02 §9; R03D §15 |
 | IDE breadth | ◐ (no Monaco) | ✓ Monaco, Design Mode, computer use, Linear | R03D §9–11 |
 | Breadth gap closable by ports | ✓ the separable Orca modules are exactly T3's gaps | n/a | R03D §14, §16.2 |
-| ESTIMATE | v1 incl. all trust/Brain/completion work ≈ 49–76 pw (08) | ≥30–60 pw **before** trust work (+ ≈25–45 pw of the same trust work) | 08; R02 §14; R03D §16 |
+| ESTIMATE | v1 incl. all trust/Brain/completion work ≈ 88–137 pw (08) | ≥30–60 pw **before** trust work (+ ≈25–45 pw of the same trust work) | 08; R02 §14; R03D §16 |
 
 ## Decisions requested from the founder
 
@@ -35,7 +35,7 @@ orchestration; keep Zain's tested Rust core as the authority sidecar; port six O
 | F5 | Governance reset (ADR-011) replacing the successor chain | Yes | Keep chain (not recommended) |
 | F6 | Fork-not-track policy for T3 | Yes | Rebase tracking (infeasible at ~1.3k PRs/week) |
 | F7 | Claude auth posture: API key default; no subscription proxy; seek Anthropic confirmation | Yes | — |
-| F9 | Accept the v1 scope line (P−1′…P5) and the 14–27 month v1 calendar estimate, with P2/P3 as earlier stopping points | Yes | larger v1 |
+| F9 | Accept the v1 scope line (P−1′…P5) and the 2.2–4.2 year v1 calendar estimate, with P2/P3 as earlier stopping points | Yes | larger v1 |
 | F10 | ~~Authorize the P−1 break-glass~~ **Withdrawn**: restore GitHub Actions billing/spending limit for the private repo (P−1′) | Yes | keep CI off (no merges possible under current policy) |
 | F11 | Create a founder-only SSH signing key and allowed_signers file for protected-path co-sign | Yes | — |
 | F8 | Communication: Arabic discussion, English artifacts (AGENTS.md) — resolve the Astro "English-only" contradiction | AGENTS.md | — |
@@ -60,5 +60,5 @@ not disclosed).
 None of these can be performed by an agent under current rules (account settings, billing, app installations).
 | FO-8 | **Trademark clearance for "Zain"** before distribution/publishing (R19: HIGH risk in KSA/GCC vs Zain Group; PyPI `zain` is a coding agent) | research/R19_ZAIN_NAMING_CONFLICTS.md | Distribution under a contested mark; forced rename later |
 | FO-9 | **Confirm the E2E source**: which repository/framework was meant (provisional: `TheHalfMoon/Ascout@ecada2bc` Spec 016 + Playwright); which Ascout parts are canonical; relicensing into Zain; whether any cloud E2E service is ever acceptable | research/R15 §6 | E-03 cannot start; Engineering loop ships without browser E2E |
-| FO-10 | **Accept the scope reality**: with the five components v1 = ≈88–137 pw (2.3–4 years solo at A-1); choose release tiers (ZAIN_V3_MASTER_PLAN §5a) or cut v1 scope | 14 §13 (computed) | Plan remains unrealistic for one person |
+| FO-10 | **Accept the scope reality**: with the five components v1 = ≈88–137 pw (2.2–4.2 years solo at A-1); choose release tiers (ZAIN_V3_MASTER_PLAN §5a) or cut v1 scope | 14 §13 (computed) | Plan remains unrealistic for one person |
 | FO-11 | Review the locally installed Desktop Commander configuration (unrestricted `allowedDirectories`, telemetry on) — independent of Zain | research/R18 §8 | Local exposure on the founder's machine |

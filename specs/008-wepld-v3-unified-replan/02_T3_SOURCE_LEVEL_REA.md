@@ -57,7 +57,7 @@ stuck runs (#15197, #22510), Windows startup (#25262), approval bugs (#24882, #2
 ## 6. Effort (ESTIMATE, R02 §14)
 
 R02 figures: MVP fork + Core seams 18–34 pw; + minimal editor 22–38 pw; + real sandbox 26–48 pw; upkeep 0.5–1 pw/month.
-These exclude Brain, missions, completion, WebAuthn and policy UI; the bottom-up v1 estimate is in `08_*` (≈ 49–76 pw, 14 §13).
+These exclude Brain, missions, completion, WebAuthn and policy UI; the bottom-up v1 estimate is in `08_*` (≈ 88–137 pw, 14 §13).
 
 ## 7. Verdict
 
