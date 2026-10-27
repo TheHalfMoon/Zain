@@ -2,7 +2,7 @@
 
 ```text
 STATUS = PROPOSED, revision 2 (estimates rebuilt bottom-up after adversarial finding H4; tiers corrected H5;
-         break-glass phase added C3).
+         break-glass phase added C3; P−1 rewritten 2026-10-27 after CI re-diagnosis).
 OWNER = founder (solo) + AI implementers under 12_*; reviewer route ≠ builder route (ADR-011)
 ESTIMATES = person-weeks (pw), ESTIMATE class, derived from R02 §14 work packages and 06 donor rows
 TIERS = T0 docs-only · T1 UI/product code with no effect, CI, supply-chain or authority change · T2 everything else
@@ -13,7 +13,7 @@ TIERS = T0 docs-only · T1 UI/product code with no effect, CI, supply-chain or a
 
 | Phase | User-visible outcome | ESTIMATE pw | Basis | Tier |
 |---|---|---|---|---|
-| P−1 Break-glass repair | (none) integrity workflow can run on the private repo | 0.1–0.2 | one workflow permission line | T2 (break-glass record) |
+| P−1′ Restore CI (founder-only billing) | (none) Actions jobs start again; failed main run re-run unchanged | ~0 pw (founder admin) | no code change | n/a |
 | P0 Governance reset | one stable checker; protected paths; founder-signed co-sign | 1–2 | ADR-011 | T2 |
 | P1 Donor baseline (VM) | T3/Orca measured; nothing changed | 1–2 | — | T2 (executes donor install scripts, isolated) |
 | P2 Fork, strip, rebrand | "WePLD" app: chat + code sessions (Codex, ACP, Claude via API key), worktrees, diff, terminal, browser | 8–14 | WP0 3–5 + WP1 2–4 + SDK/installer gates 0.5–1 + WP8 2–4 | T2 |
@@ -41,17 +41,20 @@ parity excluding trust work**, so Option A remains materially cheaper.
 
 ---
 
-## P−1 — Break-glass repair (C3)
+## P−1′ — Restore CI (replaces the withdrawn P−1)
 
-`main` fails `foundation-integrity` on every run (compare API 403 on the private repo, run 36589753362), so no PR —
-including this package and P0 — can pass the current gate.
+The earlier P−1 (a `permissions:` one-line change) is **withdrawn**: both workflows already declare `contents: read`
+(`CI_403_REDIAGNOSIS_2026-10-27.md`). The actual current blocker is that GitHub Actions jobs on this private repository
+do not start ("recent account payments have failed or your spending limit needs to be increased").
 
-- **Record (committed before the change):** `docs/governance/BREAK_GLASS_2026-xx-xx.md` with: founder signature (signed
-  commit/tag with the founder-only SSH signing key, ADR-011), exact base SHA and head SHA, the single bypassed check and
-  why, one-time scope = change `permissions: {}` → `permissions: contents: read` in the integrity workflow(s) only (or the
-  ADR-010 alternative), Build Learning entry.
-- **Then:** merge this planning package under the repaired v72 gate (it is admissible: docs `.md` only); then P0.
-- **Negative test:** a second PR touching any other path under the break-glass label is rejected by the repaired gate.
+- **Founder-only:** restore Actions for the repository (payment method / spending limit / plan).
+- **Then (agent, permitted):** re-run run 36589753362 unchanged. Pass → throttling diagnosis confirmed, `main` green, no
+  code change. Fail with 403 → reproduce locally with the founder's token, capture the response body/headers, and open a
+  governed T2 fix (logging + bounded rate-limit backoff in `GitHubClient`).
+- **No break-glass is needed** unless the re-run reveals a genuine policy defect; if it does, the break-glass record
+  procedure (founder-signed, exact SHAs, single scope, Build Learning entry) applies.
+- **Then:** open the planning PR only after the egress preconditions in `EGRESS_PREFLIGHT_2026-10-27.md` hold; merge it
+  under the normal gate; then P0.
 
 ## P0 — Governance reset
 

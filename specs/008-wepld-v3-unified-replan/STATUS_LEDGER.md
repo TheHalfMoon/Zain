@@ -50,22 +50,23 @@ top level of this directory.
 
 ## Additional verified findings (synthesis)
 
-- Main CI root cause: v72 `verify-local --remote-baseline` → GitHub compare API HTTP 403 with `permissions: {}` on a
-  now-private repo (run 36589753362, 2026-09-29).
+- ~~Main CI root cause: `permissions: {}` on a now-private repo~~ — **WITHDRAWN 2026-10-27.** Workflows already use
+  `contents: read`; the 403 burst was most probably REST throttling (PROBABLE); Actions jobs are currently blocked by
+  billing. See `CI_403_REDIAGNOSIS_2026-10-27.md`.
 - Claude official policy: third-party products may not route requests via users' Free/Pro/Max credentials (R03C §10.5).
 - `anthropics/sandbox-runtime` is Apache-2.0 (R10 pins) — resolves an R03C unknown.
 - Continue repository now states it is read-only / unmaintained (R06) — remove as reviewer/build-tool candidate.
 - Census coverage verdict recorded as COVERAGE_COMPLETE_FOR_MANDATORY_SCOPE / DEPTH_PARTIAL_OUTSIDE_IT.
 
-## Publication decision (2026-10-27)
+## Continuation session 2026-10-27 (founder instructions: stay private, no auto external review, PR only when safe)
 
-- Branch `docs/v3-unified-replan-20261027` pushed to `TheHalfMoon/wepld` as a backup of the package.
-- **No PR opened.** `EXTERNAL_REVIEW_EGRESS_POLICY.md` classifies unscreened automatic external review of non-public
-  content as `PROHIBITED_EGRESS`. The repo is now private, and Cubic has been observed auto-posting on PR creation
-  (PR #347, 2026-10-01) despite repository config disabling it (`CUBIC_PROVIDER_EFFECTIVE_STATE = CONFLICTING`).
-  Opening a PR would likely transmit this package to Cubic without a recorded preflight.
-- To open the PR safely, the founder chooses one: (a) uninstall/suspend the Cubic GitHub App for this repo (verify
-  provider-side), then open the PR; or (b) record an egress preflight for this exact docs-only scope (content
-  classification, secret screening evidence, provider data-handling decision) and accept Cubic exposure; or (c) make the
-  repo public first (ADR-010 a). Independently, the PR's integrity check will fail until P−1 repairs the 403 (08).
-- Secret screening performed on the package: regex scan for GitHub/Anthropic/AWS token patterns → 0 hits.
+| Item | State | Evidence |
+|---|---|---|
+| CI 403 re-diagnosis | DONE — earlier diagnosis withdrawn; P−1 permission fix removed | `CI_403_REDIAGNOSIS_2026-10-27.md` |
+| Re-run of main integrity (attempt 2) | NOT STARTED by GitHub — billing / spending limit | check-run 122348322500 annotation |
+| Cubic provider-level disable | NOT VERIFIABLE from this session; absence of its check suite on today's push is suggestive only | `EGRESS_PREFLIGHT_2026-10-27.md` §2–3 |
+| Other auto-triggered integrations | Qodo auto-reacts (billing-paused); CodeRabbit auto-reacted through 10-01; Cursor/Devin/Sentry/Vercel/Claude apps hold access, AI-review state unknown | same |
+| Egress record | DONE — verdict EGRESS_BLOCKED | same |
+| Draft PR | **NOT OPENED** (conditions E1–E5 are founder-only) | same §4 |
+| Claude study-coverage gaps | DONE — 0 hands-on; 18 full-text; 220 summary+gates; 78 digest-only; 23 non-HC-only | `CLAUDE_STUDY_COVERAGE_GAPS.md` |
+| Research package | PRESERVED unchanged except one username redaction (R03C) and earlier quote trims | git history |

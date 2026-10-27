@@ -44,3 +44,6 @@ The register is kept in one file to avoid two divergent copies; this document is
 `COVERAGE_COMPLETE_FOR_MANDATORY_SCOPE` and `DEPTH_PARTIAL_OUTSIDE_IT` (257 articles at gate-digest depth; API
 platform references and changelogs not line-read; no hands-on observation). This is stated rather than rounded up.
 Closure tasks: `ASSUMPTIONS_AND_UNKNOWNS.md` U-03-1..U-03-5.
+
+**Study-depth ledger:** exactly which Claude features have not been studied hands-on (all of them) or in full (321 of 339
+rows) is enumerated row by row in `CLAUDE_STUDY_COVERAGE_GAPS.md` (2026-10-27).

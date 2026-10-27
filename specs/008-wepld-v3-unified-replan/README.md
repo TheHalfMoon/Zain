@@ -14,7 +14,8 @@ any product code. If accepted, a separate governed change must update `MASTER_PL
 
 1. `00_EXECUTIVE_PRODUCT_DECISION.md` — decision, options, GO conditions
 2. `FOUNDER_DECISION_RECORD.md` — the decisions requested from the founder
-3. `01_LIVE_WEPLD_AUDIT.md` — live state (main is red; repo private; no runnable agent loop)
+3. `01_LIVE_WEPLD_AUDIT.md` — live state (main is red; repo private; no runnable agent loop) + `CI_403_REDIAGNOSIS_2026-10-27.md`
+   (403 re-diagnosed; Actions currently blocked by billing)
 4. `07_TARGET_ARCHITECTURE_AND_UX.md` — components, state ownership, Core API, trust boundaries, IA, packaging
 5. `05_VERCEL_WORKFLOW_DURABILITY_REA.md` — never-forget contract + sequence diagrams
 6. `08_MIGRATION_AND_IMPLEMENTATION_ROADMAP.md` — Phases 0–10 with gates

@@ -78,3 +78,6 @@ articles were reviewed at gate-digest depth (opening + every plan/beta/retention
 `DEPTH_INCOMPLETE` for: platform.claude.com API references, code.claude.com beyond the areas in R03C, changelog
 line-by-line, and any hands-on UI observation. 8 discrepancies remain open (R03 §3). These are listed in
 `ASSUMPTIONS_AND_UNKNOWNS.md` with closure tasks.
+
+**Study-depth ledger:** exactly which Claude features have not been studied hands-on (all of them) or in full (321 of 339
+rows) is enumerated row by row in `CLAUDE_STUDY_COVERAGE_GAPS.md` (2026-10-27).

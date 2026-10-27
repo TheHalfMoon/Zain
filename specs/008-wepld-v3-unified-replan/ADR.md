@@ -97,11 +97,12 @@ All ADRs: `STATUS = PROPOSED` until this package is merged and the founder signs
 
 ## ADR-010 — Repository visibility and enforcement
 
-- **Context:** repo is private; branch protection unavailable on the current plan (403); integrity workflow fails on
-  compare API (403) since 2026-09-29.
+- **Context:** repo is private (founder decision 2026-10-27: **stays private**); branch protection unavailable on the
+  current plan (403); integrity workflows already use `contents: read` — the 2026-09-29 403 was probably throttling,
+  not visibility; Actions jobs are currently blocked by billing.
 - **Decision options for founder:** (a) make public again (free protection, unlimited public Actions; IP exposure),
-  (b) stay private + GitHub Pro/Team for protection, (c) stay private, free: workflow `permissions: contents: read`,
-  process-level guard (`--match-head-commit`) only. **Residual risk of (c), stated:** no platform branch protection or
+  (b) stay private + GitHub Pro/Team for protection, (c) stay private, free: existing `contents: read` workflows,
+  process-level guard (`--match-head-commit`) only. **Founder has excluded (a).** **Residual risk of (c), stated:** no platform branch protection or
   required checks — every gate is advisory and depends on agents/founder honoring it; the founder-signed co-sign and
   checker-from-base remain the only hard evidence. **Recommendation: (b) if budget allows, else (c)**; (a) only if the
   founder is comfortable with public code (it was public until September).
@@ -119,6 +120,6 @@ All ADRs: `STATUS = PROPOSED` until this package is merged and the founder signs
   Named substitute when hosted reviewers are unavailable (T0/T1 only): a model from a **different vendor than the builder
   route** (e.g. Codex reviewing a Claude-built PR, or Claude reviewing a Codex-built PR), run by the founder, with model id
   and version recorded and a residual-limitation note. T2 still requires CodeRabbit or another qualified independent
-  reviewer plus security review, else `REVIEW_BLOCKED`. The bootstrap uses the P−1 break-glass record (08).
+  reviewer plus security review, else `REVIEW_BLOCKED`. The bootstrap needs Actions restored (P−1′, 08); break-glass only if a genuine policy defect appears.
 - **Consequences:** ends successor-per-edit (≥3 PRs per test fix); preserves trusted-base, exact-head and no
   self-authorization properties. Requires its own bootstrap PR (P0), which the current trusted base will judge.

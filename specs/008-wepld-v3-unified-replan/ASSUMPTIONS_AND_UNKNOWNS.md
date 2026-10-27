@@ -29,4 +29,5 @@ Every unknown has an owner phase, the evidence that closes it, and whether it bl
 | U-07-3 | Windows Hello / platform WebAuthn availability inside Electron on the founder's hardware; passkey pairing UX for phones | 07 §6 | P3 approval design | P3 spike | P3 |
 | U-07-4 | Azure Trusted Signing eligibility for an individual in Saudi Arabia | 07 §9 | public Windows release | provider check | P2 |
 | U-07-5 | Write-latency cost of `synchronous=FULL` on the T3 receipt table | 07 §5 | budget | P1 measurement | P1 |
-| U-08-1 | Whether the break-glass repair alone restores the v72 gate (no other 403 paths) | 08 P−1 | P−1 | run after change | P−1 |
+| U-08-1 | Whether the 2026-09-29 403 was rate-limit throttling (PROBABLE) — exact GitHub message not logged | CI re-diagnosis | G1 | unchanged re-run after Actions restored; else local reproduction with headers | P−1′ |
+| U-08-2 | Which installed GitHub Apps auto-process PR content (Cursor, Devin, Sentry, Vercel, Claude, Qodo; Cubic/CodeRabbit/Graphite/Greptile access state) | egress preflight | Draft PR | founder reads github.com/settings/installations + per-provider settings | before PR |

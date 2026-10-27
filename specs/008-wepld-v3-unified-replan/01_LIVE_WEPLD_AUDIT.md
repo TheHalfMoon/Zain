@@ -19,8 +19,8 @@ Astro master package → Spec 007 (S3). All read from canonical `main` at the SH
 
 | # | Finding | Class | Evidence |
 |---|---|---|---|
-| H1 | **`main` is red.** The last `foundation-integrity` run on `main` (run `36589753362`, 2026-09-29) **failed**: the v72 policy's `verify-local --remote-baseline` call to `GET /repos/TheHalfMoon/wepld/compare/666e62d…...0a843a2…` returned **HTTP 403**. The previous two runs (2026-09-21) passed. | VERIFIED | `gh run view 36589753362 --log-failed` |
-| H2 | **The repository is now PRIVATE.** `CURRENT_STATE.md` (2026-09-12) and Astro evidence (2026-09-20) record `VISIBILITY = public`. The workflow declares `permissions: {}`; on a private repo an un-scoped token cannot read the compare API → H1 is very likely caused by the visibility change. Branch-protection reads now return **HTTP 403 "Upgrade to GitHub Pro or make this repository public"**. | VERIFIED (visibility, 403s); INFERRED (causality) | `gh repo view`; `gh api …/branches/main/protection` |
+| H1 | **`main` is red.** The last `foundation-integrity` run on `main` (run `36589753362`, 2026-09-29) **failed**: the v72 policy's `verify-local --remote-baseline` call to `GET /repos/TheHalfMoon/wepld/compare/666e62d…...0a843a2…` returned **HTTP 403**. The previous two runs (2026-09-21) passed. **Re-diagnosed 2026-10-27** (`CI_403_REDIAGNOSIS_2026-10-27.md`): permissions were already `contents: read` and the same token succeeded on `contents/` immediately before; the 403 cluster (15:14–15:22) is most probably transient REST throttling during a burst of runs (PROBABLE, not proven). A re-run on 2026-10-27 could not start: **Actions jobs are blocked by billing/spending limit**. | VERIFIED (failure, permissions, billing block); PROBABLE (throttling) | `gh run view 36589753362`; check-run 122348322500 annotation |
+| H2 | **The repository is now PRIVATE.** `CURRENT_STATE.md` (2026-09-12) and Astro evidence (2026-09-20) record `VISIBILITY = public`. ~~The workflow declares `permissions: {}` … H1 is very likely caused by the visibility change.~~ **Withdrawn 2026-10-27:** the workflows declare `permissions: contents: read`; visibility did not cause H1. Branch-protection reads return **HTTP 403 "Upgrade to GitHub Pro or make this repository public"** (plan-gated on private repos). | VERIFIED (visibility, protection 403); causality claim WITHDRAWN | `gh repo view`; `gh api …/branches/main/protection` |
 | H3 | **No agent can run in WePLD today.** The Astro plan itself states the first complete loop (open project → Doctor → specify → authorize → review → repair → accept) "does not yet implement". The product is a Tauri window that shows Core readiness/health/version and a Rust CLI `wepld open|doctor|status`. | VERIFIED | `WEPLD_CANONICAL_MASTER_BUILD_PLAN.md:94`; `apps/desktop/ui/app.js` (54 lines); `crates/core/src/bin/wepld.rs` |
 | H4 | **Governance code outweighs product code ~4:1.** `.github/scripts/` holds **169 Python integrity scripts, ~83.6k lines** (policy successors v1…v72). Product Rust incl. tests: **~19.1k lines** (≈10k src + ≈9k tests) + 3 UI files. | VERIFIED | `wc -l` on main |
 | H5 | **Throughput is consumed by gate mechanics.** 347 PRs in ~7 weeks (2026-08-14 → 2026-10-01); 135 closed unmerged. A large share of merged PRs are single-use "policy successor" reopenings to edit one test file (e.g. #320/#321/#322 for one S2-S001 fixture; #323/#324/#325 for one case-identity fixture). | VERIFIED (counts/titles) | `gh pr list --state merged/closed` |
@@ -129,8 +129,10 @@ semantics while removing duplicate owners.
 2. **The security semantics are worth keeping; the mechanism is not.** What must survive: trusted-base review, exact-head binding,
    independent review, no candidate self-authorization, protected governance paths. These can be enforced with (a) a CODEOWNERS-style
    protected-path list checked by one stable script, (b) required checks (needs public repo or GitHub Pro/Team), (c) exact-head merge guard.
-3. **The private switch silently disabled the gate.** No ledger entry records the visibility change or its effect. This is precisely
-   the "DECLARED_CONSTANT != ENFORCED_BOUNDARY" failure the governance was built to catch, and it went unnoticed for four weeks.
+3. **The gate has been silently unavailable since 2026-09-29.** First a transient 403 burst (probable API throttling; the
+   script discards status headers, so nobody could tell), and now Actions jobs that do not start at all (billing). Neither is
+   recorded in a ledger. This is the "DECLARED_CONSTANT != ENFORCED_BOUNDARY" failure the governance was built to catch.
+   (An earlier draft blamed the private switch; that was wrong — see `CI_403_REDIAGNOSIS_2026-10-27.md`.)
 4. **Reviewer availability is the real bottleneck.** CodeRabbit is the only consistently eligible reviewer; Qodo exhausted; Cubic
    blocked yet still auto-posting; Greptile not connected; Codex Security usage-limited. A V3 build method must define a zero-cost
    reviewer path (e.g. local independent-model review with recorded limitation) rather than `REVIEW_BLOCKED` stalls.
@@ -160,6 +162,6 @@ manifest; keep exact-head + independent-review evidence; move gate depth to risk
 
 | ID | Unknown | Why it matters | Closure |
 |---|---|---|---|
-| U-01-1 | Exact date/actor of the public→private visibility change | Explains H1; affects whether checks on PRs #346/#347 ran | Repo audit log (owner UI) |
+| U-01-1 | Exact date/actor of the public→private visibility change | No longer explains H1 (withdrawn); still relevant to plan/billing history | Repo audit log (owner UI) |
 | U-01-2 | Whether founder intends the repo to stay private | Determines governance enforcement option (public vs GitHub Pro/Team) | Founder decision (ADR-010) |
 | U-01-3 | Rights basis for T3/Orca reuse beyond public licenses | Founder-attested; recorded as `FOUNDER-ATTESTED` | No disclosure required; verify license files at acquisition |

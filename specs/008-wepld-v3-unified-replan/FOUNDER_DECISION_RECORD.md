@@ -31,12 +31,12 @@ orchestration; keep WePLD's tested Rust core as the authority sidecar; port six 
 | F1 | Accept ADR-001 foundation | Yes | Orca-first; own platform |
 | F2 | Accept Electron and retire Tauri shell (ADR-002) | Yes | Keep Tauri (re-plan shell) |
 | F3 | Accept "one authority per fact" (ADR-004) | Yes | — |
-| F4 | Repo visibility/enforcement (ADR-010) | Private + GitHub Pro/Team, or private + read-permission fix | Public |
+| F4 | Repo visibility/enforcement (ADR-010) | **DECIDED 2026-10-27 by founder: stays PRIVATE**; enforcement plan (b) Pro/Team or (c) free advisory still open | ~~Public~~ excluded |
 | F5 | Governance reset (ADR-011) replacing the successor chain | Yes | Keep chain (not recommended) |
 | F6 | Fork-not-track policy for T3 | Yes | Rebase tracking (infeasible at ~1.3k PRs/week) |
 | F7 | Claude auth posture: API key default; no subscription proxy; seek Anthropic confirmation | Yes | — |
 | F9 | Accept the v1 scope line (P−1…P5) and the 12–26 month v1 calendar estimate, with P2/P3 as earlier stopping points | Yes | larger v1 |
-| F10 | Authorize the P−1 break-glass record (signed) to repair the integrity workflow | Yes | make repo public first (ADR-010 a) |
+| F10 | ~~Authorize the P−1 break-glass~~ **Withdrawn**: restore GitHub Actions billing/spending limit for the private repo (P−1′) | Yes | keep CI off (no merges possible under current policy) |
 | F11 | Create a founder-only SSH signing key and allowed_signers file for protected-path co-sign | Yes | — |
 | F8 | Communication: Arabic discussion, English artifacts (AGENTS.md) — resolve the Astro "English-only" contradiction | AGENTS.md | — |
 
@@ -44,3 +44,17 @@ orchestration; keep WePLD's tested Rust core as the authority sidecar; port six 
 
 To disclose permission agreements. Rights for T3/Orca are recorded as MIT (verified) + `FOUNDER-ATTESTED` (not verified,
 not disclosed).
+
+## Founder-only items from the 2026-10-27 continuation (exact evidence and implications)
+
+| # | Item | Evidence | Implication if not done |
+|---|---|---|---|
+| FO-1 | **Restore GitHub Actions** for the private repo (payment method / spending limit / plan) | Re-run of run 36589753362 (attempt 2) annotation: "The job was not started because recent account payments have failed or your spending limit needs to be increased." | No integrity check can run → no PR can be qualified or merged under current policy; the 403 diagnosis stays PROBABLE |
+| FO-2 | **Cubic**: uninstall the GitHub App or remove `TheHalfMoon/wepld` from its repository access, and record evidence | Cubic auto-wrote PR #347's description on 2026-10-01 despite `cubic.yaml`; its check suite is absent on today's push, but that does not prove removal | Opening a PR may transmit private content to Cubic (`PROHIBITED_EGRESS`) |
+| FO-3 | **Qodo**: uninstall or remove repo access | Auto-comment within ~4 s of PR creation: reviews "paused because your trial has ended" | Any future billing restoration silently re-enables automatic review of private PRs |
+| FO-4 | **CodeRabbit**: decide remove vs accept its automatic "review skipped" reaction (it reads `.coderabbit.yaml`) | Auto-comments on every PR #340–#347 within ~9 s | If accepted, record it as non-review metadata access in the egress record |
+| FO-5 | **Cursor, Devin, Sentry, Vercel, Claude GitHub Apps**: confirm automatic PR review/summary features are off for this repo or remove access | Check suites from all five on today's branch push | Unknown automatic processing of private PR content on creation |
+| FO-6 | **Graphite, Greptile**: confirm removed | Check suites until 10-01, absent today | — |
+| FO-7 | Enforcement plan for a private repo: (b) GitHub Pro/Team for branch protection/required checks, or (c) free/advisory | Branch-protection API 403 "Upgrade to GitHub Pro or make this repository public" | Under (c) every gate is advisory |
+
+None of these can be performed by an agent under current rules (account settings, billing, app installations).

@@ -15,7 +15,7 @@ REVIEW_LIMITS = model reviewer, not a qualified hosted reviewer (CodeRabbit etc.
 |---|---|---|---|---|
 | C1 | Critical | "Human token" for approvals unspecified; Core could not verify; renderer/Server could forge; no remote story | **Fixed**: WebAuthn assertion over a Core challenge, verified by Core against registered credentials; same for policy/mode changes; remote via paired passkey; interim "Server trusted for approvals" stated | 07 §3, §6; 05 §4.3, §7.1; 08 P3; 09 T3; ADR-007 |
 | C2 | Critical | Trust claim overstated: Server is PEP/TCB; v1 has no sandbox; CLI agents and native tools bypass Core | **Fixed**: product definition limited to mediated effects; TCB named; MEDIATED/UNMEDIATED tagging; completion refuses UNMEDIATED-only changes; P3 containment floor | 00 §1; 07 §1, §6; ADR-007; 09 B11 |
-| C3 | Critical | P0 cannot pass its own gate (main red on 403); no break-glass | **Fixed**: P−1 founder-signed break-glass record, single-path scope, then merge package under repaired gate | 08 P−1; 00 NEXT_BUILD_ENTRY, G1; FOUNDER F10 |
+| C3 | Critical | P0 cannot pass its own gate (main red on 403); no break-glass | **Re-dispositioned 2026-10-27**: the permissions premise was wrong (see §5); P−1 replaced by P−1′ (restore Actions billing, re-run unchanged); break-glass procedure retained only for a genuine policy defect | 08 P−1; 00 NEXT_BUILD_ENTRY, G1; FOUNDER F10 |
 | H1 | High | T3 recovery requeues/auto-continues before Core reconciles → second writer/scheduler | **Fixed**: seam S4b — T3 recovery consults `core.open_dispatches` first; UI renders outcome only from Core; W9 test | 07 §2, §5; 05 §4.6; 02 §2–3; 09 W9; ADR-004 |
 | H2 | High | T3 `synchronous=NORMAL` can roll back continuation receipts → double fire | **Fixed**: two-phase fires (`fire_intent`/`fire_acked`), receipt query on restart, T3 receipt table `synchronous=FULL`; W2b | 07 §5; 05 §4.9; 09 W2b; U-07-5 |
 | H3 | High | Single writer / fencing / direction of ids / desktop+runner unspecified; per-project vs single ledger contradiction | **Fixed**: exclusive data-root lock, Core-minted epoch per handshake, direction-tagged id spaces, project-home rule, one ledger per data root partitioned by project | 07 §3, §4, §5; 05 §7.3; 10 K10 |
@@ -68,9 +68,18 @@ REVIEW_LIMITS = model reviewer, not a qualified hosted reviewer (CodeRabbit etc.
 ```text
 PLANNING PACKAGE READINESS = READY FOR FOUNDER DECISION (after this revision)
 BUILD RECOMMENDATION = CONDITIONAL GO
-CONDITIONS = G1 (P−1 break-glass + main green) · G2 (P1 measured baseline) · G3 (P3 seam spike) · G4 (Claude SDK/auth) ·
+CONDITIONS = G1 (P−1′ Actions restored + main green on unchanged re-run) · G2 (P1 measured baseline) · G3 (P3 seam spike) · G4 (Claude SDK/auth) ·
              G5 (founder signs FOUNDER_DECISION_RECORD F1–F11)
 NO-GO TRIGGERS = G2 fails within 2 pw · G3 needs Orchestrator rewrite or >3 pw · B2 RAM budget fails twice after stripping
-NEXT EXACT BUILD ENTRY = P−1: founder-signed break-glass record → change only `permissions:` in the integrity workflow(s)
-                         → verify foundation-integrity green on main → merge this package → P0
+NEXT EXACT BUILD ENTRY = P−1′: founder restores Actions (billing) → agent re-runs 36589753362 unchanged → egress
+                         preconditions met → open Draft PR (no auto-merge) → normal review → merge → P0
 ```
+
+## 5. Post-review correction (founder challenge, 2026-10-27)
+
+The founder pointed out that both workflows already declare `permissions: contents: read`. Re-diagnosis confirmed the
+founder: the package's earlier causal claim ("`permissions: {}` on a now-private repo") was wrong — it was copied from a
+CURRENT_STATE sentence about the token boundary and not checked against the workflow file. Neither the drafting session
+nor the adversarial reviewer caught it (the reviewer took 01 H1/H2 as verified). Learning recorded: **a causal claim about
+CI must cite the workflow file and the run's token-permission block, not a governance narrative.** Details and the
+remaining PROBABLE/unproven status: `CI_403_REDIAGNOSIS_2026-10-27.md`.

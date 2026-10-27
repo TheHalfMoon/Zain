@@ -68,7 +68,7 @@ Report progress to the founder in Arabic; write code, specs, PRs and commit mess
 
 | Phase | Entry evidence required | First task packet |
 |---|---|---|
-| P−1 | founder-signed break-glass record | change only the integrity workflow permission (ADR-010 choice); verify main green |
+| P−1′ | founder restored Actions billing | re-run 36589753362 unchanged; if 403 recurs, capture body/headers locally and propose a governed logging/backoff fix — do NOT edit `permissions:` |
 | P0 | package merged | `governance_check.py` from base (`pull_request_target`, no candidate checkout) + `PROTECTED_PATHS` + signed co-sign; negative-oracle PRs |
 | P1 | P0 DoD | build/run T3 + Orca at pins **in Windows Sandbox or a VM**; record B1–B4, test ratio, FULL-sync cost; no product code |
 | P2 | G2 | create fork layout; strip list; rename register; grep gate; NSIS build |

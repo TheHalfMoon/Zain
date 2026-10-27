@@ -9,7 +9,7 @@ FOUNDATION = Hard fork of T3 Code @ 36d4d711b79c73eb33131944f73ea4a8c6156484 (MI
            + bounded ports of Orca modules @ e310a63624c86c0e91e9d77df71f038b91d79ea0 (MIT)
            + Vercel Workflow / durable-harness as PATTERNS ONLY (no runtime dependency)
 REJECTED = Orca-as-foundation; merge-both-apps; keep-Tauri-and-build-UI; Vercel Workflow as engine
-NEXT_BUILD_ENTRY = P−1 break-glass repair of the integrity workflow (founder-signed record) → merge this package → P0 → P1
+NEXT_BUILD_ENTRY = P−1′ founder restores GitHub Actions (billing) → re-run main integrity unchanged → egress preconditions → planning PR → P0 → P1
 ```
 
 ## 1. Product definition
@@ -116,7 +116,7 @@ confirmed in writing before marketing it) (`R03C §auth`, census `CL-E-096`).
 
 | # | Condition | Why | Evidence that discharges it |
 |---|---|---|---|
-| G1 | `main` CI repaired via the P−1 break-glass record (403 on private repo), then governance simplified per `ADR-011` | Nothing can be accepted while the gate is broken | Green `foundation-integrity` (or its successor) on `main` |
+| G1 | Actions restored (billing, founder-only) and `main` integrity green on unchanged re-run (the 403 is re-diagnosed as probable throttling, not permissions — `CI_403_REDIAGNOSIS_2026-10-27.md`), then governance simplified per `ADR-011` | Nothing can be accepted while the gate is broken | Green `foundation-integrity` (or its successor) on `main` |
 | G2 | Phase 1 measurement: T3 @ pin builds, tests and runs on the founder's Windows machine; baseline RAM/start/latency recorded | Estimates are from reading, not running | `09_*` B1–B3 numbers committed |
 | G3 | Effect seam spike: Core grants a Codex approval and an ACP `fs/write` through S2/S3 with a ledger receipt, and a kill -9 between dispatch and receipt yields `EFFECT_OUTCOME_UNKNOWN` | Proves the trust claim is implementable on the fork | Spike test log + receipts |
 | G4 | Claude SDK redistribution + auth posture confirmed | Proprietary SDK in a redistributed product; subscription-auth policy | Written Anthropic answer, **or** fallback adopted: SDK excluded from installer and loaded from a user-consented location + API-key/cloud credentials only. The "user-installed CLI in a WePLD terminal" route stays UNKNOWN and is not a G4 discharge. |
