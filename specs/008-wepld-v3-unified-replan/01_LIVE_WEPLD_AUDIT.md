@@ -165,3 +165,8 @@ manifest; keep exact-head + independent-review evidence; move gate depth to risk
 | U-01-1 | Exact date/actor of the public→private visibility change | No longer explains H1 (withdrawn); still relevant to plan/billing history | Repo audit log (owner UI) |
 | U-01-2 | Whether founder intends the repo to stay private | Determines governance enforcement option (public vs GitHub Pro/Team) | Founder decision (ADR-010) |
 | U-01-3 | Rights basis for T3/Orca reuse beyond public licenses | Founder-attested; recorded as `FOUNDER-ATTESTED` | No disclosure required; verify license files at acquisition |
+
+## 8. Update 2026-10-27T17:39Z
+
+- Repository visibility is now **PUBLIC** (founder change). Run 36589753362 attempt 3 (unchanged SHA) **succeeded** —
+  `main` is green. H1 is resolved as a transient failure; see `CI_403_REDIAGNOSIS_2026-10-27.md` §4.

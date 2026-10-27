@@ -9,7 +9,7 @@ FOUNDATION = Hard fork of T3 Code @ 36d4d711b79c73eb33131944f73ea4a8c6156484 (MI
            + bounded ports of Orca modules @ e310a63624c86c0e91e9d77df71f038b91d79ea0 (MIT)
            + Vercel Workflow / durable-harness as PATTERNS ONLY (no runtime dependency)
 REJECTED = Orca-as-foundation; merge-both-apps; keep-Tauri-and-build-UI; Vercel Workflow as engine
-NEXT_BUILD_ENTRY = P−1′ founder restores GitHub Actions (billing) → re-run main integrity unchanged → egress preconditions → planning PR → P0 → P1
+NEXT_BUILD_ENTRY = (P−1′ CLOSED: main green on unchanged re-run 2026-10-27) → egress preconditions → planning Draft PR → Astro review → founder merge → P0 → P1
 ```
 
 ## 1. Product definition
@@ -53,7 +53,7 @@ as a runtime. Retire the Tauri shell; keep every line of the tested Rust core.
 
 | Option | What | ESTIMATE to useful MVP (solo, AI-assisted) | Verdict | Decisive reason |
 |---|---|---|---|---|
-| **A. T3 foundation + Orca modules + Rust Core** | Hard fork T3; port ~6 Orca modules; Core sidecar at seams | **v1 (P−1…P5, incl. all trust work, Brain, missions, completion) ≈ 37–68 pw**; all phases ≈ 72–138 pw (`08_*`) | **CHOSEN** | Best substrate for authority seams; 2.4× smaller than Orca; one state store |
+| **A. T3 foundation + Orca modules + Rust Core** | Hard fork T3; port ~6 Orca modules; Core sidecar at seams | **v1 (P−1…P5, incl. all trust work, Brain, missions, completion) ≈ 49–76 pw**; all phases ≈ 114–189 pw (`08_*`) | **CHOSEN** | Best substrate for authority seams; 2.4× smaller than Orca; one state store |
 | B. Orca foundation + T3 orchestration | Fork Orca; graft T3 event store | ≥30–60 pw **before** any trust work (not like-for-like with A; add ≈ the same 25–45 pw of trust/Brain work); ≥1 FTE fork upkeep | REJECT | Three existing stores + a fourth; 2.37M LOC; 421 open Windows issues; cloud re-hosting |
 | C. One shell + other app as process-isolated sidecar | e.g. T3 shell + `orcad` | 6–10 pw per bridged capability + recurring breakage | BRIDGE ONLY | Two runtimes, two stores, 778-method non-public RPC, doubled RAM |
 | D. Own modular platform (keep Tauri, build UI) | Build shell/orchestrator around Rust core, copy patterns | 60–120 pw to donor parity, **excluding** trust work | FALLBACK | Contradicts COPY FIRST; fallback if A's Effect/orchestration seams prove unworkable |
@@ -106,8 +106,8 @@ S2 identity/evidence/git observer code and its adversarial tests.
 ## 6. Claude-feature stance (summary of `03*`)
 
 WePLD recreates the *capabilities* of Claude Chat/Cowork/Code/Design/Artifacts — not Anthropic's brand, chrome or trade
-dress — and stays multi-vendor. Of 339 census rows: 110 ADAPT, 64 USE VIA OFFICIAL INTEGRATION, 35 REIMPLEMENT,
-5 COPY, 121 DEFER, 4 REJECT (`03E`). A binding constraint discovered in official docs: **third-party products may not
+dress — and stays multi-vendor. Of 377 census rows (incl. Platform/API family G): 124 ADAPT, 80 USE VIA OFFICIAL INTEGRATION, 35 REIMPLEMENT,
+6 COPY, 127 DEFER, 5 REJECT (`03E`). A binding constraint discovered in official docs: **third-party products may not
 route requests through users' Free/Pro/Max Claude credentials**; WePLD must use API keys/cloud providers, or launch the
 user's own unmodified Claude Code binary (the latter's status as "ordinary use" inside WePLD is UNKNOWN and must be
 confirmed in writing before marketing it) (`R03C §auth`, census `CL-E-096`).
@@ -116,13 +116,13 @@ confirmed in writing before marketing it) (`R03C §auth`, census `CL-E-096`).
 
 | # | Condition | Why | Evidence that discharges it |
 |---|---|---|---|
-| G1 | Actions restored (billing, founder-only) and `main` integrity green on unchanged re-run (the 403 is re-diagnosed as probable throttling, not permissions — `CI_403_REDIAGNOSIS_2026-10-27.md`), then governance simplified per `ADR-011` | Nothing can be accepted while the gate is broken | Green `foundation-integrity` (or its successor) on `main` |
+| G1 | **MET for CI (2026-10-27):** `main` integrity green on unchanged re-run (attempt 3) after the repo became public; remaining: governance simplified per `ADR-011` (P0) | Nothing can be accepted while the gate is broken | Green `foundation-integrity` (or its successor) on `main` |
 | G2 | Phase 1 measurement: T3 @ pin builds, tests and runs on the founder's Windows machine; baseline RAM/start/latency recorded | Estimates are from reading, not running | `09_*` B1–B3 numbers committed |
 | G3 | Effect seam spike: Core grants a Codex approval and an ACP `fs/write` through S2/S3 with a ledger receipt, and a kill -9 between dispatch and receipt yields `EFFECT_OUTCOME_UNKNOWN` | Proves the trust claim is implementable on the fork | Spike test log + receipts |
 | G4 | Claude SDK redistribution + auth posture confirmed | Proprietary SDK in a redistributed product; subscription-auth policy | Written Anthropic answer, **or** fallback adopted: SDK excluded from installer and loaded from a user-consented location + API-key/cloud credentials only. The "user-installed CLI in a WePLD terminal" route stays UNKNOWN and is not a G4 discharge. |
 | G5 | Founder accepts the governance change and the T3 fork-not-track policy | Both reverse earlier canonical choices | Founder decision record (`FOUNDER_DECISION_RECORD.md`) signed off in PR |
 
-**v1 scope line:** P−1…P5 (≈ 37–68 pw; 12–26 calendar months at assumption A-1 with upkeep). Design Studio (P7),
+**v1 scope line:** P−1…P5 (≈ 49–76 pw; 14–27 calendar months at assumption A-1 with upkeep). Design Studio (P7),
 containment (P8), general agent work (P9) and runner/mobile (P10) are post-v1. Useful earlier stops: P2 exit (branded
 multi-agent workbench) and P3 exit (authority differentiator).
 
@@ -132,7 +132,7 @@ re-estimate, and re-review.
 ## 8. What is verified vs proposed
 
 - **Verified (read at pinned SHAs / official pages, 2026-10-27):** donor structures, licenses, seams, storage
-  semantics, open issues, Claude feature statuses (339 rows), Amp feature set, Vercel internals, registry liveness.
+  semantics, open issues, Claude feature statuses (377 census rows), Amp feature set, Vercel internals, registry liveness.
 - **Not verified:** any runtime behavior of T3/Orca on this machine (nothing was built or run — by mandate); all effort
   estimates; all performance claims; Claude SDK redistribution terms.
 - **Proposed:** everything in `07_*`, `08_*`, ADRs.

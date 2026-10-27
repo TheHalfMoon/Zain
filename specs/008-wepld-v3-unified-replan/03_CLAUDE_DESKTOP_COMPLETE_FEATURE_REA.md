@@ -1,7 +1,7 @@
 # 03 — Claude Ecosystem: Complete Feature REA (synthesis)
 
 ```text
-REGISTER = research/R03_CLAUDE_CENSUS.md — 339 rows, 18 columns, families A–F (canonical feature register, see 03E)
+REGISTER = research/R03_CLAUDE_CENSUS.md — 377 census rows, 18 columns, families A–F (canonical feature register, see 03E)
 DEPTH_COMPANIONS = research/R03B_CLAUDE_DESIGN.md (Design), research/R03C_CLAUDE_CODE.md (Code CLI/Desktop/SDK)
 EVIDENCE = official sources only (claude.com, support.claude.com 364 articles, code.claude.com, release notes); 2026-10-27
 OBSERVATION = No UI hands-on tests performed (all rows NOT_OBSERVED). Claude Code CLI 2.1.291 --help OBSERVED (R03C §0.1).
@@ -43,16 +43,16 @@ Removed/renamed/preview items are listed in `R03 §4` (e.g. Dispatch closed to n
 4. **Windows sandbox gap (R03C).** Claude's Bash sandbox does not run on native Windows → WePLD's own isolation
    (Phase 8) is needed for Windows-first.
 
-## 3. Route totals (from the 339-row register)
+## 3. Route totals (from the 377-row register, 2026-10-27)
 
 | Route | Rows | Meaning in V3 |
 |---|---|---|
-| ADAPT | 110 | Build in WePLD using a donor implementation (T3/Orca/OSS) shaped by Claude's observed behavior |
-| USE VIA OFFICIAL INTEGRATION | 64 | Call Claude through API/SDK/MCP/connector as one replaceable provider |
+| ADAPT | 124 | Build in WePLD using a donor implementation (T3/Orca/OSS) shaped by Claude's observed behavior |
+| USE VIA OFFICIAL INTEGRATION | 80 | Call Claude through API/SDK/MCP/connector as one replaceable provider |
 | REIMPLEMENT FROM OBSERVED BEHAVIOR | 35 | No source; reproduce the workflow from public docs |
-| COPY | 5 | Open formats/specs only (e.g. SKILL.md, MCP, MCPB manifest) — never Anthropic product code |
-| DEFER | 121 | Accounted for; not in v1 (enterprise admin breadth, education, mobile-specific, Motion, Duet, etc.) |
-| REJECT | 4 | Agentic payments, browser-cookie import, health data, Cyber Verification Program |
+| COPY | 6 | Open formats/specs only (e.g. SKILL.md, MCP, MCPB manifest) — never Anthropic product code |
+| DEFER | 127 | Accounted for; not in v1 (enterprise admin breadth, education, mobile-specific, Motion, Duet, etc.) |
+| REJECT | 5 | Agentic payments, browser-cookie import, health data, Cyber Verification Program |
 
 Feature coverage ≠ source availability ≠ proven parity: no Anthropic product source is available or used; COPY applies
 only to published open formats.
@@ -73,11 +73,10 @@ only to published open formats.
 ## 5. Coverage statement (honest)
 
 `COVERAGE_COMPLETE_FOR_MANDATORY_SCOPE`: every article in the two mandatory collections (Features and capabilities 36/36;
-Cowork 14/14) and the mandatory pages were read in full; all 364 Help Center articles were fetched; 257 non-mandatory
+Cowork 14/14) and the mandatory pages were read in full; all 364 Help Center articles were fetched; (updated 2026-10-27: 214 full-text, 91 summary-read, 59 digest-only and no row depends on them) non-mandatory
 articles were reviewed at gate-digest depth (opening + every plan/beta/retention/region/admin sentence).
 `DEPTH_INCOMPLETE` for: platform.claude.com API references, code.claude.com beyond the areas in R03C, changelog
 line-by-line, and any hands-on UI observation. 8 discrepancies remain open (R03 §3). These are listed in
 `ASSUMPTIONS_AND_UNKNOWNS.md` with closure tasks.
 
-**Study-depth ledger:** exactly which Claude features have not been studied hands-on (all of them) or in full (321 of 339
-rows) is enumerated row by row in `CLAUDE_STUDY_COVERAGE_GAPS.md` (2026-10-27).
+**Study-depth ledger:** exactly which Claude features have not been studied hands-on (all of them) or in full (267 of 377 rows) is enumerated row by row in `CLAUDE_STUDY_COVERAGE_GAPS.md` (2026-10-27).

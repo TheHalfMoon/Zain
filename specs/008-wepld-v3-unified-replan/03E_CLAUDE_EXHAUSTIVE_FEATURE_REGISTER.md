@@ -1,7 +1,7 @@
 # 03E — Claude Exhaustive Feature Register (index, taxonomy and completeness audit)
 
 ```text
-CANONICAL_REGISTER_FILE = research/R03_CLAUDE_CENSUS.md §1 (339 rows, unique IDs CL-<family>-NNN, 18 columns)
+CANONICAL_REGISTER_FILE = research/R03_CLAUDE_CENSUS.md §1 (377 census rows, unique IDs CL-<family>-NNN, 18 columns)
 COMPANION_REGISTERS = research/R03B_CLAUDE_DESIGN.md §3 (Design sub-features), research/R03C_CLAUDE_CODE.md (CLI/SDK)
 PARITY_MAPPING = 03F_CLAUDE_FEATURE_PARITY_AND_TEST_MAPPING.md
 ACCESS_DATE = 2026-10-27; evidence_date = page "last updated" where published
@@ -18,7 +18,7 @@ The register is kept in one file to avoid two divergent copies; this document is
 | exact_feature, source_product, platform_surface, user_flow | same | |
 | official_evidence_url, evidence_date | same (SC<article-id> = support.claude.com article) | |
 | observed_test | observed_test | all `NOT_OBSERVED` (no UI hands-on in this mission); CLI help observed in R03C |
-| shipped_status | shipped_status | 280 VERIFIED SHIPPING · 41 BETA-PREVIEW · 13 RESTRICTED · 5 NOT AVAILABLE · 0 UNKNOWN |
+| shipped_status | shipped_status | see R03 §7b for current status totals (377 rows) |
 | beta_or_rollout, plan_gate, region_or_OS_gate | plan_gate / region_or_OS_gate (rollout inside status) | ~45 rows carry ≤15-word live quotes (`Q:`) |
 | data_storage_and_permissions | same | |
 | access_to_source_or_public_API | same | no Anthropic product source anywhere; APIs/SDKs/open formats only |
@@ -41,9 +41,8 @@ The register is kept in one file to avoid two divergent copies; this document is
 
 ## 3. Verdict
 
-`COVERAGE_COMPLETE_FOR_MANDATORY_SCOPE` and `DEPTH_PARTIAL_OUTSIDE_IT` (257 articles at gate-digest depth; API
+`COVERAGE_COMPLETE_FOR_MANDATORY_SCOPE` and `DEPTH_PARTIAL_OUTSIDE_IT` (after the 2026-10-27 depth pass: 214 articles full-text, 91 summary-read, 59 digest-only none of which is any row's best source; API
 platform references and changelogs not line-read; no hands-on observation). This is stated rather than rounded up.
 Closure tasks: `ASSUMPTIONS_AND_UNKNOWNS.md` U-03-1..U-03-5.
 
-**Study-depth ledger:** exactly which Claude features have not been studied hands-on (all of them) or in full (321 of 339
-rows) is enumerated row by row in `CLAUDE_STUDY_COVERAGE_GAPS.md` (2026-10-27).
+**Study-depth ledger:** exactly which Claude features have not been studied hands-on (all of them) or in full (267 of 377 rows) is enumerated row by row in `CLAUDE_STUDY_COVERAGE_GAPS.md` (2026-10-27).

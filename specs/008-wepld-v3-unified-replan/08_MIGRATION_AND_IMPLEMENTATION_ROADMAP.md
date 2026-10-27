@@ -1,6 +1,7 @@
 # 08 — Migration and Implementation Roadmap (Phases P−1 … P10)
 
 ```text
+AUTHORITATIVE_ESTIMATES = 14_TASK_CATALOG.md §13 (computed from task rows); this table mirrors it
 STATUS = PROPOSED, revision 2 (estimates rebuilt bottom-up after adversarial finding H4; tiers corrected H5;
          break-glass phase added C3; P−1 rewritten 2026-10-27 after CI re-diagnosis).
 OWNER = founder (solo) + AI implementers under 12_*; reviewer route ≠ builder route (ADR-011)
@@ -13,24 +14,24 @@ TIERS = T0 docs-only · T1 UI/product code with no effect, CI, supply-chain or a
 
 | Phase | User-visible outcome | ESTIMATE pw | Basis | Tier |
 |---|---|---|---|---|
-| P−1′ Restore CI (founder-only billing) | (none) Actions jobs start again; failed main run re-run unchanged | ~0 pw (founder admin) | no code change | n/a |
+| P−1′ Restore CI | **DONE 2026-10-27**: main green on unchanged re-run (repo public) | 0.2 | no code change | n/a |
 | P0 Governance reset | one stable checker; protected paths; founder-signed co-sign | 1–2 | ADR-011 | T2 |
 | P1 Donor baseline (VM) | T3/Orca measured; nothing changed | 1–2 | — | T2 (executes donor install scripts, isolated) |
-| P2 Fork, strip, rebrand | "WePLD" app: chat + code sessions (Codex, ACP, Claude via API key), worktrees, diff, terminal, browser | 8–14 | WP0 3–5 + WP1 2–4 + SDK/installer gates 0.5–1 + WP8 2–4 | T2 |
-| P3 Trusted Core | Core-decided approvals with WebAuthn; ledger; UNKNOWN outcomes; containment floor; no Full access | 17–32 | WP2 2–3 + WP3 4–8 + WP4/S4b 2–4 + WP5 3–6 + policy engine 2–4 + Inbox/permission UI 2–3 + WebAuthn 1–2 + floor 1–2 | T2 |
+| P2 Fork, strip, rebrand | "WePLD" app: chat + code sessions (Codex, ACP, Claude via API key), worktrees, diff, terminal, browser | 11–19 | WP0 3–5 + WP1 2–4 + SDK/installer gates 0.5–1 + WP8 2–4 | T2 |
+| P3 Trusted Core | Core-decided approvals with WebAuthn; ledger; UNKNOWN outcomes; containment floor; no Full access | 24–37 | WP2 2–3 + WP3 4–8 + WP4/S4b 2–4 + WP5 3–6 + policy engine 2–4 + Inbox/permission UI 2–3 + WebAuthn 1–2 + floor 1–2 | T2 |
 | P4 Missions + Brain | projects remember; missions wait for CI/schedules; context survives model switch | 5–9 | own build | T2 |
 | P5 Review, Completion, Connections | independent reviewer; completion decisions; MCP/skills/plugins with grants | 5–9 | own + PR-Agent wrap | T2 |
-| **v1 = P−1…P5** | | **≈ 37–68** | | |
-| P6 IDE breadth + benchmarks | Monaco + diff comments, Design Mode capture, CLI agents, Linear, benchmark harness | 13–26 | 06 D7 4–8 + D2 3–6 + D3 3–5 + D5 2–4 + D23 1–2 (+ B-suite) | T2 (spawns processes, hooks) |
-| P7 Design Studio v1 | canvas, comments → proposals, DTCG tokens, handoff, exports | 8–14 | D19 1–2 + D20 3–5 + D21 1 + canvas/comments/export 3–6 | T1/T2 |
-| P8 Containment | providers in OS sandbox (Windows first); Full-access lane only inside sandbox | 4–10 | D9 | T2 |
-| P9 General agent work | documents, research, browser agent, computer use (gated) | 6–12 | D6 + own | T2 |
+| **v1 = P−1…P5** | | **≈ 49–76** | | |
+| P6 IDE breadth + benchmarks | Monaco + diff comments, Design Mode capture, CLI agents, Linear, benchmark harness | 30–54 | 14 §13 (adds LSP 6–10, debugging 6–10, packaging 3.5–6.5, accessible terminal 2–5 per R13) | T2 (spawns processes, hooks) |
+| P7 Design Studio v1 | canvas, comments → proposals, DTCG tokens, handoff, exports | 9–15 | 14 §13 | T1/T2 |
+| P8 Containment | providers in OS sandbox (Windows first); Full-access lane only inside sandbox | 9–15 | 14 §13 (R13: Codex Windows backends, Seatbelt, bwrap+seccomp, debug profile) | T2 |
+| P9 General agent work | documents, research, browser agent, computer use (gated) | 13–22 | 14 §13 (R13: browser gating 4–6, computer use 6–10) | T2 |
 | P10 Remote + runner | runner as project home; phone/web approvals via passkey | 4–8 | T3 remote + own | T2 |
-| **All phases** | | **≈ 72–138** | | |
+| **All phases** | | **≈ 114–189** | | |
 
 **What this means for a solo founder (stated, not hidden):** at assumption A-1 (~1 pw of AI-assisted output per
 calendar week) and an ongoing fork/adapter upkeep of 1.1–1.85 pw/month once P2 lands (≈25–43% of capacity, `10_*` §3),
-**v1 (P−1…P5) is roughly 12–26 calendar months; the full plan is 2–4 years.** Two earlier stopping points are useful
+**v1 (P−1…P5) is roughly 14–27 calendar months; the full plan is 3–6 years.** Two earlier stopping points are useful
 products on their own: **P2 exit** (~10–18 pw from start: a WePLD-branded multi-agent workbench) and **P3 exit**
 (~27–50 pw: the authority differentiator). Scope cuts, if slippage exceeds 50%: drop P9 computer use, P7 PPTX export,
 P10 mobile, then P6 Linear.

@@ -123,3 +123,35 @@ All ADRs: `STATUS = PROPOSED` until this package is merged and the founder signs
   reviewer plus security review, else `REVIEW_BLOCKED`. The bootstrap needs Actions restored (P−1′, 08); break-glass only if a genuine policy defect appears.
 - **Consequences:** ends successor-per-edit (≥3 PRs per test fix); preserves trusted-base, exact-head and no
   self-authorization properties. Requires its own bootstrap PR (P0), which the current trusted base will judge.
+
+## ADR-003 amendment (2026-10-27, R13 §2)
+
+LSP client is chosen by a 1-week spike behind a wrapper interface: `@vscode/monaco-lsp-client` 0.1.0 (official, alpha;
+dependency `@hediet/json-rpc` license UNKNOWN) vs `monaco-languageclient` 11.0.3 (requires CodinGame monaco build, monthly
+majors). Language servers spawn as `process.spawn.language_server` effects; untrusted repos start with code-running
+features disabled.
+
+## ADR-010 update (2026-10-27)
+
+Founder made the repository **PUBLIC**. Branch-protection/required checks are now available at no cost; enforcement
+plan should adopt them (protected `main`, required integrity check, signed co-sign for protected paths).
+
+## ADR-012 — Debugging via DAP
+
+Server-side DAP client on `@vscode/debugprotocol` (MIT); React debug panels; donors VS Code / OpenSumi (MIT); Theia
+(EPL-2.0) reference only. Adapters: vscode-js-debug, debugpy (user env; vendored pydevd is EPL-1.0 → not bundled),
+CodeLLDB / lldb-dap, Delve. Effect classes `process.spawn.debug_adapter`, `process.spawn.debuggee`,
+`process.attach.debug` (always approval), `debug.evaluate`. Agent access to debug state via MCP tool, read-only by default.
+
+## ADR-013 — Signing and updates
+
+Windows: OV code-signing certificate with cloud-HSM key, signed via jsign (Apache-2.0); Azure Trusted Signing is
+unavailable to an individual in Saudi Arabia (R13 F1); CA issuance/price UNKNOWN. Updates: electron-updater Generic
+provider; manifest signed with ed25519 and verified by Core before install; no tokens embedded in clients.
+
+## ADR-014 — Cross-platform containment
+
+Windows: Codex backends (restricted token; elevated sandbox users + WFP service; MXC where available) — not AppContainer.
+macOS: Seatbelt profiles from codex-rs. Linux: bubblewrap + seccomp (+ landlock where present). A separate debug
+profile permits ptrace for the debuggee only. anthropics/sandbox-runtime (Apache-2.0; alpha Windows backend) is a
+reference/fallback. Escape suites per OS gate any widening of the trust claim.

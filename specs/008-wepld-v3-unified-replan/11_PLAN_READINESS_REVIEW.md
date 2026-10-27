@@ -19,7 +19,7 @@ REVIEW_LIMITS = model reviewer, not a qualified hosted reviewer (CodeRabbit etc.
 | H1 | High | T3 recovery requeues/auto-continues before Core reconciles → second writer/scheduler | **Fixed**: seam S4b — T3 recovery consults `core.open_dispatches` first; UI renders outcome only from Core; W9 test | 07 §2, §5; 05 §4.6; 02 §2–3; 09 W9; ADR-004 |
 | H2 | High | T3 `synchronous=NORMAL` can roll back continuation receipts → double fire | **Fixed**: two-phase fires (`fire_intent`/`fire_acked`), receipt query on restart, T3 receipt table `synchronous=FULL`; W2b | 07 §5; 05 §4.9; 09 W2b; U-07-5 |
 | H3 | High | Single writer / fencing / direction of ids / desktop+runner unspecified; per-project vs single ledger contradiction | **Fixed**: exclusive data-root lock, Core-minted epoch per handshake, direction-tagged id spaces, project-home rule, one ledger per data root partitioned by project | 07 §3, §4, §5; 05 §7.3; 10 K10 |
-| H4 | High | Estimates inconsistent (P0–P5 summed 20–38 not 30–55; P3/P6 under-counted; no total) | **Fixed**: bottom-up rebuild — v1 ≈ 37–68 pw, all ≈ 72–138 pw; calendar 12–26 months to v1 stated; carried to 00, 10, FOUNDER | 08 overview; 00 §3, §7; 10 K6; FOUNDER |
+| H4 | High | Estimates inconsistent (P0–P5 summed 20–38 not 30–55; P3/P6 under-counted; no total) | **Fixed**: bottom-up rebuild — v1 ≈ 49–76 pw, all ≈ 114–189 pw; calendar 14–27 months to v1 stated; carried to 00, 10, FOUNDER | 08 overview; 00 §3, §7; 10 K6; FOUNDER |
 | H5 | High | ADR-011 weakens governance: option (c) advisory; `pull_request` runs candidate YAML; label co-sign forgeable; substitute reviewer unnamed; tiers mis-assigned | **Fixed**: `pull_request_target` data-only checker; founder-only SSH-signed co-sign; named different-vendor substitute for T0/T1 only; P1/P2/P6 re-tiered T2; option (c) residual risk stated | ADR-010, ADR-011; 08 tiers; 10 K5 |
 | H6 | High | Claude SDK enters installer before G4; ACP adapter has the same dependency; G4 fallback circular | **Fixed**: P2 SDK-exclusion task + installer-content gate; G4 fallback = user-consented SDK + API key; CLI-in-PTY stays UNKNOWN | 08 P2; 00 G4; 06 D14; 03C §3; 10 K13 |
 | H7 | High | Unsandboxed agents can rewrite ledger/Brain | **Fixed (bounded)**: data-root deny floor in all provider profiles; WebAuthn-signed approvals; out-of-machine anchors; claim downgraded to "tamper-evident against corruption" before P8 | 07 §4; 09 T10b; 10 K15 |
@@ -68,7 +68,7 @@ REVIEW_LIMITS = model reviewer, not a qualified hosted reviewer (CodeRabbit etc.
 ```text
 PLANNING PACKAGE READINESS = READY FOR FOUNDER DECISION (after this revision)
 BUILD RECOMMENDATION = CONDITIONAL GO
-CONDITIONS = G1 (P−1′ Actions restored + main green on unchanged re-run) · G2 (P1 measured baseline) · G3 (P3 seam spike) · G4 (Claude SDK/auth) ·
+CONDITIONS = G1 (MET for CI: main green on unchanged re-run 2026-10-27; P0 governance pending) · G2 (P1 measured baseline) · G3 (P3 seam spike) · G4 (Claude SDK/auth) ·
              G5 (founder signs FOUNDER_DECISION_RECORD F1–F11)
 NO-GO TRIGGERS = G2 fails within 2 pw · G3 needs Orchestrator rewrite or >3 pw · B2 RAM budget fails twice after stripping
 NEXT EXACT BUILD ENTRY = P−1′: founder restores Actions (billing) → agent re-runs 36589753362 unchanged → egress

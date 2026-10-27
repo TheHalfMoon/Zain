@@ -47,3 +47,17 @@ CURRENT_BLOCKER = GitHub Actions jobs do not start at all on this repository: bi
 then re-run 36589753362 unchanged. If it passes → throttling diagnosis confirmed and main is green with no code change.
 If it fails again with 403 → capture the full response by running the same policy command locally with a founder token
 and open a governed fix.
+
+## 4. Addendum — confirmation (2026-10-27T17:39Z)
+
+After the repository was made public (Actions available again), run 36589753362 was re-run **unchanged** (attempt 3,
+same SHA `0a843a2c…`, same workflow and policy files). Result: **SUCCESS**, including the `verify-local
+--remote-baseline` step and all v1–v72 activation markers (`gh run view 36589753362 --attempt 3`).
+
+```text
+DIAGNOSIS = CONFIRMED TRANSIENT (no permission, workflow or policy change was needed)
+MOST_PROBABLE_MECHANISM = REST API throttling during the 2026-09-29 burst (exact GitHub message still unlogged)
+MAIN_STATUS = GREEN at 0a843a2c (attempt 3)
+A-01 = DONE · A-02 = NOT NEEDED · P−1′ = CLOSED
+FOLLOW-UP = G-04 (log status/rate-limit headers + bounded backoff) remains in P0 so the next transient is diagnosable
+```
