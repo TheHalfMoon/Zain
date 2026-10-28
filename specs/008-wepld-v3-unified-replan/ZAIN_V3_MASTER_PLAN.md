@@ -85,14 +85,16 @@ bubblewrap not vendored. Orca process-host is reference only (C-25 replaces it).
 <!-- GENERATED:BEGIN release-table (tools/plan_graph.py) -->
 | Release | Tasks | Effort pw | Elapsed years (A-1, upkeep 35–60% after R0) |
 |---|---|---|---|
-| R0 | 45 | 21.8–34.35 | 0.4–0.7 |
-| R1 | 77 | 60.05–91.85 | 1.6–3.4 |
-| R2 | 120 | 103.8–161.55 | 2.8–6.8 |
-| R3 | 138 | 140.05–226.05 | 3.9–9.9 |
-| R4 | 146 | 149.25–240.75 | 4.2–10.6 |
-| R5 | 152 | 159.55–258.55 | 4.5–11.4 |
-| R6 | 157 | 173.05–281.05 | 4.9–12.5 |
-| R7 | 162 | 177.75–290.35 | 5.0–13.0 |
+| R0a | 5 | 0.9–2.6 | 0.0–0.1 |
+| R0b | 12 | 3.45–6.15 | 0.1–0.1 |
+| R0 | 40 | 12.5–22.4 | 0.2–0.4 |
+| R1 | 78 | 55.65–86.8 | 1.5–3.5 |
+| R2 | 124 | 99.9–157.1 | 2.8–6.9 |
+| R3 | 143 | 136.65–222.35 | 3.9–10.0 |
+| R4 | 151 | 145.85–237.05 | 4.2–10.8 |
+| R5 | 157 | 156.15–254.85 | 4.5–11.6 |
+| R6 | 162 | 169.65–277.35 | 4.9–12.7 |
+| R7 | 167 | 174.35–286.65 | 5.0–13.1 |
 | PD (optional paid distribution track) | 3 | 1–2 | not scheduled |
 <!-- GENERATED:END release-table -->
 
@@ -100,7 +102,12 @@ Details, critical paths and per-phase numbers: `GENERATED_PLAN_REPORT.md`. Model
 (unvalidated), upkeep 35–60% of capacity after R0, no acceleration or contingency. Re-run the script with measured
 capacity after P1–P3.
 
-**Recommendation:** approve only the path to **R1 Zain Trusted Starter** (21): Windows x64; T3 workbench with Monaco,
+**Time to a working app (24):** the First Working Build (R0a) is T3 at the pin with two overlays, built by copying T3's
+own Windows release job — no rebuild from scratch, no claims, founder-only; its effort is CONDITIONAL (24 §4) until Q-05
+measures it. R0b adds only what is needed before testers; qualified R0 no longer includes Monaco, C-00 or Core packaging
+(moved to R1, not removed) and no longer double-counts learning, import, build and rebrand work (24 §8).
+
+**Recommendation:** authorize R0a/R0b on an isolated branch after Astro round 2, and approve the path to **R1 Zain Trusted Starter** (21): Windows x64; T3 workbench with Monaco,
 terminal, diff, worktrees; Claude and Codex as the qualified trusted-tier providers; Core decisions, signed approvals,
 UNKNOWN outcomes and coverage reporting; Plan Mode with read-only profile; delegated code review with one findings schema.
 Re-plan R2 with measured velocity.

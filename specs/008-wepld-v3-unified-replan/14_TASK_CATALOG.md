@@ -21,6 +21,19 @@ EXIT_RULE = every task ends with: tests green (incl. mutation control for neg), 
 | A-01 | Re-run failed `main` integrity run 36589753362 unchanged | — | `.github/workflows/foundation-integrity.yml` (no edit); precondition: Actions available | Run concludes; result + log archived in `CI_403_REDIAGNOSIS` addendum | CI-01 | 0.05 | T0 | GOV-01 |
 | A-02 | If 403 recurs: reproduce `verify-local --remote-baseline` locally with founder token; capture status, `message`, `x-ratelimit-*` | A-01 | `.github/scripts/wepld_integrity.py` (read-only) | Root cause proven (rate limit vs permission) and recorded | local log | 0.1 | T0 | GOV-01 |
 
+## PF — First Working Build (source-based, unqualified; no product claims)
+
+Isolated branch `build/first-working` (never merged to main without F-01 admission). Reuses T3 unmodified except two
+overlays. Estimates are CONDITIONAL on 24 §4 conditions; replaced by measurements after Q-05.
+
+| ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
+|---|---|---|---|---|---|---|---|---|
+| Q-01 | Import T3 @36d4d711 as-is into the isolated branch (no strip, no rename) | — | pingdotgg/t3code@36d4d711 (whole tree) | Tree hash equals upstream pin | SRC-02 | 0.05–0.1 | T1 | PR-01 |
+| Q-02 | Coexistence identity overlay only: display name "Zain (dev)", app id, data dir (t3Home), protocol scheme, single-instance lock — so it cannot share state with an installed T3 | Q-01 | R11 §4 (ElectronProtocol.ts L16-17; DesktopEnvironment.ts L163/L180; build-desktop-artifact.ts) | Runs side by side with T3 without shared data or protocol hijack | FWB-02 | 0.25–0.75 | T1 | PR-01 |
+| Q-03 | Egress-off overlay: auto-update feed disabled, PostHog off, T3 Connect/Clerk/relay off (config or minimal guards; no stripping) | Q-01 | R11 §3 (updater, PostHog, Clerk/Connect rows) | No request to donor endpoints at startup or idle | EGR-02 | 0.25–0.5 | T1 | PR-22 |
+| Q-04 | Build pipeline by copying T3's own Windows x64 job from `.github/workflows/release.yml` (cross-build on GitHub-hosted Ubuntu, Windows verify job kept, signing steps removed); local `dev:desktop` on Windows documented as fallback | Q-02, Q-03 | t3code@36d4d711 `.github/workflows/release.yml` (Desktop Windows x64, verify_runner windows-2025), `scripts/build-desktop-artifact.ts` | Unsigned NSIS + zip produced from the branch; packaged app excludes `@anthropic-ai/claude-agent-sdk` and `@cursor/sdk` (Claude via user-installed ACP agent until F-06); T3-generated third-party notices included; workflow artifacts retained ≤ 1 day (public repo) and no secrets in the workflow | CI-02 | 0.25–1 | T1 | PR-21 |
+| Q-05 | Install and smoke on the founder's Windows machine; record build/install timings, failures, disk use; findings feed B-03 and F-12 | Q-04 | — | Smoke passes or each failure is recorded with a reproduction | FWB-01 | 0.1–0.25 | T1 | PR-01 |
+
 ## P0 — Governance reset
 
 | ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
@@ -38,20 +51,20 @@ EXIT_RULE = every task ends with: tests green (incl. mutation control for neg), 
 
 | ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
 |---|---|---|---|---|---|---|---|---|
-| B-01 | Provision Windows Sandbox/VM baseline image (Node, pnpm, Rust, Git) | G-03 | — | Reproducible setup script; host profile untouched | — | 0.2 | T2 | GOV-07 |
-| B-02 | Fetch T3 @36d4d711 and stable v0.1.3 @d2c44031; record tree hashes; mirror tarballs privately | B-01 | R11 §1 | Hashes match R11 pin record | hash check | 0.1 | T2 | GOV-05 |
-| B-03 | Build + run T3 desktop (both refs); run test suites; record pass/fail/skip | B-02 | R11 §6 | Pass ratio recorded per area; choose FORK_BASE (default 36d4d711 unless ratio materially worse) | donor suites (recorded pass/fail/skip) | 0.5–1 | T2 | NF-01..03 |
+| B-01 | Provision Windows Sandbox/VM baseline image (Node, pnpm, Rust, Git) | — | — | Reproducible setup script; host profile untouched | — | 0.2 | T2 | GOV-07 |
+| B-02 | Fetch T3 @36d4d711 and stable v0.1.3 @d2c44031; record tree hashes; mirror tarballs privately | Q-01 | R11 §1 | Hashes match R11 pin record | hash check | 0.05 | T2 | GOV-05 |
+| B-03 | Run T3 test suites on the FWB tree (both refs) and record pass/fail/skip; build/run evidence already comes from Q-04/Q-05 | B-02, Q-05 | R11 §6 | Pass ratio recorded per area; choose FORK_BASE (default 36d4d711 unless ratio materially worse) | donor suites (recorded pass/fail/skip) | 0.25–0.5 | T2 | NF-01..03 |
 | B-04 | Measure B1–B5 for T3 and Orca @e310a636 | B-03 | 09 §3 | CSV committed; method reproducible | bench B1–B5 | 0.3 | T2 | NF-01..03 |
 | B-05 | Measure `synchronous=FULL` cost on T3 receipt table; rusqlite fsync append latency on founder NVMe | B-03 | 07 §4–5 | Numbers recorded; NF-04 budget confirmed or revised | microbench | 0.1 | T2 | NF-04 |
-| B-06 | Verify Claude Agent SDK + `claude-agent-acp` load from user-provided location in T3 build; confirm installer exclusion feasible | B-03 | R11 §5 | Feasibility note; G4 path chosen | — | 0.1 | T2 | SEC-13 |
-| B-07 | G2 decision record (GO / reopen ADR-001) | B-03..06, C-00 | 00 §7 | Signed founder decision | — | 0.05 | T0 | GOV-03 |
+| B-06 | Verify Claude Agent SDK + `claude-agent-acp` load from user-provided location in T3 build; confirm installer exclusion feasible | Q-05 | R11 §5 | Feasibility note; G4 path chosen | — | 0.1 | T2 | SEC-13 |
+| B-07 | G2 decision record (GO / reopen ADR-001) | B-03, B-04, B-06 | 00 §7 | Signed founder decision | — | 0.05 | T0 | GOV-03 |
 | C-00 | Windows feasibility gate (throwaway spike branch, no product code): Job Object containment incl. ConPTY children; Core-owned approval surface + webauthn.dll assertion verified in Rust; handle-relative no-reparse file ops; Chromium session proxy coverage of all request types | B-03 | 17 §3–§4; 19 §1, §3 | Each spike GO/NO-GO recorded; NO-GO selects the documented weaker claim (17 §4.5) before P3 starts | FG-01..FG-05 | 1.5–2.5 | T2 | SEC-04, SEC-06, SEC-20, SEC-24, SEC-26 |
 
 ## P2-N — Zain naming clearance (before F-03)
 
 | ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
 |---|---|---|---|---|---|---|---|---|
-| N-01 | Free name-screening memo (R19 checklist; self-search of SAIP, WIPO, USPTO, EUIPO databases) + working-name rule: no public distribution under the name until N-05 | G-01 | research/R19 | Memo recorded; working-name rule in README and installer metadata | review of memo | 0.2 | T0 | GOV-11 |
+| N-01 | Free name-screening memo (R19 checklist; self-search of SAIP, WIPO, USPTO, EUIPO databases) + working-name rule: no public distribution under the name until N-05 | — | research/R19 | Memo recorded; working-name rule in README and installer metadata | review of memo | 0.2 | T0 | GOV-11 |
 | N-02 | Choose controlled domain → app ID / AUMID / bundle ids; update ZAIN_NAMING_MIGRATION §2 | N-01 | ZAIN_NAMING_MIGRATION | Development ids use the placeholder `io.github.thehalfmoon.zain`; final ids fixed by N-05 before any public distribution | ID-01 | 0.1 | T0 | GOV-11 |
 | N-03 | Package scope + crate names decision (no publishing); collision check vs Zain-LLM | N-01 | R19 | Scope/crates documented; no shared identifiers with Zain-LLM | ID-02 | 0.1 | T0 | GOV-11, GOV-12 |
 | N-04 | [P2] Canonical docs + crate rename (`wepld-*` → `zain-*`) as part of G-06 / F-10 | G-06, F-10, N-01 | AGENTS.md, invariants, Cargo.toml | Rust suite green after rename; protected docs signed | det: cargo test | 0.3 | T2 | GOV-11 |
@@ -60,22 +73,22 @@ EXIT_RULE = every task ends with: tests green (incl. mutation control for neg), 
 
 | ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
 |---|---|---|---|---|---|---|---|---|
-| F-01 | Import T3 at FORK_BASE into Zain monorepo layout (apps/, packages/, native/) beside `crates/` | B-07, G-03 | R11 §2 KEEP set | Tree equals upstream KEEP set byte-for-byte (manifest hash); source admission record (pin, license, deps, tests) per R11 | SRC-01 | 0.5 | T2 | PR-01, GOV-05, GOV-07 |
-| F-02 | Strip: mobile, marketing, relay/T3 Connect, Clerk, PostHog, `.repos/`, unused providers, V1 importer | F-01 | R11 §2 STRIP set | Build + kept tests green at B-03 ratio; no references remain; heic-to (LGPL-3.0), electron-webauthn (no declared license) and @cursor/sdk (custom terms) removed (22 §2) | det: kept suites; grep | 1–2 | T2 | PR-22, SEC-11 |
-| F-03 | Identity rename (app id, AUMID, protocol, CLI, data dirs, env prefix, refs, MCP name, hook headers) | F-02, N-02 | R11 §4; 06 §4 | Zero donor identifiers outside NOTICE files | ID-01 | 1–1.5 | T2 | SEC-11 |
+| F-01 | Admission of the FWB tree for main: KEEP-set manifest hash, admission record (pin, license, deps, tests); no re-import | B-07, G-03, G-05, Q-01 | R11 §2 KEEP set | Tree equals upstream KEEP set byte-for-byte (manifest hash); source admission record (pin, license, deps, tests) per R11 | SRC-01 | 0.25 | T2 | PR-01, GOV-05, GOV-07 |
+| F-02 | Strip: mobile, marketing, relay/T3 Connect, Clerk, PostHog, `.repos/`, unused providers, V1 importer | F-01 | R11 §2 STRIP set | Build + kept tests green at B-03 ratio; no references remain; heic-to (LGPL-3.0), electron-webauthn (no declared license) and @cursor/sdk (custom terms) removed (22 §2) | det: kept suites; grep | 1–1.75 | T2 | PR-22, SEC-11 |
+| F-03 | Identity rename beyond the Q-02 overlay (CLI, env prefix, refs, MCP name, hook headers) + donor-identifier gate | F-02, N-02 | R11 §4; 06 §4 | Zero donor identifiers outside NOTICE files | ID-01 | 0.75–1.25 | T2 | SEC-11 |
 | F-04 | Update feed → Zain-hosted Generic provider with ed25519-signed manifest verified by Core (no tokens in client) | F-03, N-02 | R11 §7; R13 §6 | Updater refuses donor manifests; ed25519 manifest check runs in the Server until C-06, then moves to Core | T9 | 0.5–1 | T2 | SEC-11 |
-| F-05 | Telemetry removal + idle-egress test | F-02 | R11 §3 | No outbound connections at idle (except user-initiated) | EGR-01 | 0.3 | T2 | PR-22, SEC-11 |
-| F-06 | Claude SDK exclusion from installer; user-consented load path; installer-content gate | B-06, F-02 | R11 §3, §5 | Installer contains no `claude-agent-sdk*`; Claude sessions work with user-provided SDK + API key | det: installer-content gate; e2e: Claude session with key; T7; T8 | 0.5 | T2 | SEC-13 |
-| F-07 | Default permission mode → Supervised; remove Full access option | F-02 | R11 §3 (RuntimePolicy) | Full access not selectable | e2e; UI-01 | 0.2 | T2 | SEC-06 |
+| F-05 | Telemetry removal + idle-egress test | Q-03, Q-05 | R11 §3 | No outbound connections at idle (except user-initiated) | EGR-01 | 0.3 | T2 | PR-22, SEC-11 |
+| F-06 | Claude SDK exclusion from installer; user-consented load path; installer-content gate | B-06, Q-05 | R11 §3, §5 | Installer contains no `claude-agent-sdk*`; Claude sessions work with user-provided SDK + API key | det: installer-content gate; e2e: Claude session with key; T7; T8 | 0.5 | T2 | SEC-13 |
+| F-07 | Default permission mode → Supervised; remove Full access option | Q-05 | R11 §3 (RuntimePolicy) | Full access not selectable | e2e; UI-01 | 0.2 | T2 | SEC-06 |
 | F-08 | ThreadSettlement → cosmetic archive only | F-02 | R11 §3 | Merge/close never marks a thread "done/settled" | det | 0.2 | T1 | PR-13 |
 | F-09 | Protocol version bump (Zain-1) | F-03 | contracts environment.ts (R11) | T3 clients get 426 | det | 0.1 | T2 | SEC-11 |
 | F-10 | Rename Core binary `zain-core`; move S2 commands under it; package next to `server.asar` | F-01 | `crates/core`, build scripts (R11 §7) | One `zain` CLI (Server) + `zain-core`; S2 tests green | det: existing 19k-line Rust suite | 0.5 | T2 | PR-01 |
-| F-11 | Windows NSIS build, unsigned (development and self-distribution) + notices and license gate | F-03, N-02 | R11 §7 | Installer builds; build fails on a missing notice or an undeclared/LGPL/GPL dependency; unsigned-build limitations (SmartScreen warning, no auto-trust) documented | det: notice gate; LIC-01 | 0.75–1.25 | T2 | PR-21, GOV-06 |
-| F-12 | Inherited-bug hardening batch 1: DB writer stalls (#21840, #23482), preview webview memory (#15579), Windows startup (#25262) | F-02 | R02 §13 | Each issue reproduced then fixed or explicitly deferred with limitation | det/e2e per issue | 2–4 | T2 | NF-02, PR-21 |
-| F-13 | Effect 4 / orchestration-v2 ramp-up notes (Build Learning) | F-01 | R02 §3 | Seam walkthrough doc for P3 | — | 2–4 (learning, overlaps) | T0 | GOV-08 |
+| F-11 | Windows NSIS build, unsigned (development and self-distribution) + notices and license gate | Q-04, F-06, N-01 | R11 §7 | Installer builds; build fails on a missing notice or an undeclared/LGPL/GPL dependency; unsigned-build limitations (SmartScreen warning, no auto-trust) documented | det: notice gate; LIC-01 | 0.75–1.25 | T2 | PR-21, GOV-06 |
+| F-12 | Inherited-bug hardening, only for issues reproduced on the founder machine in Q-05/B-03 (candidates #21840, #23482, #15579, #25262) | F-02 | R02 §13 | Each issue reproduced then fixed or explicitly deferred with limitation | det/e2e per issue | 0.5–3 | T2 | NF-02, PR-21 |
+| F-13 | Effect 4 / orchestration-v2 learning — folded into F-02/F-03/F-12/C-01 (no separate effort; double count removed) | F-01 | R02 §3 | Seam walkthrough doc for P3 | — | 0 | T0 | GOV-08 |
 | F-14 | Accessibility pass on kept UI (keyboard, focus, contrast) | F-03 | R13 §7 | Keyboard-complete core flows; screen-reader names, roles and live regions for composer, inbox, approvals and diff summary; terminal screen-reader mode is PR-24b (I-11) | e2e: axe scan; A11Y-01; A11Y-02 | 1.5–2.5 | T1 | PR-24 |
-| F-15 | Offline checklist + B1–B3 budget check vs P1 | F-05..F-11 | 09 | NF-01..03 met or exception recorded | bench B1–B3, B12 | 0.3 | T1 | NF-01..03, NF-08 |
-| F-16 | P2 exit: install, chat + Codex + ACP + Claude(API key) sessions, worktree, diff, terminal, preview | F-01..F-15, F-17, F-18, Y-00 | — | DoD in 08 P2 | e2e smoke; V1-01; V1-06; TERM-01 | 0.2 | T1 | PR-01..04, PR-08, PR-09 |
+| F-15 | Offline checklist + B1–B3 budget check vs P1 | F-05, F-06, F-07, F-08, F-09, F-11, B-04 | 09 | NF-01..03 met or exception recorded | bench B1–B3, B12 | 0.3 | T1 | NF-01..03, NF-08 |
+| F-16 | P2 exit: install, chat + Codex + ACP + Claude(API key) sessions, worktree, diff, terminal, preview | F-01, F-02, F-03, F-04, F-05, F-06, F-07, F-08, F-09, F-11, F-12, F-14, F-15, Y-00, N-02 | — | DoD in 08 P2 | e2e smoke; V1-01; V1-06; TERM-01 | 0.2 | T1 | PR-01..04, PR-08, PR-09 |
 | F-17 | Monaco editor surface bound to T3 file/state RPC (moved from I-01 so R0 is a real IDE) | F-03 | R12 D7; R13 §2 | Edit/save 5 MB file within 1 s | EDIT-01; bench | 2–3 | T1 | PR-01, PR-10 |
 | F-18 | Retire Tauri shell and glib patch; S2 commands under zain-core; keyring storage audit (secrets only in OS keyring) | F-10 | apps/desktop/src-tauri, third_party/glib-0.18.5-wepld1 | P2: secrets only in OS keyring; Tauri host + glib patch deleted at C-22 exit (after the sidecar is proven under the new shell) | det; SEC12-01 | 0.5 | T2 | PR-01, SEC-12 |
 
@@ -83,7 +96,7 @@ EXIT_RULE = every task ends with: tests green (incl. mutation control for neg), 
 
 | ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
 |---|---|---|---|---|---|---|---|---|
-| C-01 | **G3 spike**: ACP `fs/write` (S3) + Codex approval (S2) via Core with ledger receipts; kill -9 → UNKNOWN | F-16 | R11 §3 (S2, S3), `crates/core` | Spike log; go/no-go recorded | det; spike kill -9 log | 1–2 | T2 | SEC-02, SEC-03 |
+| C-01 | **G3 spike**: ACP `fs/write` (S3) + Codex approval (S2) via Core with ledger receipts; kill -9 → UNKNOWN | F-16, C-00, F-10 | R11 §3 (S2, S3), `crates/core` | Spike log; go/no-go recorded | det; spike kill -9 log | 1–2 | T2 | SEC-02, SEC-03 |
 | C-02 | Core protocol v2: direction-tagged ids, chunk frames, fencing epoch, data-root OS lock | C-01 | `crates/contracts/src/{frame,protocol}.rs` | v1 tests green + new contract tests | det; T16; PROTO-01 | 1–2 | T2 | SEC-09 |
 | C-03 | Ledger (rusqlite, FULL sync, versioned envelope hash over all authoritative fields — 17 §5, projections, tombstones, forward-only migrations, UNSUPPORTED_SCHEMA) | C-02 | new `crates/core/src/ledger/*` | Append/verify/rebuild; hash covers v, seq, ts, kind, project_id, subject_id, principal, payload digest, prev_hash; schema-too-new refusal; audit JSONL export (enterprise seam) | det; R6; R7; W5; B10; T10; LED-01; LED-02; V1-18 | 2.5–3.5 | T2 | SEC-08, NF-06, PR-25, CL-V1-18 |
 | C-04 | Effect API: propose/dispatch/report/reconcile/open_dispatches with Spec 006 §19 types | C-03 | `crates/contracts` (reuse PR #343 descriptors where fitting) | logical_operation_id allocated per principal + mission (17 §6); attempts carry separate attempt ids; same operation id with a different input digest → OPERATION_INPUT_CONFLICT; only secret handles cross into Core; effect records carry principal + scope fields | det; EFF-01; T6; OPID-01 | 2–3 | T2 | SEC-02, SEC-03, SEC-12, PR-25 |
@@ -210,7 +223,7 @@ EXIT_RULE = every task ends with: tests green (incl. mutation control for neg), 
 
 | ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
 |---|---|---|---|---|---|---|---|---|
-| K-01 | [P2] Optional spike: build forked OCR engine on Windows; engine mode on the Zain repo with a local Ollama route; advisory, read-only | F-03, E-00 | R14 §11; alibaba/open-code-review@375f64cd | Findings shown, labelled advisory; no fixes; admission-lite record (pin, license) before running | ZCR spike log | 0.5–0.75 | T2 | PR-26 |
+| K-01 | [P6] Optional spike: build forked OCR engine on Windows; engine mode on the Zain repo with a local Ollama route; advisory, read-only | F-03, E-00 | R14 §11; alibaba/open-code-review@375f64cd | Findings shown, labelled advisory; no fixes; admission-lite record (pin, license) before running | ZCR spike log | 0.5–0.75 | T2 | PR-26 |
 | K-02 | [P6] Engine admission: pin, SBOM + transitive license scan, notices, Go toolchain in CI (Win/Linux/mac) | K-07 | R14 §9 | Source admission record; notices generated | det: license gate | 0.5–0.75 | T2 | PR-26, GOV-07 |
 | K-03 | [P6] Fork-vendor `native/zain-review-engine` + patches Z-P1..Z-P7 (route lock, HOME isolation, branding, Z-P7: every tool confined to the snapshot allowlist manifest) + upstream suite green | K-02 | R14 §5–6 | Upstream tests green; ambient config cannot override the route | ZCR-T05; ZCR-T23; ZCR-T24; ZCR-T26 | 1–1.5 | T2 | PR-26, SEC-18 |
 | K-04 | [P5] Review core: findings schema, normalizer/fingerprint/anchors, contracts/ledger kinds, route rule (reviewer ≠ builder), review snapshot builder (immutable, secret-screened, allowlist manifest — 19 §2) | C-22, V-01 | R14 §7 | One finding schema for delegated and engine modes; same model under another account is NOT independent; snapshot contains only approved files | ZCR-T04; ZCR-T14; ZCR-T25 | 1.75–2.5 | T2 | PR-12, PR-26 |
@@ -254,7 +267,7 @@ EXIT_RULE = every task ends with: tests green (incl. mutation control for neg), 
 
 | ID | Task | Deps | Source / files | Acceptance criteria | Tests | Est | Tier | Reqs |
 |---|---|---|---|---|---|---|---|---|
-| Y-00 | [P2] Strip T3/Orca browser-cookie import; isolate agent partition; disable eval outside Preview; relay method allowlist | F-02 | R17 §5, WB0 | No code path reads user browser stores | BRW-AT-04; BRW-AT-14; BRW-G01 | 0.5–1 | T2 | PR-28, SEC-20 |
+| Y-00 | [P2] Strip T3/Orca browser-cookie import; isolate agent partition; disable eval outside Preview; relay method allowlist | Q-05 | R17 §5, WB0 | No code path reads user browser stores | BRW-AT-04; BRW-AT-14; BRW-G01 | 0.5–1 | T2 | PR-28, SEC-20 |
 | Y-01 | [P3] Browser effect classes + hard-block floor rules registered in Core | C-05, C-12 | R17 WB4 (part) | Payments/credentials/account creation/executable downloads blocked even in Skip; until Y-02 the inherited preview_* MCP tools are gated by C-12 seam S6 | BRW-P01; BRW-P02 | 0.5–1 | T2 | PR-28, SEC-20 |
 | Y-02 | [P5] Controller unification (broker → BrowserController; lanes Preview/Agent/Test) + Playwright 1.64 bump | Y-01 | R17 WB1 | Single controller; MCP/CLI/UI are thin front-ends | det; BRW-AT-19 | 1.5–2.5 | T2 | PR-28 |
 | Y-03 | [P5] Navigation/redirect approval gate (Electron + CDP Fetch, document hops) | Y-02, Y-10 | R17 WB2 | Document hops to ungranted origins held before the request; this is the approval/UX layer — connection enforcement is Y-10; Agent lane uses external origins only when the Y-10 suite passes, else loopback project origins only | BRW-AT-02; BRW-AT-11; BRW-AT-12 | 2–3 | T2 | PR-28, SEC-20 |
@@ -301,9 +314,11 @@ Generated — see `GENERATED_PLAN_REPORT.md` (tools/plan_graph.py). Hand-written
 
 | Release | Name | Definition |
 |---|---|---|
-| R0 | Zain Workbench (no authority claims) | phases: P−1′, P0, P1, P2-N, P2 |
-| R1 | Zain Trusted Starter (small first trusted release) | R0 + tasks: C-01, C-02, C-03, C-04, C-05, C-06, C-07, C-08, C-09, C-10, C-11, C-12, C-13, C-14, C-15, C-16, C-17, C-18, C-19, C-20, C-21, C-23, C-25, C-26, Y-01, H-08, C-22, V-01, K-04, K-05, K-08, X-01 |
-| R2 | Zain v1 | R1 + phases: P3, P4, P5 |
+| R0a | First Working Build (local, unqualified, no claims) | tasks: Q-01, Q-02, Q-03, Q-04, Q-05 |
+| R0b | Tester Build (invited testers; unsigned; narrow claims 24 §5) | R0a + tasks: B-06, F-05, F-06, F-07, F-11, Y-00, N-01 |
+| R0 | Qualified R0 Workbench (no authority claims) | R0b + tasks: A-01, A-02, G-01, G-02, G-03, G-05, G-06, G-07, G-08, B-01, B-02, B-03, B-04, B-07, N-02, N-03, F-01, F-02, F-03, F-04, F-08, F-09, F-12, F-13, F-14, F-15, F-16, L-01 |
+| R1 | Zain Trusted Starter (small first trusted release) | R0 + tasks: C-01, C-02, C-03, C-04, C-05, C-06, C-07, C-08, C-09, C-10, C-11, C-12, C-13, C-14, C-15, C-16, C-17, C-18, C-19, C-20, C-21, C-23, C-25, C-26, Y-01, H-08, C-22, V-01, K-04, K-05, K-08, X-01, C-00, B-05, F-10, F-17, F-18, N-04 |
+| R2 | Zain v1 | R1 + phases: P−1′, PF, P0, P1, P2-N, P2, P3, P4, P5 |
 | R3 | IDE breadth, CLI agents, OCR engine lane | R2 + phases: P6 |
 | R4 | Design Studio | R3 + phases: P7 |
 | R5 | OS containment | R4 + phases: P8 |

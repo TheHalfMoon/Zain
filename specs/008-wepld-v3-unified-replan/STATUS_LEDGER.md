@@ -104,3 +104,13 @@ top level of this directory.
 | Draft PR | not opened (founder decision: Astro reviews the branch directly) | — |
 | Round-2 handoff | planning commit add02fbc596dfa461e73f8acbd9a005010ad4f0f | ASTRO_REVIEW_ROUND_2_HANDOFF.md |
 
+## Revision 3.1 — First Working Build analysis (2026-10-28)
+
+| Item | State | Evidence |
+|---|---|---|
+| Founder challenge | R0 21.8–34.35 pw too long for a Copy First fork | 24 |
+| Upstream build evidence | T3 v0.1.3 + nightlies ship Windows x64 NSIS daily; cross-built on Ubuntu with Windows verify job; Windows tests manual-dispatch | 24 §1 |
+| New milestones | R0a First Working Build (Q-01..Q-05), R0b Tester Build, R0 Qualified | 14 PF, §16 |
+| Audit | 45 former R0 tasks: 0 needed for first build, 7 before testers, 28 for qualified R0, 10 deferred (R1 6, R2 3, R3 1); none deleted | 24 §6 |
+| Double counting removed | F-13 learning, import, build/run, bug fixes, rebrand, strip | 24 §8 |
+| Numbers | generated; FWB estimate conditional (C1–C6) | GENERATED_PLAN_REPORT §3 |

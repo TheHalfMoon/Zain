@@ -239,3 +239,9 @@ breakaway, kill on Server death; Linux cgroup v2; macOS labelled not-contained) 
 retry (17 §3); every mediated write uses fs-gate handle-relative, reparse/symlink-rejecting operations (19 §3).
 Rejected: Orca's `taskkill /t /f` tree walk as containment; realpath re-checks as race protection (Astro H-5, H-8).
 
+## ADR-023 amendment (2026-10-28, first working build)
+
+Releases R0a (First Working Build), R0b (Tester Build) and R0 (Qualified) are separated (24). R0a reuses T3 unmodified
+except a coexistence identity overlay and an egress-off overlay, built by copying T3's own Windows release job; it makes no
+claims and is never merged to main without F-01 admission. Deferred to R1 without weakening R1: C-00, B-05, F-10, F-17,
+F-18, N-04. R1 security requirements are unchanged.

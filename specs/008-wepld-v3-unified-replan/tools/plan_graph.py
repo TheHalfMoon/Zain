@@ -22,10 +22,10 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PHASES = ["P−1′", "P0", "P1", "P2-N", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9", "P10", "PD"]
+PHASES = ["P−1′", "PF", "P0", "P1", "P2-N", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9", "P10", "PD"]
 PIDX = {p: i for i, p in enumerate(PHASES)}
 HEADING_PHASE = [
-    ("## P−1′", "P−1′"), ("## P0", "P0"), ("## P1", "P1"), ("## P2-N", "P2-N"), ("## P2 ", "P2"),
+    ("## P−1′", "P−1′"), ("## PF", "PF"), ("## P0", "P0"), ("## P1", "P1"), ("## P2-N", "P2-N"), ("## P2 ", "P2"),
     ("## P3", "P3"), ("## P4", "P4"), ("## P5", "P5"), ("## P6", "P6"), ("## P7", "P7"), ("## P8", "P8"),
     ("## P9", "P9"), ("## P10", "P10"), ("## PD", "PD"),
 ]
@@ -36,7 +36,7 @@ TEST_FAMILIES = [
     r"DG-P\d{2}", r"CC-T\d{2}", r"V1-\d{2}", r"AT-\d{2}", r"T\d{1,2}b?", r"R\d{1,2}", r"W\d+b?", r"B\d{1,2}",
     r"N\d{1,2}", r"D\d", r"E\d", r"COV-\d{2}", r"PEM-[A-Z]{2,5}-\d{2}", r"REC-\d{2}", r"PH-\d{2}", r"APR-\d{2}",
     r"LED-\d{2}", r"GV-\d{2}", r"FG-\d{2}", r"DM-\d{2}", r"TERM-\d{2}", r"A11Y-\d{2}", r"PROV-\d{2}", r"POL-\d{2}",
-    r"EFF-\d{2}", r"SBX-\d{2}", r"RMT-\d{2}", r"EDIT-\d{2}", r"DBG-\d{2}", r"EGR-\d{2}", r"INBOX-\d{2}", r"CI-\d{2}", r"SRC-\d{2}", r"ID-\d{2}", r"PROTO-\d{2}", r"UI-\d{2}", r"SEC12-\d{2}", r"OPID-\d{2}", r"FSG-\d{2}", r"LIC-\d{2}",
+    r"EFF-\d{2}", r"FWB-\d{2}", r"SBX-\d{2}", r"RMT-\d{2}", r"EDIT-\d{2}", r"DBG-\d{2}", r"EGR-\d{2}", r"INBOX-\d{2}", r"CI-\d{2}", r"SRC-\d{2}", r"ID-\d{2}", r"PROTO-\d{2}", r"UI-\d{2}", r"SEC12-\d{2}", r"OPID-\d{2}", r"FSG-\d{2}", r"LIC-\d{2}",
 ]
 TOKEN_RE = re.compile(
     r"(?<![A-Za-z0-9-])(" + "|".join(f"(?:{f})" for f in TEST_FAMILIES) + r")(?:\s*(?:\.\.|–)\s*([A-Z0-9-]*?\d+b?))?(?![A-Za-z0-9])"
@@ -159,11 +159,11 @@ def load_releases(text: str, tasks: dict, errors: list[str]):
     rel: dict[str, set[str]] = {}
     order: list[str] = []
     for f in rows(sec[1].split("\n## ", 1)[0]):
-        if len(f) < 3 or not re.match(r"^R\d$", f[0]):
+        if len(f) < 3 or not re.match(r"^R\d[a-z]?$", f[0]):
             continue
         members: set[str] = set()
         spec = f[2]
-        for m in re.finditer(r"(R\d)\b", spec.split("phases:")[0]):
+        for m in re.finditer(r"(R\d[a-z]?)\b", spec.split("phases:")[0].split("tasks:")[0]):
             members |= rel.get(m.group(1), set())
         pm = re.search(r"phases:\s*([^+;]+)", spec)
         if pm:
@@ -325,7 +325,7 @@ def main(argv: list[str]) -> int:
     v1 = rel.get("R2", set())
 
     # Calendar: capacity A-1 = 1 pw/calendar week (unvalidated); upkeep consumes u of capacity after R0 work.
-    r0 = rel.get("R0", set())
+    r0 = rel.get("R0", set())  # qualified R0: upkeep applies only to work after it
 
     def calendar(ts, lo_hi):
         pre = sum(tasks[t]["est"][lo_hi] for t in ts if t in r0)

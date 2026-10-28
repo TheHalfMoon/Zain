@@ -11,8 +11,10 @@ MEMBERSHIP = 14 §16 (machine-read). Every release is validated as closed under 
 
 | Release | Purpose | Contents (14 §16) |
 |---|---|---|
-| R0 Zain Workbench | small usable release, **no authority claims** | governance reset, donor baseline, C-00 feasibility, fork/strip/rebrand, Monaco, terminal, diff, worktrees, unenforced Plan Mode, browser preview hardening, unsigned Windows build |
-| **R1 Zain Trusted Starter** | **smallest release with authority claims** (proposed for approval) | R0 + Core (protocol v2, ledger envelope, effects, policy, approvals A1/A2, coverage model, ProcessHost, fs-gate, reconciliation contracts, S1–S8 seams for Claude/Codex/ACP, recovery suite, anchors) + delegated code review (K-04, K-05, K-08) + R1 exit X-01 |
+| R0a First Working Build | T3 as-is + coexistence and egress-off overlays; founder-only; **no claims** (24) | Q-01..Q-05 |
+| R0b Tester Build | minimum before anyone else runs it; narrow stated claims (24 §5) | R0a + B-06, F-05, F-06, F-07, F-11, Y-00, N-01 |
+| R0 Qualified Workbench | **no authority claims** | R0b + governance reset, donor baseline, admission, strip/rebrand, inherited-bug fixes (reproduced only), accessibility, budgets, unenforced Plan Mode label; no built-in editor |
+| **R1 Zain Trusted Starter** | **smallest release with authority claims** (proposed for approval) | R0 + C-00 feasibility, Monaco (F-17), Core packaging (F-10, F-18, N-04) + Core (protocol v2, ledger envelope, effects, policy, approvals A1/A2, coverage model, ProcessHost, fs-gate, reconciliation contracts, S1–S8 seams for Claude/Codex/ACP, recovery suite, anchors) + delegated code review (K-04, K-05, K-08) + R1 exit X-01 |
 | R2 Zain v1 | full v1 | R1 + OpenCode/Pi qualification, DeskGate local, enforced Plan Mode, missions, Brain, continuations, completion, fixes, Engineering System, Browser lanes with connection-level egress, MCP/skills/MCPB |
 | R3 | IDE breadth | LSP, DAP debugging, Orca ports, CLI agents, OCR engine lane (local, qualified), CI review, shipping, DeskGate search/parity, macOS/Linux packages |
 | R4 | Design Studio | D-01..D-08 |

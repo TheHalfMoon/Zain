@@ -153,7 +153,8 @@ P1) with a pre-declared weaker claim if the gate fails — the plan never silent
 - **Repair:** all numbers generated from the 165 live task rows (GENERATED_PLAN_REPORT §2–§6); master plan §5 is a generated
   block; hand-written §13/§14 removed from 14; P6 discrepancy and non-existent edges removed (paths computed from the graph);
   upkeep 35–60% applied after R0 (21 §5; 10:51); 08/00/02/10/FOUNDER numbers replaced by references.
-- **Result:** R2 (v1) ≈ 104–162 pw, 2.8–6.8 years at A-1; R1 ≈ 60–92 pw, 1.6–3.4 years (generated, not hand-edited).
+- **Result:** see GENERATED_PLAN_REPORT §3 (values change only by regenerating). Revision 3.1 (24) split R0 into R0a/R0b/R0 and
+  removed double counting; the numbers in this disposition are therefore not restated.
 
 ### M-1 — Source admission — DEFERRED WITH EXPLICIT GATE
 

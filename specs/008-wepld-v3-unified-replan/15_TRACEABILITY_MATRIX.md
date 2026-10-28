@@ -10,7 +10,7 @@ REQUIREMENTS = 98 · REGISTERED = 98 · FREE_TEXT_ONLY = 0 · GAP = 0
 
 | Req | Requirement | Pri | Phase | Tasks | Registered tests | Coverage |
 |---|---|---|---|---|---|---|
-| PR-01 | One desktop app combining IDE and AI workspace (chat, code sessions, files, term | M | P2 | F-01, F-10, F-16, F-17, F-18, V-08 | EDIT-01, SEC12-01, SRC-01, TERM-01, V1-01, V1-06 | REGISTERED |
+| PR-01 | One desktop app combining IDE and AI workspace (chat, code sessions, files, term | M | P2 | F-01, F-10, F-16, F-17, F-18, Q-01, Q-02, Q-05, V-08 | EDIT-01, FWB-01, FWB-02, SEC12-01, SRC-01, SRC-02, TERM-01, V1-01, V1-06 | REGISTERED |
 | PR-02 | Run Claude, Codex, ACP-family agents, OpenCode, Pi and local models as replaceab | M | P2/P3 | C-09, C-24, F-16 | CC-T01, CC-T02, CC-T03, PEM-ACP-01, PEM-ACP-02, PEM-ACP-03, PEM-CDX-01, PEM-CDX-02, PEM-CDX-03, PEM-CDX-04, PEM-CLA-01, PEM-CLA-02 … | REGISTERED |
 | PR-03 | Multi-agent orchestration: parallel sessions in isolated worktrees, subagents, s | M | P2/P5 | F-16, V-01, V-08 | POL-03, TERM-01, V1-01, V1-06 | REGISTERED |
 | PR-04 | Unified composer that escalates chat to task with visible plan and resume | M | P2/P4 | F-16, V-08 | TERM-01, V1-01, V1-06 | REGISTERED |
@@ -30,8 +30,8 @@ REQUIREMENTS = 98 · REGISTERED = 98 · FREE_TEXT_ONLY = 0 · GAP = 0
 | PR-18 | Controlled browser automation in the in-app browser; hard-blocked categories (pa | S | P9 | I-05, Y-09 | BRW-AT-23, BRW-AT-24, DM-01, DM-02, DM-03 | REGISTERED |
 | PR-19 | Controlled computer use (Windows first, then macOS/Linux) behind per-session gra | C→S | P9 | W-05 | T12, V1-15 | REGISTERED |
 | PR-20 | Self-hosted runner as project home; phone/web approvals via passkey | S | P10 | H-06, R-01, R-02, R-03, R-04 | DG-N12, DG-P07, RMT-01, V1-16 | REGISTERED |
-| PR-21 | Windows x64 primary; macOS and Linux packages | M (Win) / S (mac, Linux) | P2/P6 | F-11, F-12, F-19, I-09, I-12 | LIC-01 | REGISTERED |
-| PR-22 | Local-first: core works offline; zero mandatory cloud; BYO credentials only | M | P2 | F-02, F-05, I-10 | EGR-01 | REGISTERED |
+| PR-21 | Windows x64 primary; macOS and Linux packages | M (Win) / S (mac, Linux) | P2/P6 | F-11, F-12, F-19, I-09, I-12, Q-04 | CI-02, LIC-01 | REGISTERED |
+| PR-22 | Local-first: core works offline; zero mandatory cloud; BYO credentials only | M | P2 | F-02, F-05, I-10, Q-03 | EGR-01, EGR-02 | REGISTERED |
 | PR-23 | Inbox for approvals, unknown outcomes and mission events; notifications | M | P3 | C-14 | INBOX-01 | REGISTERED |
 | PR-24 | Accessibility baseline: keyboard-complete core flows and screen-reader names/rol | M | P2 | F-14 | A11Y-01, A11Y-02 | REGISTERED |
 | PR-24b | Terminal screen-reader mode and full WCAG 2.2 AA audit of IDE surfaces | S | P6 | I-11 | A11Y-03 | REGISTERED |

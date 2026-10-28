@@ -378,3 +378,13 @@ Plumbing tests use a scripted model; ZCR-Q* measure reviewer quality.
 | RMT-01 | neg | R-04 | P10 | scoped remote sessions (session scope never authorizes effects) | session scope treated as grant | LAN client with valid session, no assertion, requests effect | effect executes | 07 §6 |
 | ES-AT-17 | neg | E-06 | P6 | merge requires Core grant; merge ≠ completion | grant check removed | auto-merge of a green PR without grant | merge executed | R15 |
 
+## 12. First Working Build (24)
+
+| Test | Kind | Prerequisites | Phase | Guard | Mutant | Fixture | Observable failure | Source |
+|---|---|---|---|---|---|---|---|---|
+| SRC-02 | pos | Q-01 | PF | — | — | branch tree vs upstream pin | tree hash differs | 24 §3 |
+| FWB-02 | neg | Q-02 | PF | coexistence identity overlay | overlay reverted | machine with upstream T3 installed and running | shared data dir, single-instance lock or protocol handler collision | 24 §3 |
+| EGR-02 | neg | Q-03 | PF | egress-off overlay | overlay reverted | startup + 10 min idle with socket capture | any request to a donor endpoint (update feed, PostHog, relay, Clerk) | 24 §3 |
+| CI-02 | neg | Q-04 | PF | installer-content check + artifact retention setting | check removed | branch workflow on GitHub-hosted runners | no artifact, or artifact containing claude-agent-sdk / @cursor/sdk, or retention > 1 day | 24 §3 |
+| FWB-01 | pos | Q-05 | PF | — | — | install, launch, one provider session (user's own credentials), terminal, worktree, diff | any step fails without a recorded reproduction | 24 §3 |
+
