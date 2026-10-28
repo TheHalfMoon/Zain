@@ -114,3 +114,4 @@ top level of this directory.
 | Audit | 45 former R0 tasks: 0 needed for first build, 7 before testers, 28 for qualified R0, 10 deferred (R1 6, R2 3, R3 1); none deleted | 24 §6 |
 | Double counting removed | F-13 learning, import, build/run, bug fixes, rebrand, strip | 24 §8 |
 | Numbers | generated; FWB estimate conditional (C1–C6) | GENERATED_PLAN_REPORT §3 |
+| Round-2 handoff updated | planning commit 024ed89ac08e91eba8b98f92a874d880a4156b7f | ASTRO_REVIEW_ROUND_2_HANDOFF.md |

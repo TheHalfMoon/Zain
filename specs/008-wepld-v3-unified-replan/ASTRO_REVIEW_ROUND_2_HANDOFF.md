@@ -4,13 +4,15 @@
 REVIEWER = Astro (independent). Challenge the repair; do not endorse it.
 REPOSITORY = https://github.com/TheHalfMoon/Zain (PUBLIC)
 BRANCH = docs/v3-unified-replan-20261027
-PLANNING_COMMIT = add02fbc596dfa461e73f8acbd9a005010ad4f0f   (all repair content; line numbers in the disposition refer to it)
+PLANNING_COMMIT = 024ed89ac08e91eba8b98f92a874d880a4156b7f   (revision 3.1: round-1 repair + first-working-build split)
+REPAIR_COMMIT = add02fbc596dfa461e73f8acbd9a005010ad4f0f   (line numbers in ASTRO_FINDINGS_DISPOSITION.md refer to it)
 HANDOFF_COMMIT = the commit that adds this file; it changes only this file, STATUS_LEDGER.md and README.md
 ROUND_1 = b94505988e05c15a55f7e2e1c9bf19bc23bed121 — DO NOT APPROVE (1 C, 12 H, 4 M, 1 L)
 BASE = main @ 0a843a2c0913236d9c93b31abb0d54bbdb023f23
 SCOPE = planning documents only; nothing implemented, built or run; no runtime claim is made
 DO_NOT = modify the repository, open/merge PRs, trigger hosted reviewers, touch TheHalfMoon/Zain-LLM
-APPROVAL_ASKED = R1 "Zain Trusted Starter" scope + exact claims (21 §3) — not the whole roadmap
+APPROVAL_ASKED = (a) R0a/R0b source-based builds with the narrow claims in 24 §5; (b) R1 "Zain Trusted Starter" scope +
+                 exact claims (21 §3) — not the whole roadmap
 ```
 
 ## 1. What changed since round 1
@@ -27,6 +29,7 @@ APPROVAL_ASKED = R1 "Zain Trusted Starter" scope + exact claims (21 §3) — not
 | Tasks | 14: C-00, C-23..C-27, H-08, Y-10, K-10, K-11, X-01, G-08, N-05, F-19, I-12; K/Y/C rows rewritten |
 | Decisions | ADR-020..024 + amendments to ADR-007/011/014/015/018/019 |
 | Dispositions | `ASTRO_FINDINGS_DISPOSITION.md` (all 18 findings, evidence lines, re-review criteria) |
+| Time to first build (rev 3.1) | `24_FIRST_WORKING_BUILD.md`: R0a First Working Build (Q-01..Q-05), R0b Tester Build, R0 Qualified; 45-task audit; double counting removed; Monaco/C-00/Core packaging moved to R1 |
 
 Reported statuses: 16 RESOLVED (several design-level with an early feasibility gate C-00 and a pre-declared weaker
 claim), 2 DEFERRED WITH EXPLICIT GATE (H-10 full governance inventory = G-08; M-1 post-v1 source closures), 0 BLOCKED.
@@ -37,7 +40,7 @@ claim), 2 DEFERRED WITH EXPLICIT GATE (H-10 full governance inventory = G-08; M-
 python -I specs/008-wepld-v3-unified-replan/tools/plan_graph.py --check
 ```
 
-Expected at PLANNING_COMMIT: exit 0; `tasks=165 tests=338 errors=0 coverage={'REGISTERED': 98, 'FREE_TEXT_ONLY': 0, 'GAP': 0}`.
+Expected at PLANNING_COMMIT: exit 0; `tasks=170 tests=343 errors=0 coverage={'REGISTERED': 98, 'FREE_TEXT_ONLY': 0, 'GAP': 0}`.
 The script is read-only in `--check` mode. Suggested adversarial checks: add W2b to C-20's tests (expect a prerequisite
 error); give Y-08 the test BRW-AT-23 (expect an execution-phase error); make a mandatory task depend on F-19 (expect a PD
 error); delete a guard cell in a negative row of 23 (expect an error).
@@ -76,6 +79,15 @@ error); delete a guard cell in a negative row of 23 (expect an error).
     import, PStack + E2E, AI Hero skills in Plan Mode, Zain Browser, DeskGate, Trusted Core + Brain, Claude-equivalent
     capabilities) was dropped rather than scheduled.
 16. **Honesty:** anything presented as verified that is documentation- or reading-only?
+17. **First Working Build (24 §1–§4):** is the upstream evidence (daily Windows installers from T3's release.yml, cross-built
+    on Ubuntu with a Windows verify job) correctly characterized, and are conditions C1–C6 complete? Is anything in Q-01..Q-05
+    missing that is genuinely required for the app to run?
+18. **Task audit (24 §6):** challenge each TEST/QUAL/DEFER classification of the 45 former R0 tasks; in particular whether
+    G-05 must precede F-01, whether F-14 belongs in qualified R0, and whether any DEFER weakens a claim actually made.
+19. **Double counting (24 §8):** are the reductions justified (F-13 → 0, B-03, F-01, F-02, F-03, F-12), or is work now
+    missing rather than de-duplicated?
+20. **Claims per milestone (24 §5):** are R0a/R0b claims narrow enough; are public-repo CI artifacts (≤ 1 day, SDKs excluded)
+    a redistribution risk; does R1 keep every round-1 security requirement unchanged?
 
 ## 4. Report format
 
