@@ -125,3 +125,4 @@ top level of this directory.
 | Mutation regressions | 26 cases (baseline + 18 Astro + 7 new): all behave as required | tools/test_plan_graph_mutations.py |
 | R0a | complete build DAG, inventories, T2, no public artifact, strict PASS, readiness packet | 24, R0A_FEASIBILITY_READINESS.md |
 | Not done | nothing built or run; T3 build not executed; all mechanisms unproven until C-00/Q-05 | — |
+| Round-3 handoff | planning commit 68211bc7d3ff9c62cbe4c476f26b70e9e98f71f1 | ASTRO_REVIEW_ROUND_3_HANDOFF.md |
