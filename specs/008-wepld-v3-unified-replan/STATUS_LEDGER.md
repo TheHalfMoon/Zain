@@ -89,5 +89,5 @@ top level of this directory.
 | Astro handoff | DONE | ASTRO_REVIEW_HANDOFF.md |
 | Disk incident | local disk filled by donor clones; clones deleted; founder instruction: nothing saved locally, only in repo | — |
 | Privacy | local-machine details removed from R18 at HEAD (still present in commits c376917 and ef19a3f history) | — |
-| Draft PR | NOT opened — automatic-review rule unproven for installed apps (EGRESS_PREFLIGHT §5) | — |
+| Draft PR | NOT opened — founder decision 2026-10-28: Astro reviews the branch directly (no PR); automatic-review rule for installed apps still unproven (EGRESS_PREFLIGHT §5) | — |
 
