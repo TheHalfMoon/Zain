@@ -57,7 +57,7 @@ Zain Trusted Core (Rust) = DECISION POINT + ledger (17 §5) + coverage (17 §2) 
 
 Trust statements that changed in revision 3:
 - **Launch authorization ≠ execution coverage.** Shells/interpreters/CLI agents make coverage UNKNOWN; Trusted Completion
-  fails closed on UNKNOWN required coverage and otherwise claims only tree provenance (17 §2).
+  fails closed on UNKNOWN required coverage and otherwise reports only authorized-content equivalence, never trust (17 §2).
 - **Providers:** only qualified provider × operation cells are in the trusted tier (18); OpenCode and Pi are untrusted
   until patched.
 - **Reconciliation:** per-operation evidence contracts; remote state never proves absence unless monotonic (17 §1).
@@ -83,24 +83,29 @@ bubblewrap not vendored. Orca process-host is reference only (C-25 replaces it).
 ## 5. Releases, effort and calendar (generated)
 
 <!-- GENERATED:BEGIN release-table (tools/plan_graph.py) -->
-| Release | Tasks | Effort pw | Elapsed years (A-1, upkeep 35–60% after R0) |
-|---|---|---|---|
-| R0a | 5 | 0.9–2.6 | 0.0–0.1 |
-| R0b | 12 | 3.45–6.15 | 0.1–0.1 |
-| R0 | 40 | 12.5–22.4 | 0.2–0.4 |
-| R1 | 78 | 55.65–86.8 | 1.5–3.5 |
-| R2 | 124 | 99.9–157.1 | 2.8–6.9 |
-| R3 | 143 | 136.65–222.35 | 3.9–10.0 |
-| R4 | 151 | 145.85–237.05 | 4.2–10.8 |
-| R5 | 157 | 156.15–254.85 | 4.5–11.6 |
-| R6 | 162 | 169.65–277.35 | 4.9–12.7 |
-| R7 | 167 | 174.35–286.65 | 5.0–13.1 |
-| PD (optional paid distribution track) | 3 | 1–2 | not scheduled |
+| Release | Tasks | Effort pw | Unmeasured tasks | Elapsed weeks (A-1; upkeep 35–60% after R0) |
+|---|---|---|---|---|
+| R0a | 7 | 2.8–7.6 (lower bound) | 1 | 2.8–7.6 |
+| R0b | 17 | 6.1–12.9 (lower bound) | 2 | 6.1–12.9 |
+| R0 | 44 | 15.15–29.15 (lower bound) | 2 | 15.2–29.1 |
+| R1 | 84 | 60.3–97.3 (lower bound) | 2 | 84.6–199.5 |
+| R2 | 130 | 104.55–167.6 (lower bound) | 2 | 152.7–375.3 |
+| R3 | 149 | 141.3–232.85 (lower bound) | 2 | 209.2–538.4 |
+| R4 | 157 | 150.5–247.55 (lower bound) | 2 | 223.4–575.1 |
+| R5 | 163 | 160.8–265.35 (lower bound) | 2 | 239.2–619.6 |
+| R6 | 168 | 174.3–287.85 (lower bound) | 2 | 260.0–675.9 |
+| R7 | 173 | 179–297.15 (lower bound) | 2 | 267.2–699.1 |
+| PD (optional paid track) | 3 | 1–2 | 0 | not scheduled |
 <!-- GENERATED:END release-table -->
 
 Details, critical paths and per-phase numbers: `GENERATED_PLAN_REPORT.md`. Model: A-1 = 1 person-week per calendar week
 (unvalidated), upkeep 35–60% of capacity after R0, no acceleration or contingency. Re-run the script with measured
 capacity after P1–P3.
+
+**Revision 4 (Astro round 2):** R0a is now a founder-only feasibility build with the complete T3 build DAG, T2 review,
+no public artifact and a strict PASS (install, launch, terminal, worktree, diff, real provider turn); readiness packet
+`R0A_FEASIBILITY_READINESS.md`. R1 claims are generated templates over the enumerated provider surface (18 §4, 21 §3).
+Dispositions: `ASTRO_ROUND_2_FINDINGS_DISPOSITION.md`.
 
 **Time to a working app (24):** the First Working Build (R0a) is T3 at the pin with two overlays, built by copying T3's
 own Windows release job — no rebuild from scratch, no claims, founder-only; its effort is CONDITIONAL (24 §4) until Q-05

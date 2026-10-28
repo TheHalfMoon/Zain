@@ -115,3 +115,13 @@ top level of this directory.
 | Double counting removed | F-13 learning, import, build/run, bug fixes, rebrand, strip | 24 §8 |
 | Numbers | generated; FWB estimate conditional (C1–C6) | GENERATED_PLAN_REPORT §3 |
 | Round-2 handoff updated | planning commit 024ed89ac08e91eba8b98f92a874d880a4156b7f | ASTRO_REVIEW_ROUND_2_HANDOFF.md |
+
+## Revision 4 — repair after Astro round 2 (2026-10-29)
+
+| Item | State | Evidence |
+|---|---|---|
+| Astro round 2 | 15 findings (11 H, 4 M); C-1 reopened; verdicts R0a conditional, R0b no, R0 conditional, R1 no | ASTRO_ROUND_2_FINDINGS_DISPOSITION.md |
+| Validator | rewritten fail-closed; `--check` exit 0 (176 tasks, 383 registered tests, 1 suite) | tools/plan_graph.py |
+| Mutation regressions | 26 cases (baseline + 18 Astro + 7 new): all behave as required | tools/test_plan_graph_mutations.py |
+| R0a | complete build DAG, inventories, T2, no public artifact, strict PASS, readiness packet | 24, R0A_FEASIBILITY_READINESS.md |
+| Not done | nothing built or run; T3 build not executed; all mechanisms unproven until C-00/Q-05 | — |

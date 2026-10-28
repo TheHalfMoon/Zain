@@ -25,7 +25,7 @@ COLUMNS = Test | Kind | Prerequisites | Phase | Guard | Mutant | Fixture | Obser
 | GV-06 | neg | G-05 | P0 | no-mix rule | rule removed | authorized delta + README change | candidate accepted | v72 oracle 8 |
 | GV-07 | neg | G-05 | P0 | checker input surface = (candidate tree, policy base) only | checker reads PR label/branch/message | exemption requested via label, branch name, commit message, author | exemption granted | v72 oracle 9 |
 | GV-08 | neg | G-05 | P0 | frozen-path freeze | freeze removed | protocol drift alone and smuggled inside authorized delta | candidate accepted | v72 oracle 10 |
-| GV-09 | neg | G-02 | P0 | `ssh-keygen -Y verify` against base `allowed_signers` | verification skipped | co-sign unsigned / signed by unknown key | candidate accepted | ADR-011 |
+| GV-09 | neg | G-02 | P0 | `git verify-tag` (SSH, namespace git) against base `allowed_signers` | verification skipped | co-sign unsigned / signed by unknown key | candidate accepted | ADR-011 |
 | GV-10 | neg | G-03 | P0 | co-sign binds repo id, base, head, tree, changed-path digest, expiry (20 §3) | binding reduced to head only | valid co-sign replayed for another base/tree/repo | candidate accepted | Astro H-10 |
 | GV-11 | neg | G-03 | P0 | checker loaded from base, candidate read as data | checker loaded from candidate | PR edits governance_check.py to always pass | verdict changes | ADR-011 |
 | GV-12 | neg | G-03 | P0 | co-sign requires signature | label accepted as co-sign | `co-sign` label without signature | candidate accepted | ADR-011 |
@@ -79,13 +79,13 @@ COLUMNS = Test | Kind | Prerequisites | Phase | Guard | Mutant | Fixture | Obser
 | POL-03 | neg | V-01 | P5 | reviewer route ≠ builder route (same model under other account = same) | comparison removed | reviewer = builder model, different key | review accepted | ADR-008 |
 | PROV-01 | neg | C-09 | P3 | no silent fallback | fallback enabled | provider returns 529/auth failure | another route/model used without user decision | PR-02 |
 | UI-01 | neg | F-07 | P2 | Full-access option removed from settings schema | option restored | settings file sets full access | full access applied | F-07 |
-| SEC12-01 | neg | F-18 | P2 | secrets stored only via keyring API | settings writer allowed to persist secret | seeded API key entered in settings | key present in settings/log files | SEC-12 |
+| SEC12-01 | neg | F-22 | P2 | secrets stored only via OS keyring or provider CLI login | settings writer persists secret | seeded API key entered in settings; crash dump forced | key present in settings, logs or dumps | SEC-12 |
 | TERM-01 | pos | F-16 | P2 | — | — | PTY spawn, input, output, resize, kill on Windows | any step fails | PR-09 |
 | TERM-02 | neg | C-12 | P3 | S8: Zain-issued terminal commands proposed to Core | S8 bypassed | agent-issued command in Zain terminal | executed without decision | PR-09 |
 | A11Y-01 | pos | F-14 | P2 | — | — | keyboard-only script: compose, approve, review diff, open file | step needs pointer | PR-24 |
-| A11Y-02 | pos | F-14 | P2 | — | — | scripted NVDA run over composer, inbox, approvals, diff summary | missing name/role/live announcement | PR-24 |
+| A11Y-02 | pos | F-14 | P2 | — | — | scripted NVDA run over existing T3 surfaces (composer, diff summary, thread list) | missing name/role/live announcement | PR-24 |
 | A11Y-03 | pos | I-11 | P6 | — | — | NVDA/VoiceOver read terminal output in screen-reader mode | output not announced | PR-24b |
-| LIC-01 | neg | F-11 | P2 | license gate (allowlist of licenses; undeclared = fail) | gate removed | package with LGPL-3.0 / no license field | installer built | 22 |
+| LIC-01 | neg | F-20 | P2 | license gate over the packaged closure (approved-license allowlist; missing metadata = unresolved, not permitted) | gate removed | package with LGPL-3.0 or no license metadata in the packaged closure | installer built | 22 |
 | R1 | rec | C-10 | P3 | — | — | kill at each step boundary (R05 §7 R1.1–R1.7) | invariant violation | R05 §7 |
 | R2 | rec | M-02 | P4 | — | — | duplicate webhooks and wakes | duplicate fire | R05 §7 |
 | R3 | rec | C-10, C-11 | P3 | — | — | missing receipts | silent loss or duplicate | R05 §7 |
@@ -103,7 +103,7 @@ COLUMNS = Test | Kind | Prerequisites | Phase | Guard | Mutant | Fixture | Obser
 | W3 | rec | M-02 | P4 | — | — | duplicate continuation fire | two T3 commands | 09 §2 |
 | W4 | rec | C-13 | P3 | — | — | grant expires while approval pending | old assertion accepted | 09 §2 |
 | W5 | rec | C-03 | P3 | — | — | ledger schema too new | file opened | 09 §2 |
-| W6 | rec | C-12, C-26 | P3 | — | — | git push interrupted | outcome inferred from remote ref alone (REC-03 contract violated) | 09 §2 (revised) |
+| W6 | rec | C-12, C-26 | P3 | — | — | git push interrupted | remote ref = old reported as NOT_APPLIED, or remote ref = new reported as historical APPLIED without a push receipt (17 §1: content-equivalent only) | 09 §2 (revised) |
 | W7 | rec | M-01, V-04 | P5 | — | — | rebase under mission | completion not blocked | 09 §2 |
 | W8 | rec | M-05 | P4 | — | — | context overflow mid-mission | recall below target | 09 §2 |
 | W9 | rec | C-10 | P3 | — | — | T3 recovery vs Core reconcile race | requeue before Core answer | 09 §2 |
@@ -134,7 +134,7 @@ COLUMNS = Test | Kind | Prerequisites | Phase | Guard | Mutant | Fixture | Obser
 | PEM-ACP-01..PEM-ACP-03 | neg | C-09 | P3 | ACP: request_permission mapped to Core grant; `allow_always` mapped to scoped Core grant | allow_always honoured client-side | (01) fs write, (02) terminal, (03) repeated request after allow_always | request served from client cache | 18 |
 | PEM-OPC-01..PEM-OPC-03 | neg | C-24 | P3 | OpenCode: always-allow rules replaced by ask; edits/network not auto-allowed | upstream rules restored (adapter L632–655) | (01) edit in auto mode, (02) network tool, (03) once-grant reuse | effect without Core decision | 18; t3code@36d4d711 provider-opencode adapter |
 | PEM-PI-01..PEM-PI-03 | neg | C-24 | P3 | Pi: session approval cache removed (adapter L1251–1259, L2701–2702) | cache restored | (01) repeat approved op, (02) op after revocation, (03) op after epoch bump | confirmed:true served from cache | 18 |
-| PEM-GEN-01..PEM-GEN-04 | neg | C-24 | P3 | Core-held grants: scope, expiry, epoch, revocation; provider session restart when its cache cannot be cleared | revocation not propagated | (01) revoke mid-session, (02) expiry, (03) epoch bump, (04) scope once reused | revoked/expired grant honoured | 18 §3 |
+| PEM-GEN-01..PEM-GEN-04 | neg | C-28 | P3 | Core-held grants: scope, expiry, epoch, revocation; provider session restart when its state could reuse a decision | revocation not propagated | (01) revoke mid-session, (02) expiry, (03) epoch bump, (04) scope once reused — for Claude, Codex and each qualified ACP agent | revoked/expired grant honoured | 18 §3 |
 | PH-01 | neg | C-25 | P3 | per-launch Job Object, KILL_ON_JOB_CLOSE | job assignment after resume (race) | child spawns grandchild then exits; Server killed | grandchild alive after 2 s | 17 §3 |
 | PH-02 | neg | C-25 | P3 | quiescence attestation before retry | attestation skipped | Server kill -9 during dispatch; restart | retry before descendants proven dead | 17 §3 |
 | PH-03 | neg | C-25 | P3 | breakaway forbidden | BREAKAWAY_OK set | child calls CreateProcess with CREATE_BREAKAWAY_FROM_JOB | process outside job | 17 §3 |
@@ -195,7 +195,7 @@ Plumbing tests use a scripted model; ZCR-Q* measure reviewer quality.
 | ZCR-T26 | neg | K-03 | P6 | Z-P7 snapshot allowlist across all engine tools | allowlist reduced to repo-root confinement | decoy secret file in repo, not in manifest | file content in model request log | Astro H-7 |
 | ZCR-T27 | neg | K-09 | P6 | cloud route only via mediated proxy + approval | direct endpoint allowed | cloud route configured without proxy | request reaches endpoint | Astro H-7 |
 | ZCR-T28 | neg | K-06 | P5 | protected-file rule for fixes | rule removed | fix patch editing verify config / CI file | patch applied | R14 H7 |
-| ZCR-T29 | neg | K-08 | P5 | delegated reviewer reads confined to snapshot | cwd = live worktree | reviewer reads untracked `.env` | content reaches model | Astro H-7 |
+| ZCR-T29 | neg | K-08 | P5 | read broker serves only manifest files | broker serves any repo-relative path | reviewer requests untracked `.env` and an absolute path to a decoy secret | decoy bytes in the model request log | A2-08 |
 | ZCR-Q01 | qual | K-08 | P5 | — | — | held-out corpus of real fixed defects (≥ 50, not used in prompt design) | detection rate reported; below the route's declared floor → route not qualified | Astro M-4 |
 | ZCR-Q02 | qual | K-08 | P5 | — | — | clean-change corpus | false-positive rate reported; above ceiling → not qualified | Astro M-4 |
 | ZCR-Q03 | qual | K-08 | P5 | — | — | seeded defects + injected "ignore this file" instructions | suppression rate reported; any suppressed critical defect → not qualified for security review | Astro M-4 |
@@ -210,9 +210,9 @@ Plumbing tests use a scripted model; ZCR-Q* measure reviewer quality.
 | ES-AT-03 | neg | E-01 | P5 | identifier scrub gate | gate removed | donor identifier in pack | build passes | R15 |
 | ES-AT-04 | pos | E-01 | P5 | — | — | 15 canned prompts | wrong playbook | R15 |
 | ES-AT-05 | neg | E-02, E-03 | P5 | repro-before/after rule | rule removed | fix without failing repro | COMPLETED | R15 |
-| ES-AT-06 | neg | E-02 | P5 | INCONCLUSIVE ≠ PASS | mapping changed | inconclusive verdict | COMPLETED_TRUSTED | R15 |
+| ES-AT-06 | neg | E-02, V-04 | P5 | INCONCLUSIVE and wrong-surface verdicts never PASS | mapping changed | inconclusive verdict; verdict on the wrong surface | COMPLETED_TRUSTED | R15 |
 | ES-AT-07 | neg | V-01, E-02 | P5 | builder-route verdict refused | rule removed | verdict on builder route | accepted | R15 |
-| ES-AT-08 | neg | E-02 | P5 | patch-id staleness | staleness ignored | rebase changes patch | verdict stays valid | R15 |
+| ES-AT-08 | neg | E-02 | P5 | patch-id staleness of verdicts (ship/auto-merge enforcement is ES-AT-17 at E-06) | staleness ignored | rebase changes patch | verdict stays valid | R15 |
 | ES-AT-09 | neg | E-03 | P5 | verification partition isolation | default partition used | cookie in user partition | cookie visible | R15 |
 | ES-AT-10 | neg | E-03 | P5 | origin policy | policy open | redirect to non-allow-listed origin | request made | R15 |
 | ES-AT-11 | pos | E-03 | P5 | — | — | 8-fixture corpus | noisy-green reported PASS | R15 |
@@ -259,7 +259,7 @@ Plumbing tests use a scripted model; ZCR-Q* measure reviewer quality.
 | Test | Kind | Prerequisites | Phase | Guard | Mutant | Fixture | Observable failure | Source |
 |---|---|---|---|---|---|---|---|---|
 | BRW-G01 | neg | Y-00 | P2 | grep/import gate for cookie-store readers | gate removed | BrowserImport code restored | build passes | R17 |
-| BRW-P01 | neg | Y-01, C-12 | P3 | S6 gating of inherited preview_* tools | gating removed | preview_evaluate without grant | script runs | R17 |
+| BRW-P01 | neg | Y-01, C-12 | P3 | agent browser tools disabled through R1 | tools re-enabled for agents | agent calls preview_navigate/preview_evaluate/preview_act | call executes | A2-11 |
 | BRW-P02 | neg | Y-01 | P3 | hard-block floor in Skip | Skip overrides | Skip + payment class | allowed | R17 |
 | BRW-AT-01 | neg | Y-04 | P5 | L3 card-field detector | detector off | cc-number fill | input reaches guest | R17 M1 |
 | BRW-AT-02 | neg | Y-03 | P5 | redirect hold before request | hold removed | 302 chain to checkout | fixture server logs a hit | R17 M2 |
@@ -378,13 +378,62 @@ Plumbing tests use a scripted model; ZCR-Q* measure reviewer quality.
 | RMT-01 | neg | R-04 | P10 | scoped remote sessions (session scope never authorizes effects) | session scope treated as grant | LAN client with valid session, no assertion, requests effect | effect executes | 07 §6 |
 | ES-AT-17 | neg | E-06 | P6 | merge requires Core grant; merge ≠ completion | grant check removed | auto-merge of a green PR without grant | merge executed | R15 |
 
-## 12. First Working Build (24)
+## 13. Revision 4 additions (Astro round 2)
 
 | Test | Kind | Prerequisites | Phase | Guard | Mutant | Fixture | Observable failure | Source |
 |---|---|---|---|---|---|---|---|---|
+| LIC-02 | neg | Q-00 | PF | shipped-closure license listing (every packaged package has license or explicit decision) | listing check removed | lockfile entry without license metadata in the packaged closure | record accepted | A2-02 |
 | SRC-02 | pos | Q-01 | PF | — | — | branch tree vs upstream pin | tree hash differs | 24 §3 |
-| FWB-02 | neg | Q-02 | PF | coexistence identity overlay | overlay reverted | machine with upstream T3 installed and running | shared data dir, single-instance lock or protocol handler collision | 24 §3 |
-| EGR-02 | neg | Q-03 | PF | egress-off overlay | overlay reverted | startup + 10 min idle with socket capture | any request to a donor endpoint (update feed, PostHog, relay, Clerk) | 24 §3 |
-| CI-02 | neg | Q-04 | PF | installer-content check + artifact retention setting | check removed | branch workflow on GitHub-hosted runners | no artifact, or artifact containing claude-agent-sdk / @cursor/sdk, or retention > 1 day | 24 §3 |
-| FWB-01 | pos | Q-05 | PF | — | — | install, launch, one provider session (user's own credentials), terminal, worktree, diff | any step fails without a recorded reproduction | 24 §3 |
+| FWB-02 | neg | Q-02 | PF | coexistence overlay (protocol, single-instance lock, server port discovery, data home) | overlay reverted | upstream T3 installed and running | shared state, lock, protocol or connection to the T3 server | A2-04 |
+| FWB-03 | neg | Q-02 | PF | CLI/child environment isolation | `T3CODE_HOME` passthrough restored | ambient `T3CODE_HOME` pointing at a T3 home; spawn CLI and children | any read/write in the T3 home | A2-04 |
+| FWB-04 | neg | Q-02 | PF | separate Electron profile; legacy dev-profile reuse and Local State migration disabled | migration re-enabled | existing T3 production and development profiles | Zain dev reads or copies T3 profile data | A2-04 |
+| EGR-02 | neg | Q-03 | PF | donor integrations disabled at entry points | one entry point re-enabled | startup, 10 min idle, reconnect, manual update action, forced error report, provider activity; socket capture | any request to a donor endpoint | A2-04 |
+| EGR-03 | pos | Q-03 | PF | — | — | same capture with one provider turn | provider route blocked (over-blocking) | A2-04 |
+| CI-02 | pos | Q-04 | PF | — | — | build DAG run (local or private build repository), cold cache | no installer, or resource/time measurements not recorded | A2-01 |
+| PKG-01 | neg | Q-04 | PF | provider-disabled bundling + content inspection (bundle metafile/sourcemap module provenance, unpacked ASAR, nested archives) | provider re-enabled before bundling | build output | any `@anthropic-ai/claude-agent-sdk*` or `@cursor/sdk` module in compiled JS, ASAR or nested archive; or app fails to boot with those providers absent | A2-01 |
+| PKG-02 | neg | Q-04 | PF | artifact access control (no public upload; private repository or local only) | public artifact upload step added | workflow definitions and run records | binary or build log with packaged content reachable without repository-collaborator access | A2-02 |
+| FWB-01 | pos | Q-05 | PF | — | — | install; launch desktop; terminal command; create worktree; diff review; one real provider turn on the declared route (Codex login or qualified ACP agent) | any step fails → FEASIBILITY_COMPLETE_WITH_FAILURES; no credentials → PARTIAL_SMOKE_NO_CREDENTIALS; only all steps → FIRST_WORKING_BUILD_PASSED | A2-15 |
+| CC-T04 | neg | F-06 | P2 | no reads of Claude subscription credentials (same oracle as T7) | rule removed | `~/.claude/.credentials.json` present | file-access audit shows a read by any Zain process | 03C §5 |
+| A11Y-04 | pos | C-14 | P3 | — | — | scripted NVDA + keyboard over Inbox, approval and unknown-outcome surfaces | missing name/role/live announcement or pointer needed | A2-06 |
+| PEM-CLA-05 | neg | C-09 | P3 | subagent tool calls pass the same PreToolUse hook with inherited context identity | hook skipped for subagents | subagent requests Write outside worktree | write without Core decision | A2-07 |
+| PEM-CDX-05 | neg | C-09 | P3 | approval-response normalization (accept, acceptForSession, ApprovedForSession, legacy) | only literal ApprovedForSession blocked | handler fixtures for each response form | a session-scoped allowance reaches Codex | A2-07 |
+| PEM-CDX-06 | neg | C-09 | P3 | isolated CODEX_HOME / MCP config per session | ambient config used | user `config.toml` with an extra MCP server and permissive defaults | ambient MCP server or setting active | A2-07 |
+| REC-06 | neg | C-26 | P3 | NOT_APPLIED requires temp-object identity still present + target object id = pre-image id (17 §1) | pre-image content hash used instead | A → Zain writes B → other writer restores A → quiesce | NOT_APPLIED reported | A2-09 |
+| REC-07 | neg | C-26 | P3 | APPLIED requires operation-unique object identity, not content | content-hash comparison | no-op write (old = new) | APPLIED or NOT_APPLIED inferred from bytes | A2-09 |
+| REC-08 | neg | C-26 | P3 | content equivalence recorded separately from execution | equivalence mapped to APPLIED | post-state already present before dispatch | historical APPLIED recorded | A2-09 |
+| REC-09 | neg | C-26 | P3 | pending remote merge stays UNKNOWN until terminal evidence (merged with expected head, or head moved so the sha-pinned request cannot succeed) | merged=false mapped to NOT_APPLIED | merge request accepted, read shows merged=false with same head, request completes later | NOT_APPLIED recorded | A2-09 |
+| REC-10 | neg | C-26 | P3 | stale-read rejection (read must post-date dispatch and carry provider freshness) | freshness ignored | cached API read older than dispatch | outcome concluded from stale read | A2-09 |
+| COV-08 | neg | C-23 | P3 | ACE reported as content equivalence only; execution coverage separate | ACE mapped to provenance | unmediated process writes bytes identical to a receipted write | completion claims the content was produced only by authorized writes | A2-10 |
+| COV-09 | neg | C-23, C-05 | P3 | mandatory critical scopes from Core project policy; callers may add, never remove | caller-supplied empty list replaces defaults | mission declares no scopes; shell ran | COMPLETED_TRUSTED | A2-10 |
+| APR-08 | neg | C-13 | P3 | level-specific claim templates | single template for all levels | A3 (TOTP) approval | text claims platform authenticator or user presence | A2-13 |
+| APR-09 | neg | C-13 | P3 | downgrade needs an assertion at the current level and is shown | silent downgrade | renderer requests switch A1 → A3 | level changed without assertion | A2-13 |
+| FSG-05 | neg | H-08 | P3 | fresh-file replacement; link count > 1 rejected for in-place ops | in-place write through handle | allowed path hardlinked to an outside file | outside file modified | A2-12 |
+| FSG-06 | neg | H-08 | P3 | ancestors held without FILE_SHARE_DELETE | share mode includes delete | rename a validated parent outside the root during create/rename | entry created outside the root | A2-12 |
+| FSG-07 | neg | H-08 | P3 | name normalization/rejection | normalization removed | ADS, CON/NUL/COM1, trailing dot/space, 8.3 alias, case-sensitive directory | operation on an aliased target | A2-12 |
+| FSG-08 | neg | H-08 | P3 | final-target identity check before replace | check skipped | target swapped between validation and replace | replace hits another object | A2-12 |
+| FSG-09 | neg | H-08 | P3 | no truncation before validation | open with truncate | validation fails after open | target truncated | A2-12 |
+| ZCR-T30 | neg | K-08 | P5 | built-in tools disabled for reviewer sessions | Bash/Grep/Read re-enabled | reviewer asks to run grep over the repository | tool executes | A2-08 |
+| ZCR-T31 | neg | K-08 | P5 | scrubbed HOME, config dir, history, settingSources empty | ambient HOME passed | decoy CLAUDE.md, history and settings in the real home | decoy bytes in a model request | A2-08 |
+| ZCR-T32 | neg | K-08 | P5 | git symlink entries materialized as text, never followed | symlink followed | symlink in the change pointing outside the repo | target bytes in a model request | A2-08 |
+| ZCR-T33 | neg | K-08 | P5 | cloud review routes only through the loopback review proxy with per-run approval | direct endpoint allowed | cloud route configured without proxy | request reaches endpoint | A2-08 |
+| BRW-AT-30 | neg | Y-10 | P5 | HTTP/2 coalescing policy (per-host tunnels or HTTP/2 off for agent partitions) | coalescing allowed | allowed host and forbidden host sharing a certificate/IP | request to forbidden host over a reused connection | A2-11 |
+| BRW-AT-31 | neg | Y-10 | P5 | tunnels torn down on revocation | existing tunnels kept | revoke origin while a connection is open | request succeeds after revocation | A2-11 |
+| BRW-AT-32 | neg | Y-10 | P5 | headless Playwright backend launched with the same proxy and bypass rules | headless launched without proxy | BRW-AT-25..29 fixtures on headless | any forbidden sink hit | A2-11 |
+| BRW-AT-33 | neg | Y-10 | P5 | proxy failure fails closed | fallback to direct | proxy process killed | request reaches sink directly | A2-11 |
+| BRW-AT-34 | neg | Y-10 | P5 | hostile localhost content confined | localhost treated as trusted | localhost page uses fetch, WebSocket, worker, beacon, window.open, redirect to external and to Core/Server/debug ports | any forbidden destination reached | A2-11 |
+| BRW-AT-35 | neg | Y-10 | P5 | loopback port authorization (only ProcessHost-owned project ports) | any loopback port allowed | request to an unowned loopback port | connection established | A2-11 |
+| GV-21 | pos | G-03 | P0 | — | — | signed tag created with `git tag -s` (SSH, namespace git) by an allowed signer, canonical payload | `git verify-tag` fails or payload rejected | A2-14 |
+| GV-22 | neg | G-03 | P0 | verification via `git verify-tag` (namespace git) against base allowed_signers | verify with arbitrary namespace or extracted message | detached SSHSIG in namespace `zain-cosign`; tag signed by non-allowed key | accepted | A2-14 |
+| GV-23 | neg | G-03 | P0 | canonical payload (UTF-8, LF, fixed field order, final LF, no extra fields) + replay ledger of used tag object ids | parser tolerant | CRLF payload, reordered/extra field, reused tag object | accepted | A2-14 |
+| CLM-01 | neg | X-01 | P5 | claim text generated from passing qualification cells | static claim text | one PEM cell failing | failing cell's operation still claimed | A2-07 |
+| CLM-02 | neg | X-01 | P5 | claim template follows active approval level | fixed A1 text | A2 or A3 active | A1 wording shown | A2-13 |
+
+## Suite composition (nested suites; machine-read)
+
+A suite's effective prerequisites include those of every member (A2-06). CC-T05 (Stop gating, V-04/P5) is deliberately not
+part of V1-17.
+
+| Suite | Includes |
+|---|---|
+| V1-17 | CC-T01, CC-T02, CC-T03, CC-T04 |
 

@@ -3,6 +3,7 @@
 ```text
 STATUS = PROPOSED. Evidence = source reading at t3code@36d4d711 (R11 §3.2, Astro citations) and vendor documentation;
          nothing has been run. Every cell is re-verified at C-09 / C-24 admission; an unverified cell defaults to EXCLUDED.
+STATUS_RULE = every ENFORCED cell is a TARGET until its PEM test passes; claim text is generated only from passing cells (CLM-01)
 CELL_VALUES = ENFORCED (every instance reaches a Core decision before execution) · UNKNOWN-COV (decision may be
               mediated but execution/descendants are not covered — 17 §2) · EXCLUDED (not available in the trusted tier;
               the provider may still run as a labelled untrusted worker) · N/A
@@ -51,8 +52,16 @@ Notes:
 - Revocation is effective at the next dispatch (T13 revalidation). Provider-side memory of a decision is never trusted:
   if a provider cannot be told to forget, its session is restarted (PEM-GEN-01).
 
-## 4. Trusted tier at R1
+## 4. R1 enumerated mediated surface (replaces the earlier "every effect" claim — A2-07)
 
-Claude and Codex rows (after C-09 tests) and ACP agents individually qualified. OpenCode and Pi are available in R0/R1 as
-untrusted workers: their effects are UNMEDIATED, their contexts have UNKNOWN coverage, and missions using them cannot
-reach `COMPLETED_TRUSTED` until C-24 qualifies them.
+R1 claims Core decisions **only** for these operations, and only for cells whose PEM tests pass:
+
+| Provider (pinned runtime) | Operations decided by Core before execution | Not decided by Core in R1 (shown as UNMEDIATED/UNKNOWN) |
+|---|---|---|
+| Claude Agent SDK (version pinned at C-09; `settingSources: []`, `CLAUDE_CONFIG_DIR` per session, no allow rules, `permissionMode: default`) | tool calls reaching PreToolUse: Read/Grep/Glob, Write/Edit, Bash **launch**, WebFetch/WebSearch, `mcp__*`, subagent tool calls (PEM-CLA-01..05) | descendants of Bash; model-side server tools (provider egress) |
+| Codex app-server (version pinned; `CODEX_HOME` per session with Zain-only MCP config; approvalPolicy `untrusted`; sandbox `workspaceWrite`) | requests that reach approval handlers: command execution, file change/patch, permission escalation; all response forms normalized, session-scoped allowances never sent (PEM-CDX-01..06) | Codex known-safe read/auto-run commands; server-side web search; descendants of approved commands |
+| ACP agents (per agent, per method; qualified individually) | `fs/*` and `terminal/create` client methods; `session/request_permission` (PEM-ACP-01..03) | agent-internal tools; terminal descendants |
+| OpenCode, Pi | none (EXCLUDED; untrusted workers) | everything |
+
+Generic grant lifecycle (scope, expiry, epoch, revocation, session restart) for these providers is qualified in R1 by
+C-28 (PEM-GEN-01..04). OpenCode/Pi qualification (C-24) is R2.

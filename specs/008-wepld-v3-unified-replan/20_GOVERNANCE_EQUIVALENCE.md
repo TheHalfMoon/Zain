@@ -32,22 +32,28 @@ its rejections (negative oracles), e.g. `wepld_s3_contracts_freeze_shortcut_v72_
 Retirement record format: `{property, reason, risk, compensating control, co-sign tag}`; a RETIRE without a valid co-sign
 (§3) fails GV-18.
 
-## 3. Co-sign binding
+## 3. Co-sign binding (revised for A2-14)
 
-A co-sign is an SSH-signed git tag created by the founder key listed in base `.github/allowed_signers`. Signed message:
+Format: a **standard SSH-signed annotated git tag** (`git tag -s` with Git's SSH signing, namespace `git`), verified by the
+base-loaded checker with `git verify-tag` using `gpg.format=ssh` and `gpg.ssh.allowedSignersFile` = the trusted base's
+`.github/allowed_signers`. No detached signature and no other namespace is accepted (GV-22).
+
+Canonical tag message (UTF-8, LF line endings, exactly these lines in this order, no extra lines, final LF; GV-23):
 
 ```text
 zain-cosign v1
-repo=TheHalfMoon/Zain#1334408699
-base=<base sha>  head=<head sha>  tree=<head tree sha>
-paths=<sha256 of the sorted list of changed protected paths>
-scope=<sha256 of the authorization text>
-expires=<UTC date>
+repo: TheHalfMoon/Zain#1334408699
+base: <40-hex base sha>
+head: <40-hex head sha>
+tree: <40-hex head tree sha>
+paths: <sha256 hex of the sorted, LF-joined list of changed protected paths>
+scope: <sha256 hex of the authorization text>
+expires: <YYYY-MM-DD UTC>
 ```
 
-The checker (from base) verifies with `ssh-keygen -Y verify -n zain-cosign`, recomputes every field from the candidate,
-and rejects any mismatch: other repository, base, head, tree, path set, expired, unknown key, label-only (GV-09, GV-10,
-GV-12).
+Tag name: `cosign/<head sha>`. The checker verifies the signature, parses the message strictly, recomputes every field from
+the candidate, rejects expired tags, and records the tag object id in a replay ledger kept in base-governed governance
+state; a tag object already used for another change is rejected. Principal = the signer identity in allowed_signers.
 
 ## 4. Required negative corpus (GV-01..GV-18)
 

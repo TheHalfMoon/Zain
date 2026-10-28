@@ -6,7 +6,8 @@ SUPERSEDES = 07 §3 replay-class paragraph, 07 §4 chain formula and integrity c
              containment paragraphs, 09 T10b wording, R17 §8.4 replay classes for text input, R18 §3.2 idempotency line
 ADDRESSES = Astro H-1 (coverage), H-4 (reconciliation), H-5 (process fencing), H-6 (approval presentation),
             H-9 (ledger envelope/anchors), M-2 (operation identity)
-TESTS = 23 §4 (COV, REC, PH, APR, LED, OPID, PEM) — each negative names guard, mutant, fixture, observable failure
+TESTS = 23 §4 and §13 (COV, REC, PH, APR, LED, OPID, PEM, CLM) — each negative names guard, mutant, fixture, observable failure
+REVISION_4 = Astro round 2: A2-09 (§1 rewritten), A2-10 (§2.2–§2.3 rewritten), A2-13 (§4.5 claim templates)
 EARLY_GATE = C-00 (P1) qualifies the Windows mechanisms in §3 and §4 before P3 starts
 ```
 
@@ -21,34 +22,43 @@ EARLY_GATE = C-00 (P1) qualifies the Windows mechanisms in §3 and §4 before P3
 | Outcome knowledge | `APPLIED` / `NOT_APPLIED` / `UNKNOWN` for one dispatched effect. |
 | Retry safety | Whether re-executing is acceptable; independent of outcome knowledge. |
 
-## 1. Per-operation reconciliation contracts (H-4)
+## 1. Per-operation reconciliation contracts (H-4; revised for A2-09)
 
-Rule R-1: an observation proves `NOT_APPLIED` **only** when (a) the state is monotonic and cannot be undone by any
-writer, or (b) the effect is an atomic local operation, the expected pre-state is still present, **and** the executor is
-proven quiescent (§3). Otherwise the result is `UNKNOWN`. Rule R-2: an observation proves `APPLIED` only for the specific
-operation when it carries an operation-unique marker (content hash, CAS result, server receipt, marker string).
-Rule R-3: inconclusive → `UNKNOWN`; dependents stay blocked; Inbox decides.
+Two separate records per effect (never merged):
 
-| Effect class | APPLIED evidence | NOT_APPLIED evidence | Otherwise | Replay class / retry safety |
+- **Execution outcome** ∈ {`APPLIED`, `NOT_APPLIED`, `UNKNOWN`} — what Zain's dispatched operation actually did.
+- **Content observation** ∈ {`CONTENT_EQUIVALENT`, `CONTENT_DIFFERENT`, `NOT_OBSERVED`} — whether current state matches the
+  intended post-state. Content equivalence never implies an execution outcome (ABA, no-op, pre-existing post-state).
+
+Rules:
+- **R-1 (APPLIED):** requires an operation-unique receipt: an object identity created by the operation itself, a CAS result
+  returned to Zain, a server response bound to the operation key, or a durable log entry written by the system that
+  performed the operation and carrying the operation id.
+- **R-2 (NOT_APPLIED):** requires positive evidence that the operation can no longer take effect: the operation's own
+  staged object is still unconsumed **and** the target still has the pre-image object identity **and** the executor is
+  quiescent (§3); or a terminal failure response; or a precondition the request was pinned to has become impossible.
+  Current state alone never proves absence unless the transition is monotonic **and** no request is still pending.
+- **R-3:** otherwise `UNKNOWN`; dependents stay blocked unless policy allows proceeding on `CONTENT_EQUIVALENT`, and the
+  audit record keeps `UNKNOWN` execution.
+
+| Effect class | APPLIED evidence (R-1) | NOT_APPLIED evidence (R-2) | Content observation | Retry safety |
 |---|---|---|---|---|
-| `fs.write` / `fs.edit` (fs-gate atomic replace, 19 §3) | file content hash = expected new hash | pre-image hash present **and** executor quiescent | UNKNOWN | RECONCILABLE; retry safe once outcome known |
-| `fs.move` / `fs.delete` | destination present with expected hash / source absent | source present with pre-image hash **and** quiescent | UNKNOWN | RECONCILABLE |
-| `git.commit` (local) | objects written first (SAFE), then `update-ref <ref> <new> <expected-old>`; ref = new | ref = expected-old **and** quiescent | UNKNOWN (another writer moved the ref) | RECONCILABLE |
-| `git.push` | leased push `--force-with-lease=<ref>:<old>`; remote ref = new OID (content-addressed: "applied or content-equivalent") | **never** from remote = old (a push may have happened and been reset) | UNKNOWN | RECONCILABLE for knowledge = APPLIED only; retry = same leased push, idempotent in end state, but re-triggers hooks/CI → approval required |
-| `git.pr.create` | PR found with body marker `zain-op:<logical_operation_id>` | not provable (search is eventually consistent) | UNKNOWN | NEVER auto-retry; retry requires approval after marker search |
-| `git.pr.merge` | PR merged with `merge_commit_sha` and head = expected sha (merge API `sha` parameter) | `merged=false` (monotonic) **and** head = expected sha | UNKNOWN | RECONCILABLE |
-| `ci.rerun`, webhook/API calls without idempotency keys | server receipt if returned | not provable | UNKNOWN | NEVER |
-| API calls with idempotency keys (e.g. MCP tools declaring `_meta.idempotencyKey` + query) | adapter query by key | adapter query by key returns absent **and** provider documents key semantics | UNKNOWN | RECONCILABLE per adapter (qualified at V-05) |
-| `browser.navigate` | committed URL = target (browser-local state only) | — | server-side effects of the navigation are **not claimed** | RECONCILABLE for browser state only; re-navigation to non-dev origins needs re-approval |
-| `browser.input.text` | — | — | UNKNOWN (input handlers may autosave/submit) | **NEVER** (changed from R17 RECONCILABLE) except Test-lane fixtures declared side-effect-free |
-| `browser.click`, `browser.form.submit`, `browser.upload`, `browser.devtools` evaluate | — | — | UNKNOWN | NEVER |
-| `browser.download` (to quarantine) | file SHA-256 in quarantine | file absent **and** download session closed | UNKNOWN | RECONCILABLE |
-| `process.spawn`, `terminal.input` | — | — | UNKNOWN (descendant effects, §2) | NEVER |
-| `model.call` (review/LLM) | response stored | — | UNKNOWN | SAFE for repository; cost-bearing, budgeted |
-| Continuation fire | receipt `cont:{id}:{seq}` in T3 | Server confirms no receipt **and** Server epoch current | UNKNOWN | two-phase (07 §5) |
+| `fs.write` / `fs.edit` (fs-gate fresh-file replacement, 19 §3) | target's file id (NTFS FileId; Linux/macOS inode + birth time) equals the id of the staged temp object recorded at dispatch | staged temp object (recorded id) still present at its op-id path **and** target file id = recorded pre-image id **and** quiescent | hash vs intended | retry only after NOT_APPLIED; UNKNOWN → Inbox |
+| `fs.move` / `fs.delete` (rename into op-id staging, then remove) | destination file id = source's recorded id / staging entry consumed per journal | source still has recorded id at original path **and** staging empty **and** quiescent | presence/hash | as above |
+| `git.commit` / local ref update | reflog entry carrying `zain-op:<id>` with expected old → new (written by git in the ref transaction) | ref = expected old **and** no reflog entry for the op **and** quiescent **and** reflog intact since dispatch | ref value | reflog missing/expired → UNKNOWN |
+| `git.push` | push response recorded with `old..new` for the ref | never from remote state | remote = new → CONTENT_EQUIVALENT only | leased push retry is idempotent in end state but re-triggers hooks/CI → approval |
+| `git.pr.create` | API response with PR number recorded, or PR found carrying body marker `zain-op:<id>` | never (search is eventually consistent) | — | retry only after marker search + approval |
+| `git.pr.merge` (API `sha` pinned) | response recorded, or PR merged with head = pinned sha **and** merged_by = the operation's credential identity **and** merge event after dispatch | terminal failure response; or PR head ≠ pinned sha **and** PR not merged at the pinned sha (the pinned request can no longer succeed); a read showing `merged=false` with the same head is **not** evidence (request may still be pending) | merged state | retry after NOT_APPLIED only |
+| API calls with idempotency keys | adapter query by key returns the completed result | adapter query returns a terminal "not processed" for the key per documented semantics | — | per adapter |
+| `ci.rerun`, webhooks, keyless APIs | response recorded | never | — | NEVER auto-retry |
+| `browser.navigate` | committed URL for browser-local state only | — | server-side effects not claimed | re-approval for non-dev origins |
+| `browser.input.text`, `click`, `form.submit`, `upload`, `devtools` evaluate | — | — | — | NEVER |
+| `browser.download` | quarantine file id + SHA-256 recorded by Zain | download session closed with no file | hash | RECONCILABLE |
+| `process.spawn`, `terminal.input` | — | — | — | NEVER |
+| Continuation fire | receipt `cont:{id}:{seq}` | Server confirms no receipt **and** epoch current | — | two-phase (07 §5) |
 
-These contracts are implemented once in Core (C-26) and used by every component (browser Y-05, DeskGate H-02/H-03,
-review fixes K-06, git S7). Tests REC-01..05, W6, BRW-AT-18, DG-N14.
+Stale reads (A2-09): a remote observation is usable only if it was taken after the dispatch record and carries provider
+freshness (no cached response); otherwise it is ignored (REC-10). Tests REC-01..REC-10, W6, BRW-AT-18, DG-N14.
 
 ## 2. Execution coverage and Trusted Completion (H-1)
 
@@ -69,29 +79,30 @@ reports are observations: they can **reveal** unmediated changes; their absence 
 off-tree paths and remote effects are invisible to them). Coverage is UNKNOWN from launch until the context is proven
 terminated (§3).
 
-### 2.2 Tree provenance
+### 2.2 Authorized-content equivalence (ACE) — renamed from "tree provenance" (A2-10)
 
-`TREE_PROVENANCE_COMPLETE` holds when replaying the receipted, MEDIATED write effects of the mission in ledger order on
-the mission base tree reproduces the candidate tree hash exactly. It proves the accepted **content** is the product of
-recorded, authorized writes (unmediated writes either did not touch the tree or cancelled out). It does not prove that
-no off-tree, network or process effect occurred.
+`ACE` holds when replaying the receipted, MEDIATED write effects of the mission in ledger order on the bound base tree
+(tree id, file modes, paths) reproduces the candidate tree exactly. **ACE is a content property**: the accepted content
+equals what authorized writes would produce. It is **not causal provenance**: an unmediated process may have written
+identical bytes, or written and then been overwritten (COV-08). Execution provenance requires COVERED/CONTAINED coverage
+(§2.1), which shells and interpreters do not have before P8.
 
-### 2.3 Completion decisions (replaces 07 §6 "Mediation classes" completion sentence)
+### 2.3 Completion decisions and mandatory scopes (revised)
+
+Mandatory critical scopes come from **Core project policy** (C-05), not from the caller. Default policy scopes: writes
+outside the worktree; pushes or merges to protected refs; network to non-allowlisted destinations; credential stores.
+Missions may add scopes; they can never remove or empty the policy set (COV-09).
 
 | Result | Conditions |
 |---|---|
-| `COMPLETED_TRUSTED` | evaluator evidence passes **and** `TREE_PROVENANCE_COMPLETE` **and** for every critical scope the mission declares (e.g. "no push to production", "no network to X"), every execution context active in the mission window has coverage `COVERED`/`CONTAINED` in the relevant dimension **and** approval level recorded |
-| `COMPLETED_WITH_UNKNOWN_COVERAGE` | evaluator evidence passes and tree provenance complete, but a declared critical scope has UNKNOWN coverage → shown as not trusted; lists the contexts |
-| `COMPLETED_WITH_UNMEDIATED_LIMITATION` | evaluator evidence passes but tree provenance incomplete |
-| `NOT_COMPLETE` / `BLOCKED` | as before (Spec 006 §20) |
+| `COMPLETED_TRUSTED` | evaluator evidence passes **and** ACE **and** every execution context active in the mission window has COVERED/CONTAINED coverage for every dimension touched by a mandatory or declared scope **and** approval levels recorded |
+| `COMPLETED_CONTENT_EQUIVALENT` | evaluator evidence passes and ACE holds, but some required coverage is UNKNOWN → **not trusted**; lists contexts and scopes |
+| `COMPLETED_WITH_UNMEDIATED_LIMITATION` | evaluator evidence passes, ACE fails |
+| `NOT_COMPLETE` / `BLOCKED` | as before |
 
-Missing coverage evidence never becomes PASS (baseline invariant `Missing … containment evidence != PASS`). Verification
-commands (tests) run in a disposable copy of the candidate tree so their writes cannot change the evaluated tree; their
-own network/process effects are reported as UNKNOWN coverage, not hidden.
-
-**Practical consequence before P8 (stated in R1/R2 claims, 21 §3):** a mission that uses shells or interpreters can reach
-`COMPLETED_TRUSTED` only for content provenance and only when it declares no off-tree critical scope; claims about the
-absence of off-tree or network side effects are unavailable until P8 containment.
+Consequence before P8: any mission whose contexts ran shells/interpreters cannot reach `COMPLETED_TRUSTED`, because the
+default scopes need fs/net coverage those contexts lack. Completion decisions start in R2 (V-04); **R1 makes no completion
+decision** and the name "Trusted Starter" refers to Core decisions for enumerated effects only (21 §3).
 
 ### 2.4 Plan Mode
 
@@ -159,16 +170,17 @@ macOS/Linux equivalents (AuthenticationServices / FIDO2 via libfido2) are P6 wor
 - Recovery via code: all standing grants revoked, fencing epoch bumped, ledger event, persistent banner for 7 days (APR-04).
 - Credential public keys live in the Core data root under the deny floor (T10b).
 
-### 4.5 Approval levels (versioned claims; never silently substituted)
+### 4.5 Approval levels and claim templates (revised for A2-13)
 
-| Level | Mechanism | Claim |
-|---|---|---|
-| A1 | Core-owned native surface + platform authenticator via webauthn.dll | resists forged/replayed approvals and deceptive display by the web renderer |
-| A2 | isolated Electron approval window owned by desktop main, static bundled page (no web-app code), text = Core display_text relayed with digest check + Chromium WebAuthn | as A1 except a compromised desktop main can deceive |
-| A3 | TOTP second factor in the A2 window | no device-bound user presence; phishable; deceptive display by desktop main possible |
+| Level | Mechanism | Claim template (exact text shown; X-01/CLM-02) | Not claimed |
+|---|---|---|---|
+| A1 | Core-owned native surface + platform authenticator (webauthn.dll) | "Approved with your device authenticator in a window drawn by Zain Core; the text you saw is bound to the approval." | protection from a compromised Zain Server (which launches Core) or same-user malware |
+| A2 | isolated Electron approval window (desktop main) + Chromium WebAuthn | "Approved with your device authenticator in an isolated Zain window; the desktop process is trusted for what you saw." | protection from a compromised desktop main, Server or same-user malware |
+| A3 | TOTP code in the A2 window | "Approved with a one-time code. No device-bound user presence; codes can be phished." | user presence, device binding, display integrity beyond A2 |
 
-The level is part of the binding, stored with every approval and completion record, and shown in the trust indicator
-(APR-07). C-00 FG-02/FG-03 decide whether A1 is available at R1; if not, R1 claims are stated at A2.
+The level is part of the binding, stored with every approval, shown in the trust indicator, and selects the claim template.
+A downgrade (A1→A2→A3) requires an assertion at the current level and is shown (APR-09). "Approval impossible without user
+presence" applies to A1/A2 only.
 
 ## 5. Ledger envelope and anchors (H-9)
 

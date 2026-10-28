@@ -63,6 +63,7 @@ not disclosed).
 | FO-11 | Review local developer-tool configurations on the founder machine (details shared privately, not recorded in this public repo) | — | local exposure |
 | FO-12 | Choose the no-cost independent reviewer route per phase (21 §4) or accept REVIEW_BLOCKED for that phase | 21 §4 | GOV-03 |
 | FO-13 | Accept approval-level fallback rule (17 §4.5): if C-00 shows A1 infeasible, R1 claims are stated at A2 | 17 §4.5 | SEC-04 |
-| FO-14 | After Astro round 2: authorize R0a (Q-01..Q-05) on isolated branch `build/first-working`, then R0b for invited testers under the working-name rule; no merge to main before F-01 admission | 24 | first working build |
+| FO-14 | After Astro round 3 accepts R0A_FEASIBILITY_READINESS.md: authorize R0a (Q-00..Q-06) on isolated branch `build/first-working`; no merge to main before F-01 admission; no public artifact | R0A_FEASIBILITY_READINESS §1 | first working build |
+| FO-15 | Choose the R0a build location (local machine, or a new private build repository on GitHub Free) and the declared smoke provider route (Codex login or a named ACP agent) | R0A_FEASIBILITY_READINESS A4, A6 | first working build |
 
 None of the FO items can be performed by an agent under current rules (account settings, billing, app installations, legal).

@@ -5,7 +5,7 @@ STATUS = CANDIDATE / DOCS-ONLY / NO IMPLEMENTATION AUTHORITY
 PRODUCT = Zain (formerly WePLD) · REPOSITORY = TheHalfMoon/Zain (ID 1334408699)
 BASE = main @ 0a843a2c0913236d9c93b31abb0d54bbdb023f23
 RECOMMENDATION = approve only the R1 Zain Trusted Starter scope and claims (21 §3) after Astro round 2; revision 3
-VALIDATION = python -I tools/plan_graph.py --check (must exit 0)
+VALIDATION = python -I tools/plan_graph.py --check and python -I tools/test_plan_graph_mutations.py (both must exit 0)
 DIRECTORY NAME = legacy path (specs/008-wepld-…) kept to preserve links
 ```
 
@@ -15,12 +15,13 @@ CURRENT_STATE, the source registry archive or product code.
 ## Read order
 
 1. `ZAIN_V3_MASTER_PLAN.md` — single entry point (product, architecture, decisions, Copy First, release tiers, gates)
-2. `ASTRO_REVIEW_ROUND_2_HANDOFF.md` — round-2 brief; `ASTRO_FINDINGS_DISPOSITION.md` — round-1 findings and status
+2. `ASTRO_REVIEW_ROUND_3_HANDOFF.md` — round-3 brief; `ASTRO_ROUND_2_FINDINGS_DISPOSITION.md` — round-2 findings;
+   `ASTRO_FINDINGS_DISPOSITION.md` — round-1 findings
    (`ASTRO_REVIEW_HANDOFF.md` = round-1 record)
 2b. Revision-3 specs: `17_TRUST_BOUNDARY_SPEC.md`, `18_PROVIDER_ENFORCEMENT_MATRIX.md`, `19_COMPONENT_SECURITY_REVISIONS.md`,
    `20_GOVERNANCE_EQUIVALENCE.md`, `21_RELEASE_TIERS_AND_COST.md`, `22_SOURCE_ADMISSION_QUALIFICATION.md`,
-   `23_ACCEPTANCE_TEST_REGISTRY.md`, `24_FIRST_WORKING_BUILD.md`; generated `GENERATED_PLAN_REPORT.md` and `15_TRACEABILITY_MATRIX.md` (tools/plan_graph.py)
-3. `00_EXECUTIVE_PRODUCT_DECISION.md`, `FOUNDER_DECISION_RECORD.md` (F1–F11, FO-1…FO-14)
+   `23_ACCEPTANCE_TEST_REGISTRY.md`, `24_FIRST_WORKING_BUILD.md`, `R0A_FEASIBILITY_READINESS.md`; generated `GENERATED_PLAN_REPORT.md` and `15_TRACEABILITY_MATRIX.md` (tools/plan_graph.py)
+3. `00_EXECUTIVE_PRODUCT_DECISION.md`, `FOUNDER_DECISION_RECORD.md` (F1–F11, FO-1…FO-15)
 4. `07_TARGET_ARCHITECTURE_AND_UX.md`, `05_VERCEL_WORKFLOW_DURABILITY_REA.md`, `16_ZAIN_PRODUCT_COMPONENTS.md`
 5. `ADR.md` (ADR-001…024 + round-1 amendments), `06_SOURCE_TRANSPLANT_MATRIX.md` (D1–D36) + `research/R11` (T3 files) + `research/R12` (donor files) + `research/R14–R18` (component files)
 6. `13_REQUIREMENTS_REGISTER.md` → `14_TASK_CATALOG.md` → `15_TRACEABILITY_MATRIX.md`; `08_MIGRATION_AND_IMPLEMENTATION_ROADMAP.md`

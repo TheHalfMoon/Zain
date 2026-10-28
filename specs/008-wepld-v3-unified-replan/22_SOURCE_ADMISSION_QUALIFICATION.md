@@ -54,3 +54,15 @@ EVIDENCE = 06, research/R11 §5, research/R12, Astro round-1 spot checks (15 lic
 - A source at L1–L3 may be studied but not shipped; LIC-01 fails the installer for any package without an approved
   license entry.
 - "Copy as-is" is allowed only for closed sets (R12 D4 was closed, but is now reference-only because C-25 supersedes it).
+
+## 5. Distribution rules (revised for A2-02)
+
+- **Any binary or build log containing packaged content that leaves the founder machine or a private repository is
+  distribution.** Public GitHub Actions artifacts and logs count as distribution regardless of retention; expiry is
+  storage hygiene, not access control.
+- R0a: build and artifacts stay local or in a private build repository; Q-00 records the shipped closure (L3) and the
+  removal decisions before the first build. No public upload (PKG-02).
+- R0b: before any tester receives a build: F-20 removals (heic-to, electron-webauthn, SDK-free compiled output), LIC-01
+  license gate over the packaged closure, notices, N-01 working-name rule, access-controlled channel (private repository
+  release to named collaborators or direct transfer). Missing license metadata is unresolved admission, never permission.
+- Public distribution: L4 for every shipped source + PD N-05 if the product name is used.

@@ -83,3 +83,16 @@ of the planning package; they should be deleted after review (they are large and
 - **Upkeep additions:** OCR Go fork (fast upstream), PStack/skills copies (quarterly diff), DesktopCommanderMCP ports,
   Playwright bumps -> add about 0.4–0.8 pw/month -> total upkeep about 1.5–2.6 pw/month (about 35–60% of capacity at A-1).
   [Resolved 2026-10-28: all calendars now use 35–60% via the generator, 21 §5]; A-1 is unvalidated until P1–P3 actuals.
+
+## 8. Corrections after Astro round 2 (2026-10-29)
+
+- **Build infrastructure at $0:** R0a builds locally or in a private build repository using GitHub Free private-repository
+  Actions minutes (limited monthly minutes; Windows minutes count at a multiplier — check current plan limits at use).
+  Public-repository artifacts are distribution and are not used for unqualified binaries. No larger/paid runners.
+- **Local build prerequisites:** Node 26.12.1, pnpm 12.14.0, Python/node-gyp, Rust MSVC target, Visual Studio C++ build
+  tools and Windows SDK, and several GB of free disk; Windows 11 Home has no Windows Sandbox/Hyper-V (isolation = separate
+  local account).
+- **Model costs:** BYO keys may cost money; a free provider route for smoke tests is the founder's own Codex login or a
+  qualified ACP agent; vendor-specific tests (C-09) cannot be substituted by small local models.
+- **Effort:** R0a/R0b totals are lower bounds while MEASURE tasks remain (GENERATED_PLAN_REPORT §3).
+

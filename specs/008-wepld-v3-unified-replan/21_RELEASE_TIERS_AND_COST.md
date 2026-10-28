@@ -11,8 +11,8 @@ MEMBERSHIP = 14 §16 (machine-read). Every release is validated as closed under 
 
 | Release | Purpose | Contents (14 §16) |
 |---|---|---|
-| R0a First Working Build | T3 as-is + coexistence and egress-off overlays; founder-only; **no claims** (24) | Q-01..Q-05 |
-| R0b Tester Build | minimum before anyone else runs it; narrow stated claims (24 §5) | R0a + B-06, F-05, F-06, F-07, F-11, Y-00, N-01 |
+| R0a First Working Build | founder-only feasibility; complete build DAG; never a public artifact; narrow tested claims (24 §6) | Q-00..Q-06 |
+| R0b Tester Build | invited testers via an access-controlled channel; license removals, SDK absence, credentials, material defects fixed before distribution | R0a + B-06, F-20, F-05, F-06, F-07, F-11, F-21, F-22, Y-00, N-01 |
 | R0 Qualified Workbench | **no authority claims** | R0b + governance reset, donor baseline, admission, strip/rebrand, inherited-bug fixes (reproduced only), accessibility, budgets, unenforced Plan Mode label; no built-in editor |
 | **R1 Zain Trusted Starter** | **smallest release with authority claims** (proposed for approval) | R0 + C-00 feasibility, Monaco (F-17), Core packaging (F-10, F-18, N-04) + Core (protocol v2, ledger envelope, effects, policy, approvals A1/A2, coverage model, ProcessHost, fs-gate, reconciliation contracts, S1–S8 seams for Claude/Codex/ACP, recovery suite, anchors) + delegated code review (K-04, K-05, K-08) + R1 exit X-01 |
 | R2 Zain v1 | full v1 | R1 + OpenCode/Pi qualification, DeskGate local, enforced Plan Mode, missions, Brain, continuations, completion, fixes, Engineering System, Browser lanes with connection-level egress, MCP/skills/MCPB |
@@ -35,26 +35,27 @@ missions/Brain, Engineering System, browser agent lanes and the OCR engine lane 
 cannot shrink without dropping a claim: ProcessHost (H-5), fs-gate (H-8), coverage (H-1), reconciliation contracts (H-4),
 approval binding (H-6), ledger envelope (H-9). The alternative is R0 only, which makes no authority claim.
 
-## 3. R1 bounded-claims statement (shown in app and docs; X-01 verifies text equality)
+## 3. R1 claim templates (generated text; X-01 verifies equality — revised for A2-07, A2-10, A2-11, A2-13)
+
+The R1 claim is assembled from templates; a template appears only if its qualification tests pass (CLM-01, CLM-02).
 
 ```text
-Zain Trusted Starter — what Zain claims (Windows x64):
-1. Decisions: every effect requested through Claude (Agent SDK, API key) and Codex sessions, ACP agents qualified in the
-   provider matrix, Zain terminals and Zain's MCP tools is decided by Zain Core before it runs; other workers
-   (OpenCode, Pi, CLI agents in terminals) are labelled untrusted.
-2. Approvals: approvals are signed by your platform authenticator and verified by Core; the approval level (A1/A2/A3)
-   is shown. A1: the text you approve is drawn by Zain Core, not by the web UI.
-3. Outcomes: effects interrupted by crashes are recorded as UNKNOWN until evidence proves APPLIED or NOT_APPLIED;
-   Zain does not retry them automatically unless the operation is proven safe.
-4. Coverage: when an agent runs a shell, interpreter or test runner, Zain cannot observe what that process does;
-   coverage is shown as UNKNOWN. "Trusted" completion then covers only the content of the accepted files (tree
-   provenance), not the absence of other side effects. Zain does not claim to contain processes before OS sandboxing.
-5. Ledger: tamper-evident against corruption; anchored history is verifiable against signed anchors; the unanchored
-   recent interval is shown and is not protected against a same-user attacker.
-6. Browser: agent browser actions need grants and are limited to project loopback origins.
-7. Review: code review runs in delegated mode on an immutable snapshot of the approved files; it is advisory and is
-   never completion authority.
-Not claimed: protection against a compromised Zain Server, same-user malware, processes that escape via system services,
+Zain Trusted Starter — Windows x64. What Zain claims:
+1. Decisions [from passing 18 §4 cells]: Zain Core decides, before execution, the operations listed in the
+   "decided by Core" column for each provider shown as qualified. Operations listed as not decided (for example Codex
+   known-safe reads, provider server-side tools, anything run inside a shell) are shown as UNMEDIATED. OpenCode, Pi and
+   CLI agents in terminals are untrusted workers.
+2. Grants [C-28]: approvals and grants are scoped, expire, and stop working after revocation or a Core restart epoch.
+3. Approvals [level template, 17 §4.5]: exactly one of the A1 / A2 / A3 sentences, matching the active level.
+4. Outcomes: interrupted operations are recorded as UNKNOWN unless an operation-specific receipt proves APPLIED or
+   NOT_APPLIED (17 §1); Zain does not retry them automatically.
+5. Coverage: when an agent runs a shell, interpreter or test runner, Zain cannot observe what that process does; this is
+   shown as UNKNOWN. R1 makes no mission completion decision.
+6. Ledger: tamper-evident against corruption; anchored history verifiable against signed anchors; the unanchored recent
+   interval is shown and is not protected against a same-user attacker.
+7. Browser: agents cannot drive the browser in this release.
+8. Review: delegated review on qualified routes reads only the approved snapshot; it is advisory, not acceptance authority.
+Not claimed: protection against a compromised Zain Server, same-user malware, processes escaping via system services,
 network effects of shells, or anything on macOS/Linux.
 ```
 

@@ -106,6 +106,7 @@ PRIORITY = M (must for v1 = P−1′…P5) · S (should, post-v1 phase named) ·
 | GOV-11 | Product identity is Zain everywhere user-facing; naming clearance and controlled-domain identifiers before distribution; legacy names preserved only as history | M | P2-N |
 | GOV-12 | Zain and the separate Zain-LLM project share no identifiers, packages, channels or docs | M | P2-N |
 | GOV-10 | `MASTER_PLAN_INDEX.md` updated to V3 only by a governed change after acceptance | M | P0 |
+| GOV-14 | No unqualified binary or packaged-content log is distributed: R0a artifacts local or in a private repository; testers only through an access-controlled channel after license/SDK gates; public distribution only after L4 admission (22 §5) | M | PF/P2 |
 | GOV-13 | Governance reset preserves every baseline property and negative oracle, or retires it by signed founder decision with a risk record; equivalence is shown with negative corpora, not accepted-PR replay alone (20) | M | P0 |
 
 ## E. Claude parity

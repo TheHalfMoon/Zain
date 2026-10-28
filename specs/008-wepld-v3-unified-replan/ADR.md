@@ -208,7 +208,7 @@ available). Rejected: running DesktopCommanderMCP as its own server (second exec
 ## ADR-020 — Execution coverage and the scope of Trusted Completion
 
 Status: PROPOSED. Decision: coverage (fs/net/proc ∈ COVERED/CONTAINED/UNKNOWN) is tracked per execution context,
-separately from launch authorization. `COMPLETED_TRUSTED` requires tree provenance plus known coverage for every declared
+separately from launch authorization. `COMPLETED_TRUSTED` requires authorized-content equivalence (amended 2026-10-29) plus known coverage for every mandatory or declared
 critical scope; otherwise completion is labelled `COMPLETED_WITH_UNKNOWN_COVERAGE` or `…_WITH_UNMEDIATED_LIMITATION`.
 Rejected: treating mediated launches or hash diffs as coverage (Astro H-1). Spec 17 §2. Tests COV-01..07.
 
@@ -245,3 +245,24 @@ Releases R0a (First Working Build), R0b (Tester Build) and R0 (Qualified) are se
 except a coexistence identity overlay and an egress-off overlay, built by copying T3's own Windows release job; it makes no
 claims and is never merged to main without F-01 admission. Deferred to R1 without weakening R1: C-00, B-05, F-10, F-17,
 F-18, N-04. R1 security requirements are unchanged.
+
+## Amendments after Astro round 2 (2026-10-29, revision 4)
+
+- **ADR-020**: "tree provenance" renamed authorized-content equivalence (ACE), a content property; execution provenance needs
+  coverage; mandatory critical scopes come from Core policy; `COMPLETED_CONTENT_EQUIVALENT` added; R1 makes no completion
+  decision (17 §2).
+- **ADR-021**: R1 claims Core decisions only for the enumerated provider surface (18 §4); ENFORCED cells are targets until
+  PEM tests pass; claim text generated from passing cells; generic grant lifecycle (C-28) moves into R1.
+- **ADR-022**: level-specific claim templates; A3 makes no user-presence claim; downgrade needs an assertion (17 §4.5).
+- **ADR-023**: R0a is a founder-only feasibility build with a complete build DAG, T2 review, no public artifact, strict
+  smoke PASS; R0b requires early license/SDK removals and access-controlled distribution (24, R0A_FEASIBILITY_READINESS).
+- **ADR-024**: fs-gate object-authority semantics (hardlinks, ancestor relocation, names, truncation) (19 §3); reconciliation
+  uses operation-unique object identity and separates execution outcome from content observation (17 §1).
+- **ADR-015**: R1 delegated review uses an enforceable read boundary (built-in tools disabled, read broker, scrubbed
+  environment, review proxy); Codex/ACP not confidential reviewer routes in R1 (19 §2).
+- **ADR-018**: agent browser tools disabled through R1; R2 proxy adds coalescing, revocation, headless parity, fail-closed
+  and port-authorization policies (19 §1).
+- **ADR-011**: co-sign = standard SSH-signed git tag verified by `git verify-tag` (namespace git) with a canonical payload
+  and replay ledger (20 §3).
+- **Validation**: tools/plan_graph.py is fail-closed; tools/test_plan_graph_mutations.py holds permanent mutation
+  regressions (all 18 Astro round-2 mutations + 7 more).

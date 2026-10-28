@@ -175,7 +175,7 @@ UI says so.** Policy changes, `core.mode` changes and permission-mode escalation
   Core records it only if reported (e.g. PostToolUse, file-hash diffs). **Revised (Astro H-1):** launch authorization never
   establishes coverage; coverage per execution context is tracked separately and is UNKNOWN for shells/interpreters (17 §2).
 
-Trusted Completion decisions are defined in 17 §2.3 (tree provenance + required coverage; fail closed on UNKNOWN). Marketing and benchmarks claim authority only over
+Trusted Completion decisions are defined in 17 §2.3 (authorized-content equivalence + coverage for policy-mandated scopes; fail closed on UNKNOWN). Marketing and benchmarks claim authority only over
 `MEDIATED` effects until P8.
 
 **Containment floor in P3 (C2 fix, partial).** Before the full P8 sandbox: (a) provider launch profiles deny writes to
