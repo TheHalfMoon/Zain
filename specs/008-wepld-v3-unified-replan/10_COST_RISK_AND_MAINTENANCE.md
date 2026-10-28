@@ -18,7 +18,7 @@ CONSTRAINTS = solo founder; zero mandatory cloud spend; no mandatory paid API fo
 | Update hosting | no | GitHub Releases | — | |
 | Reviewer services | no | CodeRabbit free (observed eligible) + independent model review via founder's own tools | Qodo/Greptile paid | `REVIEW_BLOCKED` must not stall: see ADR-011 |
 
-**No-cost route exists for every v1 phase.** Paid items are distribution polish (signing) and optional convenience.
+**Corrected (Astro H-11):** every mandatory release R0–R7 has a zero-cost route (21 §4); paid items (code signing, notarization, trademark counsel/filing) are confined to the optional distribution track PD, required only for public distribution under the name. Reviewer availability never converts to PASS: no qualified no-cost reviewer ⇒ `REVIEW_BLOCKED`.
 
 ## 2. Risk register (ranked impact × likelihood)
 
@@ -29,7 +29,7 @@ CONSTRAINTS = solo founder; zero mandatory cloud spend; no mandatory paid API fo
 | K3 | Claude SDK redistribution / auth policy | High | Med | G4; API-key default; user-installed CLI path | Anthropic says no → ship without bundled SDK, ACP via user-installed agent |
 | K4 | Trust claim overstated before sandbox | High | Med | trust banner; observe/enforce flag; P8 | any marketing claim without B11 data |
 | K5 | Governance reset weakens security | Med | Med | keep protected paths, exact-head, independent review, security review for T2; founder-signed co-sign; checker from base. **Under ADR-010 option (c) (private, free) every gate is advisory: no platform branch protection or required checks** | protected-path negative oracle fails |
-| K6 | Solo founder bandwidth (v1 ≈ 91–141 pw; all phases ≈ 160–259 pw; 2.2–4.3 years to v1 at A-1 incl. upkeep) | High | High | phase gates allow stopping at P3/P4 with a useful product; P6 parallelizable | slippage > 50% on P2/P3 → cut P7/P9 scope |
+| K6 | Solo founder bandwidth (numbers generated: GENERATED_PLAN_REPORT.md §3) | High | High | phase gates allow stopping at P3/P4 with a useful product; P6 parallelizable | slippage > 50% on P2/P3 → cut P7/P9 scope |
 | K7 | Upstream security fixes missed (no tracking) | Med | Med | monthly 0.5–1 pw review of T3 security-labelled PRs + `pnpm audit` | CVE in Electron/node-pty |
 | K8 | Electron RAM vs "low footprint" goal | Med | High | measure; strip; lazy-load browser/preview; budgets | B2 fails twice |
 | K9 | Donor identity leakage (feeds, telemetry, hook headers) | High | Low (with gate) | CI grep gate; egress test at idle | any egress at idle |
@@ -48,7 +48,7 @@ CONSTRAINTS = solo founder; zero mandatory cloud spend; no mandatory paid API fo
 | Cedar, rusqlite, MCP SDKs | low | crate/npm bumps |
 | Core (owned Rust) | feature work | most stable part |
 | Governance checker | ~0 after P0 | one script instead of a successor per change |
-| **Total upkeep** | **≈ 1.1–1.85 pw/month** | ≈ 25–43% of capacity at A-1 (1 pw/week); folded into the calendar estimate in 08 |
+| **Total upkeep** | **≈ 1.1–1.85 pw/month** | base only; with component additions (§7) ≈ 1.5–2.6 pw/month ≈ 35–60% of A-1 capacity — the only upkeep figure used (21 §5, generator) |
 
 ## 4. Licensing and provenance obligations (summary)
 
@@ -82,4 +82,4 @@ of the planning package; they should be deleted after review (they are large and
   at $0 (unsigned dev builds, local models).
 - **Upkeep additions:** OCR Go fork (fast upstream), PStack/skills copies (quarterly diff), DesktopCommanderMCP ports,
   Playwright bumps -> add about 0.4–0.8 pw/month -> total upkeep about 1.5–2.6 pw/month (about 35–60% of capacity at A-1).
-  Calendar figures in the master plan use 25–43% and are therefore optimistic; A-1 is unvalidated until P1–P3 actuals.
+  [Resolved 2026-10-28: all calendars now use 35–60% via the generator, 21 §5]; A-1 is unvalidated until P1–P3 actuals.

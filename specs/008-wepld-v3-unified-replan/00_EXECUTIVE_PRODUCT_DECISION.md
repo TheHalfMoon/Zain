@@ -1,5 +1,7 @@
 # 00 — Executive Product Decision (Zain V3)
 
+> Revision 3 (2026-10-28): Astro round 1 returned DO NOT APPROVE; dispositions in ASTRO_FINDINGS_DISPOSITION.md. The decision now asked is approval of the R1 Zain Trusted Starter scope and claims (21 §3), not the whole scope.
+
 ```text
 STATUS = CANDIDATE PLANNING PACKAGE — not authority until reviewed and merged under trusted-base governance
 DATE = 2026-10-27
@@ -53,7 +55,7 @@ as a runtime. Retire the Tauri shell; keep every line of the tested Rust core.
 
 | Option | What | ESTIMATE to useful MVP (solo, AI-assisted) | Verdict | Decisive reason |
 |---|---|---|---|---|
-| **A. T3 foundation + Orca modules + Rust Core** | Hard fork T3; port ~6 Orca modules; Core sidecar at seams | **v1 (P−1…P5, incl. all trust work, Brain, missions, completion) ≈ 91–141 pw**; all phases ≈ 160–259 pw (`08_*`) | **CHOSEN** | Best substrate for authority seams; 2.4× smaller than Orca; one state store |
+| **A. T3 foundation + Orca modules + Rust Core** | Hard fork T3; port ~6 Orca modules; Core sidecar at seams | effort generated (GENERATED_PLAN_REPORT.md §3) | **CHOSEN** | Best substrate for authority seams; 2.4× smaller than Orca; one state store |
 | B. Orca foundation + T3 orchestration | Fork Orca; graft T3 event store | ≥30–60 pw **before** any trust work (not like-for-like with A; add ≈ the same 25–45 pw of trust/Brain work); ≥1 FTE fork upkeep | REJECT | Three existing stores + a fourth; 2.37M LOC; 421 open Windows issues; cloud re-hosting |
 | C. One shell + other app as process-isolated sidecar | e.g. T3 shell + `orcad` | 6–10 pw per bridged capability + recurring breakage | BRIDGE ONLY | Two runtimes, two stores, 778-method non-public RPC, doubled RAM |
 | D. Own modular platform (keep Tauri, build UI) | Build shell/orchestrator around Rust core, copy patterns | 60–120 pw to donor parity, **excluding** trust work | FALLBACK | Contradicts COPY FIRST; fallback if A's Effect/orchestration seams prove unworkable |
@@ -122,7 +124,7 @@ confirmed in writing before marketing it) (`R03C §auth`, census `CL-E-096`).
 | G4 | Claude SDK redistribution + auth posture confirmed | Proprietary SDK in a redistributed product; subscription-auth policy | Written Anthropic answer, **or** fallback adopted: SDK excluded from installer and loaded from a user-consented location + API-key/cloud credentials only. The "user-installed CLI in a Zain terminal" route stays UNKNOWN and is not a G4 discharge. |
 | G5 | Founder accepts the governance change and the T3 fork-not-track policy | Both reverse earlier canonical choices | Founder decision record (`FOUNDER_DECISION_RECORD.md`) signed off in PR |
 
-**v1 scope line:** P−1…P5 (≈ 91–141 pw; 2.2–4.3 years at assumption A-1 with upkeep). Design Studio (P7),
+**v1 scope line:** release R2 (numbers generated: GENERATED_PLAN_REPORT.md §3; first trusted release R1, 21). Design Studio (P7),
 containment (P8), general agent work (P9) and runner/mobile (P10) are post-v1. Useful earlier stops: P2 exit (branded
 multi-agent workbench) and P3 exit (authority differentiator).
 

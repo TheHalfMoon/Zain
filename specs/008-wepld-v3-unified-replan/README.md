@@ -4,7 +4,8 @@
 STATUS = CANDIDATE / DOCS-ONLY / NO IMPLEMENTATION AUTHORITY
 PRODUCT = Zain (formerly WePLD) · REPOSITORY = TheHalfMoon/Zain (ID 1334408699)
 BASE = main @ 0a843a2c0913236d9c93b31abb0d54bbdb023f23
-RECOMMENDATION = CONDITIONAL GO — T3-first hybrid + Zain Trusted Core, staged releases R0 → R1 → R2
+RECOMMENDATION = approve only the R1 Zain Trusted Starter scope and claims (21 §3) after Astro round 2; revision 3
+VALIDATION = python -I tools/plan_graph.py --check (must exit 0)
 DIRECTORY NAME = legacy path (specs/008-wepld-…) kept to preserve links
 ```
 
@@ -14,10 +15,14 @@ CURRENT_STATE, the source registry archive or product code.
 ## Read order
 
 1. `ZAIN_V3_MASTER_PLAN.md` — single entry point (product, architecture, decisions, Copy First, release tiers, gates)
-2. `ASTRO_REVIEW_HANDOFF.md` — independent-review brief and checklist
+2. `ASTRO_REVIEW_ROUND_2_HANDOFF.md` — round-2 brief; `ASTRO_FINDINGS_DISPOSITION.md` — round-1 findings and status
+   (`ASTRO_REVIEW_HANDOFF.md` = round-1 record)
+2b. Revision-3 specs: `17_TRUST_BOUNDARY_SPEC.md`, `18_PROVIDER_ENFORCEMENT_MATRIX.md`, `19_COMPONENT_SECURITY_REVISIONS.md`,
+   `20_GOVERNANCE_EQUIVALENCE.md`, `21_RELEASE_TIERS_AND_COST.md`, `22_SOURCE_ADMISSION_QUALIFICATION.md`,
+   `23_ACCEPTANCE_TEST_REGISTRY.md`; generated `GENERATED_PLAN_REPORT.md` and `15_TRACEABILITY_MATRIX.md` (tools/plan_graph.py)
 3. `00_EXECUTIVE_PRODUCT_DECISION.md`, `FOUNDER_DECISION_RECORD.md` (F1–F11, FO-1…FO-11)
 4. `07_TARGET_ARCHITECTURE_AND_UX.md`, `05_VERCEL_WORKFLOW_DURABILITY_REA.md`, `16_ZAIN_PRODUCT_COMPONENTS.md`
-5. `ADR.md` (ADR-001…019), `06_SOURCE_TRANSPLANT_MATRIX.md` (D1–D36) + `research/R11` (T3 files) + `research/R12` (donor files) + `research/R14–R18` (component files)
+5. `ADR.md` (ADR-001…024 + round-1 amendments), `06_SOURCE_TRANSPLANT_MATRIX.md` (D1–D36) + `research/R11` (T3 files) + `research/R12` (donor files) + `research/R14–R18` (component files)
 6. `13_REQUIREMENTS_REGISTER.md` → `14_TASK_CATALOG.md` → `15_TRACEABILITY_MATRIX.md`; `08_MIGRATION_AND_IMPLEMENTATION_ROADMAP.md`
 7. `09_RECOVERY_SECURITY_AND_EVALUATION.md`, `10_COST_RISK_AND_MAINTENANCE.md`, `GAP_LIST.md`, `ASSUMPTIONS_AND_UNKNOWNS.md`
 8. Claude: `03`, `03B`, `03C`, `03E`, `03F`, `CLAUDE_STUDY_COVERAGE_GAPS.md`; donors: `02` T3, `03D` Orca, `04` Amp

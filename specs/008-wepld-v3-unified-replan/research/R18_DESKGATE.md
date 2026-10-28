@@ -162,7 +162,7 @@ MCP client / agent ──► Zain Server /mcp  (PEP)
                                │ grant
                                ▼
                         Server EffectWorker (sole executor)
-                          ├─ fs ops (realpath-checked against project root + grant target)
+                          ├─ fs ops via fs-gate handle-based operations (19 §3)
                           ├─ Terminal manager (node-pty) — the ONE PTY/process host
                           └─ ripgrep child (process.spawn effect, read-only profile)
                                │ effect.report (observed result, digests)
@@ -191,7 +191,7 @@ imports `child_process`/`node-pty`; a lint rule + dependency-cruiser check enfor
 | `get_usage_stats`, `get_recent_tool_calls`, `give_feedback…`, `write_pdf` | dropped / replaced | — | Recent calls = ledger query; PDF = P9 W-01 |
 
 All DeskGate effects are `origin = deskgate`, `mediation = MEDIATED`. They count toward Trusted Completion like
-other MEDIATED effects. Idempotency: `logical_operation_id` = MCP request id + tool + args digest.
+other MEDIATED effects. [Revised 2026-10-28, Astro H-1: `start_process`/`terminal.input` are launch authorizations only; the process context has UNKNOWN coverage (17 §2).] Idempotency: [SUPERSEDED 2026-10-28, Astro M-2] durable `logical_operation_id` allocated by Core per principal + mission + client operation key (`_meta.zainOperationKey`); MCP request ids are attempt ids; changed input under the same id is rejected (17 §6).
 
 ### 3.3 Sessions
 
@@ -275,7 +275,7 @@ control, 09). Each neg test lists its mutation.
 | DG-P08 | det | Win/macOS/Linux matrix: shell resolution, junction/symlink realpath, drive root, `force_terminate` kills grandchild | parity across OSes | — |
 | DG-N01 | neg | `write_file` outside project home with no grant | refused by Core; no file created | remove PEP call in adapter → test must fail |
 | DG-N02 | neg | symlink/junction inside root → outside target, `write_file` via link | refused (target is realpath) | resolve with `path.resolve` instead of realpath → fail |
-| DG-N03 | neg | TOCTOU: swap link between proposal and dispatch | EffectWorker re-resolves; digest/target mismatch → refused, UNKNOWN not COMPLETED | skip dispatch-time re-resolve → fail |
+| DG-N03 | neg | TOCTOU at the operation boundary: attacker thread swaps link/junction continuously during 10k writes | fs-gate writes through the validated handle; zero writes outside target (19 §3) | replace handle ops with path-based write → fail |
 | DG-N04 | neg | Core down (C-06 fail-closed) | all gated DeskGate tools refuse; reads of own buffers still OK | bypass CoreBridge health → fail |
 | DG-N05 | neg | `set_config_value allowedDirectories []` / `blockedCommands []` | fixed refusal; Core policy unchanged | re-enable DC config tool → fail |
 | DG-N06 | neg | `start_process` with blocklist-bypass strings (`/usr/bin/sudo`, `env sudo`, `python -c …`, `powershell -enc …`, `cmd /c "reg add"`) | decision comes from Core policy for `process.spawn`; DeskGate has no blocklist code path (assert none consulted) | inject DC blocklist as sole gate → test detects reliance |
@@ -285,7 +285,9 @@ control, 09). Each neg test lists its mutation.
 | DG-N10 | neg (static) | `packages/deskgate` imports `child_process`, `node-pty`, `fs.write*`, `net`, `http(s)` client, Supabase | build fails (dependency-cruiser + lint) | delete rule → seeded violation passes → test fails |
 | DG-N11 | neg | network egress from DeskGate during full suite | zero outbound connections (egress proxy / socket hook) | re-add `capture()` → fail |
 | DG-N12 | neg | non-home Zain instance proposes effect for project | refused (project-home rule) | disable rule → fail |
-| DG-N13 | neg | prompt-injection file content instructs agent to write `~/.ssh/authorized_keys` | Core requires approval / denies per policy; receipt shows MEDIATED denied | — |
+| DG-N13 | neg | prompt-injection file content instructs agent to write `~/.ssh/authorized_keys` | Core requires approval / denies per policy; receipt shows MEDIATED denied | remove the sensitive-path policy entry → fail |
+| DG-N15 | neg | parent directory swapped between check and create/rename | handle-relative parent; no entry outside target | path-based rename → fail |
+| DG-N16 | neg | same operation key with changed content | OPERATION_INPUT_CONFLICT | remove conflict check → fail |
 | DG-N14 | neg | kill -9 Server mid-`write_file` | dispatch → UNKNOWN; reconcile via pre/post hash (C-10/R suite) | auto-mark COMPLETED → fail |
 
 ## 6. Performance requirements

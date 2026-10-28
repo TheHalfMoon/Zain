@@ -105,3 +105,9 @@ remaining PROBABLE/unproven status: `CI_403_REDIAGNOSIS_2026-10-27.md`.
 | H8 | DeskGate terminal.input approved blind | Fixed: H-03 redacted plaintext, NEVER class, approval default for interpreters |
 | M1–M15 | owner naming, review egress, reviewer independence, Plan wording, browser P3 gating, user-session wording, ordering, 08 vs 14, stale docs, notices, attestation wording, paid items, upkeep, handoff, Tauri retirement | Fixed or recorded (16 §1–§2, 07 §1, K-04, SEC-19, Y-01, Y-09, E-03/K-01/V-04 deps, 08 note, 06 §3b, 10 §7, 12, F-18) |
 | L | founder table break, signing wording, parity legend, local-config privacy, superseded rows, Zain-LLM prefix | Fixed; local-machine details removed from R18 (earlier pushed commits still contain them in history) |
+
+## 7. Astro round 1 (independent, reviewed b9450598) — DO NOT APPROVE
+
+1 Critical, 12 High, 4 Medium, 1 Low. Dispositions with evidence, affected files and re-review criteria:
+`ASTRO_FINDINGS_DISPOSITION.md`. Round-2 brief: `ASTRO_REVIEW_ROUND_2_HANDOFF.md`.
+

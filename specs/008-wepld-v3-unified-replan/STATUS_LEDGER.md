@@ -91,3 +91,15 @@ top level of this directory.
 | Privacy | local-machine details removed from R18 at HEAD (still present in commits c376917 and ef19a3f history) | — |
 | Draft PR | NOT opened — founder decision 2026-10-28: Astro reviews the branch directly (no PR); automatic-review rule for installed apps still unproven (EGRESS_PREFLIGHT §5) | — |
 
+## Revision 3 — repair after Astro round 1 (2026-10-28)
+
+| Item | State | Evidence |
+|---|---|---|
+| Astro round 1 | DO NOT APPROVE @b94505988e05 (1 C, 12 H, 4 M, 1 L) | ASTRO_FINDINGS_DISPOSITION.md |
+| Dispositions | 15 RESOLVED (several with early feasibility gates), 3 DEFERRED WITH EXPLICIT GATE (H-10, M-1, plus A1 approval level inside H-6), 0 BLOCKED | ASTRO_FINDINGS_DISPOSITION.md |
+| Deterministic validation | `tools/plan_graph.py --check` exit 0: 165 live tasks, 338 registered tests, 0 errors; 98 requirements REGISTERED, 0 GAP | GENERATED_PLAN_REPORT.md |
+| New specs | 17 trust boundary, 18 provider matrix, 19 component security, 20 governance equivalence, 21 releases/cost, 22 source admission, 23 test registry | — |
+| Release proposal | R1 Zain Trusted Starter with fixed claims; R0 first usable release; all capabilities preserved in R2–R7 | 21, 14 §16 |
+| Not done | nothing implemented, built or run; Windows mechanisms unproven until C-00; full governance inventory is G-08 | — |
+| Draft PR | not opened (founder decision: Astro reviews the branch directly) | — |
+

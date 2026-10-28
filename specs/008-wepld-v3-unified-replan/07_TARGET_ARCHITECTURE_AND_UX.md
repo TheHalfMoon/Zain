@@ -1,5 +1,10 @@
 # 07 — Target Architecture and UX (Zain V3)
 
+> **Revision 3 (2026-10-28, Astro round 1):** §3 replay classes and idempotency, §4 chain/anchor claims, §5 reconciliation,
+> §6 approvals, mediation/coverage and containment floor are superseded by `17_TRUST_BOUNDARY_SPEC.md`; provider
+> enforcement by `18_PROVIDER_ENFORCEMENT_MATRIX.md`; browser egress, review confidentiality and file operations by
+> `19_COMPONENT_SECURITY_REVISIONS.md`. Where text below conflicts, 17–19 govern.
+
 ```text
 STATUS = PROPOSED (candidate), revision 2 after adversarial review (11_*: C1–C3, H1–H3, H7–H9, M3, M5, M8, L5).
 GROUNDING = R02 (T3 @36d4d711), R03D (Orca @e310a636), R05 (Vercel), Spec 006 §19–21.
@@ -97,7 +102,7 @@ Framing unchanged (4-byte BE length + UTF-8 JSON). **Changes for v2:**
 
 | Method | Purpose | Durability before reply |
 |---|---|---|
-| `effect.propose` | `{logical_operation_id, effect_class, exact_target, input_digest, origin, mediation: MEDIATED\|UNMEDIATED, ids…}` → decision + `grant_id?` + `replay_class` + `approval_challenge?` | proposal + decision fsynced; idempotent on `(logical_operation_id, input_digest)` |
+| `effect.propose` | `{logical_operation_id, effect_class, exact_target, input_digest, origin, mediation: MEDIATED\|UNMEDIATED, ids…}` → decision + `grant_id?` + `replay_class` + `approval_challenge?` | proposal + decision fsynced; idempotent on `logical_operation_id`; a different `input_digest` under the same id → `OPERATION_INPUT_CONFLICT` (17 §6) |
 | `effect.dispatch` | `{grant_id, execution_identity, fencing_epoch}` → `dispatch_id` (revalidates grant, scope, expiry) | fsynced **before** the Server releases the effect |
 | `effect.report` | outcome + postcondition refs | fsynced |
 | `effect.reconcile` | observations → `CONFIRMED_APPLIED\|CONFIRMED_NOT_APPLIED\|STILL_UNKNOWN` + `retry_safety_state` | fsynced |
@@ -119,7 +124,7 @@ Replay classes: `SAFE` (idempotent/read-only), `RECONCILABLE` (observable postco
   10 K10). Export/import works per project partition.
 - **Tables:** `ledger_events(seq, ts, kind, project_id, subject_id, payload_json, prev_hash, hash)` + rebuildable
   projections (`effects`, `missions`, `continuations`, `completions`, `brain_entries` + `brain_fts`, `grants`).
-- **Chain:** `hash = SHA-256(prev_hash ‖ seq ‖ kind ‖ canonical_json(payload))`.
+- **Chain:** [SUPERSEDED, Astro H-9] versioned envelope hash over every authoritative column (v, seq, ts, kind, project_id, subject_id, principal, payload_digest, prev_hash) — 17 §5.
 - **Honest integrity claim:** before P8 the chain is **tamper-evident against corruption, not against a same-user
   adversary** (an unsandboxed agent with the user's rights could rewrite the file and recompute an unkeyed chain).
   Mitigations from P3: (a) deny-floor rules for the Zain data root in every provider profile (Claude managed settings,
@@ -167,15 +172,15 @@ UI says so.** Policy changes, `core.mode` changes and permission-mode escalation
 - `MEDIATED` — passes through a Server PEP (ACP fs/terminal, Zain terminals' commands issued by Zain, git ops,
   MCP tools, outbox effects, provider approval prompts with a Core decision).
 - `UNMEDIATED` — happens inside a provider's own tool runtime without a prompt, or inside a CLI agent running in a PTY.
-  Core records it only if reported (e.g. PostToolUse, file-hash diffs).
+  Core records it only if reported (e.g. PostToolUse, file-hash diffs). **Revised (Astro H-1):** launch authorization never
+  establishes coverage; coverage per execution context is tracked separately and is UNKNOWN for shells/interpreters (17 §2).
 
-Trusted Completion refuses `COMPLETED_TRUSTED` when an acceptance-critical change came from `UNMEDIATED` effects; it may
-return `COMPLETED_WITH_UNMEDIATED_LIMITATION`, which is shown as such. Marketing and benchmarks claim authority only over
+Trusted Completion decisions are defined in 17 §2.3 (tree provenance + required coverage; fail closed on UNKNOWN). Marketing and benchmarks claim authority only over
 `MEDIATED` effects until P8.
 
 **Containment floor in P3 (C2 fix, partial).** Before the full P8 sandbox: (a) provider launch profiles deny writes to
 the Zain data root and outside the worktree (Codex `workspaceWrite`, Claude managed deny rules, ACP client policy);
-(b) Windows Job Objects for process-tree ownership and kill (Orca process-host + codex `process-hardening` ideas);
+(b) ProcessHost Job Objects created atomically at process creation, no breakaway, kill on Server death (17 §3; Orca's taskkill tree walk is not containment);
 (c) Full access mode removed. This is **not** a security sandbox; it narrows the unmediated surface.
 
 ## 6b. First-class components (founder amendment)

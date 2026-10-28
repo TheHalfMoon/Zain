@@ -39,3 +39,9 @@ Every unknown has an owner phase, the evidence that closes it, and whether it bl
 | U-16-5 | LSP client license (`@hediet/json-rpc` UNKNOWN) | R13 | I-03 | license check | P6 |
 | U-12-1 | Codex sandbox crate closure, LGPL bubblewrap vendor tree, `rama` pre-release | R12 D9 | S-01..S-04 | admission + spike | P8 |
 | U-12-2 | Orca D7 diff-comment rewrite effort; D3 closure (44 modules) | R12 | I-02, I-06 | admission | P6 |
+
+| U-17-1 | ConPTY children can be job-assigned at creation on Windows 11 (PROC_THREAD_ATTRIBUTE_JOB_LIST) | 17 §3 | C-25 | C-00 FG-01 | P1 |
+| U-17-2 | webauthn.dll assertion from a Core-owned native window; focus rules | 17 §4 | C-13 | C-00 FG-02/03 | P1 |
+| U-19-1 | Chromium session proxy captures every request type incl. service workers; QUIC off via proxy | 19 §1 | Y-10 | C-00 FG-05 | P1 |
+| U-19-2 | Handle-relative no-reparse writes feasible from Node via native helper on Windows | 19 §3 | H-08 | C-00 FG-04 | P1 |
+| U-21-1 | A-1 capacity and 35–60% upkeep | 21 §5 | all calendars | P1–P3 actuals | after P3 |

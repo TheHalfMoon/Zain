@@ -23,7 +23,7 @@ MUTATION_CONTROL = every negative (security/authority) test is run twice: with i
 | T8 | Supply chain | lockfiles, pins, license/notice gate, `pnpm audit`, `cargo deny`, SBOM, installer-content gate | injected GPL/CVE dep fails; `claude-agent-sdk*` in installer fails (until G4) |
 | T9 | Cross-update to donor binaries | own feed + signature + grep gate | manifest pointing to T3/Orca rejected |
 | T10 | Ledger corruption | hash chain + verify on start | byte flip → verify fails → read-only recovery mode |
-| T10b | **Ledger tampering by an unsandboxed agent** (same user) | data-root deny floor (P3); WebAuthn-signed approvals; out-of-machine anchor (`ledger.anchor`); P8 sandbox | agent rewrites file + recomputes chain → floor denies the write (mediated agents); for unmediated agents the next anchor comparison detects divergence (documented limitation before P8) |
+| T10b | **Ledger tampering by an unsandboxed agent** (same user) | data-root deny floor (P3); signed approvals; anchors (`ledger.anchor`); P8 sandbox | mediated agent write to the ledger is denied; rewriting the **anchored prefix** is detected by anchor comparison; truncation/rewrite of the **unanchored interval** is NOT detectable by the chain and is reported as such (17 §5, LED-03) |
 | T11 | Design preview script reaches Server/Core | separate-origin sandboxed iframe, no preload | preview JS WS to Server → blocked |
 | T12 | Computer-use into payments | hard-blocked categories + per-session grant (P9) | payment page → refused |
 | T13 | Stale grant after permission change | revalidation at dispatch | downgrade between approve and dispatch → `STALE_TARGET` |
@@ -46,7 +46,7 @@ Invariants I1–I6 and scenarios R1–R11 exactly as `research/R05_VERCEL.md` §
 | W3 | Duplicate continuation fire | single T3 command |
 | W4 | Grant expires while approval pending | explicit expiry event; re-approval needs a new assertion |
 | W5 | Ledger schema too new | refuse to open |
-| W6 | Git push interrupted | reconcile by remote ref |
+| W6 | Git push interrupted | leased push; remote ref = new OID ⇒ APPLIED; otherwise UNKNOWN — never NOT_APPLIED from remote = old (17 §1, REC-03) |
 | W7 | Rebase / outdated branch under a mission | target stale; completion blocked until re-evaluated |
 | W8 | Context overflow mid-mission | continue-as-new with capsule; recall measured on non-pinned decisions (B8) |
 | W9 | T3 recovery vs Core reconcile race | T3 cannot requeue/auto-continue a `NEVER`/`RECONCILABLE` effect before Core answers |
@@ -60,8 +60,7 @@ runs ≤ 2.
 ## 3. Benchmarks (solo-affordable protocol)
 
 Hardware: founder's Windows 11 laptop (record specs) for timing; a Windows VM for donor isolation. CI runners are used
-only for functional suites: on a **private** repo GitHub Actions minutes are limited and Windows minutes count at a
-multiplier (verify current plan numbers before relying on them); timing benchmarks are not run in CI.
+only for functional suites (public repository since 2026-10-27); timing benchmarks are not run in CI.
 
 | ID | Metric | Runs | Baseline | Budget / target (proposed) |
 |---|---|---|---|---|
@@ -88,3 +87,10 @@ every comparative statement is labelled "target".
 A phase is done only when its DoD tests run (CI or recorded local run for hardware-bound benchmarks) with mutation
 controls, and evidence is linked from the phase PR. From P4 Zain records its own build missions in its ledger
 (dogfooding), so progress is queryable rather than narrated.
+
+## 1b. Guard-specification gate (Astro M-4)
+
+Every coded test lives in `23_ACCEPTANCE_TEST_REGISTRY.md` with prerequisites and phase; every negative test names its
+guard, mutant, fixture and observable failure. `tools/plan_graph.py` rejects free-text negative tests in R1 tasks; for
+later tasks a free-text negative must be converted into a registry row at task admission (phase entry gate) before work
+starts. Reviewer quality (ZCR-Q*) is measured as rates on held-out corpora, separate from deterministic plumbing tests.

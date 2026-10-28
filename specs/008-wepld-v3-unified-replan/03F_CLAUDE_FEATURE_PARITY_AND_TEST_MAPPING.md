@@ -50,6 +50,29 @@ Each spec: user-visible outcome · route · donor · positive test · negative t
 | V1-17 | Claude Code worker integration (R03C) | Claude via SDK (API key) with hook-based Core authority | INTEGRATE | CC-T01..T05 (03C §5) | CC-T04 credential non-access | v1 |
 | V1-18 | Enterprise roles/audit/OTel (CL-E-0xx) | Seams only (principal, scope, audit export from ledger) | DEFER | Ledger export produces audit JSONL | — | v2+ |
 
+## 2b. Parity labels for V1-01…18 (Astro M-3)
+
+Census row counts are research inventory, not acceptance coverage. Each hand-written spec carries a label:
+PARITY = same user-visible outcome; ADAPTATION = different mechanism or weaker/other guarantee, stated; DEFERRED = later release.
+
+| Spec | Label | Note |
+|---|---|---|
+| V1-01 | ADAPTATION | composer escalates to a task; no automatic mode selection by a model |
+| V1-02 | PARITY | modes and per-tool rules; decided by Core |
+| V1-03, V1-04 | PARITY | Brain; incognito |
+| V1-05 | ADAPTATION | local continuations fire once on wake; Claude cloud scheduled tasks run with the computer off — equivalent only with the R7 runner |
+| V1-06 | PARITY | T3 inherited |
+| V1-07 | PARITY | merge ≠ completion is stricter than Claude |
+| V1-08, V1-09 | PARITY | skills, remote MCP OAuth |
+| V1-10 | PARITY (R2) | MCPB manifest review |
+| V1-11, V1-13 | DEFERRED (R6) | documents, research |
+| V1-12 | DEFERRED (R4) | Design Studio |
+| V1-14 | ADAPTATION | in-app browser lanes, loopback-only until Y-10 passes; user-session lane R6 |
+| V1-15 | DEFERRED (R6) | computer use |
+| V1-16 | DEFERRED (R7) | phone approvals |
+| V1-17 | PARITY | Claude via SDK + hooks; API key only |
+| V1-18 | ADAPTATION | audit export seam only; enterprise admin deferred |
+
 ## 3. Full generated mapping (all 377 census rows)
 
 Legend: `PT-<id>` = parity test **placeholder**. The generated negative clause ("any effect without Core grant is refused")
@@ -67,7 +90,7 @@ scheduled (DEFER/Backlog).
 | CL-A-005 | Automatic model switching when safety classifiers flag a request: Fable 5/5.1 fall back to Opus 5 (bio/chem/li | VERIFIED SHIPPING | ADAPT (transparent, labelled model | P3 | Core Nawat + permission UI | PT-CL-A-005: positive = user completes "Flagged request re-runs on the fallback model in the same chat with a " in Zain; negative = any effect without Core grant is refused |
 | CL-A-006 | Efficient mode (restrict to Sonnet/Haiku; default Sonnet 5.5 low effort) | VERIFIED SHIPPING | DEFER | Backlog-E | Enterprise profile (deferred) | accounted only |
 | CL-A-007 | Chat file upload: PDF, DOCX, CSV, TXT, HTML, ODT, RTF, EPUB, JSON, XLSX; JPEG/PNG/GIF/WebP; 500 MB/file; 20 fi | VERIFIED SHIPPING | USE VIA OFFICIAL INTEGRATION | P9 | Artifacts/Documents | PT-CL-A-007: positive = user completes ""+" > Add files or photos; drag-drop; paste" in Zain; negative = any effect without Core grant is refused |
-| CL-A-008 | PDF handling: visual analysis up to 100 pages; text-only 101-1000; reject above 1000; PDFs over 30 MB processe | VERIFIED SHIPPING | USE VIA OFFICIAL INTEGRATION | P3 | Core Nawat + permission UI | PT-CL-A-008: positive = user completes "Upload PDF and ask" in Zain; negative = any effect without Core grant is refused |
+| CL-A-008 | PDF handling: visual analysis up to 100 pages; text-only 101-1000; reject above 1000; PDFs over 30 MB processe | VERIFIED SHIPPING | USE VIA OFFICIAL INTEGRATION | P9 | Artifacts/Documents (re-routed 2026-10-28; was keyword misroute) | PT-CL-A-008: positive = user completes "Upload PDF and ask" in Zain; negative = any effect without Core grant is refused |
 | CL-A-009 | Image understanding including screenshots and screen-region capture | VERIFIED SHIPPING | USE VIA OFFICIAL INTEGRATION | P9 | Browser/computer use (Core-gated) | PT-CL-A-009: positive = user completes "Attach image or capture region" in Zain; negative = any effect without Core grant is refused |
 | CL-A-010 | No image generation; Claude builds diagrams/charts/interactive visuals in HTML and SVG (beta) and analyses upl | NOT AVAILABLE (photo/illustr | DEFER | Backlog | Deferred | accounted only |
 | CL-A-011 | Math: Claude processes equations and calculations; advises verifying mission-critical results with specialised | VERIFIED SHIPPING | ADAPT (add verification nudge) | P2 | Fork baseline / composer | PT-CL-A-011: positive = user completes "Ask math" in Zain; negative = any effect without Core grant is refused |
@@ -252,11 +275,11 @@ scheduled (DEFER/Backlog).
 | CL-D-005 | VS Code / Cursor extension (inline diffs, @-mentions, plan review, conversation history) | VERIFIED SHIPPING | USE VIA OFFICIAL INTEGRATION | P5 | Connections (skills/plugins/MCP) | PT-CL-D-005: positive = user completes "Install extension (anthropic.claude-code)" in Zain; negative = any effect without Core grant is refused |
 | CL-D-006 | JetBrains plugin for IntelliJ IDEA, PyCharm, WebStorm and others (interactive diff viewing, selection context; | BETA-PREVIEW (marketplace li | USE VIA OFFICIAL INTEGRATION | P5 | Connections (skills/plugins/MCP) | PT-CL-D-006: positive = user completes "Install from JetBrains Marketplace" in Zain; negative = any effect without Core grant is refused |
 | CL-D-007 | GitHub Actions and GitLab CI/CD integration (automate code review and issue triage in CI; `claude -p` scriptin | VERIFIED SHIPPING | USE VIA OFFICIAL INTEGRATION | P5 | Review + Trusted Completion | PT-CL-D-007: positive = user completes "Configure workflow" in Zain; negative = any effect without Core grant is refused |
-| CL-D-008 | GitHub Code Review: parallel specialised agents review the PR diff plus codebase, verify findings, dedupe and  | VERIFIED SHIPPING | USE VIA OFFICIAL INTEGRATION | P3 | Core Nawat + permission UI | PT-CL-D-008: positive = user completes "Organization settings > Claude Code > Code Review > Configure; install" in Zain; negative = any effect without Core grant is refused |
+| CL-D-008 | GitHub Code Review: parallel specialised agents review the PR diff plus codebase, verify findings, dedupe and  | VERIFIED SHIPPING | USE VIA OFFICIAL INTEGRATION | P5 | Review (re-routed 2026-10-28; was keyword misroute) | PT-CL-D-008: positive = user completes "Organization settings > Claude Code > Code Review > Configure; install" in Zain; negative = any effect without Core grant is refused |
 | CL-D-009 | Slack: mention @Claude with a bug report and get a pull request back (Claude Code in Slack; Claude Tag brand i | VERIFIED SHIPPING (Claude Ta | DEFER | Backlog | Deferred | accounted only |
 | CL-D-010 | Remote Control (continue local session from phone/browser) | VERIFIED SHIPPING | DEFER | Backlog | Deferred | accounted only |
 | CL-D-011 | Channels (push events from Telegram, Discord, iMessage or own webhooks into a running session) | BETA-PREVIEW (research previ | DEFER | Backlog | Deferred | accounted only |
-| CL-D-012 | Cloud scheduled tasks (formerly routines; keep running with computer off; API-call and GitHub-event triggers;  | VERIFIED SHIPPING | USE VIA OFFICIAL INTEGRATION | P4 | Missions + continuations | PT-CL-D-012: positive = user completes "/schedule; Desktop; /loop" in Zain; negative = any effect without Core grant is refused |
+| CL-D-012 | Cloud scheduled tasks (formerly routines; keep running with computer off; API-call and GitHub-event triggers;  | VERIFIED SHIPPING | USE VIA OFFICIAL INTEGRATION | P4 (local, runs on wake) / P10 (runner, off-machine) | Missions + continuations — ADAPTATION, not parity | PT-CL-D-012: positive = user completes "/schedule; Desktop; /loop" in Zain; negative = any effect without Core grant is refused |
 | CL-D-013 | Session handoff: `claude --teleport` (web/mobile to terminal), `/desktop` (terminal to Desktop), `claude --clo | VERIFIED SHIPPING | DEFER | Backlog-M | Mobile client (deferred) | accounted only |
 | CL-D-014 | Agent SDK (build custom agents on Claude Code tools); usage counts against plan when signed in with plan | VERIFIED SHIPPING | USE VIA OFFICIAL INTEGRATION | P2 | Fork baseline (T3 inherited) | PT-CL-D-014: positive = user completes "Install SDK" in Zain; negative = any effect without Core grant is refused |
 | CL-D-015 | Automated security reviews (/security-review, GitHub Action); Claude Code Security Center (beta) | VERIFIED SHIPPING (/security | USE VIA OFFICIAL INTEGRATION | P5 | Review + Trusted Completion | PT-CL-D-015: positive = user completes "Command/Action" in Zain; negative = any effect without Core grant is refused |

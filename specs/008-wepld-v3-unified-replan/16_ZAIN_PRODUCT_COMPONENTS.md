@@ -1,5 +1,10 @@
 # 16 — Zain First-Class Product Components
 
+> Revision 3 (2026-10-28, Astro round 1): Code Review default = delegated mode on an immutable snapshot (19 §2), OCR engine lane
+> preserved for R3 (local-only, qualified by ZCR-Q04); Browser agent lanes use external origins only behind connection-level
+> egress (19 §1); DeskGate and every mediated write use fs-gate (19 §3) and ProcessHost (17 §3); DeskGate and enforced Plan
+> Mode ship in R2, unenforced Plan Mode in R0 (14 §16).
+
 ```text
 STATUS = PROPOSED (planning only). Founder amendment 2026-10-27/28: Code Review, Engineering System (PStack + E2E),
          Plan Mode (AI Hero / mattpocock skills), Zain Browser, DeskGate are first-class, user-facing parts of Zain.
@@ -16,7 +21,7 @@ NO_DUPLICATES_RULE = one review engine, one engineering loop, one planning mode,
 | Concern | Single owner | Components that use it (never re-implement it) |
 |---|---|---|
 | Policy decisions, grants, receipts | Zain Trusted Core (Nawat + Ledger) | all five |
-| Process / PTY execution | one Zain Server ProcessHost service (T3 node-pty for PTYs; ported Orca process-host logic inside it; static import guard forbids child_process elsewhere) | DeskGate, Code Review engine runner, E2E runner, LSP/DAP |
+| Process / PTY execution | one Zain Server ProcessHost service backed by a native helper (Job Objects / cgroups, 17 §3, C-25); Orca process-host is reference only; static import guard forbids child_process/node-pty elsewhere | DeskGate, Code Review engine runner, E2E runner, LSP/DAP |
 | Browser control | Zain Browser `BrowserController` (Server) | Engineering E2E (`zain-browser-verify`), Design Mode capture, DeskGate (none), agents via MCP |
 | Review findings store and schema | Zain Code Review (`packages/review-engine`) | Engineering review lanes (E-05), Plan Mode critic (L-09), Trusted Completion |
 | Planning artifacts (spec, ADR, task DAG) | Zain Plan Mode (repo files under `specs/<NNN>-<slug>/`, Brain index) | Engineering System reads only (L-07 contract) |

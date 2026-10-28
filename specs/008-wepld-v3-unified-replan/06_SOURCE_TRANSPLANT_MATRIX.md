@@ -15,7 +15,7 @@ REGISTRY_BASE = frozen 402-entry V1 (archive 35dee10e…) — not rewritten; add
 | D1 | Shell, server, orchestration, providers, worktrees, diff, terminal, browser, packaging | pingdotgg/t3code @36d4d711 | MIT, PUBLIC-OSS + FOUNDER-ATTESTED | `apps/{desktop,web,server}`, `packages/{contracts,client-runtime,provider-*,source-control-*,shared}` | **FORK FOUNDATION** | ~1M LOC of working, tested product | Hard fork; cherry-pick security fixes monthly; no rebase | Effect 4 learning curve; Windows/storage debt; churn | T3's own 1,693 test files must pass on fork (baseline ratio recorded in P1) + Zain seam tests | 18–34 (MVP) | M |
 | D2 | Design Mode element capture | stablyai/orca @e310a636 `src/main/browser/grab-*.ts`, `browser-grab-payload.ts`, `src/shared/browser-grab-types` | MIT | as listed | **PORT (ADAPT)** | ~1.1k LOC hard-won UX | Owned copy; no sync | Electron capture glue differs from T3 | AT-01..05 (03B) | 3–6 | M |
 | D3 | CLI agent catalog + hook/OSC 7501 status | Orca `src/shared/tui-agent-config*.ts`, `src/shared/{agent-hook-listener,program-status}` | MIT | as listed | **PORT** | 45 CLI agents' launch/ready rules | Catalog curated in Zain | CLI drift. **Never write hooks into the user's global `~/.claude`/`~/.codex`**: use per-launch overlays (`CLAUDE_CONFIG_DIR`, `CODEX_HOME`) and an authenticated loopback hook endpoint (per-PTY secret) so other local processes cannot spoof status. CLI agents are `UNMEDIATED` workers (07 §6) | PTY agent launches; status detection fixture tests | 3–5 | M |
-| D4 | Windows-safe process host | Orca `src/packages/process-host/src` | MIT | package | **COPY AS-IS** (rename) | Windows tree-kill/quoting | Owned | low | process kill/tree tests on Windows | 1–2 | H |
+| D4 | Windows-safe process host | Orca `src/packages/process-host/src` | MIT | package | **REFERENCE ONLY** (superseded 2026-10-28 by C-25 ProcessHost; taskkill is not containment — 17 §3) | Windows tree-kill/quoting | Owned | low | process kill/tree tests on Windows | 1–2 | H |
 | D5 | Linear integration | Orca `src/main/linear` | MIT | dir | **PORT** | 6.8k LOC low coupling | Owned | API drift | contract tests with recorded fixtures | 2–4 | M |
 | D6 | Computer use sidecar | Orca `src/main/computer`, `native/computer-use-*` | MIT | dirs | **PORT (Phase 9)** | cross-OS native helpers | Owned | high-risk effect class | Core-gated input injection tests | 3–6 | L |
 | D7 | Editor + diff comments | `microsoft/monaco-editor` @dbf1945df2ff (MIT) + Orca `components/{editor,diff-comments}` | MIT | — | **INTEGRATE Monaco + PORT diff comments** | editor engine solved | npm pin | bundle weight | editor a11y + large-file tests | 4–8 | M |
@@ -129,9 +129,14 @@ license or notice obligations, or trademark rights. Third-party code is governed
 | D3 (Orca TUI catalog + hooks) | not self-contained: 44 outside `src/shared` modules come along; Orca hook installers must NOT be copied (they write global agent configs) | I-06 copies the listed closure only; overlays per SEC-14 |
 | D7 (diff comments) | depth-2 import closure 489 modules (renderer store) | REWRITE behind an adapter, not a port; I-02 estimate at risk (+1–2 pw) |
 | D2 (Design Mode) | nearly self-contained (6 outside modules; Electron in one file) | port as planned |
-| D4 (process-host) | fully closed | COPY AS-IS confirmed |
+| D4 (process-host) | fully closed | was COPY AS-IS; now REFERENCE ONLY (22) |
 | D9 (Codex sandboxes) | needs `codex-protocol`, `codex-utils-pty`, `codex-otel`, `codex-http-client`; `windows-sandbox-service` needs `codex-core` -> reference only; `bwrap` vendors LGPL-2.0 C -> do not vendor, use system bwrap; `network-proxy` pins pre-release `rama =0.3.0-alpha.4` | S-01..S-04 risk raised; CI license gate rejects LGPL vendor trees; S-01 estimate at risk (+1–3 pw) |
 | D13 (MCP SDKs) | one LICENSE mixes Apache-2.0 + MIT + CC-BY-4.0 | ship all license texts |
 | D19 (Excalidraw) | fonts without license files in tree; repo 0.18.0 vs npm 0.18.1 | verify font licenses before D-07; pin npm version |
 | UNKNOWN | Orca closures beyond depth 2; native sidecar internals; used `codex_protocol` symbols; test imports; `process-hardening` on Windows; TLS termination in `network-proxy` | resolved at each task admission (GOV-07) |
 
+## 1d. Admission levels and v1 decisions (2026-10-28, Astro M-1)
+
+Admission levels L1–L4 and per-source decisions are in `22_SOURCE_ADMISSION_QUALIFICATION.md` (supersedes "COPY AS-IS"
+for D4: Orca process-host is now reference only; C-25 ProcessHost replaces it). v1 removals: heic-to, electron-webauthn,
+@cursor/sdk. Codex sandbox crates are post-v1 (R5) with their full closure.

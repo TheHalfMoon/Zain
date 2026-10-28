@@ -13,14 +13,14 @@ PRIORITY = M (must for v1 = P−1′…P5) · S (should, post-v1 phase named) ·
 | ID | Requirement | Pri | Phase |
 |---|---|---|---|
 | PR-01 | One desktop app combining IDE and AI workspace (chat, code sessions, files, terminal, browser preview, review) under the Zain brand | M | P2 |
-| PR-02 | Run Claude, Codex, ACP-family agents, OpenCode, Pi and local models as replaceable workers; no silent fallback | M | P2/P3 |
+| PR-02 | Run Claude, Codex, ACP-family agents, OpenCode, Pi and local models as replaceable workers; no silent fallback. Trusted tier = only provider × operation cells qualified in 18 (initially Claude, Codex; ACP per agent); OpenCode and Pi run as labelled untrusted (UNMEDIATED) workers until C-24 qualifies them | M | P2/P3 |
 | PR-03 | Multi-agent orchestration: parallel sessions in isolated worktrees, subagents, steer/interrupt/resume, per-role model pins (reviewer ≠ builder) | M | P2/P5 |
 | PR-04 | Unified composer that escalates chat to task with visible plan and resume | M | P2/P4 |
 | PR-05 | Projects with instructions, knowledge files, isolated memory; Brain indexes repo specs | M | P4 |
 | PR-06 | Durable missions with continuations (schedules, wait-for-CI/PR/human), missed-run policy | M | P4 |
 | PR-07 | Context survives model/provider switch and compaction (capsules) | M | P4 |
 | PR-08 | Git: worktrees, checkpoints, diff review with inline comments, PR/CI tracking; destructive git ops gated | M | P2/P3 |
-| PR-09 | Terminals: integrated PTYs; CLI agents in terminals with status detection, labelled UNMEDIATED | M (terminal) / S (CLI agents P6) | P2/P6 |
+| PR-09 | Terminals: integrated PTYs on Windows (spawn, input, output, resize, kill — TERM-01 at P2; Zain-issued commands mediated — TERM-02 at P3); CLI agents in terminals with status detection, labelled UNMEDIATED (S, P6) | M (terminal) / S (CLI agents P6) | P2/P3/P6 |
 | PR-10 | Code editor (Monaco) with diff comments; LSP for TS/Python/Rust/Go | S | P6 |
 | PR-11 | Debugging via Debug Adapter Protocol (Node/browser, Python, Rust/C++, Go); debug launches are gated effects; agent-readable debug state | S | P6 |
 | PR-12 | Code review: independent reviewer worker, findings schema, finding → repair proposal loop | M | P5 |
@@ -35,8 +35,9 @@ PRIORITY = M (must for v1 = P−1′…P5) · S (should, post-v1 phase named) ·
 | PR-21 | Windows x64 primary; macOS and Linux packages | M (Win) / S (mac, Linux) | P2/P6 |
 | PR-22 | Local-first: core works offline; zero mandatory cloud; BYO credentials only | M | P2 |
 | PR-23 | Inbox for approvals, unknown outcomes and mission events; notifications | M | P3 |
-| PR-24 | Accessibility baseline (keyboard-complete, screen-reader modes, AA contrast) | M | P2/P6 |
-| PR-26 | Zain Code Review: one review engine (OCR fork) with IDE findings panel, dispositions, fix proposals applied only via Core grants with undo and verification; local/free model routes | M | P5 |
+| PR-24 | Accessibility baseline: keyboard-complete core flows and screen-reader names/roles/live regions for composer, inbox, approvals and diff summary (A11Y-01/02, scripted NVDA), AA contrast | M | P2 |
+| PR-24b | Terminal screen-reader mode and full WCAG 2.2 AA audit of IDE surfaces | S | P6 |
+| PR-26 | Zain Code Review: one findings schema and store; delegated review mode is the default (R1/R2); fixes applied only via Core grants with undo and verification; the Alibaba OCR engine lane (fork) is preserved as an R3 capability, local-only and advisory until K-11 qualification; cloud review routes only through the mediated proxy (K-09) | M (delegated, fixes) / S (OCR engine lane) | P5 / P6 |
 | PR-27 | Zain Engineering System: one investigate-plan-implement-test-review-verify loop (PStack-derived) with E2E evidence feeding Trusted Completion | M | P5 |
 | PR-28 | Zain Browser: one BrowserController, lanes Preview/Agent/Test (+ opt-in user-session later), action receipts, evidence, recovery | M (localhost/allow-listed) / S (general web) | P5 / P9 |
 | PR-29 | Zain Plan Mode: first-class read-only planning mode with durable artifacts, approval to mission | M | P2-P5 |
@@ -50,11 +51,11 @@ PRIORITY = M (must for v1 = P−1′…P5) · S (should, post-v1 phase named) ·
 | SEC-01 | Core Nawat is the only policy decision point; Server is PEP and named TCB | M | P3 |
 | SEC-02 | Effect model per Spec 006 §19 (proposal → decision → dispatch → result/reconciliation; UNKNOWN outcomes; retry safety) | M | P3 |
 | SEC-03 | Dispatch record fsynced before release; replay classes SAFE/RECONCILABLE/NEVER | M | P3 |
-| SEC-04 | Approvals, policy and mode changes require WebAuthn assertion verified by Core | M | P3 |
+| SEC-04 | Approvals, policy and mode changes require a WebAuthn assertion verified by Core over a canonical operation binding; approval text is rendered by a Core-owned surface; enrollment, recovery and credential replacement are specified; approval level A1/A2/A3 is recorded and shown (17 §4) | M | P3 |
 | SEC-05 | MEDIATED/UNMEDIATED tagging on every effect; UI trust indicator states the current claim | M | P3 |
 | SEC-06 | Containment floor before P8: data-root and out-of-worktree write deny in provider profiles; Job Objects; no Full access | M | P3 |
 | SEC-07 | OS sandbox for providers on Windows, macOS, Linux; Full-access lane only inside sandbox | S | P8 |
-| SEC-08 | Ledger append-only, hash-chained, fsync, verified on start; out-of-machine anchors | M | P3 |
+| SEC-08 | Ledger append-only, fsync, verified on start; versioned envelope hash over every authoritative field; anchors with an explicit anchored prefix and a reported unanchored interval (17 §5) | M | P3 |
 | SEC-09 | Single Core per data root (OS lock); fencing epoch; direction-tagged ids; chunked frames | M | P3 |
 | SEC-10 | T3 recovery gated by Core (S4b); two-phase continuation fires | M | P3/P4 |
 | SEC-11 | No telemetry egress; no donor endpoints, feeds or identifiers in shipped builds (grep + installer gates) | M | P2 |
@@ -65,9 +66,15 @@ PRIORITY = M (must for v1 = P−1′…P5) · S (should, post-v1 phase named) ·
 | SEC-16 | Design preview runs in isolated origin with no access to Server/Core | S | P7 |
 | SEC-18 | Review route independence cannot be overridden by ambient config/env | M | P5 |
 | SEC-19 | Plan Mode denies MEDIATED writes outside the plan path; UNMEDIATED writes are detected and invalidate the plan (prevention only after P8) | M | P3 |
-| SEC-20 | Browser hard blocks, pre-request redirect gating, no import of user browser cookie stores | M | P2-P5 |
+| SEC-20 | Browser hard blocks; navigation/redirect approval gate; connection-level egress enforcement for every request type before any external origin is allowed in agent lanes (19 §1); no import of user browser cookie stores | M | P2-P5 |
 | SEC-21 | DeskGate has no execution authority of its own (single PTY/process host; Core-mediated) | M | P3 |
-| SEC-17 | Every negative security test passes mutation control (fails with Core disabled) | M | P3+ |
+| SEC-22 | Execution coverage is tracked separately from launch authorization; unsandboxed execution has UNKNOWN descendant coverage; Trusted Completion fails closed when required coverage is UNKNOWN (17 §2) | M | P3 |
+| SEC-23 | Provider × operation enforcement matrix; cached approvals live only in Core with scope, expiry, epoch and revocation; unqualified cells excluded from the trusted tier (18) | M | P3 |
+| SEC-24 | Process lifecycle: every launch owned by ProcessHost (Windows Job Objects created atomically, no breakaway, kill on Server death); retries only after proven quiescence (17 §3) | M | P3 |
+| SEC-25 | Per-operation reconciliation contracts: APPLIED / NOT_APPLIED / UNKNOWN evidence per effect class; current remote state never proves absence unless the state is monotonic (17 §1) | M | P3 |
+| SEC-26 | Single handle-based file write path with no-follow/reparse protection (fs-gate) for every mediated write (19 §3) | M | P3 |
+| SEC-27 | Review confidentiality: reviews read an immutable, screened snapshot with an exact allowlist; cloud review egress only via the mediated proxy with approval (19 §2) | M | P5/P6 |
+| SEC-17 | Every negative security test names its guard, mutant, fixture and observable failure (23) and fails with its guard removed; Core is the guard only where Core enforces the property | M | P3+ |
 
 ## C. Non-functional (budgets are targets until measured)
 
@@ -99,8 +106,12 @@ PRIORITY = M (must for v1 = P−1′…P5) · S (should, post-v1 phase named) ·
 | GOV-11 | Product identity is Zain everywhere user-facing; naming clearance and controlled-domain identifiers before distribution; legacy names preserved only as history | M | P2-N |
 | GOV-12 | Zain and the separate Zain-LLM project share no identifiers, packages, channels or docs | M | P2-N |
 | GOV-10 | `MASTER_PLAN_INDEX.md` updated to V3 only by a governed change after acceptance | M | P0 |
+| GOV-13 | Governance reset preserves every baseline property and negative oracle, or retires it by signed founder decision with a risk record; equivalence is shown with negative corpora, not accepted-PR replay alone (20) | M | P0 |
 
 ## E. Claude parity
+
+Census counts and row mappings are research inventory, **not** acceptance coverage (Astro M-3). Parity labels
+(PARITY / ADAPTATION / DEFERRED) for V1-01…18 are in 03F §2b.
 
 All 377 census rows are mapped in `03F` (phase, module, placeholder test). v1-gating rows have hand-written specs
 V1-01…V1-18 (03F §2). Traceability treats V1-xx as requirements `CL-V1-01…18`; Backlog rows are accounted, not required.

@@ -344,7 +344,7 @@ intent → TargetResolver (ref → node; stale → error, never guess)
 | `browser.observe` | snapshot, screenshot, get_text, list_tabs | SAFE | allow within granted origin |
 | `browser.navigate` | navigate, back, reload, open tab | RECONCILABLE (postcondition: committed URL) | first visit to origin → grant prompt; then allow |
 | `browser.navigate.sensitive` | URL/redirect hop classified checkout/signup/OAuth-consent/admin | NEVER | approval always |
-| `browser.input.text` | type/fill in non-sensitive field | RECONCILABLE (field value readback, redacted) | Manual: ask; Auto: allow on granted origin |
+| `browser.input.text` | type/fill in non-sensitive field | NEVER (revised 2026-10-28, 17 §1: field readback cannot prove no autosave/submit) | Manual: ask; Auto: allow on granted origin |
 | `browser.click` | generic click/press | NEVER (side effects unknowable) | Manual: ask; Auto: allow on granted origin unless L3 flags submit-like |
 | `browser.form.submit` | submit, click on submit-like control, Enter in form | NEVER | approval (all modes) |
 | `browser.upload` | file chooser answer | NEVER | approval; paths only from per-run allow-listed dir |
@@ -383,7 +383,7 @@ RECONCILABLE → `effect.reconcile` reads postcondition; SAFE → re-run.
 |---|---|---|
 | Electron guests | `session.webRequest.onBeforeRequest` (main-frame + subframe document types) + `webContents` `will-navigate`, `will-frame-navigate`, `will-redirect` (preventable), `setWindowOpenHandler` | classify each hop; ungranted cross-origin hop → cancel + `effect.propose(browser.navigate.redirect)` with full chain; on approval re-navigate to the held URL. (INFERRED: Chromium re-enters onBeforeRequest after onBeforeRedirect; **verify in spike**.) |
 | Playwright lanes | CDP `Fetch.enable({patterns:[{resourceType:Document, requestStage:Request}]})` via `CDPSession` owned by controller | `Fetch.requestPaused` per hop incl. redirects (INFERRED; verify) → continue/fail. Playwright `page.route` redirect coverage: UNKNOWN — not relied upon. |
-| All | URL parsing via WHATWG URL; only http/https; block loopback/link-local/RFC1918/`.local` for non-dev origins; meta-refresh and JS `location` arrive as navigations (same hooks); popups inherit opener's grants only for same origin; downloads triggered by navigation go to §8.5. DNS-rebinding: resolved-IP check requires an egress proxy (P8 containment proxy; INFERRED). |
+| All | URL parsing via WHATWG URL; only http/https; block loopback/link-local/RFC1918/`.local` for non-dev origins; meta-refresh and JS `location` arrive as navigations (same hooks); popups inherit opener's grants only for same origin; downloads triggered by navigation go to §8.5. DNS-rebinding: resolved-IP check requires an egress proxy (P8 containment proxy; INFERRED). **[SUPERSEDED 2026-10-28, Astro H-3: document-hop interception is not an egress boundary; connection-level enforcement for all request types via the P5 partition proxy, 19 §1 / Y-10.]** |
 
 ### 8.7 Prompt-injection defenses
 

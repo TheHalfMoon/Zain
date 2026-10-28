@@ -27,3 +27,8 @@ Rank = impact × (1/complexity) × (1/risk) × source availability, judged quali
 | 21 | Browser pre-request gating + DNS rebinding defence | H | H | H | Low (net-new on T3) | P5 |
 | 22 | DeskGate without second authority | M | M | M | High (DC MIT) | P3 |
 | 23 | Trademark clearance for Zain | H | L | H | n/a (legal) | before distribution |
+
+| 24 | Execution coverage vs launch authorization (UNKNOWN for shells) | H | M | H | n/a (design) | P3 |
+| 25 | Windows process containment (Job Objects at creation) | H | M | H | Low (net-new native helper) | P3 |
+| 26 | Approval presentation (Core-owned surface) | H | M | H | Low (net-new) | P3 |
+| 27 | Governance equivalence via negative corpora | H | M | M | High (v1–v72 fixtures exist) | P0 |

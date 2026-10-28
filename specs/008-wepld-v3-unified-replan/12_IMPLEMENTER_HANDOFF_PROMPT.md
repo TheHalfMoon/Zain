@@ -79,3 +79,12 @@ Report progress to the founder in Arabic; write code, specs, PRs and commit mess
 | P2 | G2 | create fork layout; strip list; rename register; grep gate; NSIS build |
 | P3 | P2 DoD | **G3 spike first**: S3 ACP fs/write + S2 Codex approval via Core with ledger receipt + kill test |
 | P4–P10 | previous DoD | per 08 |
+
+## Revision 3 rules (2026-10-28)
+
+- Numbers, release membership and critical paths come only from `tools/plan_graph.py` (run `python -I tools/plan_graph.py --check`
+  before and after any plan change; non-zero exit blocks the change).
+- Every test you write must exist in `23_ACCEPTANCE_TEST_REGISTRY.md`; negatives must name guard, mutant, fixture, failure.
+- Trust contracts: 17 (reconciliation, coverage, ProcessHost, approvals, ledger, operation ids), 18 (providers),
+  19 (browser egress, review snapshot, fs-gate). Do not claim anything beyond 21 §3 for R1.
+- Start with C-00 (Windows feasibility); its NO-GO results select the documented weaker claims before P3.

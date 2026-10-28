@@ -1,5 +1,7 @@
 # Astro Review Handoff — Zain V3 Master Plan
 
+> **Superseded for round 2** by `ASTRO_REVIEW_ROUND_2_HANDOFF.md` (2026-10-28). Kept as the round-1 record.
+
 ```text
 REVIEWER = Astro (independent). You are asked to CHALLENGE this plan, not endorse it.
 REPOSITORY = https://github.com/TheHalfMoon/Zain (ID 1334408699, PUBLIC; formerly TheHalfMoon/wepld)
