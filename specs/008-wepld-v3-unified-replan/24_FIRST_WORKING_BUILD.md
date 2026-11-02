@@ -1,10 +1,10 @@
 # 24 — First Working Build (R0a), Tester Build (R0b), Qualified R0 — revision 4
 
 ```text
-STATUS = PROPOSED (planning only; nothing built or run by Zain). Revision 4 repairs Astro round 2 A2-01..A2-04, A2-15.
+STATUS = R0a FOUNDER WORK ORDER APPROVED TO START Q-00, subject to all A3-A7 evidence gates; nothing built/run or package-qualified by this document. The concrete selected build route is in OPUS_R0A_BUILD_EXECUTION_2026-11-02.md.
 STRATEGY = Copy First: T3 @36d4d711 is the application foundation; Zain compiles and packages T3's own code with a
            small set of overlays. Nothing that T3 already provides is rebuilt.
-NUMBERS = generated (GENERATED_PLAN_REPORT.md §3). R0a contains one MEASURE task (Q-06), so its total is a LOWER BOUND,
+NUMBERS = generated (GENERATED_PLAN_REPORT.md §3). R0a has a 2.8–7.6 person-week KNOWN-WORK SUBTOTAL; Q-06 is MEASURE and excluded, so this is NOT a delivery bound,
           not a delivery envelope; the earlier 0.9–2.6 pw figure is withdrawn (it omitted the build DAG, inventories,
           admission and fix-to-pass work).
 APPROVAL_PACKET = R0A_FEASIBILITY_READINESS.md (approvable without approving R1)
@@ -23,7 +23,7 @@ APPROVAL_PACKET = R0A_FEASIBILITY_READINESS.md (approvable without approving R1)
 
 ## 2. What Copy First saves (reviewable) and what it does not
 
-Reused without rebuilding: Electron shell, web UI, server, orchestration-v2, retained providers (Codex, ACP; Claude later via
+Reused without reimplementing: Electron shell, web UI, server, orchestration-v2, retained providers (Codex, ACP; Claude later via
 F-06), terminals, worktrees, diff review, `build-desktop-artifact.ts` with unsigned NSIS (`signed` defaults false), native
 probes, notices tooling (`licenses:sync`), upstream verify steps, 1,278 test files.
 
@@ -35,22 +35,18 @@ bundling, identity/egress inventories, admission records, and fixing whatever bl
 ```text
 source @36d4d711 + overlays (Q-02 identity, Q-03 egress, provider registry: Claude + Cursor disabled)
   └─▶ [1] install: pnpm 12.14.0 --frozen-lockfile, Node 26.12.1, pinned action SHAs; no task-cache secret
-       └─▶ [2] JS bundle: build_bundle logic WITHOUT relay_public_config / relay tracing; telemetry channel 'dev';
-               repository guard and donor publish steps removed; bundle metafile/sourcemap kept for PKG-01
-            └─▶ [3] native + package staging: resource monitor/native modules, build-desktop-artifact.ts --platform win
-                    --target nsis (unsigned), NO --wsl-runtime (WSL backend disabled for R0a)
-                 └─▶ [4] Windows verify: upstream verify steps (native loads, CLI, resource monitor) + PKG-01 content scan
-                      └─▶ [5] artifact stays local or in a private build repository (PKG-02) → Q-05 install + smoke
+       └─▶ [2] JS + Windows CLI SEA bundles: build_bundle and separate CLI bundling WITHOUT relay_public_config / relay tracing; telemetry channel 'dev';
+               repository guard and donor publish steps removed; Claude/Cursor removed from BOTH BUILT_IN_DRIVERS and BUILT_IN_USAGE_DRIVERS plus indirect imports; provenance for EVERY bundled root kept for PKG-01
+            └─▶ [3] native + CLI archive + package staging: resource monitor/native modules, sanitized Windows CLI SEA/archive, build-desktop-artifact.ts --platform win
+                    --target nsis (unsigned), NO --wsl-runtime AND clear T3CODE_DESKTOP_WSL_RUNTIME (WSL backend disabled for R0a)
+                 └─▶ [4] Windows verify: native loads, actual Windows CLI SEA/archive, resource monitor + PKG-01 scan of all ASAR/SEA/nested/unpacked payload roots
+                      └─▶ [5] LOCAL_ONLY artifact (PKG-02; no hosted build without new explicit verified zero-cost approval) → Q-05 installed + provider smoke
 ```
 
-Where it runs (zero cost, A2-02): (a) locally on the founder machine (needs Node 26.12.1, pnpm 12.14.0, Python/node-gyp,
-Rust MSVC target, Visual Studio C++ build tools/Windows SDK and enough free disk — the founder disk filled up earlier, so
-Q-05 records disk use), or (b) a **private** build repository using GitHub Free private-repository Actions minutes (limits
-and the Windows minute multiplier must be checked at use; no paid runners). The public Zain repository never uploads a
-binary or a packaged-content log.
+Where it runs (zero cost, A2-02): LOCAL_ONLY on the founder Windows machine (requires Node 26.12.1, pnpm 12.14.0, Python/node-gyp,
+Rust MSVC target, Visual Studio C++ build tools/Windows SDK and verified available free disk/RAM — do not start a cold build if resource preflight fails). No hosted GitHub build or paid fallback is approved. A future private repository route needs a new verified spending/access/retention decision. The public Zain repository never uploads a binary or packaged-content log.
 
-WSL: disabled in R0a (no Linux CLI archive built); re-enabled with matching overlays in qualified R0 (F-02 scope) — the
-capability is preserved, not dropped.
+WSL: disabled in R0a (no Linux CLI archive built); restoration in qualified R0 requires an explicit new task with sanitized Linux CLI archive, identity/egress parity and real startup/provider smoke. F-02 alone does not presently schedule this work. Do not modify existing founder WSL disks.
 
 ## 4. Inventories (Q-02, Q-03)
 
@@ -116,3 +112,7 @@ T3 (R0a onward), Orca ports (R3), OCR engine lane + Continue rule import (R3; de
 Mode with AI Hero skills (R0 label; R2 enforced + skills), Zain Browser (R0b hardening; R1 agents disabled; R2 lanes), DeskGate
 (R2/R3/R7), Trusted Core (R1), Project Brain (R2), WSL backend (re-enabled in qualified R0), Claude feature coverage (03F labels
 across R0–R7). Nothing was deleted.
+
+## 9. Astro Round-3 build-start correction (2026-11-02)
+
+This document's exact R0a execution authority, chosen Windows CLI SEA path, local-only policy, source-admission gates and all nine Round-3 findings are tracked in OPUS_R0A_BUILD_EXECUTION_2026-11-02.md. A3-05 and A3-06 are mandatory pre-Q-04/pre-Q-01 respectively. A3-01/02/03/04/07/08/09 remain gated in their stated later tiers; a passing R0a installer cannot be called R1 approved.
