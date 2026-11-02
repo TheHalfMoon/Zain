@@ -1,15 +1,15 @@
 # Zain V3 Master Plan
 
 ```text
-STATUS = CANDIDATE MASTER PLAN, revision 3 (after Astro round 1: DO NOT APPROVE @b9450598). Planning only; no
-         implementation authority until accepted under trusted-base governance.
+STATUS = CANDIDATE FULL-ROADMAP MASTER PLAN (R0a–R7). Astro Round 3: limited founder-directed R0a Q-00 start; R0b / Qualified R0 conditional; R1 DO NOT APPROVE.
+         This docs-only branch is NOT governance-admitted and grants no main merge/release authority. Q-00..Q-06 remain subject to their concrete gates.
 DATE = 2026-10-28
 PRODUCT = Zain (formerly WePLD — legacy name; see ZAIN_NAMING_MIGRATION.md)
 REPOSITORY = TheHalfMoon/Zain (ID 1334408699, PUBLIC) · branch docs/v3-unified-replan-20261027
 SEPARATE_PROJECT = TheHalfMoon/Zain-LLM (private) — not part of this plan, never modified
 BASE = main @ 0a843a2c0913236d9c93b31abb0d54bbdb023f23
 LEADING_ARCHITECTURE = T3-first fork + selected Orca modules + existing Rust Trusted Core (ADR-001)
-APPROVAL_ASKED = a bounded first release (R1 "Zain Trusted Starter") with the exact claims in 21 §3 — not the whole scope
+APPROVAL_ASKED = bounded founder-only R0a feasibility after recorded admission; R1 Trusted Starter and any distribution are NOT approved.
 SINGLE_SOURCE = numbers come from tools/plan_graph.py → GENERATED_PLAN_REPORT.md; this file embeds only its generated block
 ```
 
@@ -107,15 +107,10 @@ no public artifact and a strict PASS (install, launch, terminal, worktree, diff,
 `R0A_FEASIBILITY_READINESS.md`. R1 claims are generated templates over the enumerated provider surface (18 §4, 21 §3).
 Dispositions: `ASTRO_ROUND_2_FINDINGS_DISPOSITION.md`.
 
-**Time to a working app (24):** the First Working Build (R0a) is T3 at the pin with two overlays, built by copying T3's
-own Windows release job — no rebuild from scratch, no claims, founder-only; its effort is CONDITIONAL (24 §4) until Q-05
-measures it. R0b adds only what is needed before testers; qualified R0 no longer includes Monaco, C-00 or Core packaging
+**Time to a working app (24):** R0a compiles sanitized native Windows x64 JS + CLI SEA + NSIS from pinned T3 source, with Q-02 identity and Q-03 egress overlays, source/license gates, complete SDK exclusion and real installed-provider smoke. No raw binary reuse; 2.80–7.60 person-weeks is known-work subtotal plus unmeasured Q-06, not a deadline. R0b adds only what is needed before testers; qualified R0 no longer includes Monaco, C-00 or Core packaging
 (moved to R1, not removed) and no longer double-counts learning, import, build and rebrand work (24 §8).
 
-**Recommendation:** authorize R0a/R0b on an isolated branch after Astro round 2, and approve the path to **R1 Zain Trusted Starter** (21): Windows x64; T3 workbench with Monaco,
-terminal, diff, worktrees; Claude and Codex as the qualified trusted-tier providers; Core decisions, signed approvals,
-UNKNOWN outcomes and coverage reporting; Plan Mode with read-only profile; delegated code review with one findings schema.
-Re-plan R2 with measured velocity.
+**Round-3 recommendation (2026-11-02):** Begin the limited, local-only R0a Q-00 admission and Q-01..Q-06 Windows experiment only after their recorded gates. R0b and Qualified R0 remain conditional on measured evidence and distribution/governance checks. **R1 Trusted Starter planning is NOT APPROVED** until A3-01..04/A3-07..08 and original Critical C-1 are corrected and appropriately qualified. Read OPUS_R0A_BUILD_EXECUTION_2026-11-02.md for the chosen Windows CLI SEA/SDK build, no-cost policy and stop rules. Preserve the R2–R7 roadmap without implying runtime qualification.
 
 ## 6. Zero-mandatory-cost path (10 §1, 21 §4)
 
@@ -126,8 +121,7 @@ qualified no-cost reviewer route must be named per phase; if none can run, the g
 
 ## 7. Quality and evaluation (09, 23)
 
-335 registered tests; every negative names guard, mutant, fixture and observable failure; reviewer quality is measured
-separately (ZCR-Q*). The validator proves that every test runs only after its implementation prerequisites.
+Astro Round 3 measured 383 registry tests and 26/26 passing permanent plan mutations. Its additional adversarial mutations showed fail-open parsing and missing semantic dependencies: counts and a green validator are accounting, not runtime proof. A3-01/02 and C-1 remain open. Reviewer quality remains a separate ZCR-Q* qualification.
 
 ## 8. Feature completeness
 
@@ -156,3 +150,7 @@ labels in 03F §2b.
 | G4 | Claude SDK/auth posture | pending |
 | G5 | Founder signs FOUNDER_DECISION_RECORD incl. R1 scope and claims (FO-10) | pending |
 | G6 | Astro round 2 approves R1 scope | pending |
+
+## 9. Founder execution baseline — Astro Round 3 (2026-11-02)
+
+Read OPUS_R0A_BUILD_EXECUTION_2026-11-02.md before Q-00. That packet selects LOCAL_ONLY native Windows x64 with a sanitized Windows CLI SEA/archive, legal/source admission, isolated profile, legitimate provider, complete SDK-content scan, artifact-bound tests, zero-cost restrictions and independent review. Generated release-table 'lower bound' labels are not statistically proven lower bounds or delivery commitments: the known-work figures exclude unmeasured Q-06; do not alter generated rows manually before repairing the validator/generator in A3-01. Subsequent release tiers remain conditional, and Critical C-1 is open until semantic dependency and exit-ordering corrections are tested.
