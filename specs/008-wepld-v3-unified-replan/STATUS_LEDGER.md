@@ -126,3 +126,14 @@ top level of this directory.
 | R0a | complete build DAG, inventories, T2, no public artifact, strict PASS, readiness packet | 24, R0A_FEASIBILITY_READINESS.md |
 | Not done | nothing built or run; T3 build not executed; all mechanisms unproven until C-00/Q-05 | — |
 | Round-3 handoff | planning commit 68211bc7d3ff9c62cbe4c476f26b70e9e98f71f1 | ASTRO_REVIEW_ROUND_3_HANDOFF.md |
+
+
+## Founder-directed R0a build handoff — 2026-11-02
+
+- **Authority:** founder directs Opus to stop unbounded replanning and begin the bounded founder-only R0a work order. This authorizes Q-00 read-only inventory immediately; Q-01..Q-06 require documented A3–A7 legal/source, reviewer, isolation, provider and zero-cost gates. R1 remains DO NOT APPROVE.
+- **Canonical implementation order:** OPUS_R0A_BUILD_EXECUTION_2026-11-02.md → R0A_FEASIBILITY_READINESS.md → 24_FIRST_WORKING_BUILD.md → Q-00..Q-06 in 14_TASK_CATALOG.md. The selected path is LOCAL_ONLY native Windows x64 with the sanitized Windows CLI SEA/archive, all SDK usage-reader/independent bundle roots inspected, and installed final-artifact provider smoke.
+- **Public repo policy:** this branch is docs-only; never upload T3 transplant, installers, binaries, ASAR/SEA, private test content, credentials or production logs. No PR opened, no merge, no publish/deployment and no paid build.
+- **Docs branch:** docs/r0a-opus-start-20261102, created from docs/v3-unified-replan-20261027; latest edits update README, master plan, readiness, first build and Q-00/Q-04 task catalog.
+- **Executed local read-only validation:** shallow temporary clone of this docs branch; python -I specs/008-wepld-v3-unified-replan/tools/plan_graph.py --check exited 0: tasks=176 tests=383 suites=1 errors=0, coverage REGISTERED=99 / FREE_TEXT_ONLY=0 / GAP=0. python -I specs/008-wepld-v3-unified-replan/tools/test_plan_graph_mutations.py exited 0: cases=26 failures=0. Temporary clone removed.
+- **Not proven:** no application build, artifact, provider smoke, legal admission, independently signed T2 review, R0a PASS, released installer or R1 security qualification. Astro Round-3 additional adversarial parser cases and original Critical C-1 remain OPEN: green baseline is not complete fail-closed parsing.
+- **Next executable step:** Opus performs Q-00 admission and local resource check, produces independent review and A3–A7 gate evidence; only then import pinned donor as Q-01. No need for another global architecture review to perform this non-authoritative feasibility experiment.
