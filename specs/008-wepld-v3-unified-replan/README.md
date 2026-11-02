@@ -1,10 +1,10 @@
 # Spec 008 — Zain V3 Unified Replan (planning package)
 
 ```text
-STATUS = CANDIDATE / DOCS-ONLY / NO IMPLEMENTATION AUTHORITY
+STATUS = CANDIDATE / DOCS-ONLY; founder-authorized bounded R0a Q-00 start only, subject to admission gates; no main merge/release authority
 PRODUCT = Zain (formerly WePLD) · REPOSITORY = TheHalfMoon/Zain (ID 1334408699)
 BASE = main @ 0a843a2c0913236d9c93b31abb0d54bbdb023f23
-RECOMMENDATION = approve only the R1 Zain Trusted Starter scope and claims (21 §3) after Astro round 2; revision 3
+RECOMMENDATION = Astro Round 3 (2026-11-02): R0a conditional start, R0b/Qualified R0 conditional, R1 DO NOT APPROVE. Read OPUS_R0A_BUILD_EXECUTION_2026-11-02.md first.
 VALIDATION = python -I tools/plan_graph.py --check and python -I tools/test_plan_graph_mutations.py (both must exit 0)
 DIRECTORY NAME = legacy path (specs/008-wepld-…) kept to preserve links
 ```
@@ -14,8 +14,9 @@ CURRENT_STATE, the source registry archive or product code.
 
 ## Read order
 
-1. `ZAIN_V3_MASTER_PLAN.md` — single entry point (product, architecture, decisions, Copy First, release tiers, gates)
-2. `ASTRO_REVIEW_ROUND_3_HANDOFF.md` — round-3 brief; `ASTRO_ROUND_2_FINDINGS_DISPOSITION.md` — round-2 findings;
+1. `OPUS_R0A_BUILD_EXECUTION_2026-11-02.md` — founder-directed Opus build work order, native Windows CLI route, source admission, zero-cost/local-only and Astro Round-3 stop gates.
+1b. `ZAIN_V3_MASTER_PLAN.md` — full product roadmap (R0a–R7), architecture and release tiers; R1 design not approved.
+2. `ASTRO_REVIEW_ROUND_3_HANDOFF.md` — round-3 brief (Astro assessment dated 2026-11-02); `ASTRO_ROUND_2_FINDINGS_DISPOSITION.md` — round-2 findings;
    `ASTRO_FINDINGS_DISPOSITION.md` — round-1 findings
    (`ASTRO_REVIEW_HANDOFF.md` = round-1 record)
 2b. Revision-3 specs: `17_TRUST_BOUNDARY_SPEC.md`, `18_PROVIDER_ENFORCEMENT_MATRIX.md`, `19_COMPONENT_SECURITY_REVISIONS.md`,
@@ -37,3 +38,7 @@ R02 T3 · R03 Claude census (377 rows) · R03B Claude Design · R03C Claude Code
 R06 registry (402) · R10 competitors · R11 T3 file manifest · R12 donor file manifest · R13 IDE/debug/platform ·
 R14 Code Review · R15 PStack/E2E · R16 Plan Mode skills · R17 Browser · R18 DeskGate · R19 naming conflicts.
 Research files are historical evidence and may use the legacy name WePLD.
+
+## Build-start status (2026-11-02)
+
+The founder directs Opus to start the bounded founder-only R0a work order, beginning with read-only Q-00. The exact build-route, resource/license/reviewer/isolation prerequisites, local-only artifact policy and independent signoffs remain mandatory in the Opus packet. Do not claim an installer, qualified R0, approved R1 or any trusted recovery from this documentation commit. This branch opens no PR and changes no source/application code.
