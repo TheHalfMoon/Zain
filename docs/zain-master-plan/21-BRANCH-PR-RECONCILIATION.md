@@ -4,8 +4,7 @@
 DATE     = 2026-11-08
 TASK     = Z-04 (AGENT+FOUNDER): a disposition for every open PR and every non-main branch, salvage notes for #342 and
            #73, and a merge path for the planning branches
-STATUS   = PROPOSAL. Nothing has been closed, deleted or tagged. Each group in §5 is applied only after the founder
-           approves it
+STATUS   = APPLIED 2026-11-08T02:32Z after the founder approved all groups in chat ("Yes, apply all"); results in §6
 METHOD   = read-only: work/z04_inventory.py (remote-tracking refs, checked equal to `git ls-remote`, plus the PR list
            API) and work/z04_dispositions.py. Every branch and its proposed action: work/z04_branches.csv
 ```
@@ -101,3 +100,24 @@ it merges, the two contained branches are deleted.
 Applying an approved group uses `gh pr close <n> --comment …`, `git tag archive/<b> <sha>` and `git push origin
 archive/<b>`, and `git push origin --delete <b>`. Afterwards `gh pr list --state all` and `git ls-remote` are recorded
 here as evidence.
+
+## 6. Applied (2026-11-08T02:32Z)
+
+The founder approved every group in chat on 2026-11-08. `work/z04_apply.py` re-checked that no branch had moved since
+the inventory, then ran its stages in order:
+
+| Stage | Result | Evidence |
+|---|---|---|
+| Manifest | 352 branches with full SHAs, committed before any change (`f3cb77f`) | `work/z04_applied_manifest.csv` |
+| Archive tags | 34 `archive/<branch>` tags pushed; all 34 match the manifest SHA on the remote | `git ls-remote origin 'refs/tags/archive/*'` |
+| PRs closed | #1, #73, #81, #88, #136, #159, #162, #164, #342, #343, #346, #347, each with a comment pointing here | `gh pr list --state all`: closed 147, merged 185 |
+| Branches deleted | 348 of 348 (A 187, B 117, C 34 after their tags verified, D 10); none failed | `git ls-remote --heads` |
+| Remaining branches | `main`, `docs/v3-unified-replan-20261027`, `docs/r0a-opus-start-20261102`, `docs/zain-master-plan-20261108`, `codex/astro-c01-s3-contracts-20260921` | same |
+| CI | No workflow ran: no workflow triggers on tags, branch deletion or PR close | `gh run list` |
+
+**Restoring a branch:** `git push origin <full_sha>:refs/heads/<branch>`, with the SHA from the manifest. A branch
+from a closed PR can also be restored with the PR page's "Restore branch" button. Group C commits stay reachable
+through their archive tags.
+
+The verification stage first reported 0 of 34 tags matched; that was a key-prefix bug in the check, not in the tags.
+It was fixed and re-verified (34 of 34) before any branch was deleted.

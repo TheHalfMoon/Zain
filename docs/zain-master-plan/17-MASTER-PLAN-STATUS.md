@@ -107,6 +107,10 @@ open PRs (keeping #343's branch as reference), keep the 3 nested planning branch
 Salvage notes for #342 (into V3 09 §3) and #73 (into Design Studio) are written. Nothing is applied until the
 founder approves.
 
+**2026-11-08, Z-04 applied.** The founder approved all groups. The 12 open PRs are closed; 34 archive tags were
+pushed and verified; 348 branches were deleted after a full-SHA manifest was committed (21 §6). Five branches remain:
+main, the three nested planning branches and #343's reference branch. No CI ran. Z-04 is DONE_UNREVIEWED.
+
 ## 5. Repository evidence
 
 | Item | Value |

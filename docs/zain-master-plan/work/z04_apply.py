@@ -22,7 +22,7 @@ def run(cmd, check=True):
     return r.stdout
 
 def heads(): return {l.split()[1][11:]: l.split()[0] for l in run(G + ["ls-remote", "origin", "refs/heads/*"]).splitlines()}
-def tags(): return {l.split()[1][10:]: l.split()[0] for l in run(G + ["ls-remote", "origin", "refs/tags/archive/*"]).splitlines()}
+def tags(): return {l.split()[1][len("refs/tags/archive/"):]: l.split()[0] for l in run(G + ["ls-remote", "origin", "refs/tags/archive/*"]).splitlines()}
 rows = list(csv.DictReader(open(CSV, encoding="utf-8")))
 remote = heads()
 plan = []
