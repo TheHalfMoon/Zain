@@ -5,8 +5,8 @@ DATE     = 2026-11-08
 TASK     = V3 Q-00 (tier T2): source pin and digests, overlay scope, LOCAL_ONLY Windows route, capacity and cost=0
            controls, toolchain pins, frozen-lockfile policy, CLI archive route, shipped-closure license listing,
            decisions for heic-to / electron-webauthn / Claude SDK / Cursor SDK
-STATUS   = §1-§7 approved by the founder as drafted (chat, 2026-11-08); the §8 re-check was added afterwards and
-           awaits the founder's confirmation. Q-01 is RESOURCE_BLOCKED (§4)
+STATUS   = SIGNED OFF by the founder (T2 reviewer, DEC-01) in chat on 2026-11-08: §1-§7 approved as drafted, §8
+           confirmed. LIC-02 is re-checked against the packaged output at Q-04. Q-01 is RESOURCE_BLOCKED (§4)
 METHOD   = read-only GitHub API, npm registry and local version checks; scripts and outputs in work/q00_*
 ```
 
@@ -100,7 +100,7 @@ This listing is pre-build. LIC-02 passes only when Q-04 checks the packaged outp
 
 | Condition | State |
 |---|---|
-| A3 Q-00 independently reviewed | The founder approved the record as drafted (chat, 2026-11-08; DEC-01). The §7 re-checks added afterwards need the founder's confirmation; OCR may add an advisory pass after Z-06 |
+| A3 Q-00 independently reviewed | **Met:** the founder signed off §1-§7 as drafted and confirmed §8 (chat, 2026-11-08; DEC-01). OCR may add an advisory pass after Z-06 |
 | A4 LOCAL_ONLY route and capacity recorded | Recorded (§3, §4); capacity is below threshold |
 | A5 isolated Windows account | Not created (Z-09) |
 | A6 consented provider route | DEC-08 chose the official Codex login; not yet verified (Z-10) |

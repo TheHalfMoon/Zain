@@ -98,6 +98,9 @@ were fetched to `D:\zain-build\tools`, SHA-256 verified, and wired into a per-se
 (`work/z08_build_shell.ps1`); the global Node and pnpm are unchanged. Manifest in 20 §2. Q-01 now waits only on
 disk (D: 15.3 GB of 30 GB) and free RAM, plus the founder's confirmation of 20 §8.
 
+**2026-11-08, Q-00 signed off.** The founder confirmed 20 §8, completing the T2 sign-off (DEC-01). Q-00 is DONE;
+LIC-02 is re-checked on the packaged output at Q-04. Q-01 waits only on disk (Z-07) and free RAM.
+
 ## 5. Repository evidence
 
 | Item | Value |
