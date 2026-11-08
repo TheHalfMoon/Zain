@@ -101,6 +101,12 @@ disk (D: 15.3 GB of 30 GB) and free RAM, plus the founder's confirmation of 20 �
 **2026-11-08, Q-00 signed off.** The founder confirmed 20 §8, completing the T2 sign-off (DEC-01). Q-00 is DONE;
 LIC-02 is re-checked on the packaged output at Q-04. Q-01 waits only on disk (Z-07) and free RAM.
 
+**2026-11-08, Z-04 proposal.** Every one of the 352 non-main branches and 12 open PRs has a proposed disposition
+(21): delete 187 merged and 117 closed-PR branches, archive 34 no-PR branches as tags then delete them, close the 12
+open PRs (keeping #343's branch as reference), keep the 3 nested planning branches until one merge at G-03.
+Salvage notes for #342 (into V3 09 §3) and #73 (into Design Studio) are written. Nothing is applied until the
+founder approves.
+
 ## 5. Repository evidence
 
 | Item | Value |

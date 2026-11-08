@@ -15,4 +15,5 @@ Literals that the redaction scripts removed from the plan are replaced in these 
 | `z03_scan.py`, `z03_agg.py`, `z03_detail.py`, `z03_extra.py`, `z03_result.txt` | Z-03 scanner (in-memory, fingerprints only) and its aggregated output (18) |
 | `q00_*.py`, `q00_license_listing.csv`, `q00_r11_delta.csv`, `q00_citations.csv` | V3 Q-00 evidence: pin inventory, lockfile digests, shipped-closure licenses, R11 deltas, citation and seam re-check (20) |
 | `z08_toolchain.py`, `z08_build_shell.ps1` | Z-08: fetch and verify the pinned Node and pnpm; per-session build shell (20 §2) |
+| `z04_inventory.py`, `z04_dispositions.py`, `z04_branches.csv` | Z-04: branch and PR inventory with a proposed disposition per branch (21) |
 | `record_*.py` | Status and decision records (Z-03, DEC-16, Z-25, visibility changes) |

@@ -135,9 +135,9 @@ freeze applies to governance policy successors (v73+), not to planning documents
 | Evidence for completion | PR state list after changes (gh pr list --state all) and the approval record |
 | Security implications | Closing PR #136 does not remove its public branch; branch deletion is founder-only. |
 | Estimate · complexity · risk · tier · cost | 0.25 pw · S · MEDIUM · T0 · FREE |
-| Blockers | — |
+| Blockers | Founder approval of groups A-E and the PR closures (21 §5) |
 | Parallel group | M0-agent |
-| Status | NOT_STARTED |
+| Status | IN_PROGRESS — 21-BRANCH-PR-RECONCILIATION.md (2026-11-08): dispositions for all 352 non-main branches (79 updated since 2026-09-01) and all 12 open PRs; salvage notes for #342 and #73; planning merge path. Application awaits founder approval |
 | Reference | 01-REPOSITORY-AUDIT.md §6 |
 
 ### Z-05 — Master-plan registries, cross-artifact validator and mutation suite
