@@ -1,0 +1,23 @@
+journey_id,name,first_milestone,full_milestone,entry_point,tasks,gates,failure_recovery,status
+J01,Install and launch Zain,R0b,R0,"Installer double-click (unsigned NSIS; SmartScreen 'More info, Run anyway' documented)",Q-04;Q-05;F-11;Z-22,GATE-J01,Install failure leaves no partial registration; rerun is idempotent; uninstall cleans (Z-22),PLANNED
+J02,Create or open a project,R0,R0,Home: Open folder / Clone / New project,F-16;Z-15,GATE-J02,"Unreadable or non-git folder gives a clear state; git init offered, never automatic",PLANNED
+J03,Configure a local or authorized remote model,R0,R1,"Settings: Models: Add endpoint, or first-run onboarding",Z-11;F-22;B-06;Z-15,GATE-J03,Probe failure shows which capability failed; route stays disabled; secrets go to keyring,PLANNED
+J04,Start an AI coding conversation,R0a,R0,Project: New thread: prompt,Q-05;F-16,GATE-J04,"Provider auth expired: re-login through the provider CLI; turn marked failed, not lost",PLANNED
+J05,Request a multi-file code modification,R0,R0,Thread prompt naming several files,F-16;Z-15,GATE-J05,Provider error mid-turn: checkpoint before turn allows revert; partial edits visible in diff,PLANNED
+J06,Review and accept or reject changes,R0b,R1,Diff panel after a turn; per-file and per-hunk accept/reject; open in external editor,F-16;Z-13;Z-31;Z-15;K-05,GATE-J06,Rejected hunks restored from checkpoint; external edits refresh the diff,PLANNED
+J07,Create a detailed implementation plan,R0,R2,Plan mode toggle or /plan,L-01;L-02;L-06;L-08;Z-15,GATE-J07,R0: plan mode labelled 'not yet enforced'; from R2 out-of-plan writes invalidate the plan,PLANNED
+J08,Run an autonomous engineering task,R2,R2,Plan: Approve: Mission,M-01;M-02;M-07;E-01;E-07,GATE-J08,"Mission survives reboot; failed step retried within budget, then waits for a human",PLANNED
+J09,Inspect agent progress and tool actions,R0,R1,Thread activity timeline; later Inbox and trust indicator,F-16;Z-15;C-14;C-17,GATE-J09,Unknown outcomes listed explicitly instead of hidden,PLANNED
+J10,Approve sensitive operations,R1,R1,Inbox / approval surface (A1/A2/A3),F-07;C-13;C-14;C-15;Z-16,GATE-J10,Denied or expired approval stops the effect; agent told; no silent retry,PLANNED
+J11,Run and diagnose tests,R0,R3,Terminal or agent runs tests; later E2E lane and debugger,F-16;Z-15;E-03;I-04,GATE-J11,R0: runner crash keeps output and the user can stop the turn; R2: budgets stop loops,PLANNED
+J12,Create and inspect Git changes,R0,R1,Source control view; commit; branch; PR,F-16;Z-15;C-12,GATE-J12,Destructive git operations require approval from R1 (C-12 seam S7),PLANNED
+J13,Resume an interrupted agent task,R0,R2,Relaunch after crash; thread resumes,Z-21;Z-15;M-05,GATE-J13,R0: in-flight turn marked interrupted and can be re-sent; R2: resume with a context capsule (M-05),PLANNED
+J14,Recover from a failed operation,R1,R1,Inbox: unknown outcome: reconcile,C-26;C-14;C-20;Z-16,GATE-J14,APPLIED / NOT_APPLIED / UNKNOWN shown with evidence; retry only when replay-safe,PLANNED
+J15,Manage multiple projects,R0,R0,Sidebar project switcher,Z-15,GATE-J15,"Missing project folder: project marked unavailable, not deleted",PLANNED
+J16,Change agent or model configuration,R0,R1,Thread settings: agent/model; role pins,Z-11;F-22;Z-15;V-01,GATE-J16,Switching mid-thread starts a new provider session; history kept,PLANNED
+J17,Control background execution,R2,R2,Background tasks list; schedules; wait-for-CI,M-02;M-06,GATE-J17,Missed runs follow the missed-run policy; user can cancel any background task,PLANNED
+J18,Restore a previous checkpoint,R0b,R2,Thread: turn: Revert to checkpoint,Z-27;Z-15;K-06,GATE-J18,"Untracked files quarantined, not deleted (Z-27)",PLANNED
+J19,Investigate a security event,R1,R2,Inbox or ledger view: event detail: export,C-19;C-14;C-17;Z-16;Y-06,GATE-J19,Ledger gap (unanchored interval) shown explicitly,PLANNED
+J20,Export a complete engineering execution report,R2,R2,Thread or mission: Export report,Z-23,GATE-J20,Redaction failure blocks export rather than leaking,PLANNED
+J21,Use the integrated terminal,R0b,R1,"Terminal panel: new terminal (PowerShell, Git Bash, wsl.exe as a shell)",Q-05;Z-30;C-25,GATE-J21,Hung process: kill from the panel; from R1 ProcessHost kills the whole job tree (WSL excluded),PLANNED
+J22,Search and navigate project files,R0,R1,File explorer; project search; open file from results,F-16;Z-15;Z-28,GATE-J22,Search on a huge repository is cancellable; ignored files excluded,PLANNED
