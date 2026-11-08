@@ -79,9 +79,9 @@ freeze applies to governance policy successors (v73+), not to planning documents
 | Evidence for completion | Command output with timestamp pasted into 17-MASTER-PLAN-STATUS.md |
 | Security implications | Stops future disclosure. Does not undo past exposure (Z-03). |
 | Estimate · complexity · risk · tier · cost | 0.05 pw · S · CRITICAL · T0 · FREE |
-| Blockers | Founder-only: repository settings change |
+| Blockers | Founder: spending-limit check on the billing page; wepld/wepld decision (DEC-02) |
 | Parallel group | M0-founder |
-| Status | NOT_STARTED |
+| Status | IN_PROGRESS — gh repo edit --visibility private at 2026-11-08T00:37:46Z (founder-approved in chat); gh repo view returns PRIVATE; forkCount was 0. Remaining: confirm 0 USD Actions/Packages spending limit; decide wepld/wepld (separate account, still PUBLIC) |
 | Reference | 01-REPOSITORY-AUDIT.md §2 |
 
 ### Z-02 — Close third-party automatic AI review and app egress on the repository (EGRESS_PREFLIGHT E1–E5)

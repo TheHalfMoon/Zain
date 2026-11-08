@@ -3,14 +3,14 @@
 ```text
 DATE      = 2026-11-08
 PRODUCT   = Zain (formerly WePLD) — private, local-first, Windows-first AI-native desktop development environment
-BRANCH    = docs/zain-master-plan-20261108 (local commit only; the repository is public, so nothing was pushed)
+BRANCH    = docs/zain-master-plan-20261108 (pushed after the repository was made private on 2026-11-08; no PR)
 VERDICT   = CONDITIONALLY READY (see §8)
 ```
 
 ## A. Current Zain status (verified)
 
-- **Repository:** `TheHalfMoon/Zain`, which is **public**, as is the legacy `wepld/wepld`. This conflicts with the
-  founder's privacy rule (01 §2).
+- **Repository:** `TheHalfMoon/Zain` was **public** at audit time and was made **private** on 2026-11-08 at the founder's
+  direction. Its history was public before that (Z-03), and the legacy `wepld/wepld` is still public (01 §2).
 - **Product code:** a 10k-line Rust Core (identity, read-only git topology, evidence store, CLI) plus a Tauri status
   window that V3 retires. There is no editor, terminal, chat or agent. Governance code is 85k lines, 8.4 times the
   product code (01 §3).

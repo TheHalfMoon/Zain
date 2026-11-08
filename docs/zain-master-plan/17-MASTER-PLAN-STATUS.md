@@ -26,7 +26,7 @@ RULE     = every line below cites evidence; no percentages
 |---|---|---|
 | GATE-PLAN-01 | MET in substance (exit 0), recorded NOT_MET until Z-05 review | 15 §1 |
 | GATE-PLAN-02 | MET in substance (35/35), recorded NOT_MET until Z-05 review | 15 §2 |
-| GATE-PRIV-01 | NOT MET (public) | 01 §2 |
+| GATE-PRIV-01 | Visibility PRIVATE since 2026-11-08T00:37:46Z; gate closes when Z-01 finishes (0 USD spending limit, wepld/wepld decision) | Z-01 evidence |
 | GATE-REV-01 | NOT MET (no authorized non-Claude route) | 06 §3, 14 |
 | GATE-RES-01 | NOT MET (C: 3.4 GB, D: 20 GB) | 09 §1 |
 | GATE-TOOL-01 | NOT MET (Node 24.19.0, pnpm 9.12.0) | 15 §4 |
@@ -36,7 +36,7 @@ RULE     = every line below cites evidence; no percentages
 
 | Blocker | Dependency | Owner |
 |---|---|---|
-| Repository public (gates pushing, not local building) | DEC-02 → Z-01 | Founder |
+| Z-01 remainder: spending limit and the still-public wepld/wepld | DEC-02 → Z-01 | Founder |
 | Reviewer route | DEC-01 → Z-06 | Founder |
 | Disk capacity | DEC-12 → Z-07 | Founder |
 | Isolated account, provider route | Z-09, Z-10 | Founder |
@@ -51,12 +51,15 @@ refreshed donor licenses and competitor research, wrote this plan with 7 registr
 levels, gateway scope and source pins corrected). No product code was changed. Nothing was pushed. Next: founder
 decisions (DEC-01, DEC-02, DEC-04, DEC-07, DEC-08, DEC-12), then Z-03 and Z-18.
 
+**2026-11-08, follow-up.** At the founder's direction, TheHalfMoon/Zain was made PRIVATE (00:37:46Z, verified; 0 forks).
+The plan branch was then pushed; no workflow runs on non-main branch pushes and no PR was opened.
+
 ## 5. Repository evidence
 
 | Item | Value |
 |---|---|
 | Base | `23bea38c6dd0deefcae5d5188a18a7d061ab2588` (docs/r0a-opus-start-20261102) |
-| Branch | `docs/zain-master-plan-20261108` (local clone in the session folder; not pushed) |
+| Branch | `docs/zain-master-plan-20261108`, pushed to the now-private TheHalfMoon/Zain (no PR) |
 | Commit | recorded in the commit message history of that branch; see `git log -1` |
 | Pull request | none |
 | Admission note | `.csv` and `.py` under `docs/` are not admitted by the current trusted-base policy (`wepld_integrity.py:621-624` allows only `docs/**.md` and `specs/**.md`), so DEC-11 decides how the registries and tools reach `main` |
