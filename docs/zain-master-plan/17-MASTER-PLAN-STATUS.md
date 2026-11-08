@@ -118,6 +118,11 @@ during today's private window created queued (never run) suites for five of them
 remove Zain from the apps (22 §4), then a scratch-push check (22 §5). The founder decided to remove all 10, CodeRabbit
 included (2026-11-08); the change is the founder's to make in GitHub settings.
 
+**2026-11-08, reviewer route.** The founder said not to use CodeRabbit and to review with Alibaba OCR via OpenCode's
+free models. Checked: OpenCode here reaches models only through a hosted third-party relay, and no local model runner
+is installed, so the route is remote, not local. DEC-01 records it; Z-06 waits for the founder to confirm that data
+path for public content.
+
 ## 5. Repository evidence
 
 | Item | Value |

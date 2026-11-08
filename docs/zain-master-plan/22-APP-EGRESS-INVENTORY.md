@@ -59,7 +59,7 @@ installation token could read the repository; whether any did is not visible. Th
 
 ## 4. Founder actions
 
-**Decided 2026-11-08 (founder, in chat): remove Zain from all 10 apps, CodeRabbit included; no gate exception.**
+**Decided 2026-11-08 (founder, in chat): remove Zain from all 10 apps, CodeRabbit included; no gate exception.** The founder also said not to use CodeRabbit for review; the review route is Alibaba OCR via OpenCode (13, DEC-01).
 
 In GitHub, signed in as TheHalfMoon: **Settings → Applications → Installed GitHub Apps**
 (https://github.com/settings/installations). For each app below, open **Configure**. Under **Repository access**,

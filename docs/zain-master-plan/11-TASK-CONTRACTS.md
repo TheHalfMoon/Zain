@@ -173,7 +173,7 @@ freeze applies to governance policy successors (v73+), not to planning documents
 | Evidence for completion | Decision record + findings file + route configuration with credentials redacted |
 | Security implications | Prevents private code reaching unauthorized hosted models; defines the fallback. |
 | Estimate · complexity · risk · tier · cost | 0.25 pw · S · HIGH · T0 · FREE |
-| Blockers | Founder sets up OCR on the ChatGPT login for the dry-run review (DEC-01 decided 2026-11-08) |
+| Blockers | Founder confirms the OCR-via-OpenCode route: it sends diffs to a hosted third-party relay, not a local model (13 DEC-01 amendment); then one dry-run review of this plan |
 | Parallel group | M0-founder |
 | Status | NOT_STARTED |
 | Reference | 06-MODELS-CONTEXT-AND-REVIEW.md §5 |
