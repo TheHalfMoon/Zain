@@ -30,7 +30,7 @@ enforcement provides.
 ## 3. Release definitions
 
 V3 defines R0a through R7. This plan keeps that ladder and adds **M0** (privacy and repository control) in front of
-it. It also names the **first release**: R0b (DEC-07, founder decision required).
+it. It also names the **first release**: R0b (DEC-07, decided by the founder on 2026-11-08).
 
 | Milestone | Name | What the founder can do at exit | Claims allowed |
 |---|---|---|---|

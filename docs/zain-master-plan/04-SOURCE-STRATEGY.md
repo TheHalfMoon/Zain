@@ -24,7 +24,7 @@ RULE      = owner permission statements do not replace license verification; unv
 
 | Source | Decision | Pinned / current | License (from LICENSE file) | Change since 2026-10-27 that matters |
 |---|---|---|---|---|
-| T3 Code `pingdotgg/t3code` | **ADAPT** (hard fork; ADR-001) | pin 36d4d711 / HEAD a9e709f1, v0.1.7 (2026-11-04) | MIT | Upstream moved fast; v0.1.7 ships Windows installers from CI; Electron 44.10.1; **re-pin decision DEC-04**; full notices obligation (MIT, Apache-2.0, OFL-1.1, CC0, BSD entries); jszip→MIT and dompurify→Apache-2.0 elections; heic-to, electron-webauthn, @cursor/sdk removed (V3 22 §2) |
+| T3 Code `pingdotgg/t3code` | **ADAPT** (hard fork; ADR-001) | pin 36d4d711 / HEAD a9e709f1, v0.1.7 (2026-11-04) | MIT | Upstream moved fast; v0.1.7 ships Windows installers from CI; Electron 44.10.1; **DEC-04: re-pin to v0.1.7 at Q-00**; full notices obligation (MIT, Apache-2.0, OFL-1.1, CC0, BSD entries); jszip→MIT and dompurify→Apache-2.0 elections; heic-to, electron-webauthn, @cursor/sdk removed (V3 22 §2) |
 | Zain Rust core (S1/S2) | **KEEP** (identity, git topology, framing; the ledger and policy engine are new modules, REIMPLEMENT) | main 0a843a2 | founder-owned (no LICENSE file) | — |
 | Orca `stablyai/orca` | ADAPT (bounded ports only: Design Mode, TUI-agent catalog, Linear, computer-use helpers; diff comments are a rewrite) | pin e310a636 / HEAD 26179069 | MIT | Latest commit deleted 763 tests; rebaseline before porting |
 | Alibaba Open Code Review | ADAPT (engine fork, R3) | pin 375f64cd (= v1.13.3) / current v1.13.6 | Apache-2.0 | Patches Z-P1..Z-P7 need rebasing; logo is a brand mark (exclude) |
@@ -44,7 +44,7 @@ RULE      = owner permission statements do not replace license verification; unv
 | Theia | REFERENCE | 8179891f | EPL-2.0 or GPL-2.0 w/ CPE | — |
 | Cline, Aider | REFERENCE | see registry | Apache-2.0 | Aider dormant |
 | Amp | REFERENCE (patterns only) | — | proprietary | — |
-| E2E (candidate Ascout) | DEFER | pin ecada2bc / HEAD 70458aed | Apache-2.0 per API only | FO-9 relicensing confirmation open (DEC-13) |
+| E2E (candidate Ascout) | DEFER | pin ecada2bc / HEAD 70458aed | Apache-2.0 per API only | FO-9 relicensing confirmation open; Playwright-only until E-03 (DEC-13) |
 | Onlook | DEFER (V3 says ADAPT for R4) | 423e2e92 | Apache-2.0 (not re-checked) | Re-verify before R4 |
 | Roo Code | REJECT | archived | Apache-2.0 | Shut down |
 | Remote Desktop Commander | REJECT | 7aaa331e | all rights reserved | Proprietary |

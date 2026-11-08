@@ -88,13 +88,13 @@ Full list in 13.
 
 ## H. Readiness verdict: CONDITIONALLY READY
 
-**Ready now:** M0, plus the read-only agent tasks Z-03 and Z-18.
+**Ready now:** M0, plus the read-only agent task Z-18 (Z-03 is done, unreviewed).
 
 **Not ready for R0a build work until:**
 
-1. The founder decides DEC-01, DEC-02, DEC-04, DEC-07, DEC-08 and DEC-12 (Z-25).
-2. A reviewer route is authorized (Z-06). The founder's own review always qualifies.
-3. Disk capacity reaches GATE-RES-01 (Z-07).
+1. Founder decisions: **done**. The founder decided DEC-01..DEC-16 on 2026-11-08 (13 §2).
+2. The reviewer route authorized by DEC-01 is qualified with one dry-run review (Z-06).
+3. Disk capacity on D: reaches GATE-RES-01 (Z-07, DEC-12).
 4. The toolchain matches the pins (Z-08).
 5. The isolated account and provider route exist (Z-09, Z-10). These are needed before Q-05.
 

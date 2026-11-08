@@ -58,7 +58,7 @@ better, so this plan adds option G and compares the two on the founder's real co
 
 | Criterion | **A. T3 fork + Rust Core (selected)** | **G. Code-OSS fork + T3 server as sidecar** |
 |---|---|---|
-| IDE without AI (LSP, DAP, multi-root, extensions, settings, SCM UI) | Weak at start; Monaco in R1, LSP/DAP in R3 (or earlier, DEC-05); external editor bridge meanwhile | Strong from day one; Open VSX extensions only (Microsoft Marketplace excludes forks) |
+| IDE without AI (LSP, DAP, multi-root, extensions, settings, SCM UI) | Weak at start; Monaco in R1, LSP/DAP in R3 (LSP spike in R1 if Z-20 confirms Monaco, DEC-05); external editor bridge meanwhile | Strong from day one; Open VSX extensions only (Microsoft Marketplace excludes forks) |
 | Agent workbench (multi-provider sessions, worktrees, checkpoints, diff review) | Present in donor (T3 orchestration-v2) | Must be ported into VS Code's workbench or run as a second UI |
 | Authority seams for the Trusted Core | Exact seams identified (R02 §10, S1–S9) | Extension host runs arbitrary extensions with full Node access; mediation seams far wider |
 | Size and upkeep | ~1.0M non-test TS lines; fast-moving upstream (36d4d711 → v0.1.7 in 12 days) | VS Code is larger still and ships monthly; Code-OSS forks (Cursor, Windsurf, Positron) rebase with dedicated teams |

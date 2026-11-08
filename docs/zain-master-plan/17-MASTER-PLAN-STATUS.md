@@ -18,7 +18,7 @@ RULE     = every line below cites evidence; no percentages
 | Task contracts | DONE for Z-01..Z-34; V3 contracts mirrored and drift-checked | 11; `zmp.py check` |
 | Registries and validator | DONE_UNREVIEWED (Z-05) | 15 |
 | Independent reviews | 4 EGM passes, 80 findings: 72 fixed, 3 partial, 3 decisions, 2 rejected with reasons | 14 |
-| Founder decisions | OPEN: DEC-01..DEC-15; DEC-16 decided 2026-11-08 | 13 §2 |
+| Founder decisions | DONE: DEC-01..DEC-16 decided 2026-11-08 (Z-25, unreviewed) | 13 §2 |
 
 ## 2. Gates (state on 2026-11-08)
 
@@ -27,9 +27,9 @@ RULE     = every line below cites evidence; no percentages
 | GATE-PLAN-01 | MET in substance (exit 0), recorded NOT_MET until Z-05 review | 15 §1 |
 | GATE-PLAN-02 | MET in substance (35/35), recorded NOT_MET until Z-05 review | 15 §2 |
 | GATE-PRIV-03 | MET in substance (0 live credentials; DEC-16 accepted), recorded NOT_MET until Z-03 review | 18 |
-| GATE-PRIV-01 | Visibility PRIVATE since 2026-11-08T00:37:46Z; gate closes when Z-01 finishes (0 USD spending limit, wepld/wepld decision) | Z-01 evidence |
-| GATE-REV-01 | NOT MET (no authorized non-Claude route) | 06 §3, 14 |
-| GATE-RES-01 | NOT MET (C: 3.4 GB, D: 20 GB) | 09 §1 |
+| GATE-PRIV-01 | Visibility PRIVATE since 2026-11-08T00:37:46Z; gate closes when Z-01 finishes (0 USD spending limit, wepld/wepld made private) | Z-01 evidence |
+| GATE-REV-01 | NOT MET: route authorized (DEC-01: founder T2 sign-off, OCR on ChatGPT as advisory); Z-06 dry run pending | 06 §3, 14 |
+| GATE-RES-01 | NOT MET (D:, chosen by DEC-12, has 15 GB free; needs at least 30 GB) | 09 §1 |
 | GATE-TOOL-01 | NOT MET (Node 24.19.0, pnpm 9.12.0) | 15 §4 |
 | All other gates | NOT MET (no build exists) | — |
 
@@ -37,11 +37,10 @@ RULE     = every line below cites evidence; no percentages
 
 | Blocker | Dependency | Owner |
 |---|---|---|
-| Z-01 remainder: spending limit and the still-public wepld/wepld | DEC-02 → Z-01 | Founder |
-| Reviewer route | DEC-01 → Z-06 | Founder |
-| Disk capacity | DEC-12 → Z-07 | Founder |
+| Z-01 remainder: 0 USD spending limit; make wepld/wepld private (DEC-02) | Z-01 | Founder |
+| Reviewer route qualification: OCR on the ChatGPT login, one dry-run review | Z-06 | Founder + agent |
+| Disk capacity: free D: to at least 30 GB (DEC-12) | Z-07 | Founder |
 | Isolated account, provider route | Z-09, Z-10 | Founder |
-| All decisions | Z-25 | Founder |
 
 ## 4. Session handoff log
 
@@ -63,6 +62,11 @@ Z-03 is DONE_UNREVIEWED; GATE-PRIV-03 waits for the founder's DEC-16.
 founder's PC now use the GitHub noreply address, and the two other wepld identities proved to be founder-owned.
 New finding P7: the account's public profile email is still the personal address. Founder to do: GitHub email
 privacy settings, profile email, wepld/wepld visibility (18 §8).
+
+**2026-11-08, Z-25.** The founder decided DEC-01..DEC-15 in chat, each as recommended (13 §2): R0b is the first
+release, T3 re-pins to v0.1.7, builds go on D:, the governance chain is frozen, OCR on the founder's ChatGPT login
+is the advisory reviewer. Founder actions left: make wepld/wepld private, 0 USD spending limit, free D: to 30 GB,
+GitHub email settings, OCR setup for the Z-06 dry run.
 
 ## 5. Repository evidence
 

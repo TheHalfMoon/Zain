@@ -45,16 +45,15 @@ The R0a contracts are fully specified in V3 (14 §PF, `OPUS_R0A_BUILD_EXECUTION_
 
 | V3 task | Added gate edge(s) | Why (verified 2026-11-08) |
 |---|---|---|
-| Q-00 admission | Z-25 | Pin (DEC-04), provider route (DEC-08) and build volume (DEC-12) must be decided first |
-| Q-01 import | Z-06, Z-07, Z-08 | No authorized reviewer (A7); C: 3.4 GB free; Node 24.19.0 / pnpm 9.12.0 vs pins. Repository privacy (Z-01) gates pushing, not a local import of public MIT source (ADR-Z04) |
+| Q-00 admission | Z-25 | Pin (DEC-04), provider route (DEC-08) and build volume (DEC-12) must be decided first (decided 2026-11-08) |
+| Q-01 import | Z-06, Z-07, Z-08 | Reviewer route authorized (DEC-01) but not yet qualified (A7); build volume D: has 15 GB free; Node 24.19.0 / pnpm 9.12.0 vs pins. Repository privacy (Z-01) gates pushing, not a local import of public MIT source (ADR-Z04) |
 | Q-04 build | Z-07 | Cold build must start above the measured capacity threshold |
 | Q-05 smoke | Z-09, Z-10 | Isolated account (A5) and consented provider route (A6) are founder actions |
 
 **Timeboxes.** Q-06 and F-21 (MEASURE) get 2 pw each; when exhausted the founder decides (10 §3).
 
-**Re-pin question (DEC-04).** Q-00 pins `pingdotgg/t3code@36d4d711`. Upstream released v0.1.7 (`a9e709f15f82`
-HEAD on 2026-11-07, tag 2026-11-04) with Windows installers built in CI. Q-00 must record either the original pin or a
-re-pin to the release tag, with the R11 manifest deltas for changed files, a re-run of the R02 §10 seam inventory and a
+**Re-pin (DEC-04, decided 2026-11-08: re-pin to the v0.1.7 tag).** Q-00 pins `pingdotgg/t3code@36d4d711`. Upstream released v0.1.7 (`a9e709f15f82`
+HEAD on 2026-11-07, tag 2026-11-04) with Windows installers built in CI. Q-00 records the re-pin to the release tag, with the R11 manifest deltas for changed files, a re-run of the R02 §10 seam inventory and a
 re-check of the V3 18 file:line citations at the new pin.
 
 **Amending V3 contracts.** Z-24 and Z-26 change V3 text. Amendments go in a separate commit that edits only the
@@ -79,9 +78,9 @@ freeze applies to governance policy successors (v73+), not to planning documents
 | Evidence for completion | Command output with timestamp pasted into 17-MASTER-PLAN-STATUS.md |
 | Security implications | Stops future disclosure. Does not undo past exposure (Z-03). |
 | Estimate · complexity · risk · tier · cost | 0.05 pw · S · CRITICAL · T0 · FREE |
-| Blockers | Founder: spending-limit check on the billing page; wepld/wepld decision (DEC-02) |
+| Blockers | Founder: spending-limit check on the billing page; make wepld/wepld private (DEC-02) |
 | Parallel group | M0-founder |
-| Status | IN_PROGRESS — gh repo edit --visibility private at 2026-11-08T00:37:46Z (founder-approved in chat); gh repo view returns PRIVATE; forkCount was 0. Remaining: confirm 0 USD Actions/Packages spending limit; decide wepld/wepld (separate account, still PUBLIC) |
+| Status | IN_PROGRESS — gh repo edit --visibility private at 2026-11-08T00:37:46Z (founder-approved in chat); gh repo view returns PRIVATE; forkCount was 0. Remaining: confirm 0 USD Actions/Packages spending limit; make wepld/wepld private (DEC-02, decided 2026-11-08). |
 | Reference | 01-REPOSITORY-AUDIT.md §2 |
 
 ### Z-02 — Close third-party automatic AI review and app egress on the repository (EGRESS_PREFLIGHT E1–E5)
@@ -174,7 +173,7 @@ freeze applies to governance policy successors (v73+), not to planning documents
 | Evidence for completion | Decision record + findings file + route configuration with credentials redacted |
 | Security implications | Prevents private code reaching unauthorized hosted models; defines the fallback. |
 | Estimate · complexity · risk · tier · cost | 0.25 pw · S · HIGH · T0 · FREE |
-| Blockers | Founder decision DEC-01 |
+| Blockers | Founder sets up OCR on the ChatGPT login for the dry-run review (DEC-01 decided 2026-11-08) |
 | Parallel group | M0-founder |
 | Status | NOT_STARTED |
 | Reference | 06-MODELS-CONTEXT-AND-REVIEW.md §5 |
@@ -214,7 +213,7 @@ freeze applies to governance policy successors (v73+), not to planning documents
 | Estimate · complexity · risk · tier · cost | 0.1 pw · S · HIGH · T0 · FREE |
 | Blockers | Founder decisions |
 | Parallel group | M0-founder |
-| Status | NOT_STARTED |
+| Status | DONE_UNREVIEWED — 13 §2 (2026-11-08): the founder answered DEC-01..DEC-16 in chat, all as recommended; recorded by the agent; DEC-10 confirmed, usn-journal.csv location unknown; no separate signature beyond the founder's chat answers |
 | Reference | 13-RISKS-AND-OPEN-DECISIONS.md |
 
 ### Z-07 — Build-volume capacity: measure need, founder frees space (no agent deletion)
