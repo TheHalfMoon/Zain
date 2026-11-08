@@ -64,7 +64,7 @@ Each decision lists the options, the recommendation and what it unblocks. Decisi
 ## 3. Questions this plan could not resolve
 
 1. **Where is `usn-journal.csv`?** No copy exists in any TheHalfMoon repository default branch, any of the 353 Zain
-   remote refs, or the Orcel checkout. A disk-wide search for it was cut off when the earlier session ended. **Founder, 2026-11-08 (DEC-10):** location not known; treated as not found. **Z-18:** not found so far: a filename search of all of C: and D: (`dir /s *usn*.csv`, started 01:35Z) had no match when this note was committed and was still running; the final result is added when it finishes (19 §6)
+   remote refs, or the Orcel checkout. A disk-wide search for it was cut off when the earlier session ended. **Founder, 2026-11-08 (DEC-10):** location not known; treated as not found. **Z-18:** not found. A filename search of all of C: and D: (`dir /s /b /a-d *usn*.csv`, 2026-11-08 01:35Z, completed) returned no match; folders that need administrator rights were skipped (19 §6)
 2. **Is ChatGPT (via the OCR CLI) or the Nara relay authorized for private code?** The configuration exists. No
    written authorization was found (DEC-01). **Answered 2026-11-08 (DEC-01):** OCR through the founder's ChatGPT
    login is authorized as advisory review; the third-party relay is not.

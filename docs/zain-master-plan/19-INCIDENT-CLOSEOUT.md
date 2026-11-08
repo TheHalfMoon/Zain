@@ -79,7 +79,7 @@ the exact maintenance task was not confirmed from the documentation (no local co
 
 ## 6. Open questions for the founder
 
-1. **`usn-journal.csv`:** not found so far: a filename search of all of C: and D: (`dir /s *usn*.csv`, started 01:35Z) had no match when this note was committed and was still running; the final result is added when it finishes
+1. **`usn-journal.csv`:** not found. A filename search of all of C: and D: (`dir /s /b /a-d *usn*.csv`, 2026-11-08 01:35Z, completed) returned no match; folders that need administrator rights were skipped
 2. **OneDrive:** before OneDrive sync is ever resumed, check the `Desktop/wepld` folder on OneDrive online. Resuming
    sync would apply the local deletions to the cloud copy.
 3. **The local-only commit** on `docs/pre-h1-evaluation-protocol-fixture-registry`: push it to wepld/wepld (the

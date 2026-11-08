@@ -83,6 +83,11 @@ worktrees is gone; OneDrive sync has been idle since 2026-06-26, so it did not s
 `git fetch --dry-run` pruned ten stale worktree records (19 §4); requirement R4 prevents a repeat. Z-18 is
 DONE_UNREVIEWED; requirements R1-R6 go to Z-19.
 
+**2026-11-08, Q-00 draft.** The R0a pre-admission record is drafted (20): T3 pinned to v0.1.7 (`322f6544`) with
+lockfile digests; toolchain gaps (Node 24.19.0 vs 26.12.1, pnpm 9.12.0 vs 12.14.0); LOCAL_ONLY route without the
+embedded WSL archive; 860-package shipped closure with 30 packages dispositioned. Q-00 is REVIEW_BLOCKED on the
+founder's T2 sign-off; Q-01 is also RESOURCE_BLOCKED (D: 16.5 GB, free RAM 1.6 GB).
+
 ## 5. Repository evidence
 
 | Item | Value |

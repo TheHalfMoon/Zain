@@ -13,4 +13,5 @@ Literals that the redaction scripts removed from the plan are replaced in these 
 | `make_registries.py`, `make_registries_part2.py`, `export_v3.py`, `v3_export.json` | First build of the registry CSVs and the V3 task export they mirror |
 | `apply_reviews.py`, `apply_reviews2.py`, `doc_edits*.py`, `scope_block.md`, `sec_sections.md`, `stats.py` | Review-fix and document edits; plan statistics |
 | `z03_scan.py`, `z03_agg.py`, `z03_detail.py`, `z03_extra.py`, `z03_result.txt` | Z-03 scanner (in-memory, fingerprints only) and its aggregated output (18) |
+| `q00_*.py`, `q00_license_listing.csv`, `q00_r11_delta.csv` | V3 Q-00 evidence: pin inventory, lockfile digests, shipped-closure licenses, R11 deltas (20) |
 | `record_*.py` | Status and decision records (Z-03, DEC-16, Z-25, visibility changes) |
