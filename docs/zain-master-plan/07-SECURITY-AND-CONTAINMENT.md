@@ -96,7 +96,7 @@ build line is qualified separately.
 | No automatic third-party AI review | Unverified; apps installed | Z-02 |
 | Past exposure assessed | Not done | Z-03 |
 | Research tools do not send private content to unauthorized services | This session ran web research with generic product queries only; no private content was sent; no OpenCode/DeepSeek review was run because the configured route is a third-party relay | Z-06, DEC-01 |
-| No donor source or binaries in a public location | Respected (nothing pushed) | ADR-Z04 |
+| No donor source or binaries in a public location | Withdrawn with ADR-Z04 (2026-11-08): donor source is pushed with its license notices; secrets never | ADR-Z04 |
 
 ## 6. Lessons from incidents
 

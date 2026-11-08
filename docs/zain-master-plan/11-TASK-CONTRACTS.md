@@ -46,7 +46,7 @@ The R0a contracts are fully specified in V3 (14 §PF, `OPUS_R0A_BUILD_EXECUTION_
 | V3 task | Added gate edge(s) | Why (verified 2026-11-08) |
 |---|---|---|
 | Q-00 admission | Z-25 | Pin (DEC-04), provider route (DEC-08) and build volume (DEC-12) must be decided first (decided 2026-11-08) |
-| Q-01 import | Z-06, Z-07, Z-08 | Reviewer route authorized (DEC-01) but not yet qualified (A7); build volume D: has 15 GB free; Node 24.19.0 / pnpm 9.12.0 vs pins. Repository privacy (Z-01) gates pushing, not a local import of public MIT source (ADR-Z04) |
+| Q-01 import | Z-06, Z-07, Z-08 | Reviewer route authorized (DEC-01) but not yet qualified (A7); build volume D: has 15 GB free; Node 24.19.0 / pnpm 9.12.0 vs pins. The repository is public by founder choice and pushing is not gated (ADR-Z04 withdrawn) |
 | Q-04 build | Z-07 | Cold build must start above the measured capacity threshold |
 | Q-05 smoke | Z-09, Z-10 | Isolated account (A5) and consented provider route (A6) are founder actions |
 
@@ -78,9 +78,9 @@ freeze applies to governance policy successors (v73+), not to planning documents
 | Evidence for completion | Command output with timestamp pasted into 17-MASTER-PLAN-STATUS.md |
 | Security implications | Stops future disclosure. Does not undo past exposure (Z-03). |
 | Estimate · complexity · risk · tier · cost | 0.05 pw · S · CRITICAL · T0 · FREE |
-| Blockers | Founder: spending-limit check on the billing page |
+| Blockers | — |
 | Parallel group | M0-founder |
-| Status | IN_PROGRESS — gh repo edit --visibility private at 2026-11-08T00:37:46Z (founder-approved in chat); gh repo view returns PRIVATE; forkCount was 0. wepld/wepld made private 2026-11-08T01:22:38Z with the wepld login (founder-approved in chat; owner view PRIVATE, anonymous API 404, 0 forks). Remaining: confirm 0 USD Actions/Packages spending limit. |
+| Status | NOT_NEEDED — Founder reversed DEC-02 on 2026-11-08: both repositories public again (Zain 01:31:32Z, wepld/wepld 01:31:33Z, anonymous API 200, 0 forks). Earlier: Zain private 00:37:46Z-01:31:32Z, wepld/wepld 01:22:38Z-01:31:33Z. |
 | Reference | 01-REPOSITORY-AUDIT.md §2 |
 
 ### Z-02 — Close third-party automatic AI review and app egress on the repository (EGRESS_PREFLIGHT E1–E5)

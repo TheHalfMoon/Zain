@@ -1,0 +1,87 @@
+SUMMARY {"summary": true, "src": "zain-gh", "prs": 332, "issues": 15, "comments": 4179}
+SUMMARY {"summary": true, "src": "wepld-gh", "prs": 11, "issues": 0, "comments": 7}
+== counts (src, rule, class) -> hits / distinct values
+('wepld', 'commit-identity-email', 'NEEDS_REVIEW') -> 4 / 4
+('wepld', 'email', 'EMAIL') -> 6 / 2
+('wepld', 'email', 'NOREPLY_OR_VENDOR') -> 70 / -
+('wepld', 'openai-key', 'LIKELY_PLACEHOLDER_OR_FIXTURE') -> 1 / 1
+('wepld', 'posix-home-path', 'PERSONAL_PATH') -> 3 / -
+('wepld-gh', 'email', 'EMAIL') -> 2 / 2
+('zain', 'commit-identity-email', 'NEEDS_REVIEW') -> 5 / 5
+('zain', 'email', 'EMAIL') -> 40 / 24
+('zain', 'email', 'NOREPLY_OR_VENDOR') -> 238 / -
+('zain', 'generic-secret-assignment', 'LIKELY_PLACEHOLDER_OR_FIXTURE') -> 4 / 4
+('zain', 'github-token', 'LIKELY_PLACEHOLDER_OR_FIXTURE') -> 1 / 1
+('zain', 'onedrive-path', 'ENVIRONMENT_DETAIL') -> 3 / 1
+('zain', 'posix-home-path', 'GENERIC') -> 68 / -
+('zain', 'posix-home-path', 'PERSONAL_PATH') -> 4 / -
+('zain', 'private-ipv4', 'ENVIRONMENT_DETAIL') -> 19 / 4
+('zain', 'private-key-block', 'LIKELY_PLACEHOLDER_OR_FIXTURE') -> 1 / 1
+('zain', 'windows-user-path', 'GENERIC') -> 6 / -
+('zain', 'windows-user-path', 'PERSONAL_PATH') -> 12 / -
+('zain-gh', 'email', 'EMAIL') -> 31 / 8
+('zain-gh', 'email', 'NOREPLY_OR_VENDOR') -> 2 / -
+('zain-gh', 'posix-home-path', 'GENERIC') -> 1 / -
+('zain-gh', 'private-key-block', 'NEEDS_REVIEW') -> 15 / 1
+('zain-gh', 'windows-user-path', 'PERSONAL_PATH') -> 2 / -
+== secret-rule and email/env fingerprints (non-placeholder classes only)
+wepld commit-identity-email NEEDS_REVIEW fp=b0e593d15bb6 at (metadata):(author/committer)
+wepld commit-identity-email NEEDS_REVIEW fp=4bcfe3938a55 at (metadata):(author/committer)
+wepld commit-identity-email NEEDS_REVIEW fp=4a8bdde78735 at (metadata):(author/committer)
+wepld commit-identity-email NEEDS_REVIEW fp=3c205d8fc749 at (metadata):(author/committer)
+wepld email EMAIL fp=5713e8e9c4be at 4e12497dfc15:docs/impl/10_V0_Governance_Safety_and_Limits.md | 7f40ed0d0e80:crates/providers/Cargo.toml
+wepld email EMAIL fp=a00d2065bba7 at 7f40ed0d0e80:(commit message) | 7f40ed0d0e80:crates/providers/src/openai.rs | 7f40ed0d0e80:crates/providers/tests/openai_tests.rs | 7f40ed0d0e80:crates/providers/tests/openai_tests.rs
+wepld-gh email EMAIL fp=5713e8e9c4be at PR#1:(PR body)
+wepld-gh email EMAIL fp=a00d2065bba7 at comment 4969466275:(issues/comments)
+zain commit-identity-email NEEDS_REVIEW fp=e7cd911927c7 at (metadata):(author/committer)
+zain commit-identity-email NEEDS_REVIEW fp=b0e593d15bb6 at (metadata):(author/committer)
+zain commit-identity-email NEEDS_REVIEW fp=3c205d8fc749 at (metadata):(author/committer)
+zain commit-identity-email NEEDS_REVIEW fp=dcc39f6b9f73 at (metadata):(author/committer)
+zain commit-identity-email NEEDS_REVIEW fp=56667b18fd18 at (metadata):(author/committer)
+zain email EMAIL fp=3e002773b073 at add02fbc596d:specs/008-wepld-v3-unified-replan/research/R14_ZAIN_CODE_REVIEW.md | c37691766883:specs/008-wepld-v3-unified-replan/research/R14_ZAIN_CODE_REVIEW.md
+zain email EMAIL fp=cc40c5cbe52f at b498bdf4eb73:specs/008-wepld-v3-unified-replan/research/R11_T3_FILE_MANIFEST.md
+zain email EMAIL fp=e7837d7614e8 at b498bdf4eb73:specs/008-wepld-v3-unified-replan/research/R11_T3_FILE_MANIFEST.md
+zain email EMAIL fp=8ea6b360060f at b498bdf4eb73:specs/008-wepld-v3-unified-replan/research/R12_DONOR_FILE_MANIFEST.md
+zain email EMAIL fp=9aeda69ea314 at b62fb7c2e0d0:specs/008-wepld-v3-unified-replan/research/R03D_ORCA.md
+zain email EMAIL fp=0adae492c538 at 1464f025fc17:crates/core/tests/git_topology_v1.rs | f132c3093f9a:crates/core/tests/git_topology_v1.rs
+zain email EMAIL fp=87887e050a71 at fe9873a92306:crates/core/src/git_topology.rs
+zain email EMAIL fp=fcf6e1af1606 at 86805665bfb3:crates/core/src/git_topology.rs | 86805665bfb3:crates/core/tests/cli_v1.rs | 86805665bfb3:crates/core/tests/security_sensitive_config_v1.rs
+zain email EMAIL fp=e0f0d64fa9d4 at 86805665bfb3:crates/core/src/git_topology.rs
+zain email EMAIL fp=78bb45d8562b at 86805665bfb3:crates/core/src/git_topology.rs | 86805665bfb3:crates/core/tests/security_sensitive_config_v1.rs | 86805665bfb3:crates/core/tests/security_sensitive_config_v1.rs
+zain email EMAIL fp=5d948c5573e1 at 86805665bfb3:crates/core/src/git_topology.rs | 86805665bfb3:crates/core/tests/security_sensitive_config_v1.rs
+zain email EMAIL fp=f55654d4fa15 at 86805665bfb3:crates/core/src/git_topology.rs | 86805665bfb3:crates/core/tests/security_sensitive_config_v1.rs | 86805665bfb3:crates/core/tests/security_sensitive_config_v1.rs
+zain email EMAIL fp=d63b0a653468 at 86805665bfb3:crates/core/tests/security_sensitive_config_v1.rs
+zain email EMAIL fp=821e18b5d31f at 86805665bfb3:crates/core/tests/security_sensitive_config_v1.rs
+zain email EMAIL fp=72b218327fee at 86805665bfb3:crates/core/tests/security_sensitive_config_v1.rs
+zain email EMAIL fp=8b4a7779bef2 at 86805665bfb3:crates/core/tests/security_sensitive_config_v1.rs
+zain email EMAIL fp=4bea4e9e00f3 at f3c40af9bf2f:crates/core/tests/identity_store_v1.rs | 056761e75e62:crates/core/tests/identity_store_v1.rs | f64d7b1f64a9:crates/core/tests/identity_store_v1.rs
+zain email EMAIL fp=c8164b4e928f at ee83867385c6:.github/workflows/s2-v30-dependency-e2e-diagnostic.yml | ac4db160a359:.github/workflows/s2-v30-dependency-e2e-diagnostic.yml
+zain email EMAIL fp=e85b6543b57e at c6737bad1841:crates/contracts/tests/project_v1.rs
+zain email EMAIL fp=f0a22f36ac1d at 047fe82d9736:vendor/agile/CODE_OF_CONDUCT.md
+zain email EMAIL fp=160c089bffb7 at 047fe82d9736:vendor/agile/extensions/RFC-EXTENSION-SYSTEM.md
+zain email EMAIL fp=3de132cd98be at 047fe82d9736:vendor/agile/extensions/git/commands/agile.git.remote.md
+zain email EMAIL fp=81063181a668 at 047fe82d9736:vendor/pictorial/.claude-plugin/marketplace.json | 047fe82d9736:vendor/pictorial/.claude-plugin/marketplace.json | 047fe82d9736:vendor/pictorial/.claude-plugin/plugin.json | 047fe82d9736:vendor/pictorial/plugin/.claude-plugin/plugin.json
+zain email EMAIL fp=ae9087a2a224 at 047fe82d9736:vendor/pictorial/scripts/build-extension.js
+zain onedrive-path ENVIRONMENT_DETAIL fp=04b72495b85c at 19ff3bd48c6c:docs/zain-master-plan/01-REPOSITORY-AUDIT.md | 19ff3bd48c6c:docs/zain-master-plan/07-SECURITY-AND-CONTAINMENT.md | c8e9f116d8f8:docs/canonical/master-plan-v2-2/PART-01.md
+zain private-ipv4 ENVIRONMENT_DETAIL fp=b0d56c1d2839 at 047fe82d9736:vendor/agile/.github/workflows/bug-assess.md | 047fe82d9736:vendor/agile/.github/workflows/bug-fix.md | 047fe82d9736:vendor/agile/.github/workflows/bug-test.md | 047fe82d9736:vendor/agile/.github/workflows/feature-assess.md
+zain private-ipv4 ENVIRONMENT_DETAIL fp=4fb0798e0eb0 at 047fe82d9736:vendor/agile/.github/workflows/bug-assess.md | 047fe82d9736:vendor/agile/.github/workflows/bug-fix.md | 047fe82d9736:vendor/agile/.github/workflows/bug-test.md | 047fe82d9736:vendor/agile/.github/workflows/feature-assess.md
+zain private-ipv4 ENVIRONMENT_DETAIL fp=5da4236dba69 at 047fe82d9736:vendor/agile/.github/workflows/bug-assess.md | 047fe82d9736:vendor/agile/.github/workflows/bug-fix.md | 047fe82d9736:vendor/agile/.github/workflows/bug-test.md | 047fe82d9736:vendor/agile/.github/workflows/feature-assess.md
+zain private-ipv4 ENVIRONMENT_DETAIL fp=f5047344122f at 047fe82d9736:vendor/agile/extensions/assess/commands/agile.assess.intake.md
+zain-gh email EMAIL fp=e85b6543b57e at comment 5452222623:(issues/comments) | comment 5452242638:(issues/comments) | comment 5555358325:(issues/comments) | comment 3880540826:(pulls/comments)
+zain-gh email EMAIL fp=4bea4e9e00f3 at comment 5473318900:(issues/comments) | comment 5473661142:(issues/comments) | comment 5474090121:(issues/comments) | comment 5474733917:(issues/comments)
+zain-gh email EMAIL fp=fcf6e1af1606 at comment 5546414076:(issues/comments)
+zain-gh email EMAIL fp=72b218327fee at comment 5546414076:(issues/comments)
+zain-gh email EMAIL fp=0adae492c538 at comment 5551293682:(issues/comments) | comment 5557100787:(issues/comments)
+zain-gh email EMAIL fp=dc582314dadc at comment 5552787325:(issues/comments)
+zain-gh email EMAIL fp=21f1b921f574 at comment 3787650925:(pulls/comments)
+zain-gh email EMAIL fp=852e7b941ea2 at comment 3848843912:(pulls/comments) | comment 3848843912:(pulls/comments) | comment 3848843912:(pulls/comments) | comment 3848843912:(pulls/comments)
+zain-gh private-key-block NEEDS_REVIEW fp=3021d90eb943 at PR#105:(PR body) | comment 5374562050:(issues/comments) | comment 5376333435:(issues/comments) | comment 5376450241:(issues/comments)
+== personal user-path names (by fingerprint): distinct files
+zain user_fp=5b80c867ad42 files=3 e.g. ['(commit message)', 'docs/canonical/master-plan-v2-2/PART-01.md', 'specs/008-wepld-v3-unified-replan/research/R03C_CLAUDE_CODE.md']
+zain user_fp=ef260e9aa3c6 files=3 e.g. ['crates/core/tests/cli_v1.rs', 'vendor/agile/tests/test_extensions.py', 'vendor/pictorial/tests/skills-cli.test.js']
+zain user_fp=ab5df625bc76 files=2 e.g. ['vendor/agile/src/agile_cli/agents.py', 'vendor/pictorial/tests/windows-path-fix.test.js']
+zain user_fp=0bfe935e70c3 files=1 e.g. ['vendor/agile/tests/test_self_upgrade_verification.py']
+zain user_fp=2bd806c97f0e files=1 e.g. ['vendor/pictorial/tests/skills-cli.test.js']
+wepld user_fp=24d4b96f58da files=2 e.g. ['crates/contracts/tests/fixtures/mission_rate_limiting.json', 'docs/v2/07_Contracts.md']
+wepld user_fp=5b80c867ad42 files=1 e.g. ['docs/governance/CONFIDENTIALITY.md']
+zain-gh user_fp=5b80c867ad42 files=1 e.g. ['(issues/comments)']
