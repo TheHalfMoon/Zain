@@ -2,7 +2,7 @@
 
 ```text
 RISKS     = registry/zain-risk-register.csv (25 risks; severity = likelihood × impact, checked by zmp.py)
-DECISIONS = DEC-01..DEC-16 below; each needs the founder (Z-25). None is decided by this document.
+DECISIONS = DEC-01..DEC-16 below; each needs the founder (Z-25). None is decided by this document; the Decided column records founder answers.
 ```
 
 ## 1. Risk summary
@@ -53,7 +53,7 @@ Each decision lists the options, the recommendation and what it unblocks. Decisi
 | DEC-07 | Definition of the first release | R0b founder daily driver; R0 Zain 1.0 qualified; V3 R1 "Trusted Starter" | **R0b** (changed after the scope review): use the workbench daily from about 11–20 pw instead of 26–48 pw; R0 qualifies it on daily-use evidence; R1 adds trust claims | GATE-R0B-EXIT | — |
 | DEC-08 | Model policy for the no-paid path | Subscription CLIs through official login; local small models; third-party relays | Official CLI logins (Codex) for agent turns, with the per-session CODEX_HOME arrangement from V3 18; local models for completion and triage; no relays for private code | Z-10, Z-11 | — |
 | DEC-14 | Claude sessions in the V3 P2 exit (F-16) | Founder supplies an Anthropic API key (paid); make the Claude-key session optional in F-16 | Optional: F-16 passes with Codex and ACP sessions; a Claude session is tested only if the founder supplies a key | F-16 | — |
-| DEC-16 | Response to the historical exposure found by Z-03 (18) | Accept the commit-email exposure and switch to the GitHub noreply address with email privacy settings; rewrite history (invalidates every SHA, branch and PR reference); do nothing | Accept and switch to noreply now; make or archive wepld/wepld private; identify the two other wepld identities | GATE-PRIV-03 | — |
+| DEC-16 | Response to the historical exposure found by Z-03 (18) | Accept the commit-email exposure and switch to the GitHub noreply address with email privacy settings; rewrite history (invalidates every SHA, branch and PR reference); do nothing | Accept and switch to noreply now; make or archive wepld/wepld private; identify the two other wepld identities | GATE-PRIV-03 | 2026-11-08, founder in chat: accept the exposure, no history rewrite; commits now use the GitHub noreply address. The other wepld identities are founder-owned accounts. Still open: GitHub email-privacy settings and profile email (18 P7), wepld/wepld visibility (Z-01) |
 | DEC-15 | Update feed (F-04) hosting and signing-key custody | Private release assets with a client token (V3 forbids tokens in the client); a static host the founder controls; no auto-update before R1 | No auto-update in R0b; for R0, a founder-controlled static host with an ed25519 key held offline by the founder, or defer F-04 to R1 | F-04 | — |
 | DEC-09 | Governance freeze | Continue the v1–v72 successor chain; freeze it and replace with G-03 at R0 | Freeze: no v73+ during R0a/R0b; the build branch stays local; G-03 replaces the chain at R0 | G-03, G-05 | — |
 | DEC-10 | Attribution of historical claims | Confirm that E4–E7, FD-4 and 70458ae belong to Ascout; say where usn-journal.csv is | Confirm, and point the agent at usn-journal.csv if it exists | Z-18, Z-25 | — |

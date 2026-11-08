@@ -48,11 +48,12 @@ these findings.
 | # | Data | Where | Still exposed now? | Sensitivity |
 |---|---|---|---|---|
 | P1 | The founder's personal Gmail address as author/committer | 1,482 Zain commits; 72 wepld commits | wepld: yes. Zain: no longer public, but was | Medium (contact identifier, permanently in commit metadata) |
-| P2 | Two other Gmail identities as authors | wepld: 11 and 2 commits | Yes | Unknown; founder to identify (collaborator or another account) |
+| P2 | Two other Gmail identities as authors | wepld: 11 and 2 commits | Yes | None for third parties: both map to founder-owned GitHub accounts (commit API, 2026-11-08) |
 | P3 | The founder's Windows username in paths | Zain `docs/canonical/master-plan-v2-2/PART-01.md`, V3 `research/R03C_CLAUDE_CODE.md` (history; redacted at HEAD), one commit message, one issue comment; wepld `docs/governance/CONFIDENTIALITY.md` | wepld: yes | Low |
 | P4 | Local npm-cache path and installed package version | Zain V3 `research/R18_DESKGATE.md` at commits `c376917` and `ef19a3f` (removed at HEAD) | No | Low |
 | P5 | Third-party maintainer emails | Dependency license metadata in both artifacts (132 and 151 distinct); vendored projects in PR #136 | — | None for the founder (public upstream data) |
 | P6 | Environment details | Private IPv4 addresses only inside vendored third-party docs; a generic "OneDrive\Desktop" mention | — | None |
+| P7 | The founder's personal Gmail as the public profile email of the account the Zain commits map to | GitHub user profile (found 2026-11-08) | Yes, regardless of repository visibility | Medium (same identifier as P1, still published) |
 
 Test-fixture identities (`example.test`, `example.invalid`, `evil.example`, names such as `alice`, `dev`, `ana`) are
 synthetic and need no action.
@@ -63,7 +64,8 @@ synthetic and need no action.
 |---|---|---|---|
 | Secrets S1–S8 | No action; record as reviewed | — | No |
 | P1 commit email | **Accept the historical exposure** (it was public for weeks and may already be archived; rewriting 1,482 commits would invalidate every SHA, branch and PR reference in the plans). **Going forward:** set `git config user.email` to the GitHub noreply address, enable "Keep my email addresses private" and "Block command line pushes that expose my email" in GitHub email settings (DEC-16) | Founder | No (settings only) |
-| P2 other identities | Founder identifies them; if they belong to other people, tell them their address was public | Founder | No |
+| P2 other identities | Resolved: both are founder-owned accounts; no one to notify | — | No |
+| P7 profile email | Set the profile's public email to "Don't show my email address" | Founder | No (settings only) |
 | wepld/wepld | Make it private or archive it from the `wepld` account; it still exposes P1, P2 and P3 | Founder | No |
 | P3 Windows username | Low risk; optionally redact from `PART-01.md` in a normal commit (history keeps it) | Agent, on request | No |
 | P4 npm-cache path | No action (removed at HEAD; low sensitivity) | — | No |
@@ -94,3 +96,16 @@ Run on 2026-11-08 from the local clones (no files written except this report): t
 personal-data hits from the in-memory scanner; artifact contents read from the API into memory; R18 differences from
 `git diff c376917 origin/docs/r0a-opus-start-20261102`. Scanner logic: 13 secret rules and 6 personal-data rules
 listed above, sha256 fingerprints truncated to 12 hex characters, no value persisted.
+
+## 8. Founder decision (DEC-16, 2026-11-08)
+
+- **Accepted:** the historical commit-email exposure (P1). History is not rewritten.
+- **Done:** the global git identity on the founder's PC now uses the GitHub noreply address of the account that the
+  existing commits map to, so attribution is unchanged. The commit that recorded this decision is the first with it.
+- **Resolved:** P2. Both other wepld identities belong to the founder's own GitHub accounts.
+- **Founder to do:** in GitHub email settings, enable "Keep my email addresses private" and "Block command line pushes
+  that expose my email"; set the profile's public email to "Don't show my email address" (P7). The active `gh` token
+  lacks the `user` scope, so the agent cannot read or change these settings. Make wepld/wepld private or archive it
+  (Z-01).
+- **Caveat:** once push blocking is on, GitHub rejects pushes of new commits authored with the personal address,
+  including unpushed commits made before the switch in other local repositories.
