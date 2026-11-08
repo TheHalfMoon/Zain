@@ -119,7 +119,7 @@ freeze applies to governance policy successors (v73+), not to planning documents
 | Estimate · complexity · risk · tier · cost | 0.25–0.5 pw · S · HIGH · T0 · FREE |
 | Blockers | — |
 | Parallel group | M0-agent |
-| Status | NOT_STARTED |
+| Status | DONE_UNREVIEWED — 18-EXPOSURE-ASSESSMENT.md (2026-11-08): all refs of both repos, PR/issue text, 4,186 comments, both artifacts and 20 sampled logs scanned; 0 live credentials; personal data P1-P3 dispositioned; founder acceptance pending (DEC-16) |
 | Reference | 01-REPOSITORY-AUDIT.md §2 |
 
 ### Z-04 — Branch and pull-request reconciliation

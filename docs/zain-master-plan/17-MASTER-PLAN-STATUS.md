@@ -18,7 +18,7 @@ RULE     = every line below cites evidence; no percentages
 | Task contracts | DONE for Z-01..Z-34; V3 contracts mirrored and drift-checked | 11; `zmp.py check` |
 | Registries and validator | DONE_UNREVIEWED (Z-05) | 15 |
 | Independent reviews | 4 EGM passes, 80 findings: 72 fixed, 3 partial, 3 decisions, 2 rejected with reasons | 14 |
-| Founder decisions | OPEN: DEC-01..DEC-15 | 13 §2 |
+| Founder decisions | OPEN: DEC-01..DEC-16 | 13 §2 |
 
 ## 2. Gates (state on 2026-11-08)
 
@@ -26,6 +26,7 @@ RULE     = every line below cites evidence; no percentages
 |---|---|---|
 | GATE-PLAN-01 | MET in substance (exit 0), recorded NOT_MET until Z-05 review | 15 §1 |
 | GATE-PLAN-02 | MET in substance (35/35), recorded NOT_MET until Z-05 review | 15 §2 |
+| GATE-PRIV-03 | 0 live credentials, all hits dispositioned; waits for founder DEC-16 | 18 |
 | GATE-PRIV-01 | Visibility PRIVATE since 2026-11-08T00:37:46Z; gate closes when Z-01 finishes (0 USD spending limit, wepld/wepld decision) | Z-01 evidence |
 | GATE-REV-01 | NOT MET (no authorized non-Claude route) | 06 §3, 14 |
 | GATE-RES-01 | NOT MET (C: 3.4 GB, D: 20 GB) | 09 §1 |
@@ -53,6 +54,10 @@ decisions (DEC-01, DEC-02, DEC-04, DEC-07, DEC-08, DEC-12), then Z-03 and Z-18.
 
 **2026-11-08, follow-up.** At the founder's direction, TheHalfMoon/Zain was made PRIVATE (00:37:46Z, verified; 0 forks).
 The plan branch was then pushed; no workflow runs on non-main branch pushes and no PR was opened.
+
+**2026-11-08, Z-03.** Public-exposure assessment done (18): no live credential in either repository; the founder's
+personal email (1,482 Zain and 72 wepld commits) and Windows username were public; wepld/wepld still exposes them.
+Z-03 is DONE_UNREVIEWED; GATE-PRIV-03 waits for the founder's DEC-16.
 
 ## 5. Repository evidence
 

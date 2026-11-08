@@ -19,11 +19,12 @@ replace V3. It verifies the current state, adds what V3 lacks, and makes the who
 | [10-ROADMAP-AND-CRITICAL-PATH.md](10-ROADMAP-AND-CRITICAL-PATH.md) | Milestones, generated effort and critical paths, graph |
 | [11-TASK-CONTRACTS.md](11-TASK-CONTRACTS.md) | Contract rules; generated contracts for Z-01..Z-34 |
 | [12-TEST-QA-AND-DEFINITION-OF-DONE.md](12-TEST-QA-AND-DEFINITION-OF-DONE.md) | Test layers, Definition of Done, release qualification |
-| [13-RISKS-AND-OPEN-DECISIONS.md](13-RISKS-AND-OPEN-DECISIONS.md) | Risks and founder decisions DEC-01..DEC-15 |
+| [13-RISKS-AND-OPEN-DECISIONS.md](13-RISKS-AND-OPEN-DECISIONS.md) | Risks and founder decisions DEC-01..DEC-16 |
 | [14-INDEPENDENT-REVIEWS.md](14-INDEPENDENT-REVIEWS.md) | Review findings and dispositions |
 | [15-VALIDATION-EVIDENCE.md](15-VALIDATION-EVIDENCE.md) | Validator and mutation outputs; what was not validated |
 | [16-OPUS-IMPLEMENTATION-HANDOFF.md](16-OPUS-IMPLEMENTATION-HANDOFF.md) | How to execute, resume and stay within authorization |
 | [17-MASTER-PLAN-STATUS.md](17-MASTER-PLAN-STATUS.md) | Canonical status and session handoff log |
+| [18-EXPOSURE-ASSESSMENT.md](18-EXPOSURE-ASSESSMENT.md) | Z-03 public-exposure assessment of both repositories |
 
 Registries (`registry/`): task backlog (V3 mirror + Z tasks), dependency edges, acceptance gates, capability
 matrix, source registry, risk register, UX journeys.
