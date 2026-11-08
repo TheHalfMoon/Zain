@@ -4,7 +4,8 @@
 DATE     = 2026-11-08
 TASK     = Z-02 (AGENT+FOUNDER): inventory of GitHub Apps with access to TheHalfMoon/Zain (agent); remove each app or
            document its automatic review OFF (founder); disposition of cubic.yaml; scratch-push check afterwards
-STATUS   = inventory done; app changes wait for the founder (§4); the scratch-push check follows them (§5)
+STATUS   = inventory done; founder decided 2026-11-08 to remove Zain from all 10 apps (§4); the founder makes the
+           change in GitHub settings, then the scratch-push check runs (§5)
 RULE     = main's EXTERNAL_REVIEW_EGRESS_POLICY.md: hosted reviewers stay manual opt-in until a machine-enforced
            pre-egress gate exists. This holds while the repository is public: public content limits confidentiality
            impact, not the automatic-trigger rule
@@ -56,7 +57,9 @@ installation token could read the repository; whether any did is not visible. Th
 - DEC-01 named the founder and OCR on the founder's ChatGPT login as reviewers; none of these hosted apps is an
   authorized review route.
 
-## 4. Proposed founder actions
+## 4. Founder actions
+
+**Decided 2026-11-08 (founder, in chat): remove Zain from all 10 apps, CodeRabbit included; no gate exception.**
 
 In GitHub, signed in as TheHalfMoon: **Settings → Applications → Installed GitHub Apps**
 (https://github.com/settings/installations). For each app below, open **Configure**. Under **Repository access**,

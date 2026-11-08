@@ -115,7 +115,8 @@ main, the three nested planning branches and #343's reference branch. No CI ran.
 hold repository access (22): CodeRabbit and cubic have automatic review OFF in repository config; Qodo is paused by
 billing; Cursor, Devin, Graphite, Greptile, Sentry, Vercel and Claude have no documented OFF state. Five plan pushes
 during today's private window created queued (never run) suites for five of them. GATE-PRIV-02 needs the founder to
-remove Zain from the apps (22 §4), then a scratch-push check (22 §5).
+remove Zain from the apps (22 §4), then a scratch-push check (22 §5). The founder decided to remove all 10, CodeRabbit
+included (2026-11-08); the change is the founder's to make in GitHub settings.
 
 ## 5. Repository evidence
 
