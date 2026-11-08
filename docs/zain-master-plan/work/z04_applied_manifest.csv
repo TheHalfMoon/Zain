@@ -1,0 +1,353 @@
+branch,full_sha,group,action,latest_pr
+acq/s1-005-glib-0.18.5-official-bytes,feb89f114650bf216f50546786454efda84f8ec2,C,tag+delete,none
+acq/s1-005-glib-lock-shape,9c3723a513930579a17fea835fba59b6ba6eee7c,C,tag+delete,none
+acquisition/pictorial-agile-full-import-2026-08-22,acc118a876b6edff6ec47d5011a7ea21ca63525a,A,delete,#96 MERGED
+agent/fresh-reconstitution-foundation,99eb2c20975b5528e37e9fea165753fa8fe9e9c0,D,delete,#1 OPEN
+bootstrap/pr9-component-policy-e2e-canary,b0e0099da3187864f0c62d6f74013737720ab3ef,C,tag+delete,none
+bootstrap/pr9-component-policy-e2e-canary-v2,10666f19bfc41f901c187c16f79fa2c3af07a886,C,tag+delete,none
+bootstrap/pr9-qodo-glib-reachability-repair,b1fb1c993ce6a4acb1c165c872f6e6b4f942d3b5,C,tag+delete,none
+bootstrap/pr9-remote-subtree-selftest,887df163b093e37420152866c6978a6cf9350812,C,tag+delete,none
+bootstrap/s1-005-component-admission-policy,aad14e79471fbd088656751f657a76e3c2424bae,C,tag+delete,none
+canary/harness-h0-012-implementation-policy-activation,1e543335c5e6ed08eb015ad824cb5dab5323b11f,B,delete,#65 CLOSED
+canary/s1-005-component-policy-activation,ee0e81003031bf42a3287db04aaf39101e5dfefa,B,delete,#10 CLOSED
+canary/s1-010-shell-policy-activation,4b777da6af0999367d6760867c247382c36133db,B,delete,#24 CLOSED
+canary/s1-010-v10-icon-policy-activation,e62f4c72f99a0235b9fcad20d37b39ad9d4340e5,B,delete,#27 CLOSED
+canary/s1-010-v11-deterministic-icon-policy-activation,8b838bb0b9bd33e3ba8a14e9a4f0813842a1f865,B,delete,#29 CLOSED
+chore/graft-context-layer,847863d30cfaf4b16adbab7aebb2e5b712bb08d1,D,delete,#347 OPEN
+ci/browser-visual-edit-research-authorization,cdd4a1ff0757d910b70e4e330b8c0bf21a9926e0,A,delete,#74 MERGED
+ci/harness-h0-implementation-allowlist-repair,cdb3038a61c7d7164d3db5b86192d8c81ae6cc60,A,delete,#68 MERGED
+ci/harness-h0-research-bundle-policy,152dc64ffb16f49c2d7b5d9c8ed69acbc2dc4eb6,B,delete,#41 CLOSED
+ci/harness-h0-screen-implementation-integrity-policy,9366fb39536e3f507f5dfcfe3bb531e75f680f60,A,delete,#63 MERGED
+ci/harness-h0-spec-kit-authorization,43fa791de3a20fadb77c3bb1dfaafb0e6479e922,A,delete,#43 MERGED
+ci/harness-h0-spec-kit-four-finding-repair-authorization,ad562baa9c3c0fd8268eb20834ec730be4394ac6,A,delete,#53 MERGED
+ci/harness-h0-spec-kit-recovery-authorization,dffcab3e71c3ca2c64e09745dbfb708a04d1b82c,A,delete,#49 MERGED
+ci/harness-h0-spec-kit-review-repair-authorization,8dbc31eec2338ee3f418c04574e712b3982f9003,A,delete,#45 MERGED
+ci/harness-h0-spec-kit-two-finding-repair-authorization,fcf91e2f7a9baa26a7a6219e54807357b82e61a6,A,delete,#57 MERGED
+ci/harness-research-docs-authorization,10a5db2e29be49152f8db48f64caa3953e02c12e,A,delete,#40 MERGED
+ci/minimax-agent-research-authorization,737067aa9b8c730ad89721e293f4aa834179155e,A,delete,#78 MERGED
+ci/minimax-agent-research-five-finding-repair-authorization,61722d2de7262a33ba8cc1401a4871880c4bc50c,A,delete,#90 MERGED
+ci/minimax-agent-research-review-repair-authorization,4b95a51b3c20d2db21c86f5602104f34ec10cac1,A,delete,#83 MERGED
+ci/pictorial-agile-contract-branding-boundary-repair-v5-authorization,27922812bc0655b4c2979f0dca11bacc51be2245,A,delete,#121 MERGED
+ci/pictorial-agile-contract-qodo-three-finding-repair-v4-authorization,927c32af19328dab580976e0240075f1eaa57dd9,A,delete,#116 MERGED
+ci/pictorial-agile-contract-three-finding-repair-authorization,aaa57789dbe27342c0d38d1d243529241173fad3,A,delete,#105 MERGED
+ci/pictorial-agile-full-import-authorization,305479dc4e00dfbd32056bc8afed645891171e08,A,delete,#97 MERGED
+ci/pictorial-agile-notice-provenance-repair-v6-2026-08-23,d4fcd21dd9815725124c26957a074715d8512f59,A,delete,#128 MERGED
+ci/pictorial-agile-post-merge-type-drift-repair-authorization,4dd6060b7186ee94928c96521fb8ac4a27a634d8,A,delete,#111 MERGED
+ci/pictorial-agile-source-admission-v7-2026-08-24,b7dcb917846ac2be8872965e61353577a0abf2ea,A,delete,#137 MERGED
+ci/pictorial-agile-source-admission-v8-activation-repair-2026-08-24,568d7d4d7e5aaa09c6ae950141fe63667367afe2,A,delete,#153 MERGED
+ci/pictorial-agile-source-admission-v9-lock-overlay-2026-08-24,f91d765d21f497502e21414f49d42869218066b5,D,delete,#164 OPEN
+ci/s1-003-activation-canary,2813ed6d70983473f0262a218181a16989269a47,B,delete,#6 CLOSED
+ci/s1-005-component-admission-integrity,0629e5b6e9aca308a25a873dccebf18531d53d2c,A,delete,#9 MERGED
+ci/s1-006-protocol-integrity,6f354f7297ede429580b3f2711034f16cb8d0fa3,A,delete,#12 MERGED
+ci/s1-007-state-integrity,c6c84b2859dcf6b9810bcd9206d05622354f8c4d,A,delete,#16 MERGED
+ci/s1-008-allowlist-selftest-repair,1cb76ef97bb49d24be414c8fb5cae7182871080c,A,delete,#20 MERGED
+ci/s1-008-core-process-integrity,48c8b5652810801e624072e410867044a38b48dd,A,delete,#18 MERGED
+ci/s1-009-desktop-admission-bootstrap,fc4854a819152ea93bdd17903fb44656fc5e979d,A,delete,#21 MERGED
+ci/s1-010-deterministic-icon-fixture-repair,7b1657cef57b6ec8f8e3b833fb8a5fcbb1ede2ef,A,delete,#28 MERGED
+ci/s1-010-rustfmt-template-repair,8bf917ffdc9f3b4da1bd20566a2e4ba406b2cda4,A,delete,#31 MERGED
+ci/s1-010-tauri-icon-admission-repair,3a6b931d52dc32d292ae37f4c9df21c4d114763e,A,delete,#26 MERGED
+ci/s1-010-tauri-shell-admission-bootstrap,709b2806e7aa45c8cc44affb87519f9091c8d10d,A,delete,#23 MERGED
+ci/s1-010-typed-status-projection-repair,67e6544c974d9f0147b6be0a026196dd2723f495,A,delete,#30 MERGED
+ci/s1-010-windows-icon-admission-repair,3211a66f75dd0cf7e5edd23f358cb7878ea12b68,A,delete,none
+ci/s1-011-adversarial-stage-policy,1e5a064f2a194881b93968b1ddcd301224cf503a,A,delete,#32 MERGED
+ci/s1-011-clippy-qualification,d00582c640dbf9a1cdc5f9f88514c0f20d5b5ede,A,delete,#36 MERGED
+ci/s1-011-deterministic-format-qualification,ca0581d0442cd8c9bc3e2857979c1c985062ec73,A,delete,#35 MERGED
+ci/s1-011-trusted-base-local-qualification,c2338edc82de2dddf82e2078f70224fd1fe0a163,A,delete,#34 MERGED
+ci/s1-012-ledger-reconciliation-policy,4cf4222256d94d27bf487019b67e8db38e32b61a,A,delete,#39 MERGED
+ci/s1-012-platform-qualification,16b1b49b7c3ad52e8d56ce2ac38fb132e249971d,A,delete,#37 MERGED
+ci/s1-013-closeout-candidate-selftest-ledger-v13,f819e178a4ed993fddfcad21be5a1dc09501c60f,A,delete,#189 MERGED
+ci/s1-013-closeout-ledger-compatibility-v11,6c8690a9e451ef5540dcbbd7e2674747afafc11c,B,delete,#183 CLOSED
+ci/s1-013-closeout-ledger-compatibility-v11-r2,c5d9073697a925bcdf2c084ef7bee2c6af36b0f7,A,delete,#184 CLOSED
+ci/s1-013-closeout-ledger-compatibility-v11-r3,ec1f255a230258a89c1af77cf8cc4a18300e2f43,A,delete,#185 MERGED
+ci/s1-013-closeout-selftest-sequencing-v12,2a76fdbc60615bae911bc9286069497ea1c87c11,A,delete,#187 MERGED
+ci/s1-013-evidence-closeout-v10,1daab9be56f2706a81b535a9015ae5b109a74996,A,delete,#180 MERGED
+ci/s1-014-review-closeout-v14,1dfbe5f99806b2fd48edfc608ec39f7c5401b383,A,delete,#192 MERGED
+ci/s1-015-closeout-authority-v17,022f9395c3026c4504bcdc11e86a1b3fcef0e759,C,tag+delete,none
+ci/s1-015-closeout-authority-v17-2026-08-27,157401af0f5d792e6592981829308a46ab31f0a1,A,delete,#198 MERGED
+ci/s1-015-performance-projection-authority-v16,abc1182a8a4dca8c8592efc5444d798e0c2d1ee2,A,delete,#196 MERGED
+ci/s1-015-performance-trigger-authority-v15,4dff48f829205240d937edb79963dd1628dcc94c,A,delete,#194 MERGED
+ci/s1-016-acceptance-authority-v18-2026-08-27,e741fda8e106236274c14918455f420a6c60efec,A,delete,#200 MERGED
+ci/s1-016-policy-graph-projection-repair-v20-2026-08-27,0643e6e9bc70d5e65784ab2ac26db31485a07224,A,delete,#207 MERGED
+ci/s1-016-post-acceptance-projection-repair-v19-2026-08-27,c5c8d1a9a562611687ee6fed629384bb3e938d7c,A,delete,#205 MERGED
+ci/s1-local-policy-base-verifier-v4-2026-08-24,1a1ed09980aab7c6d0bfbaa48a79c1217012883f,A,delete,#169 MERGED
+ci/s1-stage-aware-foundation-integrity,7a21edd0d6ba48240857909a3810af852c63e05a,A,delete,#4 MERGED
+ci/s1-steady-state-planning-route-repair-2026-08-24,d458a9ac13c39b274d696c26c5b9cba37f12ac9d,A,delete,#168 MERGED
+ci/s1-v5-v2-3-canonicalization-bootstrap-2026-08-25,385b4ddb557c82e29e9d01890d90fbe008fff8f8,A,delete,#171 MERGED
+ci/s2-admitted-selftest-projection-v31-2026-08-29,f00104d51bb521e03c7032cf97dfbd2ae4a2d0f8,A,delete,#228 MERGED
+ci/s2-admitted-selftest-projection-v31-ready-2026-08-29,f00104d51bb521e03c7032cf97dfbd2ae4a2d0f8,A,delete,#234 MERGED
+ci/s2-contracts-bootstrap-v22-2026-08-28,0822bac074d4ce653205254626260697244d7c33,A,delete,#215 MERGED
+ci/s2-contracts-freeze-repair-v23-2026-08-28,433b11ce063f8e3b2161c9645155e2e52e4e3f59,A,delete,#217 MERGED
+ci/s2-core-observation-v24-2026-08-28,eeebe58cf86174dcd53337ec29d744cffa1d0d64,A,delete,#218 MERGED
+ci/s2-dependency-policy-file-projection-v30-2026-08-29,b49d1474751e3896fffe374a1a082d7df71c82af,A,delete,#225 MERGED
+ci/s2-dependency-policy-file-projection-v30-ready-2026-08-29,b49d1474751e3896fffe374a1a082d7df71c82af,A,delete,#226 MERGED
+ci/s2-frozen-policy-repair-v32-2026-08-30,6a7803e166e8fbfe0b0f5707f0a1f63a7a2c4371,A,delete,#237 MERGED
+ci/s2-getrandom-provenance-v29-2026-08-29,75350766e2b40ab57b5a76c467ef0c7a4d3c8e40,A,delete,#223 MERGED
+ci/s2-identity-store-v25-2026-08-28,2245eef5d84a1819269bd3332ed76d0263017e30,A,delete,#221 MERGED
+ci/s2-planning-bootstrap-v21-2026-08-28,ea29743d96978a2c53610cdea0a71654efbe02b0,A,delete,#209 MERGED
+ci/s2-pretranche-view-repair-v33-2026-08-30,d77f4a42869155287f1ab193b69594c99f8c0677,A,delete,#239 MERGED
+codex/astro-b01-benchmark-prereg-20260921,7cc8d51318b277ce8c53efc3a4648e365b6d9cd1,D,delete,#342 OPEN
+codex/astro-c01-s3-contracts-20260921,2dc078a0a75b32ef44b0bfd8af664740902e423a,D,keep,#343 OPEN
+codex/astro-f01-frontier-freeze-20260921,7215cb843d79ed100e8a7e806e0fcd76e1f77900,A,delete,#341 MERGED
+codex/astro-master-plan-20260920,4deee28f85153c357e5a51413cbef438297f67cc,A,delete,#340 MERGED
+codex/astro-s3-contracts-freeze-enforcement-v72-20260921,e9a1bebe09df675d18b83d4fe99387d43857e463,A,delete,#344 MERGED
+codex/local-intelligence-capability-plan-20260922,0ae061a58a4c2c618a033029fd8395a6c930e0a5,A,delete,#345 MERGED
+codex/source-expansion-firstmate-assurance-20260930,e995212d01e2eb55da5bed4d01d69f3b9013f9e0,D,delete,#346 OPEN
+diag/actions-runner-start-2026-08-29,564f2a91afd8fcfc87da039268c2d8d8f7c0908a,C,tag+delete,none
+diag/browser-visual-edit-bootstrap-qualification,ae4db0955e643b1bda6d188ca77ae7606aba1234,C,tag+delete,none
+diag/browser-visual-edit-pr73-admission-6b9011f0,7c7fdd0e41f4b5f2f19da6cdbc5a018ff2eeabcd,B,delete,#77 CLOSED
+diag/browser-visual-edit-pr74-activation-5d25112d,ecdce2fdc6869fae1fe492fb085a89df0dcfce53,B,delete,#76 CLOSED
+diag/browser-visual-edit-pr74-admission,f937b1772e51f4058613c893bf17057b6030a69c,B,delete,#75 CLOSED
+diag/harness-h0-012-activation-dca804f2,013b0fc94d416e58bca197cd99f7ec0ee6b55b21,B,delete,#64 CLOSED
+diag/harness-h0-013-lock-materialization-dca804f2,26c6b6b88555deeb419c098dfdef75145db5146e,B,delete,#66 CLOSED
+diag/harness-h0-013-rust-qual-d4a05f3e,42e64b2945e04167fb91733d3ce9b5d6c1aa4264,B,delete,#72 CLOSED
+diag/harness-h0-activation-run348,3782e5a9c09b1a24285277b89458f5034bbbdec2,B,delete,#46 CLOSED
+diag/harness-h0-admission-run47,8ca4ff123338d296ea132d630db97ae8ac7db7e0,B,delete,#48 CLOSED
+diag/harness-h0-final-package-admission-246bd675,f14b638e0aad34ff28ec5d91ccb48bb3a06e384e,B,delete,#56 CLOSED
+diag/harness-h0-final-package-admission-68f9cce7,a8fd105f52abec3a122814916ac169d18215ca09,B,delete,#60 CLOSED
+diag/harness-h0-final-package-ready-admission-68f9cce7,2a8fa678b20f64ecd9eb3bc5be879f243f507c8a,B,delete,#61 CLOSED
+diag/harness-h0-four-finding-activation-71188a30,63bf600e329dade6d8ae37d89a41701bc0058ecb,B,delete,#54 CLOSED
+diag/harness-h0-package-admission-36f94d1,9979e6b9949eadae92063cec47b2476fd97f3aaa,B,delete,#52 CLOSED
+diag/harness-h0-package-refreeze-a85bc7ea,d07212bbe8183fdd35261db8fbf9bb63ec12c5ed,B,delete,#62 CLOSED
+diag/harness-h0-recovery-activation-89e7750,919cd97189f2fe11e421012b60c1604b9b0e742e,B,delete,#50 CLOSED
+diag/harness-h0-repair3-activation-5fdd9f9a,1efce88db72aa4ca9d1c3cc08d45418ed0fcdefd,B,delete,#71 CLOSED
+diag/harness-h0-repair3-h0-013-e2e,1c36473b7a338d9a687a96768aadc4b401d8fcc4,B,delete,#69 CLOSED
+diag/harness-h0-repair3-unknown-path-negative,0f7ce0880bc61585abfd4da96e4137b264a9876c,B,delete,#70 CLOSED
+diag/harness-h0-two-finding-activation-d97e8ea8,d1253068a4ed661b09a6c9fb2f1cc35ae920f354,B,delete,#58 CLOSED
+diag/minimax-pr78-activation-b028b074,61d70422b1537e26b44d95e67b5fe60a25c701e7,B,delete,#80 CLOSED
+diag/minimax-pr78-admission-737067aa,25933fac98e73b9e040fea0cc224939aa45f1277,B,delete,#79 CLOSED
+diag/minimax-pr81-admission-701fcf71,d66dd851599ff5ba992e40422e403eaf9b307522,B,delete,#82 CLOSED
+diag/minimax-pr83-activation-98612f2d,b3468be0684f459180af95ae8fe5d9c105987a90,B,delete,#86 CLOSED
+diag/minimax-pr83-admission-447ee0c8,2449882dd13168c70461537f690a6ad7d4ceadfa,B,delete,#84 CLOSED
+diag/minimax-pr83-admission-4b95a51b,4e7327ae3c55232e19384d4ea5e2f90e1043d793,B,delete,#85 CLOSED
+diag/minimax-pr83-admission-4b95a51b-check,4e7327ae3c55232e19384d4ea5e2f90e1043d793,C,tag+delete,none
+diag/minimax-pr88-admission-159057a3,c7604f50cb31d386f4693a443547304803e1be53,B,delete,#95 CLOSED
+diag/minimax-pr88-admission-16d0569c,e39cdba6df7f0952c991c541be6f41772d8961ca,B,delete,#89 CLOSED
+diag/minimax-pr90-activation-27886783,ad29dcdf80ada4e7400731206cdc6f825079270e,B,delete,#93 CLOSED
+diag/minimax-pr90-admission-3cecb09f,997f9a30c110f6f350c738c1894d754e9204a7c8,B,delete,#91 CLOSED
+diag/minimax-pr90-admission-61722d2d,ee73b2dedf3b9d10c5952ab10d6f9dfd53a1aa05,B,delete,#92 CLOSED
+diag/pictorial-agile-pr105-admission-aaa57789,dafa72a6889657cafb9e9614022005f1a50d4fc0,B,delete,#107 CLOSED
+diag/pictorial-agile-pr105-admission-d4f09259,c1dee4ff8f9921c2d148fba1bd9a159c80a33a1a,B,delete,#106 CLOSED
+diag/pictorial-agile-pr105-postmerge-foundation-531540b0,63e9b742337e068f0f5080f7a908b12d613942e5,B,delete,#108 CLOSED
+diag/pictorial-agile-pr111-admission-4dd6060b,c75c6d6df902614810d41502cc0bc1b3dada7a01,B,delete,#112 CLOSED
+diag/pictorial-agile-pr111-postmerge-foundation-d4cd2b2b,53ea68ba12843b686dcd1701baa8fef932b8b868,B,delete,#114 CLOSED
+diag/pictorial-agile-pr111-ready-admission-4dd6060b,9c8b09a9f6a42e0db13f85e9716d99b2b59411c6,B,delete,#113 CLOSED
+diag/pictorial-agile-pr116-admission-927c32af,abe3b6fcaea269480184a9c4b3d5c47fb034cdfe,B,delete,#117 CLOSED
+diag/pictorial-agile-pr116-postmerge-foundation-44417fbc,effb55866f963cf367156e6de12b8cb6239ea5c1,B,delete,#119 CLOSED
+diag/pictorial-agile-pr116-ready-admission-927c32af,d500979382f25ee2c012fa8d2aa84bf875edd1a5,B,delete,#118 CLOSED
+diag/pictorial-agile-pr121-admission-349c9d6f,e12ea436c64f4c79b68133e9b5bf02482c43836e,B,delete,#123 CLOSED
+diag/pictorial-agile-pr121-admission-a30b26d8,4e7dad53b0d5f265908132dcf1074a0175489fb3,B,delete,#122 CLOSED
+diag/pictorial-agile-pr121-postmerge-foundation-f96f0ede,7c6cec407cdb61a9221094b01a7f402f62f3da7a,B,delete,#124 CLOSED
+diag/pictorial-agile-pr96-admission-1c7c1500,eea75750f4903097349e67827a4cbcc6e574e62d,B,delete,#115 CLOSED
+diag/pictorial-agile-pr96-admission-61a11e50,1ae289e15267306ee60edaf1167f3252a3b3ac5c,B,delete,#110 CLOSED
+diag/pictorial-agile-pr96-admission-cd071115,d5f2c754f4a5203a0c98a25fafdc57984a5e2f4b,B,delete,#104 CLOSED
+diag/pictorial-agile-pr96-postmerge-foundation-871e509a,2bdd04fa17fce0f64f5c8c7c2d70d9944d548880,B,delete,#125 CLOSED
+diag/pictorial-agile-pr96-v4-admission-bfd59ec7,ee2b73a055c20f771fb541a68f41ccca78c9d8ff,B,delete,#120 CLOSED
+diag/pictorial-agile-pr97-activation-fc2e35f4,90b834fb31a5b3bcf5f70e93dc24a72427e23a8c,B,delete,#102 CLOSED
+diag/pictorial-agile-pr97-admission-2e3e8725,9717274ff11da58538fc86ada0bfa3ade5d52e2e,B,delete,#99 CLOSED
+diag/pictorial-agile-pr97-admission-305479dc,e82255fa55500194e443853d2d2fa5a351b87b43,B,delete,#101 CLOSED
+diag/pictorial-agile-pr97-admission-3d9c4f80,9d82a9a79e1371ae1d474deaa7ca25489bfc7abf,B,delete,#100 CLOSED
+diag/pictorial-agile-pr97-admission-922807fb,af5a2003cf67c804d12059297f56676dfd9945cc,B,delete,#98 CLOSED
+diag/pictorial-agile-upstream-inventory-2026-08-23,8f7b27614b7a1fc402fb56172711906b661fb4a0,B,delete,#126 CLOSED
+diag/pr128-admission-locator-2026-08-23,b1806f50e636023fe7fc225dc56f213f7e078894,B,delete,#129 CLOSED
+diag/pr128-postmerge-foundation-locator-2026-08-23,d610532d9646d16c8d011a54a06479275d821ee1,B,delete,#131 CLOSED
+diag/pr128-ready-admission-locator-2026-08-23,267cc19c7b2d13e42727bd5348ca2acfa8e15250,B,delete,#130 CLOSED
+diag/pr132-admission-locator-2026-08-23,c2c5f94bf848cec8d3b9784836cef3946fe5ffa0,B,delete,#133 CLOSED
+diag/pr132-postmerge-foundation-locator-2026-08-23,b7f55a366dedc089aad3bc7b788c41fea0a32e70,B,delete,#135 CLOSED
+diag/pr132-ready-admission-locator-2026-08-23,060eaf74aceeaa60438fce8b5d8d7d388d00393c,B,delete,#134 CLOSED
+diag/pr136-pictorial-lock-repair-resolver-2026-08-24,ee305f03ec4be535e19d43a65ddc7fdd2657fee5,B,delete,#161 CLOSED
+diag/pr136-pictorial-sbom-static-2026-08-24,0709285acb69c245db462512c4f43e68fc782c06,B,delete,#160 CLOSED
+diag/pr136-v8-admission-locator-2026-08-24,8a96c014e2f1a021703b72e14783fdd1335fa6e3,B,delete,#158 CLOSED
+diag/pr136-v9-lock-overlay-qualification-2026-08-24,abe803853ec451fa149d51042ecd029068b4ab6c,B,delete,#165 CLOSED
+diag/pr137-postmerge-foundation-8651a9e8-2026-08-24,7722035a09ecb4e5e5d59d43abd90c5f5d69d16b,B,delete,#152 CLOSED
+diag/pr137-ready-v7-locator-2026-08-24,7a1079eb4ce973ed6f3b9fb6a98cb468874b7b46,B,delete,#140 CLOSED
+diag/pr137-repaired-v7-admission-locator-2026-08-24,a999587c7979b9755b1ab8a2bc3cf4c9fa8537db,B,delete,#142 CLOSED
+diag/pr137-source-admission-v7-locator-2026-08-24,7cb2afdceae3826281307f2510a200f9bf1fc2d0,B,delete,#138 CLOSED
+diag/pr153-ready-v8-locator-2026-08-24,442423f1f4c2431e6f99e9c81cbaea69715f0f7a,B,delete,#156 CLOSED
+diag/pr153-v8-trusted-oracle-locator-2026-08-24,c81e28896c397f6d58fe68b2abb7974a6d89a755,B,delete,#154 CLOSED
+diag/pr164-v9-convergence-candidate-2026-08-24,c46c152ac9d97e7e178edf90c5be7b1cc592d168,C,tag+delete,none
+diag/pr164-v9-f2b-convergence-2026-08-24,e8a70633fc7f60b1e8dd3e607e334e11d878bb0c,C,tag+delete,none
+diag/pr164-v9-f2b-postmerge-2026-08-24,c67eb570e9601f1dd21e1edd03a21926d29dc870,C,tag+delete,none
+diag/pr164-v9-postmerge-head-2026-08-24,14cd0fa2999e7831d02488bc8c926057b8f3fcb6,C,tag+delete,none
+diag/pr164-v9-three-finding-repair-2026-08-24,cf308bb76b55016651ce3ba13e73197afbd53937,B,delete,#166 CLOSED
+diag/pr164-v9-wrong-lock-fixture-2026-08-24,eeab2e835b8e3680549452f820e0ccb0c0138ff1,C,tag+delete,none
+diag/pr164-v9-wrong-parent-fixture-2026-08-24,3f50f40b5e746f3dcf05ffe8759cc8b809d205f2,C,tag+delete,none
+diag/pr74-preimport-bind-repair,8ab56533bea1841cffd46355d8ed5d2feaa0194a,C,tag+delete,none
+diag/repaired-v7-pr136-synthetic-2026-08-24,ff22ddf0bbef84337b3a59d9c3d94d4235942d54,B,delete,#143 CLOSED
+diag/s2-auth-012-byte-builder-2026-08-29,24907357fc470f8cefab7958d6c6846c772dd066,C,tag+delete,none
+diag/s2-auth-012-supply-chain-2026-08-29,8d9077c6bfa56001f5053eedf1e977722f35854b,C,tag+delete,none
+diag/s2-v30-dependency-e2e-2026-08-29,b1a369044015e006bd3335b6dcd1fd2fa7325603,C,tag+delete,none
+diag/s2-v30-policy-qualification-2026-08-29,482272ad1ce55058148bdf3a6abc37a420a334c5,C,tag+delete,none
+diag/s2-v31-auth012-e2e-2026-08-29,d81a17e27ac6463ab1fa9d60f6df1f4e05130be0,C,tag+delete,none
+diag/s2-v31-auth012-negative-v3-2026-08-29,5e875b44420f7c7c1589ce036be2b03258e201be,B,delete,#232 CLOSED
+diag/s2-v31-auth012-positive-2026-08-29,740c11e73bf95d5ec70bc847f652f506c551c035,B,delete,#229 CLOSED
+diag/s2-v31-auth012-positive-v2-2026-08-29,05a02ea0ed755624a09712536c924ae08db0f304,B,delete,#230 CLOSED
+diag/s2-v31-auth012-positive-v3-2026-08-29,38402ab0a1ad9ef574a98cb24f59aa0f22f9013d,B,delete,#231 CLOSED
+diag/s2-v31-candidate-trace-2026-08-29,6c95eecff72fc10a833bb7c3b9bf1bb9ba4e91b5,C,tag+delete,none
+diag/s2-v31-dependency-product-negative-2026-08-29,b1084200e8bd42afea074fe524b76c080878ce6e,B,delete,#233 CLOSED
+diag/s2-v31-mixed-mutation-negative-oracle-2026-08-29,2eed71291759fd0d3b5d1f4bacba795f1f81a33a,C,tag+delete,none
+diag/s2-v31-trace-2026-08-29,63273e7ffdf14ef45afa7751ad4a6987a4c9828d,C,tag+delete,none
+diag/synthetic-pr136-plus-v7-2026-08-24,8fc41386319a4c1e48ed7624bf70babfc2894c57,C,tag+delete,none
+diag/v7-b72-ready-oracle-locator-2026-08-24,16a5b9862c055e0c52e5434a2fa3344cbc72575d,B,delete,#146 CLOSED
+diag/v7-entrypoint-foundation-b72ee6a8-2026-08-24,b72ee6a85d79da3ff076f6110578e4937d70cd69,A,delete,#144 CLOSED
+diag/v7-entrypoint-pr136-synthetic-2026-08-24,fb4038754aeab8520bd2f4a05ad67f9cf960ec22,B,delete,#147 CLOSED
+diag/v7-entrypoint-ready-oracle-b72ee6a8-2026-08-24,b72ee6a85d79da3ff076f6110578e4937d70cd69,A,delete,#145 CLOSED
+diag/v7-pr136-dry-admission-2026-08-24,32d3fd924323f72f17f87c461e480ccf5061e8d8,B,delete,#139 CLOSED
+diag/v7-prebind-foundation-b7dcb917-2026-08-24,b7dcb917846ac2be8872965e61353577a0abf2ea,A,delete,#148 CLOSED
+diag/v7-prebind-pr136-synthetic-2026-08-24,d3abddd7f8b4481ca80481e9f369e133be33565c,B,delete,#151 CLOSED
+diag/v7-prebind-ready-oracle-b7dcb917-2026-08-24,b7dcb917846ac2be8872965e61353577a0abf2ea,A,delete,#149 CLOSED
+diag/v7-prebind-ready-oracle-locator-2026-08-24,30c3f4c41beb4a6ccf02f44ef8dd77316828edd1,B,delete,#150 CLOSED
+diag/v7-topology-repair-foundation-2af1c492-2026-08-24,2af1c4920a94f93f7ebac0f9a7e21e885917d15b,A,delete,#141 CLOSED
+diag/v8-post-merge-activation-locator-2026-08-24,145abf10281142f6782b6f68a9dd8bcd190b6d90,B,delete,#157 CLOSED
+diag/v8-pr136-synthetic-2026-08-24,9caf1724f5602f8be461cadc71d03ce010489e90,B,delete,#155 CLOSED
+docs/003-agent-control-plane-major-enrichment-2026-08-24,3f9c624b9f1fc7a733b6d2737cb2aba035c11ff5,A,delete,#167 MERGED
+docs/004-v2-3-canonicalization-2026-08-25,e3b7cdf6192c92dcf6fc0ccc3a80cc025674a27e,A,delete,#172 MERGED
+docs/004-v2-3-canonicalization-bootstrap-2026-08-25,a2a55911d1019eda31cba2a8ab07fddd21ca6e12,A,delete,#170 MERGED
+docs/fresh-reconstitution-v1,b67fc1be0e505b7cbd1adf286c6a26db9da9c95c,A,delete,#2 MERGED
+docs/harness-h0-research-bundle,304385a0baa74a9ae85c4dcbd29d2e09744a4438,A,delete,#42 MERGED
+docs/harness-h0-screening-spec-kit,4c6d638098c239156b90e3fea17b8aadf3446087,C,tag+delete,none
+docs/harness-h0-screening-spec-kit-canonicalization,67dfa0350fdea056e6968494801194cd4e0b235b,B,delete,#44 CLOSED
+docs/harness-h0-screening-spec-kit-corrected-canonicalization,1f7552a99c295a7bd9187e0ddcfda1b06e8292d2,A,delete,#47 CLOSED
+docs/harness-h0-screening-spec-kit-four-finding-repair,246bd67559cb506d2c21775d8031c09f20ce7d56,A,delete,#55 CLOSED
+docs/harness-h0-screening-spec-kit-recovery-denominator-repair,36f94d1cd8b48fd1a781a5d35d2e14cedc8f2c60,A,delete,#51 CLOSED
+docs/harness-h0-screening-spec-kit-review-repair,5c8b75c9a83875b76fada43855d84edd4da4739e,C,tag+delete,none
+docs/harness-h0-screening-spec-kit-two-finding-repair,68f9cce7ea0385992a3564fc189f41f42ff9b56a,A,delete,#59 MERGED
+docs/harness-program-donor-candidates,58191aa238179c4e5977b4e3fed745a438f56bd0,C,tag+delete,none
+docs/pictorial-agile-notice-provenance-contract-repair-2026-08-23,67dbf6f1db805f7a6d35860e9dc2283d6c5c7542,A,delete,#132 MERGED
+docs/r0a-opus-start-20261102,23bea38c6dd0deefcae5d5188a18a7d061ab2588,E,keep,none
+docs/s1-012-ledger-reconciliation,92e8ad3bb4077e7edf02b9683e590bb3e4d80986,A,delete,#38 MERGED
+docs/s1-013-performance-evidence-closeout,1f764d46e8daf161f4821fdf609ec5fd03d056a4,B,delete,#182 CLOSED
+docs/s1-013-performance-evidence-closeout-v11,0ef649e10c6b426738c46827ba3f09e810d751a1,B,delete,#186 CLOSED
+docs/s1-013-performance-evidence-closeout-v12,6a4347956bf90f6c111df09c3c243ae95551a9e5,B,delete,#188 CLOSED
+docs/s1-013-performance-evidence-closeout-v13,3adfe2d6841ac60b1df607b2d54199486fc7a1b5,A,delete,#190 MERGED
+docs/s1-014-review-closeout-v14,268bb22a10875f000f4f1424a3a6226ca5e5ccf4,A,delete,#193 MERGED
+docs/s1-015-closeout-v17-2026-08-27,4d3a09e5bf1555b5ad0ccccdb670014b57496f77,A,delete,#199 MERGED
+docs/s1-016-acceptance-v18-2026-08-27,e8e38b5122542b3558e84c2a9443c35b27c39e50,B,delete,#201 CLOSED
+docs/s1-016-acceptance-v19-2026-08-27,951fe13485961eae3a7c74cf77d6075baeb54fc9,B,delete,#206 CLOSED
+docs/s1-016-acceptance-v20-2026-08-27,ba02fac0851ae61d6c175df7fb50b67990060fe3,A,delete,#208 MERGED
+docs/s2-a005-a007-a008-reconciliation,58ca8590ec5eaf2229921fbdc0e3042c04389032,A,delete,#330 MERGED
+docs/s2-a009-build-learning-capture,17a3ea29e498bf2f2ca2db2e207519db66610ddf,A,delete,#332 MERGED
+docs/s2-a009-tasks-close-canonical,9d75c27b592284aab997271bd4787eaa52590508,A,delete,#335 MERGED
+docs/s2-acceptance-a001-a003-a006,130e1771dab5d6c61442817f6f923fcb92da1b85,A,delete,#329 MERGED
+docs/s2-acceptance-h-windows-runtime-limitation,566e0baa6c4c78cb7d450d73e0f25ffeca755e63,A,delete,#289 MERGED
+docs/s2-auth-013-task-ledger-activation,723e81f526f14ec13f3cc2999897e9ebb1457def,A,delete,#255 MERGED
+docs/s2-build-learning-capture-2026-08-31,23da54b821c381d6c274362082ad7e16ebac72da,B,delete,#246 CLOSED
+docs/s2-canonical-checkpoint-2026-08-31,d5c88480e02ebbdcf1314db7192964dc299e1d6f,B,delete,#244 CLOSED
+docs/s2-canonical-checkpoint-transition-v37,4fb59e4e46bcad37944d3c9c285fa8a65960a939,B,delete,#257 CLOSED
+docs/s2-canonical-checkpoint-transition-v38,11f6456874deb1b71c409f32319f3f4bcaa3aac5,B,delete,#259 CLOSED
+docs/s2-canonical-checkpoint-transition-v39,61d7b39399cf3fd35e38c090ca6e6b07bd1da562,B,delete,#261 CLOSED
+docs/s2-canonical-documentation-transition-2026-08-31,b8de727218c538f0ba0abac7750970a33f666b42,B,delete,#248 CLOSED
+docs/s2-checkpoint-corrected-freeze-2026-08-31,7e4ca9486dd189d60b6e03addc5a0fa6189bc46c,C,tag+delete,none
+docs/s2-corrected-canonical-documentation-transition-2026-08-31,a120540f656c59307a1fdae20e7eb29962e87164,A,delete,#252 MERGED
+docs/s2-d012-ledger-reconciliation,7c4df82e3541c7f97f1c4a51b93d8316333362ed,A,delete,#284 MERGED
+docs/s2-i006-i007-ledger-reconciliation,2312f33466abfc13a4b9e46c81f5567c4cb09f4a,A,delete,#288 MERGED
+docs/s2-identity-store-tranche-closeout-2026-08-31,6087695e9a2541fe6d55ba14b74a32020e805c9b,A,delete,#242 MERGED
+docs/s2-ledger-reconcile-proven-sq-rows,d859fd82b72dd5b03dfb8e6641846a9c8d14b223,A,delete,#290 MERGED
+docs/s2-ledger-reconcile-s002-s004-s005-e015,76b393ca97db34c5a1e676847b4ddb95cce357b5,A,delete,#303 MERGED
+docs/s2-record-auth-014-015-doctor-cli-tranches,eebc58a86f4a79479ef27f808bc2cfff3b3212b3,A,delete,#281 MERGED
+docs/s2-s001-locator-reconcile,0287fd7bec47c91609ccf0bef9d80db5ee7bbc08,A,delete,#322 MERGED
+docs/s2-s004-identity-reconcile,cc6380a87f26a460235626b07b44d36ca047e666,A,delete,#325 MERGED
+docs/s2-s006-gitdir-reconcile,21db7f7842434de282cf84cc85ab5a61fd91f4e6,A,delete,#328 MERGED
+docs/s2-spec-kit-planning-2026-08-28,d0f84fa2d59c43ba64e004470f2d87ea86db7ab9,A,delete,#210 MERGED
+docs/s2-v40-canonical-reconciliation,779dedebdb34a9564a559706a8ab3cc78b827146,A,delete,#263 MERGED
+docs/v3-unified-replan-20261027,f50f921530e72467afd0f776faac61f49380c838,E,keep,none
+docs/zain-master-plan-20261108,9b0cedc474fd6ffc6f0ee0acdb72ccb231e61201,E,keep,none
+evidence/pr136-agile-dependency-resolution-2026-08-24,5f89e959a1b26ea35aba18ea42c58bc2506bd967,D,delete,#159 OPEN
+evidence/s1-005-component-admission,490bee9b41206eb4813d175cf303c35a005b8ee2,C,tag+delete,none
+feat/harness-h0-013-canonical-identity,d4a05f3e91a23ef5977c9d21d418e806ce9fabe5,A,delete,#67 MERGED
+feat/s1-004-dependency-resolution-candidate,3a2f1b88b0e87b3368b45011eb4b882713459219,A,delete,#7 MERGED
+feat/s1-006-protocol-v1-contracts,bd5d64dc632855dbd7b1576f2d121db367b40b41,A,delete,#14 MERGED
+feat/s1-007-pure-handshake-state,6a0efe89b000d6a92de31a671d8236973d63c757,A,delete,#17 MERGED
+feat/s1-008-core-process,9e1fab0a837204e0bc52a89024d1c1664f24c56d,A,delete,#19 MERGED
+feat/s1-009-desktop-core-client,c6a3c41d61780b0013da620edb0348023add7c88,A,delete,#22 MERGED
+feat/s1-010-tauri-shell,8922d4cb0ef195851303e9652275d68374b7f74c,A,delete,#25 MERGED
+feat/s1-desktop-rust-core-handshake,f3f88eeed8789c48a6a1f4b280126333d2d2d2e8,A,delete,#3 MERGED
+feat/s2-contracts-c001-c009-2026-08-28,305749d0b4e9f95ef7303409b05f3ab21b06c598,A,delete,#216 MERGED
+feat/s2-core-observation-foundations-2026-08-28,08218b921cafaafebac3391ddf7445aa6c8da138,A,delete,#219 MERGED
+feat/s2-d012-security-sensitive-config-observation-product,fe9873a9230626a313200f7946b7b105de4a9f19,A,delete,#283 MERGED
+feat/s2-doctor-cli-v2,9b78232622d10538ef163592da662b7617b2b189,A,delete,#280 MERGED
+feat/s2-git-topology-v1,7aac2147f507ee2530293c761b4185bb9b5fd41a,A,delete,#274 MERGED
+feat/s2-identity-evidence-store-2026-08-30,0555072d11705d0f9458421fa65a86446f2f2963,B,delete,#236 CLOSED
+feat/s2-identity-evidence-store-v32-2026-08-30,056761e75e62ba2155fae06ac000e2c7b86682bb,B,delete,#238 CLOSED
+feat/s2-identity-evidence-store-v33-2026-08-31,bdebfbaa8f146115321e6d204da9e49d367047e2,A,delete,#240 MERGED
+feat/s2-identity-store-dependency-admission-2026-08-29,3588ba5e6cab286be8339ea80eb991ec045d50a6,B,delete,#224 CLOSED
+feat/s2-identity-store-dependency-admission-v30-2026-08-29,fe6d6ad95d18d3256c2d821b553c816b8a738054,B,delete,#227 CLOSED
+feat/s2-identity-store-dependency-admission-v31-2026-08-29,57a74adbe0ead10d8907fb54d9fde347f9eeb85a,A,delete,#235 MERGED
+fix/s1-015-performance-trigger-coverage,029332324399d83fb57cd367d62e92ba18f24cb8,B,delete,#195 CLOSED
+fix/s1-015-performance-trigger-coverage-v16,1229bdd9a411c70cce5494185c1f6c7814fa2085,A,delete,#197 MERGED
+governance/foundation-integrity-baseline-v1,421c769b47fd8ad4f5bcba67ff8b00ba0adfc6c3,C,tag+delete,none
+impl/s1-013-measurement-identity-v7,b8c25fdfbb8413da1bca6d09d2a560270d2ac235,A,delete,#174 MERGED
+impl/s1-013-performance-evidence-bootstrap,b3f69b77904b0fcac53762456c4be08416c1c8d8,A,delete,#173 MERGED
+impl/s1-013-performance-evidence-bootstrap-2,b45a175baa5e8b4e2981a7985043395faa0e387d,A,delete,none
+impl/s1-013-performance-evidence-bootstrap-check,b45a175baa5e8b4e2981a7985043395faa0e387d,A,delete,none
+impl/s1-013-performance-evidence-bootstrap-final,b45a175baa5e8b4e2981a7985043395faa0e387d,A,delete,none
+impl/s1-013-performance-evidence-bootstrap-real,b45a175baa5e8b4e2981a7985043395faa0e387d,A,delete,none
+impl/s1-013-performance-evidence-bootstrap-use,b45a175baa5e8b4e2981a7985043395faa0e387d,A,delete,none
+impl/s1-013-performance-evidence-bootstrap-verify,b45a175baa5e8b4e2981a7985043395faa0e387d,A,delete,none
+impl/s1-013-performance-evidence-bootstrap-work,b45a175baa5e8b4e2981a7985043395faa0e387d,A,delete,none
+impl/s1-013-performance-measurement,a8db9bcde791d3448c3686ac34b7735251552ac7,B,delete,#175 CLOSED
+impl/s1-013-performance-measurement-v2,56f03eea9a8a2eeaa39c79821f9ae0b8e1d9c3f6,B,delete,#177 CLOSED
+impl/s1-013-performance-measurement-v9,c4fe5b1bbc4c27c68413e57019d3b47c9520997c,A,delete,#179 MERGED
+impl/s1-013-performance-probe-review-repair-v9,7250a33d2a607aee5e55a9fb7a5021d9e85dd06b,A,delete,#178 MERGED
+impl/s1-013-performance-workflow-repair-v8,42d82d5594eb614e49597f1d403065536b677f24,A,delete,#176 MERGED
+import/pictorial-agile-full-source-snapshot-2026-08-23,28f0023b8ffb90c585213762dae5f4c1d57322ef,D,delete,#136 OPEN
+ops/pr228-ready-transition-2026-08-29,369d0dcb6f589dba3bedf96905d648e5e403351f,C,tag+delete,none
+plan/006-issueops-agentic-engineering-control-plane,e237a61f82683fbd8cfbbae525ba02666fa063c5,A,delete,#241 MERGED
+policy/s2-a009-build-learning-reopen-v66,1c201212e73f77dddbe606738040acfbe5d88f3a,A,delete,#331 MERGED
+policy/s2-a009-v67-selftest-repair,6789f485702e143d81e7846df39bfdc121730004,A,delete,#333 MERGED
+policy/s2-a009-v68-files-hook-repair,2bdac4df99abd43c05bab7771ec980ce10e9e74b,A,delete,#334 MERGED
+policy/s2-auth-013-git-route-v34,0745b5380d51636e38d439cb7ab7b696a8e93dd3,B,delete,#245 CLOSED
+policy/s2-auth-013-git-route-v36,58f313acbb0b9f23ebe0944c0fdb43c3c3cbc803,A,delete,#254 MERGED
+policy/s2-auth-014-git-topology-v45,14d5d985eb1a66bf0730eb4aa1ac768abe9e8205,A,delete,#273 MERGED
+policy/s2-auth-015-doctor-cli-authority-v49,d23a38e6fda4d48f8a53fe360c9aa58e39371ca2,A,delete,#278 MERGED
+policy/s2-canonical-documentation-transition-v34-2026-08-31,d384dc768e0f048552cf5025fe4219aca5054fe1,A,delete,#247 MERGED
+policy/s2-canonical-documentation-transition-v35-2026-08-31,4fb369108dbc81fae1b3fd3df5e680b1f93bd62c,A,delete,#250 MERGED
+policy/s2-canonical-documentation-transition-v35-ready-2026-08-31,4fb369108dbc81fae1b3fd3df5e680b1f93bd62c,A,delete,#251 MERGED
+policy/s2-checkpoint-ledger-repair-v38,7616190f78231f988f2f5df192c5d028e74e8699,A,delete,#258 MERGED
+policy/s2-checkpoint-ledger-repair-v39,b032728b2ec413badc5b9aed0cd5cf362ff339ed,A,delete,#260 MERGED
+policy/s2-checkpoint-transition-v37,445af5a016ec25276a489f37bece938cdf934946,A,delete,#256 MERGED
+policy/s2-d012-git-config-observation-authority-v51,b92dc448bc2a45c45729eb4c4271fc9d53a1d656,A,delete,#282 MERGED
+policy/s2-e015-child-process-and-store-reopen-v55,d9e7d05b19c57b6b379bf3115083bce7674fa537,A,delete,#296 MERGED
+policy/s2-e015-frontier-projection-repair-v56,1b9cece495e5571e1d9c4f86c391b5677bf569b4,A,delete,#298 MERGED
+policy/s2-e015-reopen-token-scan-projection-repair-v57,6370239bf98088e9c3bde3f07acf858f31e604f2,A,delete,#300 MERGED
+policy/s2-e015-v57-selftest-cascade-projection-repair-v58,369246eddfdad8068ee36c6483c89f22c62dcdb1,A,delete,#302 MERGED
+policy/s2-git-topology-evidence-reopen-v52,549ed01855aff4dd6621b452c3987ee8076c7dd1,A,delete,#286 MERGED
+policy/s2-git-topology-evidence-reopen-v53,a584f5ca23d843ec27d54c8df010f2e63049b8da,A,delete,#291 MERGED
+policy/s2-project-v1-evidence-reopen-v54,389b90251d10fd9861c964860756f8b64c675811,A,delete,#294 MERGED
+policy/s2-v43-final-state-selftest-repair-v44,060a28577aca431df404ae8972d0497fe36a0278,B,delete,#268 CLOSED
+policy/s2-v45-product-selftest-repair-v46,6150ddf29337c6aa7dfd2b498195edd3e0139006,A,delete,#275 MERGED
+policy/s2-v46-predecessor-inventory-repair-v47,6b4f157ceb53911d7ec5f35bd5dbc3488d7cb4e4,A,delete,#276 MERGED
+policy/s2-v47-install-product-projection-repair-v48,0f02d51b9b9360f75da6b4f5ea24e430de222a5a,A,delete,#277 MERGED
+policy/s2-v49-doctor-cli-selftest-projection-repair-v50,42b39b189937ed44d762896de22d03ebb47acc92,A,delete,#279 MERGED
+policy/v64-s2-s004-project-v1-case-identity-reopen,ce199a1ddd8cd0d0e658a52ee90db61cda732e4d,A,delete,#323 MERGED
+policy/v65-s2-s006-gitdir-reopen,89305d7f2b3b7bab6ee144f4cf904a815d0398da,A,delete,#326 MERGED
+prep/s1-005-glib-0.18.5-backport,34406c9587a5f574ec7d65baac35b28dc306b53b,A,delete,#11 MERGED
+repair/pr136-pictorial-lockfile-metadata-2026-08-24,04cc279133d536e2b4b68e01c019d7b595f0ed42,B,delete,#163 CLOSED
+research/jetbrains-browser-visual-edit-2026-08-21,6b9011f0ea796075861e510f5c515e8713064f39,D,delete,#73 OPEN
+research/minimax-universal-agent-automation-2026-08-21,701fcf71185b859d825863a5dfddf55dab9dd0aa,D,delete,#81 OPEN
+research/minimax-universal-agent-review-repair-2026-08-21,159057a345de19638cc2a7664b447f1a4a1fd03b,D,delete,#88 OPEN
+review/s1-014-acceptance-candidate,58ad0d166b6177ae69d04ff59da17aa8cc0e3c28,A,delete,#191 CLOSED
+review/s1-014-base,6eff72319cad99c878a80f0d5bce9f107d213679,A,delete,none
+s2-checkpoint-ledger-repair-v40,883316193215c4015de954113f3916ffd03f68d0,A,delete,#262 MERGED
+s2-delta-resting-view-scope-repair-v43,fcfe474eb816b8bac996b1fb1a7f0f33464ad5f0,B,delete,#267 CLOSED
+s2-files-resting-view-scope-repair-v42,ad1599e92478717aea93094276b3d597408446bf,A,delete,#265 MERGED
+s2-predecessor-selftest-scope-repair-v41,5e9ecf87e7dfa0f09689ccc583bad380956d0b28,A,delete,#264 MERGED
+s2-remaining-resting-view-scope-repair-v43,ff31209cb7466577ceaf463294cbeb3759ef9d7f,A,delete,#266 MERGED
+s2-v43-selftest-repair-v44,a590dc6ae5cb4604a1579162a18db4f639722d22,A,delete,#269 MERGED
+spec/s3-auth-c-capability-scan-v70,b570d047d35d90ada633f0f61ca3e14685e001e5,A,delete,#338 MERGED
+spec/s3-auth-c-contracts-bootstrap,80ba97ae6ed708d656159e53c831255c53f3e554,A,delete,#337 MERGED
+spec/s3-contracts-freeze-shortcut-v71,89bc2697ec87f69480cc9f37ffb9f9dd06f4627e,A,delete,#339 MERGED
+spec/s3-terminal-fabric-constitution,04738e996b54f2f4c7635dac6b7da7e1fc5ab23a,A,delete,#336 MERGED
+test/s1-011-cross-process-adversarial,05540dade6a0fe5d0491584211ebb7eb88022538,A,delete,#33 MERGED
+test/s2-e015-process-crash-lock-release,ea570976344dec8e5119e0d4eafbb742d248cf81,A,delete,#301 MERGED
+test/s2-i006-i007-fixtures-final,3bbb070b59d9b7e9053a0b80aed345ac0d68be8f,A,delete,#287 MERGED
+test/s2-i006-i007-worktree-submodule-fixtures,f132c3093f9a4c3b7f7a97949dc7e5f671d837e1,B,delete,#285 CLOSED
+test/s2-s002-s004-project-observation-fixtures,576fced0d02dbdd2a4988ae54419a3e70b1d047c,A,delete,#295 MERGED
+test/s2-s002-s004-symlink-and-case-fixtures,df580937a3f6dece3f2198685b08546ae1cd6915,B,delete,#293 CLOSED
+test/s2-s004-case-identity,f90b1481d2256bfb391f5f42283d45a947547e84,A,delete,#324 MERGED
+test/s2-s005-safe-directory-and-bare-repo-fixtures,830e3c24be391bec78feff6c62770efd7875daef,A,delete,#292 MERGED
+test/s2-s006-malformed-gitdir,ad3c6252adcdbe712664236b32dcd4c28b2bcf8e,A,delete,#327 MERGED
+tmp/noop-verify,0018668ed9e5f1c24bb816f007ad84cab26c0bcf,B,delete,#204 CLOSED
+tmp/noop-verify-2,c9510114097374ddc01f70b446e02088fc052d99,A,delete,none
+tmp/noop-verify-3,c9510114097374ddc01f70b446e02088fc052d99,A,delete,none
+tmp/noop-verify-4,c9510114097374ddc01f70b446e02088fc052d99,A,delete,none
+tmp/noop-verify-5,c9510114097374ddc01f70b446e02088fc052d99,A,delete,none
