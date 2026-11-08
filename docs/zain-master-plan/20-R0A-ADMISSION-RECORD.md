@@ -5,8 +5,8 @@ DATE     = 2026-11-08
 TASK     = V3 Q-00 (tier T2): source pin and digests, overlay scope, LOCAL_ONLY Windows route, capacity and cost=0
            controls, toolchain pins, frozen-lockfile policy, CLI archive route, shipped-closure license listing,
            decisions for heic-to / electron-webauthn / Claude SDK / Cursor SDK
-STATUS   = REVIEW_BLOCKED: drafted by the builder; T2 needs the founder's sign-off (DEC-01). Q-01 is also
-           RESOURCE_BLOCKED (§4)
+STATUS   = §1-§7 approved by the founder as drafted (chat, 2026-11-08); the §8 re-check was added afterwards and
+           awaits the founder's confirmation. Q-01 is RESOURCE_BLOCKED (§4)
 METHOD   = read-only GitHub API, npm registry and local version checks; scripts and outputs in work/q00_*
 ```
 
@@ -32,7 +32,7 @@ Per-path results: `work/q00_r11_delta.csv`.
 |---|---|---|---|
 | Node | 26.12.1 (`engines.node`) | 24.19.0 | Z-08 |
 | pnpm | 12.14.0 (`packageManager`) | 9.12.0 (global npm install) | Z-08 |
-| Rust | Upstream uses unpinned `stable` (`dtolnay/rust-toolchain`). Proposed local pin: 1.97.1, the current `stable` here; 1.98.0 and 1.98.1 are also installed | rustup: stable 1.97.1 (active), 1.98.0, 1.98.1 | Founder confirms the pin |
+| Rust | Upstream uses unpinned `stable` (`dtolnay/rust-toolchain`). **Pinned 1.97.1** (founder, 2026-11-08), the current `stable` here; 1.98.0 and 1.98.1 are also installed | rustup: stable 1.97.1 (active), 1.98.0, 1.98.1 | none |
 | MSVC | Visual Studio Build Tools 2022 | 17.14.37710.0 | none known |
 | Windows SDK | — | 10.0.26100.0 | none known |
 | Python (node-gyp) | — | 3.14.7 | Confirm at Q-04 |
@@ -49,7 +49,7 @@ Per-path results: `work/q00_r11_delta.csv`.
   `hyprland-snap-shot` and `browser-secret` (libsecret) are Linux-only and are not built. `libghostty-vt` ships
   headers with its own LICENSE.
 - **CLI archive route.** Upstream's Windows build embeds the Linux CLI archive, built on Linux, for the WSL backend.
-  No WSL distribution exists here. **Proposed:** R0a builds the Windows CLI single-executable or archive path as V3
+  No WSL distribution exists here. **Decided (founder, 2026-11-08):** R0a builds the Windows CLI single-executable or archive path as V3
   requires, and omits the embedded Linux archive. The WSL backend stays disabled until Z-33 restores it at R0. The
   alternative, installing a WSL distribution, is a system change for the founder to approve.
 - **Overlay scope (V3):** Q-01 imports as-is with no strip or rename. Before compiling, the Claude and Cursor drivers
@@ -72,7 +72,7 @@ the npm registry at each exact version; where npm has none, from the source repo
 `third-party-licenses/spdx/v3.28.0` carries texts for 8 licenses (Apache-2.0, BSD-2-Clause, BSD-3-Clause, CC0-1.0,
 ISC, MIT, OFL-1.1, Unlicense); 830 packages fall inside that set.
 
-| Packages outside the set | License | Proposed decision |
+| Packages outside the set | License | Decision (approved by the founder, 2026-11-08) |
 |---|---|---|
 | `@anthropic-ai/claude-agent-sdk@0.3.284` | proprietary ("SEE LICENSE IN README.md") | **Exclude** before compile (V3 sanitize step; DEC-14 makes Claude optional) |
 | `@cursor/sdk@1.2.0` and 5 platform packages | proprietary ("SEE LICENSE IN LICENSE.md") | **Exclude** before compile (V3 sanitize step) |
@@ -89,7 +89,7 @@ This listing is pre-build. LIC-02 passes only when Q-04 checks the packaged outp
 
 | Condition | State |
 |---|---|
-| A3 Q-00 independently reviewed | **Not yet**: this record awaits the founder's T2 sign-off (DEC-01); OCR may give an advisory pass after Z-06 |
+| A3 Q-00 independently reviewed | The founder approved the record as drafted (chat, 2026-11-08; DEC-01). The §7 re-checks added afterwards need the founder's confirmation; OCR may add an advisory pass after Z-06 |
 | A4 LOCAL_ONLY route and capacity recorded | Recorded (§3, §4); capacity is below threshold |
 | A5 isolated Windows account | Not created (Z-09) |
 | A6 consented provider route | DEC-08 chose the official Codex login; not yet verified (Z-10) |
@@ -97,7 +97,39 @@ This listing is pre-build. LIC-02 passes only when Q-04 checks the packaged outp
 
 ## 7. Still open inside Q-00
 
-1. Re-run the R02 §10 seam inventory at the new pin, and re-check the V3 18 file:line citations against the 93
-   changed and 1 moved R11 paths.
-2. The founder's decisions on §5 (four special packages) and on the CLI archive route (§3).
-3. The Rust pin (§2).
+1. Done 2026-11-08: the R02 §10 seam inventory and the source citations behind V3 18 were re-checked at the new pin (§8).
+2. Decided 2026-11-08 (founder approved as drafted): the §5 packages, the CLI archive route (§3) and the Rust pin (§2).
+
+## 8. Citation and seam re-check at v0.1.7
+
+V3 18 states its line references (for example "adapter L632–655") from R11 §3.2, and R02 and R11 carry the explicit
+`path@36d4d711:L…` citations. All 171 cited ranges and files in R02 and R11 were re-anchored by their text at
+`322f6544` (`work/q00_citations.py`, results in `work/q00_citations.csv`).
+
+| Result | Count | Action |
+|---|---|---|
+| Same lines, same text | 43 | none |
+| Same text, lines shifted | 71 | use the new line numbers in the CSV |
+| Changed, at least 80% similar | 23 | re-read before relying on them |
+| Changed, under 80% similar | 5 | `Orchestrator.ts` L12365-12411 (0.50); `DatabaseMaintenance.ts` L175-190 (0.69); `GitVcsDriver.ts` L1174-1245, checkpoint capture and restore (0.42); `ClaudeAdapterV2.ts` L9265-9536 (0.77; excluded with the Claude driver); `McpHttpServer.ts` L103/L1082 |
+| Anchor text not found | 12 | `ProjectionMaintenance.ts` (4 ranges), ACP `adapter.ts` L5860-5983, `GitVcsDriverCore.ts` L1178/L422/L3704, `OrchestrationEventStore.ts` L289-300 and L453-466, `scripts/sync-reference-repos.ts`, `updateChannels.ts` L12, `DesktopEnvironment.ts` L235, `apps/server/package.json` L36 |
+| File removed | 2 | `apps/server/src/checkpointing/Utils.ts` (both citations) |
+| Cited as a file only, still present | 14 | none |
+| Resolved by hand | 1 | `config.ts` L160 is `apps/server/src/config.ts` (`worktreesDir`) |
+
+**Seams (R02 §10) at the new pin: all nine still exist.**
+
+| Seam | State at v0.1.7 |
+|---|---|
+| S1 Runtime policy resolution | File and all 5 named symbols present |
+| S2 Provider approval callbacks | Files present; the Claude part is excluded; the Codex handlers shifted (CSV) |
+| S3 ACP client fs/terminal | Restructured: client file-system capabilities in `adapter.ts` L390-394 and L2313-2314; `terminal/create` in `clientTerminals.ts` L393; `AcpSessionRuntime.ts` L1791-1792 advertises `readTextFile` and `writeTextFile` as false |
+| S4 Effect worker | Present; symbol found |
+| S5 EventSink commit hook | Present; both symbols found |
+| S6 MCP tool access | Files present; `McpHttpServer.ts` changed at the cited lines |
+| S7 Git writes, worktrees, checkpoint restore | Worktree add moved from about L3704 to about L4230 of `GitVcsDriverCore.ts`; capture and restore in `GitVcsDriver.ts` changed; checkpoint restore now lives in `orchestration-v2/Checkpoint*Service.ts` with a new `CheckpointRestoreSafety.ts`, which Z-27 must re-verify |
+| S8 T3 terminals | Files present |
+| S9 Process spawn of providers | Files present; symbol found |
+
+**Consequence:** no seam disappeared. Tasks that implement against these seams (the Core C-0x chain, Z-27) re-read
+the changed, not-found and removed locations at the pin first.

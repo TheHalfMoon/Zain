@@ -88,6 +88,11 @@ lockfile digests; toolchain gaps (Node 24.19.0 vs 26.12.1, pnpm 9.12.0 vs 12.14.
 embedded WSL archive; 860-package shipped closure with 30 packages dispositioned. Q-00 is REVIEW_BLOCKED on the
 founder's T2 sign-off; Q-01 is also RESOURCE_BLOCKED (D: 16.5 GB, free RAM 1.6 GB).
 
+**2026-11-08, Q-00 approved.** The founder approved the admission record as drafted: package decisions, the
+LOCAL_ONLY route without the WSL archive, and Rust 1.97.1. The seam and citation re-check followed (20 §8): of 171
+cited ranges, 114 match (43 in place, 71 shifted), 28 changed, 12 lost their anchor and 1 file was removed; all nine
+seams still exist. Q-00 is DONE_UNREVIEWED until the founder confirms §8; Q-01 waits on disk, RAM and Z-08.
+
 ## 5. Repository evidence
 
 | Item | Value |
