@@ -88,7 +88,7 @@ Full list in 13.
 
 ## H. Readiness verdict: CONDITIONALLY READY
 
-**Ready now:** M0, plus the read-only agent task Z-18 (Z-03 is done, unreviewed).
+**Ready now:** the M0 agent tasks are done (Z-03 and Z-18, unreviewed); next is Q-00.
 
 **Not ready for R0a build work until:**
 
@@ -103,8 +103,8 @@ and C-1, and C-00 proves the Windows mechanisms.
 
 ## I. Exact next implementation task
 
-- **Founder:** Z-25 (the six decisions above), Z-06 and Z-01. Each takes minutes.
-- **Agent, now:** **Z-03**, the public-exposure assessment (read-only), together with Z-18.
+- **Founder:** Z-25 is recorded and Z-01 is not needed; Z-06 (OCR set up for one dry-run review) remains.
+- **Agent:** Z-03 and Z-18 are done, unreviewed (18, 19).
 - **First engineering unit:** **V3 Q-00**, the R0a admission record, with Z-07 and Z-08. Z-29 (a one-day trial of
   the upstream T3 release) runs alongside (16 §6).
 

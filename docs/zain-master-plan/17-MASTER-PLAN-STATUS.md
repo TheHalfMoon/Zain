@@ -77,6 +77,12 @@ full fetch, so nothing new had been pushed while private. The founder also direc
 repository: ADR-Z04 is withdrawn, the build branch is pushed (DEC-09 amended), and the session scripts are in
 `work/`. Z-01 is NOT_NEEDED, GATE-PRIV-01 is NOT_APPLICABLE, and DEC-03 is moot while public.
 
+**2026-11-08, Z-18.** Incident close-out done (19). All 175 deleted files in the OneDrive wepld checkout are
+recoverable from git and GitHub; one commit exists only locally; uncommitted work in the checkout and ten sibling
+worktrees is gone; OneDrive sync has been idle since 2026-06-26, so it did not spread the deletion. The agent's own
+`git fetch --dry-run` pruned ten stale worktree records (19 §4); requirement R4 prevents a repeat. Z-18 is
+DONE_UNREVIEWED; requirements R1-R6 go to Z-19.
+
 ## 5. Repository evidence
 
 | Item | Value |

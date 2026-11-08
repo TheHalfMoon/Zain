@@ -25,6 +25,7 @@ replace V3. It verifies the current state, adds what V3 lacks, and makes the who
 | [16-OPUS-IMPLEMENTATION-HANDOFF.md](16-OPUS-IMPLEMENTATION-HANDOFF.md) | How to execute, resume and stay within authorization |
 | [17-MASTER-PLAN-STATUS.md](17-MASTER-PLAN-STATUS.md) | Canonical status and session handoff log |
 | [18-EXPOSURE-ASSESSMENT.md](18-EXPOSURE-ASSESSMENT.md) | Z-03 public-exposure assessment of both repositories |
+| [19-INCIDENT-CLOSEOUT.md](19-INCIDENT-CLOSEOUT.md) | Z-18 deletion and disk-incident close-out |
 | [work/](work/README.md) | Session scripts and intermediate data, kept for provenance (not maintained tools) |
 
 Registries (`registry/`): task backlog (V3 mirror + Z tasks), dependency edges, acceptance gates, capability

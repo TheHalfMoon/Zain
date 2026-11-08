@@ -194,7 +194,7 @@ freeze applies to governance policy successors (v73+), not to planning documents
 | Estimate · complexity · risk · tier · cost | 0.25 pw · S · MEDIUM · T0 · FREE |
 | Blockers | — |
 | Parallel group | M0-agent |
-| Status | NOT_STARTED |
+| Status | DONE_UNREVIEWED — 19-INCIDENT-CLOSEOUT.md (2026-11-08): timeline, recoverability, OneDrive (idle since 2026-06-26, did not propagate), hypotheses H1-H3, requirements R1-R6 for Z-19; agent-caused pruning of 10 stale worktree records disclosed (19 §4) |
 | Reference | 07-SECURITY-AND-CONTAINMENT.md §6 |
 
 ### Z-25 — Founder decision record for this master plan (scope, milestones, open decisions)
@@ -642,7 +642,7 @@ freeze applies to governance policy successors (v73+), not to planning documents
 | Why | Lessons from Z-18 and from public competitor incidents (an agent wiping a drive in an auto-approve mode): deletion and disk exhaustion need enforcement, not prompts. |
 | Dependencies (must finish first) | H-08, C-12 |
 | Gates it opens for V3 tasks | X-01 (Destructive guards before the R1 release exit) |
-| Deliverables | Policy rules and fs-gate checks: deletes of more than N entries or outside the workspace need A2 approval; paths under OneDrive, user-profile roots and other workspaces are protected; deletes go to a recoverable quarantine by default; writes stop when free space falls below a reserve; git clean/restore of untracked files quarantines first; proposed values: bulk threshold 25 entries, disk reserve max(5 GB, 10% of volume); policy for OneDrive Files On-Demand placeholders (cloud-file reparse points): refuse OneDrive-hosted workspaces in R1 unless the founder allowlists the cloud-file reparse tag |
+| Deliverables | Policy rules and fs-gate checks: deletes of more than N entries or outside the workspace need A2 approval; paths under OneDrive, user-profile roots and other workspaces are protected; deletes go to a recoverable quarantine by default; writes stop when free space falls below a reserve; git clean/restore of untracked files quarantines first; proposed values: bulk threshold 25 entries, disk reserve max(5 GB, 10% of volume); policy for OneDrive Files On-Demand placeholders (cloud-file reparse points): refuse OneDrive-hosted workspaces in R1 unless the founder allowlists the cloud-file reparse tag; covers requirements R1-R6 of 19-INCIDENT-CLOSEOUT.md §5 |
 | Acceptance criteria | Each guard has a negative test that fails when the guard is removed; quarantine restore round-trips; the disk-reserve stop triggers in a fixture with a small quota |
 | Required tests / gates | GATE-SEC-03 |
 | Evidence for completion | Test log with guard-removed mutation results |
