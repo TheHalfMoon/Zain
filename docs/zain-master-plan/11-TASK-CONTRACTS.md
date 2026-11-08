@@ -251,7 +251,7 @@ freeze applies to governance policy successors (v73+), not to planning documents
 | Estimate · complexity · risk · tier · cost | 0.1 pw · S · MEDIUM · T1 · FREE |
 | Blockers | — |
 | Parallel group | R0a-prereq |
-| Status | DONE_UNREVIEWED — 2026-11-08: Node 26.12.1 and pnpm 12.14.0 fetched with founder approval to D:\zain-build\tools, SHA-256 matched (SHASUMS256.txt; GitHub asset digest); build shell shows v26.12.1 / 12.14.0, global still v24.19.0 / 9.12.0; manifest 20 §2 |
+| Status | IN_PROGRESS — Deliverables complete; stays IN_PROGRESS until prerequisite Z-07 (build-volume capacity) closes. 2026-11-08: Node 26.12.1 and pnpm 12.14.0 fetched with founder approval to D:\zain-build\tools, SHA-256 matched (SHASUMS256.txt; GitHub asset digest); build shell shows v26.12.1 / 12.14.0, global still v24.19.0 / 9.12.0; manifest 20 §2 |
 | Reference | specs/008 OPUS_R0A_BUILD_EXECUTION_2026-11-02.md §B1 |
 
 ### Z-09 — Create the isolated local Windows test account for R0a smoke (A5)

@@ -30,7 +30,7 @@ RULE     = every line below cites evidence; no percentages
 | GATE-PRIV-01 | NOT_APPLICABLE: the founder made both repositories public again at 01:31Z (DEC-02 reversed) | Z-01 evidence |
 | GATE-REV-01 | NOT MET: route authorized (DEC-01: founder T2 sign-off, OCR on ChatGPT as advisory); Z-06 dry run pending | 06 §3, 14 |
 | GATE-RES-01 | NOT MET (D:, chosen by DEC-12, has 15 GB free; needs at least 30 GB) | 09 §1 |
-| GATE-TOOL-01 | MET in substance (build shell: Node v26.12.1, pnpm 12.14.0; MSVC, SDK, Rust recorded), recorded NOT_MET until Z-08 review | 15 §4 |
+| GATE-TOOL-01 | MET in substance (build shell: Node v26.12.1, pnpm 12.14.0; MSVC, SDK, Rust recorded), recorded NOT_MET until Z-07 and Z-08 close | 15 §4 |
 | All other gates | NOT MET (no build exists) | — |
 
 ## 3. Blockers
