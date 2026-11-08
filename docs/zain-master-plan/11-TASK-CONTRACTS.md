@@ -173,9 +173,9 @@ freeze applies to governance policy successors (v73+), not to planning documents
 | Evidence for completion | Decision record + findings file + route configuration with credentials redacted |
 | Security implications | Prevents private code reaching unauthorized hosted models; defines the fallback. |
 | Estimate · complexity · risk · tier · cost | 0.25 pw · S · HIGH · T0 · FREE |
-| Blockers | Founder confirms the OCR-via-OpenCode route: it sends diffs to a hosted third-party relay, not a local model (13 DEC-01 amendment); then one dry-run review of this plan |
+| Blockers | Founder joins the relay's required Telegram group/channel and relinks the account at the relay settings page |
 | Parallel group | M0-founder |
-| Status | NOT_STARTED |
+| Status | BLOCKED — Z-06 dry run blocked 2026-11-08: (1) 02:48Z `opencode run` attached to a shared OpenCode background service busy with another project and timed out after 15 min without opening a session, so no content was sent; (2) 03:1xZ `opencode run --standalone` probes with a one-word prompt to both relay providers returned "telegram_required: Join the required Telegram group/channel and relink at /settings to continue". Founder action on the relay account needed; retry with --standalone afterwards |
 | Reference | 06-MODELS-CONTEXT-AND-REVIEW.md §5 |
 
 ### Z-18 — Deletion and disk-incident close-out (read-only forensics)

@@ -123,6 +123,12 @@ free models. Checked: OpenCode here reaches models only through a hosted third-p
 is installed, so the route is remote, not local. DEC-01 records it; Z-06 waits for the founder to confirm that data
 path for public content.
 
+**2026-11-08, Z-06 blocked.** The founder confirmed the relay route for public content only. The dry run could not
+run: the relay answers every request with "telegram_required" until the founder joins its Telegram group or channel
+and relinks the account at the relay's settings page. No repository content was sent (the first attempt never
+opened a session; the probes sent one word). Retry uses `opencode run --standalone`, which applies the locked-down
+run configuration instead of the shared background service.
+
 ## 5. Repository evidence
 
 | Item | Value |
