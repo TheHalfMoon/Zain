@@ -10,7 +10,7 @@ VERDICT   = CONDITIONALLY READY (see §8)
 ## A. Current Zain status (verified)
 
 - **Repository:** `TheHalfMoon/Zain` was **public** at audit time and was made **private** on 2026-11-08 at the founder's
-  direction. Its history was public before that (Z-03), and the legacy `wepld/wepld` is still public (01 §2).
+  direction. Its history was public before that (Z-03), and the legacy `wepld/wepld` was public until 2026-11-08T01:22:38Z (01 §2).
 - **Product code:** a 10k-line Rust Core (identity, read-only git topology, evidence store, CLI) plus a Tauri status
   window that V3 retires. There is no editor, terminal, chat or agent. Governance code is 85k lines, 8.4 times the
   product code (01 §3).

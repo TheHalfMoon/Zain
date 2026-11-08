@@ -27,7 +27,7 @@ RULE     = every line below cites evidence; no percentages
 | GATE-PLAN-01 | MET in substance (exit 0), recorded NOT_MET until Z-05 review | 15 §1 |
 | GATE-PLAN-02 | MET in substance (35/35), recorded NOT_MET until Z-05 review | 15 §2 |
 | GATE-PRIV-03 | MET in substance (0 live credentials; DEC-16 accepted), recorded NOT_MET until Z-03 review | 18 |
-| GATE-PRIV-01 | Visibility PRIVATE since 2026-11-08T00:37:46Z; gate closes when Z-01 finishes (0 USD spending limit, wepld/wepld made private) | Z-01 evidence |
+| GATE-PRIV-01 | Zain PRIVATE since 2026-11-08T00:37:46Z, wepld/wepld since 01:22:38Z; gate closes when Z-01 finishes (0 USD spending limit) | Z-01 evidence |
 | GATE-REV-01 | NOT MET: route authorized (DEC-01: founder T2 sign-off, OCR on ChatGPT as advisory); Z-06 dry run pending | 06 §3, 14 |
 | GATE-RES-01 | NOT MET (D:, chosen by DEC-12, has 15 GB free; needs at least 30 GB) | 09 §1 |
 | GATE-TOOL-01 | NOT MET (Node 24.19.0, pnpm 9.12.0) | 15 §4 |
@@ -37,7 +37,7 @@ RULE     = every line below cites evidence; no percentages
 
 | Blocker | Dependency | Owner |
 |---|---|---|
-| Z-01 remainder: 0 USD spending limit; make wepld/wepld private (DEC-02) | Z-01 | Founder |
+| Z-01 remainder: confirm the 0 USD spending limit | Z-01 | Founder |
 | Reviewer route qualification: OCR on the ChatGPT login, one dry-run review | Z-06 | Founder + agent |
 | Disk capacity: free D: to at least 30 GB (DEC-12) | Z-07 | Founder |
 | Isolated account, provider route | Z-09, Z-10 | Founder |
@@ -67,6 +67,10 @@ privacy settings, profile email, wepld/wepld visibility (18 §8).
 release, T3 re-pins to v0.1.7, builds go on D:, the governance chain is frozen, OCR on the founder's ChatGPT login
 is the advisory reviewer. Founder actions left: make wepld/wepld private, 0 USD spending limit, free D: to 30 GB,
 GitHub email settings, OCR setup for the Z-06 dry run.
+
+**2026-11-08, wepld/wepld.** Made private at 2026-11-08T01:22:38Z with the `wepld` login, founder-approved in chat (DEC-02).
+Evidence: `gh repo edit wepld/wepld --visibility private` succeeded; `gh repo view` as owner returns PRIVATE with 0
+forks; an anonymous `GET /repos/wepld/wepld` returns 404. Z-01 now waits only on the 0 USD spending limit.
 
 ## 5. Repository evidence
 

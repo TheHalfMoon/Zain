@@ -2,7 +2,7 @@
 
 ```text
 DATE     = 2026-11-08
-SCOPE    = TheHalfMoon/Zain (public until 2026-11-08T00:37:46Z, now private) and wepld/wepld (still public)
+SCOPE    = TheHalfMoon/Zain (public until 2026-11-08T00:37:46Z, now private) and wepld/wepld (public until 2026-11-08T01:22:38Z, now private)
 METHOD   = read-only; all refs fetched (Zain: 689 refs incl. 336 PR heads, 1,497 commits; wepld: 22 refs, 85 commits);
            every added line of every commit, commit messages and author/committer identities streamed in memory through
            13 secret rules and 6 personal-data rules (_work/z03_scan.py logic, summarized in §6); PR and issue bodies and
@@ -13,9 +13,9 @@ VERDICT  = no live credential found; personal data was exposed (commit email, Wi
 
 ## 1. What was publicly readable, and for how long
 
-| Surface | TheHalfMoon/Zain | wepld/wepld (still public) |
+| Surface | TheHalfMoon/Zain | wepld/wepld (private since 01:22:38Z) |
 |---|---|---|
-| Public window | From at least 2026-09-12 (CURRENT_STATE checkpoint records "public"; the repo was created 2026-08-14) until 2026-11-08T00:37:46Z. The exact start is unknown | Since creation (2026-07-12), still open |
+| Public window | From at least 2026-09-12 (CURRENT_STATE checkpoint records "public"; the repo was created 2026-08-14) until 2026-11-08T00:37:46Z. The exact start is unknown | Since creation (2026-07-12) until 2026-11-08T01:22:38Z |
 | Git history | 353 branches, 336 PR heads, 1,497 commits | 9 branches, 85 commits |
 | PRs, issues, comments | 332 PRs, 15 issues, 4,179 comments | 11 PRs, 7 comments |
 | Actions run logs | 2,985 runs | 30 runs |
@@ -47,9 +47,9 @@ these findings.
 
 | # | Data | Where | Still exposed now? | Sensitivity |
 |---|---|---|---|---|
-| P1 | The founder's personal Gmail address as author/committer | 1,482 Zain commits; 72 wepld commits | wepld: yes. Zain: no longer public, but was | Medium (contact identifier, permanently in commit metadata) |
-| P2 | Two other Gmail identities as authors | wepld: 11 and 2 commits | Yes | None for third parties: both map to founder-owned GitHub accounts (commit API, 2026-11-08) |
-| P3 | The founder's Windows username in paths | Zain `docs/canonical/master-plan-v2-2/PART-01.md`, V3 `research/R03C_CLAUDE_CODE.md` (history; redacted at HEAD), one commit message, one issue comment; wepld `docs/governance/CONFIDENTIALITY.md` | wepld: yes | Low |
+| P1 | The founder's personal Gmail address as author/committer | 1,482 Zain commits; 72 wepld commits | No longer public (Zain 00:37:46Z, wepld 01:22:38Z), but was | Medium (contact identifier, permanently in commit metadata) |
+| P2 | Two other Gmail identities as authors | wepld: 11 and 2 commits | No longer public (01:22:38Z) | None for third parties: both map to founder-owned GitHub accounts (commit API, 2026-11-08) |
+| P3 | The founder's Windows username in paths | Zain `docs/canonical/master-plan-v2-2/PART-01.md`, V3 `research/R03C_CLAUDE_CODE.md` (history; redacted at HEAD), one commit message, one issue comment; wepld `docs/governance/CONFIDENTIALITY.md` | No longer public | Low |
 | P4 | Local npm-cache path and installed package version | Zain V3 `research/R18_DESKGATE.md` at commits `c376917` and `ef19a3f` (removed at HEAD) | No | Low |
 | P5 | Third-party maintainer emails | Dependency license metadata in both artifacts (132 and 151 distinct); vendored projects in PR #136 | — | None for the founder (public upstream data) |
 | P6 | Environment details | Private IPv4 addresses only inside vendored third-party docs; a generic "OneDrive\Desktop" mention | — | None |
@@ -66,7 +66,7 @@ synthetic and need no action.
 | P1 commit email | **Accept the historical exposure** (it was public for weeks and may already be archived; rewriting 1,482 commits would invalidate every SHA, branch and PR reference in the plans). **Going forward:** set `git config user.email` to the GitHub noreply address, enable "Keep my email addresses private" and "Block command line pushes that expose my email" in GitHub email settings (DEC-16) | Founder | No (settings only) |
 | P2 other identities | Resolved: both are founder-owned accounts; no one to notify | — | No |
 | P7 profile email | Set the profile's public email to "Don't show my email address" | Founder | No (settings only) |
-| wepld/wepld | Make it private or archive it from the `wepld` account; it still exposes P1, P2 and P3 | Founder | No |
+| wepld/wepld | Done: made private 2026-11-08T01:22:38Z with the `wepld` login (DEC-02); anonymous API returns 404 | — | No |
 | P3 Windows username | Low risk; optionally redact from `PART-01.md` in a normal commit (history keeps it) | Agent, on request | No |
 | P4 npm-cache path | No action (removed at HEAD; low sensitivity) | — | No |
 | PR #136 vendored third-party code | Privacy: none. Licensing: the public branch distributed third-party code; keep the projects' license notices if the branch is kept, or delete the branch (founder decision under Z-04) | Founder | Branch deletion is destructive |
@@ -105,7 +105,7 @@ listed above, sha256 fingerprints truncated to 12 hex characters, no value persi
 - **Resolved:** P2. Both other wepld identities belong to the founder's own GitHub accounts.
 - **Founder to do:** in GitHub email settings, enable "Keep my email addresses private" and "Block command line pushes
   that expose my email"; set the profile's public email to "Don't show my email address" (P7). The active `gh` token
-  lacks the `user` scope, so the agent cannot read or change these settings. Make wepld/wepld private or archive it
-  (Z-01).
+  lacks the `user` scope, so the agent cannot read or change these settings. wepld/wepld was made private at
+  01:22:38Z (DEC-02).
 - **Caveat:** once push blocking is on, GitHub rejects pushes of new commits authored with the personal address,
   including unpushed commits made before the switch in other local repositories.
