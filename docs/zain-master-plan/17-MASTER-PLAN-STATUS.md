@@ -30,7 +30,7 @@ RULE     = every line below cites evidence; no percentages
 | GATE-PRIV-01 | NOT_APPLICABLE: the founder made both repositories public again at 01:31Z (DEC-02 reversed) | Z-01 evidence |
 | GATE-REV-01 | NOT MET: route authorized (DEC-01: founder T2 sign-off, OCR on ChatGPT as advisory); Z-06 dry run pending | 06 §3, 14 |
 | GATE-RES-01 | NOT MET (D:, chosen by DEC-12, has 15 GB free; needs at least 30 GB) | 09 §1 |
-| GATE-TOOL-01 | NOT MET (Node 24.19.0, pnpm 9.12.0) | 15 §4 |
+| GATE-TOOL-01 | MET in substance (build shell: Node v26.12.1, pnpm 12.14.0; MSVC, SDK, Rust recorded), recorded NOT_MET until Z-08 review | 15 §4 |
 | All other gates | NOT MET (no build exists) | — |
 
 ## 3. Blockers
@@ -92,6 +92,11 @@ founder's T2 sign-off; Q-01 is also RESOURCE_BLOCKED (D: 16.5 GB, free RAM 1.6 G
 LOCAL_ONLY route without the WSL archive, and Rust 1.97.1. The seam and citation re-check followed (20 §8): of 171
 cited ranges, 114 match (43 in place, 71 shifted), 28 changed, 12 lost their anchor and 1 file was removed; all nine
 seams still exist. Q-00 is DONE_UNREVIEWED until the founder confirms §8; Q-01 waits on disk, RAM and Z-08.
+
+**2026-11-08, Z-08.** With founder approval, Node 26.12.1 (41.9 MB, nodejs.org) and pnpm 12.14.0 (23.0 MB, GitHub)
+were fetched to `D:\zain-build\tools`, SHA-256 verified, and wired into a per-session build shell
+(`work/z08_build_shell.ps1`); the global Node and pnpm are unchanged. Manifest in 20 §2. Q-01 now waits only on
+disk (D: 15.3 GB of 30 GB) and free RAM, plus the founder's confirmation of 20 §8.
 
 ## 5. Repository evidence
 

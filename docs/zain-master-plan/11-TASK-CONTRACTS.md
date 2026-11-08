@@ -46,7 +46,7 @@ The R0a contracts are fully specified in V3 (14 §PF, `OPUS_R0A_BUILD_EXECUTION_
 | V3 task | Added gate edge(s) | Why (verified 2026-11-08) |
 |---|---|---|
 | Q-00 admission | Z-25 | Pin (DEC-04), provider route (DEC-08) and build volume (DEC-12) must be decided first (decided 2026-11-08) |
-| Q-01 import | Z-06, Z-07, Z-08 | Reviewer route authorized (DEC-01) but not yet qualified (A7); build volume D: has 15 GB free; Node 24.19.0 / pnpm 9.12.0 vs pins. The repository is public by founder choice and pushing is not gated (ADR-Z04 withdrawn) |
+| Q-01 import | Z-06, Z-07, Z-08 | Reviewer route authorized (DEC-01) but not yet qualified (A7); build volume D: has 15 GB free; toolchain pinned in the build shell since 2026-11-08 (Z-08). The repository is public by founder choice and pushing is not gated (ADR-Z04 withdrawn) |
 | Q-04 build | Z-07 | Cold build must start above the measured capacity threshold |
 | Q-05 smoke | Z-09, Z-10 | Isolated account (A5) and consented provider route (A6) are founder actions |
 
@@ -251,7 +251,7 @@ freeze applies to governance policy successors (v73+), not to planning documents
 | Estimate · complexity · risk · tier · cost | 0.1 pw · S · MEDIUM · T1 · FREE |
 | Blockers | — |
 | Parallel group | R0a-prereq |
-| Status | NOT_STARTED |
+| Status | DONE_UNREVIEWED — 2026-11-08: Node 26.12.1 and pnpm 12.14.0 fetched with founder approval to D:\zain-build\tools, SHA-256 matched (SHASUMS256.txt; GitHub asset digest); build shell shows v26.12.1 / 12.14.0, global still v24.19.0 / 9.12.0; manifest 20 §2 |
 | Reference | specs/008 OPUS_R0A_BUILD_EXECUTION_2026-11-02.md §B1 |
 
 ### Z-09 — Create the isolated local Windows test account for R0a smoke (A5)

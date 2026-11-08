@@ -30,13 +30,24 @@ Per-path results: `work/q00_r11_delta.csv`.
 
 | Tool | Pin (source) | Installed now | Gap |
 |---|---|---|---|
-| Node | 26.12.1 (`engines.node`) | 24.19.0 | Z-08 |
-| pnpm | 12.14.0 (`packageManager`) | 9.12.0 (global npm install) | Z-08 |
+| Node | 26.12.1 (`engines.node`) | 24.19.0 global; **v26.12.1 in the build shell** (Z-08) | none in the build shell |
+| pnpm | 12.14.0 (`packageManager`) | 9.12.0 global; **12.14.0 in the build shell** (Z-08) | none in the build shell |
 | Rust | Upstream uses unpinned `stable` (`dtolnay/rust-toolchain`). **Pinned 1.97.1** (founder, 2026-11-08), the current `stable` here; 1.98.0 and 1.98.1 are also installed | rustup: stable 1.97.1 (active), 1.98.0, 1.98.1 | none |
 | MSVC | Visual Studio Build Tools 2022 | 17.14.37710.0 | none known |
 | Windows SDK | — | 10.0.26100.0 | none known |
 | Python (node-gyp) | — | 3.14.7 | Confirm at Q-04 |
 | WSL | needed only for the embedded Linux CLI archive | no distribution registered | §3 |
+
+**Toolchain manifest (Z-08, 2026-11-08).** Fetched with founder approval by `work/z08_toolchain.py`; used only in a
+session that dot-sources `work/z08_build_shell.ps1`, which prepends both folders to PATH for that process.
+
+| Tool | File and source | SHA-256 (verified against) | Path under `D:\zain-build\tools` |
+|---|---|---|---|
+| Node 26.12.1 (npm 11.20.0 bundled) | `node-v26.12.1-win-x64.zip`, 41,901,456 bytes, nodejs.org/dist | `b3efd5c70cba3308ed46e7e699a9b8aac075bbc6b027fcb39c84c31acc25e2b4` (release SHASUMS256.txt; its GPG signature was not checked) | `node-v26.12.1-win-x64\node-v26.12.1-win-x64` |
+| pnpm 12.14.0 | `pnpm-win32-x64.zip`, 22,994,360 bytes, GitHub release `pnpm/pnpm` v12.14.0 | `6f0f38e917c8ce76ef31db528c357e2bfa354a1bcb16464e3cdec39e6530d784` (GitHub asset digest; pnpm publishes no checksum file) | `pnpm-12.14.0` |
+
+Check: in the build shell `node --version` = v26.12.1 and `pnpm --version` = 12.14.0; in an ordinary shell they
+are still v24.19.0 and 9.12.0. The downloaded archives are kept under `downloads\` for re-verification.
 
 ## 3. Build route, overlay scope and cost controls
 
