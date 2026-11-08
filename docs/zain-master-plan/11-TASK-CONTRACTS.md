@@ -97,9 +97,9 @@ freeze applies to governance policy successors (v73+), not to planning documents
 | Evidence for completion | Installation list (gh api /user/installations/<id>/repositories or settings screenshot) and the scratch-push check result |
 | Security implications | Removes an unauthorized hosted-model data path. |
 | Estimate · complexity · risk · tier · cost | 0.1–0.25 pw · S · HIGH · T0 · FREE |
-| Blockers | Founder-only for app settings |
+| Blockers | Founder removes Zain from the apps (22 §4); then the scratch-push check (22 §5) with founder go-ahead |
 | Parallel group | M0-founder |
-| Status | NOT_STARTED |
+| Status | IN_PROGRESS — 22-APP-EGRESS-INVENTORY.md (2026-11-08): inventory done; 10 apps with access, 2 with automatic review OFF in config (CodeRabbit, cubic), Qodo paused by billing, 7 undocumented; no webhooks, deploy keys, secrets or deployments |
 | Reference | specs/008 EGRESS_PREFLIGHT_2026-10-27.md §4 |
 
 ### Z-03 — Public-exposure assessment of TheHalfMoon/Zain and wepld/wepld history

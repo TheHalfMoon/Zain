@@ -28,6 +28,7 @@ replace V3. It verifies the current state, adds what V3 lacks, and makes the who
 | [19-INCIDENT-CLOSEOUT.md](19-INCIDENT-CLOSEOUT.md) | Z-18 deletion and disk-incident close-out |
 | [20-R0A-ADMISSION-RECORD.md](20-R0A-ADMISSION-RECORD.md) | V3 Q-00 R0a pre-admission record (draft for T2 review) |
 | [21-BRANCH-PR-RECONCILIATION.md](21-BRANCH-PR-RECONCILIATION.md) | Z-04 branch and PR dispositions and salvage notes (proposal) |
+| [22-APP-EGRESS-INVENTORY.md](22-APP-EGRESS-INVENTORY.md) | Z-02 inventory of third-party apps with repository access |
 | [work/](work/README.md) | Session scripts and intermediate data, kept for provenance (not maintained tools) |
 
 Registries (`registry/`): task backlog (V3 mirror + Z tasks), dependency edges, acceptance gates, capability

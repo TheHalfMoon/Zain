@@ -111,6 +111,12 @@ founder approves.
 pushed and verified; 348 branches were deleted after a full-SHA manifest was committed (21 §6). Five branches remain:
 main, the three nested planning branches and #343's reference branch. No CI ran. Z-04 is DONE_UNREVIEWED.
 
+**2026-11-08, Z-02 inventory.** No webhooks, deploy keys, Actions secrets, rulesets or deployments. Ten GitHub Apps
+hold repository access (22): CodeRabbit and cubic have automatic review OFF in repository config; Qodo is paused by
+billing; Cursor, Devin, Graphite, Greptile, Sentry, Vercel and Claude have no documented OFF state. Five plan pushes
+during today's private window created queued (never run) suites for five of them. GATE-PRIV-02 needs the founder to
+remove Zain from the apps (22 §4), then a scratch-push check (22 §5).
+
 ## 5. Repository evidence
 
 | Item | Value |
